@@ -1,5 +1,3 @@
-//Lab 930: World bigger than Canvas
-//Sept. 29, 2022
 
 //Global
 let world;
