@@ -13,29 +13,36 @@ function World() {
     width: 2400,
     height: 600
   }
+  this.cnvMainLoc = new JSVector(0, 0);
 
-    this.cnvMainLoc = new JSVector(0, 0);
+    window.addEventListener("keypress", function (event) {
+      switch (event.code) {
+        //  What is "this" inside of the listener????????????????????
+        case "KeyA":
+          if (world.cnvMainLoc.x > world.dims.left)
+            world.cnvMainLoc.x -= 20;
+          break;
+        case "KeyD":
+          if (world.cnvMainLoc.x + world.cnvMain.width < world.dims.right)
+            world.cnvMainLoc.x += 20;
+          break;
+          break;
+      }
+    }, false);
 
-      window.addEventListener("keypress", function (event) {
-        switch (event.code) {
-          //  What is "this" inside of the listener????????????????????
-          case "KeyA":
-            if (world.cnvMainLoc.x > world.dims.left)
-              world.cnvMainLoc.x -= 20;
-            break;
-          case "KeyD":
-            if (world.cnvMainLoc.x + world.cnvMain.width < world.dims.right)
-              world.cnvMainLoc.x += 20;
-            break;
-            break;
-        }
-      }, false);
+
+    platforms[0] = new Platform(100, 300, 50, this.ctxMain); //code this as a function
+  
 }//++++++++++++++++++++++++++++++  end world constructor
 
 
 // run the world in animation
 World.prototype.run = function () {
   let ctx = this.ctxMain;
+  for(let i = 0; i<platforms.length; i++){
+    platforms[i].render();
+  }
+
   ctx.clearRect(0, 0, this.cnvMain.width, this.cnvMain.height);
   
 
@@ -45,6 +52,7 @@ World.prototype.run = function () {
   ctx.restore();
 
 }
+
 
 World.prototype.getRandomColor = function () {
   //  List of hex color values for movers
