@@ -6,35 +6,25 @@ function World() {
 
 
   this.dims = {
-    top: -1500,
-    left: -2000,
-    bottom: 1500,
-    right: 2000,
-    width: 4000,
-    height: 3000
+    top: 0,
+    left: 0,
+    bottom: 600,
+    right: 2400,
+    width: 2400,
+    height: 600
   }
 
     this.cnvMainLoc = new JSVector(0, 0);
 
-      // add an event handler such that the a, s, w, d keys
-      // will reposition the canvas within the world.
       window.addEventListener("keypress", function (event) {
         switch (event.code) {
           //  What is "this" inside of the listener????????????????????
-          case "KeyW":
-            if (world.cnvMainLoc.y + 100 > world.dims.top)
-              world.cnvMainLoc.y -= 20;
-            break;
-          case "KeyS":
-            if (world.cnvMainLoc.y + world.cnvMain.height - 100 < world.dims.bottom)
-              world.cnvMainLoc.y += 20;
-            break;
           case "KeyA":
-            if (world.cnvMainLoc.x + 100 > world.dims.left)
+            if (world.cnvMainLoc.x > world.dims.left)
               world.cnvMainLoc.x -= 20;
             break;
           case "KeyD":
-            if (world.cnvMainLoc.x + world.cnvMain.width - 100 < world.dims.right)
+            if (world.cnvMainLoc.x + world.cnvMain.width < world.dims.right)
               world.cnvMainLoc.x += 20;
             break;
             break;
