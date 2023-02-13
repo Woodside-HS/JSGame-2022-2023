@@ -2,7 +2,7 @@
 var game, canvas, ctx, gamestate;
 window.onload = init;//  After the window has been loaded, go to init
 
-function init(){
+function init() {
   canvas = document.createElement('canvas');
   canvas.style.border = 'solid black 2px';
   canvas.style.backgroundColor = 'rgba(0,0,0, .95)';
@@ -15,11 +15,11 @@ function init(){
 }
 
 
-function animate(){
+function animate() {
   ctx.fillStyle = 'rgba(0,0,0,.05)'
-  ctx.fillRect(0,0,canvas.width,canvas.height); 
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   game.update()
   requestAnimationFrame(animate);
 }
 
-  
+
