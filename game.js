@@ -29,16 +29,8 @@ class Game {
     } else if (gameState == 1) {
       ctx.save();
       ctx.translate(-this.camLoc.x, -this.camLoc.y);
-      ctx.moveTo(200, 200);
-      ctx.lineTo(250, 200)
-      ctx.lineTo(250, 250)
-      ctx.lineTo(200, 250)
-      ctx.closePath()
-      ctx.fillStyle = "green";
-      ctx.strokeStyle = "black";
-      ctx.fill();
-      ctx.restore()
       this.hero.run()
+      ctx.restore()
       this.levels[0].run();
     }
 
