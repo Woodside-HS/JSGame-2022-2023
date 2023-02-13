@@ -1,5 +1,5 @@
 // global variables for canvas and context
-var game, canvas, ctx, gamestate;
+var game, canvas, ctx, gameState;
 window.onload = init;//  After the window has been loaded, go to init
 
 function init() {
@@ -10,7 +10,7 @@ function init() {
   canvas.height = 696; // 700 - 4 for the border
   ctx = canvas.getContext('2d'); // This is the context
   game = new Game();
-  gamestate = 0;//gamestate controls where the player is, 0 is main menu, 1 is 1st level, etc
+  gameState = 1;//gameState controls where the player is, 0 is main menu, 1 is 1st level, etc
   animate();
 }
 
@@ -22,4 +22,33 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
+window.addEventListener("keydown", function (event) {
+  switch (event.code) {
+    case "KeyA":
+      game.clickingA = true;
+      break;
 
+    case "KeyD":
+      game.clickingD = true
+      break;
+
+    case "KeyQ":
+
+      break;
+  }
+}, false);
+
+window.addEventListener("keyup", function (event) {
+  switch (event.code) {
+
+    case "KeyA":
+      game.clickingA = false;
+      break;
+    case "KeyD":
+      game.clickingD = false
+      break;
+
+    case "KeyQ":
+      break;
+  }
+}, false);

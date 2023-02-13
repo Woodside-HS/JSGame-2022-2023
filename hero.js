@@ -12,4 +12,8 @@ class Hero {
             shots: 10,
         }
     }
+
+    run() {
+        // console.log("hero was run")
+    }
 }
