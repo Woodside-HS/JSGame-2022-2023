@@ -1,7 +1,5 @@
-
-
 // global variables for canvas and context
-var game, canvas, ctx;
+var game, canvas, ctx, gamestate;
 window.onload = init;//  After the window has been loaded, go to init
 
 function init(){
@@ -12,6 +10,7 @@ function init(){
   canvas.height = 696; // 700 - 4 for the border
   ctx = canvas.getContext('2d'); // This is the context
   game = new Game();
+  gamestate = 0;//gamestate controls where the player is, 0 is main menu, 1 is 1st level, etc
   animate();
 }
 
