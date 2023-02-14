@@ -1,6 +1,7 @@
 class Hero {
     constructor() {
         this.loc = new JSVector(200,200);//ideally loc would only be a y value for how far up the screen they are
+        this.vel = new JSVector(0,0);
         this.width = 50;
         this.grav = new JSVector(0,0.05);//gravity for when falling
         this.inventory = {
@@ -18,8 +19,13 @@ class Hero {
     }
 
     run() {
-        // console.log("hero was run")
-
+        this.render();
+        if(!this.statusBlock.onPlatform){
+            this.vel.add(this.grav);
+        }
+        this.loc.add(this.vel)
+    }
+    render(){
         ctx.save(); // draws the hero 
         ctx.beginPath();//Malcom you need begin path
         //without begin path, it continues to render old boxes so it wont be cleared
