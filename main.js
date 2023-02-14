@@ -16,8 +16,8 @@ function init() {
 
 
 function animate() {
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   //ctx.fillStyle = 'rgba(0,0,0,.05)'
   //ctx.fillRect(0, 0, canvas.width, canvas.height);
   game.update();
@@ -38,6 +38,9 @@ window.addEventListener("keydown", function (event) {
     case "KeyQ":
 
       break;
+    case "Space":
+      game.hero.jump();
+      break;
   }
 }, false);
 
@@ -48,7 +51,7 @@ window.addEventListener("keyup", function (event) {
       game.clickingA = false;
       break;
     case "KeyD":
-      game.clickingD = false
+      game.clickingD = false;
       break;
 
     case "KeyQ":

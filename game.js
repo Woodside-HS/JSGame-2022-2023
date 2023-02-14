@@ -18,7 +18,6 @@ class Game {
       height: 600
     }
 
-    //! makes the first level
     this.levels[0] = new Levels()
 
   }
@@ -29,12 +28,12 @@ class Game {
     } else if (gameState == 1) {
       ctx.save();
       ctx.translate(-this.camLoc.x, -this.camLoc.y);//moves the "camera" along the canvas
-      this.hero.loc.x=this.camLoc.x+200;
+      this.hero.loc.x = this.camLoc.x + 200;
       //moves the hero with the camera, temporarilly disabled to make sure level works
       this.hero.run();
       this.levels[0].run();
       ctx.restore();
-      
+
     }
 
   }
