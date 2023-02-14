@@ -29,6 +29,8 @@ class Game {
     } else if (gameState == 1) {
       ctx.save();
       ctx.translate(-this.camLoc.x, -this.camLoc.y);//moves the "camera" along the canvas
+      //this.hero.loc.x=this.camLoc.x+200;
+      //moves the hero with the camera, temporarilly disabled to make sure level works
       this.hero.run();
       ctx.restore();
       this.levels[0].run();
@@ -37,6 +39,8 @@ class Game {
   }
 
   moveCam() {
+    //changed to move the hero
+    //if the hero gets too far to one side the camera follows him
     if (this.clickingA) {
       this.camLoc.x--;
     }
