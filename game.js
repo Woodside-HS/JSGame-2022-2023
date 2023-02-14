@@ -23,14 +23,14 @@ class Game {
 
   }
   update = function () {
-    this.moveCam()
+    this.moveCam();
     if (gameState == 0) {
 
     } else if (gameState == 1) {
       ctx.save();
-      ctx.translate(-this.camLoc.x, -this.camLoc.y);
-      this.hero.run()
-      ctx.restore()
+      ctx.translate(-this.camLoc.x, -this.camLoc.y);//moves the "camera" along the canvas
+      this.hero.run();
+      ctx.restore();
       this.levels[0].run();
     }
 
