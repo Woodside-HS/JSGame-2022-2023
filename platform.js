@@ -30,12 +30,12 @@ Platform.prototype.render = function(){
 }
 
 //stops character
-Platform.prototype.stopChar = function(){
-    if(h1.loc.x + 10 >= this.loc.x && h1.loc.x -10 <= this.loc.x + this.size){
-        if(h1.loc.y + 10 >=this.loc.y && h1.loc.y + 10 <this.loc.y+2){
-          h1.onPlatform = true;
-          h1.jVel = 0;
-          check = true;
-        }
-    }
-}
+// Platform.prototype.stopChar = function(){
+//     if(h1.loc.x + 10 >= this.loc.x && h1.loc.x -10 <= this.loc.x + this.size){
+//         if(h1.loc.y + 10 >=this.loc.y && h1.loc.y + 10 <this.loc.y+2){
+//           h1.onPlatform = true;
+//           h1.jVel = 0;
+//           check = true;
+//         }
+//     }
+// }
