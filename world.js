@@ -44,7 +44,7 @@ function World() {
   this.platforms[22] = new Platform(2025, 250, 50, this.ctx);
   this.platforms[23] = new Platform(2125, 275, 75, this.ctx);
   this.platforms[24] = new Platform(2250, 300, 150, this.ctx);
-
+  
   this.worldMovingRight = false;
   this.worldMovingLeft = false;
 

@@ -17,6 +17,7 @@ function Hero(width, ctx) {
 Hero.prototype.run = function () {
     this.render();
     this.update();
+    this.checkPlatform();
     //this.checkDeath();
 
 }
