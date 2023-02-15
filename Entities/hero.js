@@ -29,7 +29,7 @@ class Hero {
     run() {
         this.render();
         this.update();
-        this.attack();
+        // this.attack();
         if (!this.statusBlock.onPlatform) {
             this.vel.add(this.grav);
         } else {
@@ -55,16 +55,7 @@ class Hero {
         ctx.restore()
     }
     update() {
-        if (game.mouseDown) {
-            this.statusBlock.isAttacking = true;
-        }
-        if (this.statusBlock.isAttacking) {
-            this.attackTimer++;
-        }
-        if (this.attackTimer >= this.attackRate) {
-            this.statusBlock.isAttacking = false
-            this.attackTimer = 0
-        }
+
 
     }
 
@@ -80,6 +71,16 @@ class Hero {
         }
     }
     attack() {
+        // if (this.attackTimer <= this.attackRate) {
+        //     this.statusBlock.isAttacking = true;
+        // }
+        // if (this.statusBlock.isAttacking) {
+        //     this.attackTimer++;
+        // }
+        // if (this.attackTimer >= this.attackRate) {
+        //     this.statusBlock.isAttacking = false
+        //     this.attackTimer = 0
+        // }
         console.log(this.attackTimer)
         if (this.statusBlock.isAttacking) {
             ctx.save()
