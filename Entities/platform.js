@@ -17,7 +17,7 @@ class Platform {
         this.enemies[0] = new Enemy(this.loc.x,this.loc.y,this.width,10);
     }
     loadCoins(){
-
+        this.powerups[0] = new Coin(this.loc.x,this.loc.y,this.width,5);
     }
     run() {
         this.render();
@@ -31,7 +31,11 @@ class Platform {
         }
         for(let i = this.powerups.length-1;i >=0 ;i--){
             //goes backwards to aid with splices
-            this.powerup[i].run();
+            this.powerups[i].run();
+            if(this.powerups[i].collected){
+                this.powerups.splice(i,1);
+                //splices out the coin if it has been collected
+            }
         }
     }
     render() {
