@@ -62,7 +62,7 @@ World.prototype.run = function () {
   ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
   //this.hero.run();  
   for(let i = 0; i<this.platforms.length; i++){
-    this.platforms[i].render();
+    this.platforms[i].run();
   }
   ctx.restore();
 
