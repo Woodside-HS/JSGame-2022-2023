@@ -1,7 +1,7 @@
 function World() {
 
-  this.cnvMain = document.getElementById('cnv1');
-  this.ctxMain = this.cnvMain.getContext('2d');
+  this.cnv = document.getElementById('cnv1');
+  this.ctx = this.cnv.getContext('2d');
   //  vector to locate canvas in the world
 
 
@@ -13,42 +13,63 @@ function World() {
     width: 2400,
     height: 600
   }
-  this.cnvMainLoc = new JSVector(0, 0);
+
+  this.cnvLoc = new JSVector(0, 0);
+
+  this.platforms = [];
+  this.platforms[0] = new Platform(0, 300, 100, this.ctx);
+  this.platforms[1] = new Platform(125, 325, 75, this.ctx);
+  this.platforms[2] = new Platform(250, 350, 50, this.ctx);
+  this.platforms[3] = new Platform(325, 400, 75, this.ctx);
+  this.platforms[4] = new Platform(450, 375, 50, this.ctx);
+  this.platforms[5] = new Platform(525, 350, 100, this.ctx);
+  this.platforms[6] = new Platform(650, 375, 25, this.ctx);
+  this.platforms[7] = new Platform(700, 350, 25, this.ctx);
+  this.platforms[8] = new Platform(750, 325, 25, this.ctx);
+  this.platforms[9] = new Platform(825, 300, 50, this.ctx);
+  this.platforms[10] = new Platform(900, 275, 100, this.ctx);
+  this.platforms[11] = new Platform(1050, 250, 25, this.ctx);
+  this.platforms[12] = new Platform(1100, 275, 75, this.ctx);
+  this.platforms[13] = new Platform(1225, 300, 75, this.ctx);
+  this.platforms[14] = new Platform(1325, 325, 100, this.ctx);
+  this.platforms[15] = new Platform(1475, 300, 25, this.ctx);
+  this.platforms[16] = new Platform(1525, 275, 50, this.ctx);
+  this.platforms[17] = new Platform(1575, 250, 25, this.ctx);
+  this.platforms[18] = new Platform(1625, 225, 50, this.ctx);
+  this.platforms[19] = new Platform(1725, 200, 100, this.ctx);
+  this.platforms[20] = new Platform(1850, 225, 25, this.ctx);
+  this.platforms[21] = new Platform(1900, 275, 100, this.ctx);
+  this.platforms[22] = new Platform(2025, 250, 50, this.ctx);
+  this.platforms[23] = new Platform(2125, 275, 75, this.ctx);
+  this.platforms[24] = new Platform(2250, 300, 150, this.ctx);
 
     window.addEventListener("keypress", function (event) {
       switch (event.code) {
         //  What is "this" inside of the listener????????????????????
         case "KeyA":
-          if (world.cnvMainLoc.x > world.dims.left)
-            world.cnvMainLoc.x -= 20;
+          if (world.cnvLoc.x > world.dims.left)
+            world.cnvLoc.x -= 20;
           break;
         case "KeyD":
-          if (world.cnvMainLoc.x + world.cnvMain.width < world.dims.right)
-            world.cnvMainLoc.x += 20;
+          if (world.cnvLoc.x + world.cnv.width < world.dims.right)
+            world.cnvLoc.x += 20;
           break;
           break;
       }
     }, false);
-
-
-    platforms[0] = new Platform(100, 300, 50, this.ctxMain); //code this as a function
   
 }//++++++++++++++++++++++++++++++  end world constructor
 
 
 // run the world in animation
 World.prototype.run = function () {
-  let ctx = this.ctxMain;
-  for(let i = 0; i<platforms.length; i++){
-    platforms[i].render();
-  }
-
-  ctx.clearRect(0, 0, this.cnvMain.width, this.cnvMain.height);
-  
-
-
+  let ctx = this.ctx;
+  ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
   ctx.save();
-  ctx.translate(-this.cnvMainLoc.x, -this.cnvMainLoc.y);
+  ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
+  for(let i = 0; i<this.platforms.length; i++){
+    this.platforms[i].render();
+  }
   ctx.restore();
 
 }
