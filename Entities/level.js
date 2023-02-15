@@ -2,15 +2,13 @@ class Levels {
     constructor(id) {
         this.id =id
         this.platforms = [];
-        this.enemies = [];
-        this.powerups = [];
         this.obstacles = [];
         this.loadPlatforms();
     }
     loadPlatforms(){
         //this function hard codes all of the platforms in by hand
-        this.platforms[0] = new Platform(0,600,500,"red");
-        this.platforms[1] = new Platform(0,600,500,"green");
+        this.platforms[0] = new Platform(0,600,500,"red", false, true);
+        this.platforms[1] = new Platform(600,600,500,"green", true, false);
     }
     run() {
         // console.log("level was run")

@@ -1,9 +1,23 @@
 class Platform {
-    constructor(x, y, width, clr) {
+    constructor(x, y, width, clr, enemyYN, coinYN) {
         this.loc = new JSVector(x, y);
         this.width = width;
         this.height = 10;
         this.clr = clr;
+        this.enemies = [];
+        this.powerups = [];
+        if(enemyYN){
+            this.loadEnemies;
+        }
+        if(coinYN){
+            this.loadCoins;
+        }
+    }
+    loadEnemies() {
+        this.enemies = new Enemy(this.loc.x,this.loc.y,);
+    }
+    loadCoins(){
+
     }
     run() {
         this.render();
@@ -36,7 +50,6 @@ class Platform {
             // game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
             return true;
         } else {
-            game.hero.statusBlock.onPlatform = false;
             return false;
         }
     }
