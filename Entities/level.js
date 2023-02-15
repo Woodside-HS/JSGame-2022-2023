@@ -9,7 +9,8 @@ class Levels {
     }
     loadPlatforms(){
         //this function hard codes all of the platforms in by hand
-        this.platforms[0] = new Platform(0,600,500,"red")
+        this.platforms[0] = new Platform(0,600,500,"red");
+        this.platforms[1] = new Platform(0,600,500,"green");
     }
     run() {
         // console.log("level was run")
