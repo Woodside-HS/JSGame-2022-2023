@@ -58,3 +58,13 @@ window.addEventListener("keyup", function (event) {
       break;
   }
 }, false);
+
+window.addEventListener('mousedown', function (event) {
+  // game.mouseDown = true;
+  game.hero.attack();
+}, false);
+
+// window.addEventListener("mouseup", function (event) {
+//   game.mouseDown = false;
+// }, false);
+

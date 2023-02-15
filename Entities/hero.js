@@ -17,12 +17,19 @@ class Hero {
             shots: 10,
             onPlatform: false,
             jumpCount: 0,
+            isAttacking: false,
         }
+
+        this.attackRate = 20
+        this.attackTimer = 0;
+        // this.clicks = 0;
+        // this.attacks = 0;
     }
 
     run() {
         this.render();
         this.update();
+        this.attack();
         if (!this.statusBlock.onPlatform) {
             this.vel.add(this.grav);
         } else {
@@ -36,6 +43,7 @@ class Hero {
         ctx.beginPath();//Malcom you need begin path
         //without begin path, it continues to render old boxes so it wont be cleared 
         // MY BAD LMAO!
+        ctx.fillText(this.loc.x + 20, this.loc.y - 20, this.statusBlock.hp)
         ctx.moveTo(this.loc.x, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
@@ -47,6 +55,16 @@ class Hero {
         ctx.restore()
     }
     update() {
+        if (game.mouseDown) {
+            this.statusBlock.isAttacking = true;
+        }
+        if (this.statusBlock.isAttacking) {
+            this.attackTimer++;
+        }
+        if (this.attackTimer >= this.attackRate) {
+            this.statusBlock.isAttacking = false
+            this.attackTimer = 0
+        }
 
     }
 
@@ -59,6 +77,22 @@ class Hero {
             this.vel.y -= 5 // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
+        }
+    }
+    attack() {
+        console.log(this.attackTimer)
+        if (this.statusBlock.isAttacking) {
+            ctx.save()
+            ctx.beginPath();
+            ctx.moveTo(this.loc.x + 60, this.loc.y + 20);
+            ctx.lineTo(this.loc.x + 70, this.loc.y + 20);
+            ctx.lineTo(this.loc.x + 70, this.loc.y + 30);
+            ctx.lineTo(this.loc.x + 60, this.loc.y + 30)
+            ctx.closePath()
+            ctx.fillStyle = "green";
+            ctx.strokeStyle = "black";
+            ctx.fill();
+            ctx.restore();
         }
     }
 }

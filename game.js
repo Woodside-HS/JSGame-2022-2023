@@ -8,6 +8,7 @@ class Game {
 
     this.clickingA = false;
     this.clickingD = false;
+    this.mouseDown = false;
 
     this.dims = {
       top: 0,
