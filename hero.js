@@ -17,7 +17,6 @@ function Hero(width, ctx) {
 Hero.prototype.run = function () {
     this.render();
     this.update();
-    this.checkPlatform();
     //this.checkDeath();
 
 }
@@ -34,16 +33,16 @@ Hero.prototype.jump = function () {
     this.vel.limit(2);
 }
 
-// Hero.prototype.checkPlatform = function(){
-//     for(let i=0; i<world.platforms.length; i++){
-//         console.log(world.platforms[i].size);
-//         if(this.loc.y >= world.platforms[i].loc.y && this.loc.y <= world.platforms[i].loc.y + world.platforms[i].height && ((this.loc.x >= world.platforms[i].loc.x)) && (this.loc.x <= world.platforms[i].size+world.platforms[i].loc.x)){
-//             this.vel.y = 0;
-//             this.loc.y = world.platforms[i].loc.y;
-//         }
-//         //(this.loc.y >= world.platforms[i].loc.y && this.loc.y <= world.platforms[i].loc.y + world.platforms[i].height) && ((this.loc.x >= world.platforms[i].loc.x) && (this.loc.x <= world.platforms[i].size+world.platforms[i].loc.x)) && this.vel.y >=0
-//     }
-// }
+Hero.prototype.checkPlatform = function(){
+    for(let i=0; i<world.platforms.length; i++){
+        console.log(world.platforms[i].size);
+        if(this.loc.y >= world.platforms[i].loc.y && this.loc.y <= world.platforms[i].loc.y + world.platforms[i].height && ((this.loc.x >= world.platforms[i].loc.x)) && (this.loc.x <= world.platforms[i].size+world.platforms[i].loc.x)){
+            this.vel.y = 0;
+            this.loc.y = world.platforms[i].loc.y;
+        }
+        //(this.loc.y >= world.platforms[i].loc.y && this.loc.y <= world.platforms[i].loc.y + world.platforms[i].height) && ((this.loc.x >= world.platforms[i].loc.x) && (this.loc.x <= world.platforms[i].size+world.platforms[i].loc.x)) && this.vel.y >=0
+    }
+}
 
 
 Hero.prototype.render = function () {

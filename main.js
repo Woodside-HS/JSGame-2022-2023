@@ -1,18 +1,18 @@
 
 //Global
 let world;
-let hero;
+let h1;
 window.onload = init;
 
 
 function init(){
     world = new World();
-    hero = new Hero(5, world.ctx);
+    h1= new Hero(5, world.ctx);
     animate();
 }
 
 function animate(){
   world.run();
-  hero.run();
+  h1.run();
   requestAnimationFrame(animate);
 }
