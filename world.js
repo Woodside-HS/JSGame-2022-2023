@@ -4,6 +4,8 @@ function World() {
   this.ctx = this.cnv.getContext('2d');
   //  vector to locate canvas in the world
 
+  
+
 
   this.dims = {
     top: 0,
@@ -43,20 +45,11 @@ function World() {
   this.platforms[23] = new Platform(2125, 275, 75, this.ctx);
   this.platforms[24] = new Platform(2250, 300, 150, this.ctx);
 
-    window.addEventListener("keypress", function (event) {
-      switch (event.code) {
-        //  What is "this" inside of the listener????????????????????
-        case "KeyA":
-          if (world.cnvLoc.x > world.dims.left)
-            world.cnvLoc.x -= 20;
-          break;
-        case "KeyD":
-          if (world.cnvLoc.x + world.cnv.width < world.dims.right)
-            world.cnvLoc.x += 20;
-          break;
-          break;
-      }
-    }, false);
+  this.worldMovingRight = false;
+  this.worldMovingLeft = false;
+
+
+ 
   
 }//++++++++++++++++++++++++++++++  end world constructor
 
@@ -67,6 +60,7 @@ World.prototype.run = function () {
   ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
   ctx.save();
   ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
+  //this.hero.run();  
   for(let i = 0; i<this.platforms.length; i++){
     this.platforms[i].render();
   }
