@@ -1,4 +1,4 @@
-class Enemie {
+class Enemy {
     constructor() {
 
     }

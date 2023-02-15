@@ -42,10 +42,10 @@ class Game {
     //changed to move the hero
     //if the hero gets too far to one side the camera follows him
     if (this.clickingA) {
-      this.camLoc.x--;
+      this.camLoc.x -= 2;
     }
     if (this.clickingD) {
-      this.camLoc.x++;
+      this.camLoc.x += 2;
     }
   }
 }//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Ball constructor
