@@ -7,14 +7,14 @@ class Platform {
         this.enemies = [];
         this.powerups = [];
         if(enemyYN){
-            this.loadEnemies;
+            this.loadEnemies();
         }
         if(coinYN){
-            this.loadCoins;
+            this.loadCoins();
         }
     }
     loadEnemies() {
-        this.enemies = new Enemy(this.loc.x,this.loc.y,);
+        this.enemies[0] = new Enemy(this.loc.x,this.loc.y,this.width,10);
     }
     loadCoins(){
 
@@ -22,6 +22,17 @@ class Platform {
     run() {
         this.render();
         this.checkHero();
+        this.runEntities();
+    }
+    runEntities(){
+        for(let i = this.enemies.length-1;i >=0 ;i--){
+            //goes backwards to aid with splices
+            this.enemies[i].run();
+        }
+        for(let i = this.powerups.length-1;i >=0 ;i--){
+            //goes backwards to aid with splices
+            this.powerup[i].run();
+        }
     }
     render() {
         ctx.beginPath();
@@ -34,7 +45,6 @@ class Platform {
         ctx.fillStyle = this.clr;
         ctx.fill();
     }
-
     checkHero() {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
         let heroH = game.hero.height; // the heros height

@@ -28,7 +28,8 @@ class Hero {
         } else {
             this.vel.y = 0 // stops the hero on the platform
         }
-        this.loc.add(this.vel)
+        this.loc.add(this.vel);
+        game.hero.statusBlock.onPlatform = false;
     }
     render() {
         ctx.save(); // draws the hero 
