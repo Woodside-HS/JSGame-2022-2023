@@ -42,10 +42,10 @@ class Game {
   moveCam() {
     //changed to move the hero
     //if the hero gets too far to one side the camera follows him
-    if (this.clickingA) {
+    if (this.clickingA&&!hittingRight) {
       this.camLoc.x -= 2;
     }
-    if (this.clickingD) {
+    if (this.clickingD&&!hittingLeft) {
       this.camLoc.x += 2;
     }
   }
