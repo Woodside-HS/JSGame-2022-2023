@@ -23,6 +23,7 @@ class Game {
 
   }
   update = function () {
+    
     this.moveCam();
     if (gameState == 0) {
 
@@ -34,7 +35,6 @@ class Game {
       this.hero.run();
       this.levels[0].run();
       ctx.restore();
-
     }
 
   }

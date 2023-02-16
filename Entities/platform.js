@@ -69,25 +69,32 @@ class Platform {
         }
     }
     sideCollision() {
-        if(game.hero.loc.x+game.hero.width<this.loc.x){
+        
+        //does not work vertically for now
+        if (game.hero.loc.x + game.hero.width < this.loc.x) {
             //the hero is to the left of the platform
-            //console.log("left of " + this.clr);
-            if(game.hero.loc.x+game.hero.width>this.loc.x-10){
-                console.log("registering left hit");
-                hittingLeft=true;
-                hittingRight= false;
-                //hitting left works(for now)
+            if (game.hero.loc.x + game.hero.width > this.loc.x - 10) {
+                if (game.hero.loc.y+game.hero.height-5 > this.loc.y &&game.hero.loc.y < this.loc.y+(game.hero.height)) {
+                    //makes sure hero is not above the platform
+                    hittingLeft = true;
+                    hittingRight = false;
+                    //hitting left works(for now)
+                }
+
             }
         }//left check if statement
-        if(game.hero.loc.x>this.loc.x+this.width){
+        if (game.hero.loc.x > this.loc.x + this.width) {
             //checks that it is right
-            console.log("right of" + this.clr);
-            if(game.hero.loc.x<this.loc.x+this.width+10){
-                console.log("registering right hit" + this.clr);
-                hittingRight=true;
-                hittingLeft = false;
+            if (game.hero.loc.x < this.loc.x + this.width + 10) {
+                if (game.hero.loc.y+game.hero.height-5 > this.loc.y &&game.hero.loc.y < this.loc.y+(game.hero.height)) {
+                    hittingRight = true;
+                    hittingLeft = false;
+                }
             }
-
+        }
+        if(game.hero.loc.y+game.hero.height < this.loc.y-11){
+            hittingLeft = false;
+                    hittingRight = false;
         }
     }
 }
