@@ -62,19 +62,19 @@ class Platform {
         ) {
             // console.log("touching platform");
             game.hero.statusBlock.onPlatform = true;
-            // game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
             return true;
         } else {
             return false;
         }
     }
     sideCollision() {
-        
+
         //does not work vertically for now
         if (game.hero.loc.x + game.hero.width < this.loc.x) {
             //the hero is to the left of the platform
             if (game.hero.loc.x + game.hero.width > this.loc.x - 10) {
-                if (game.hero.loc.y+game.hero.height-5 > this.loc.y &&game.hero.loc.y < this.loc.y+(game.hero.height)) {
+                if (game.hero.loc.y + game.hero.height - 5 > this.loc.y && game.hero.loc.y < this.loc.y + (game.hero.height)) {
                     //makes sure hero is not above the platform
                     hittingLeft = true;
                     hittingRight = false;
@@ -86,15 +86,15 @@ class Platform {
         if (game.hero.loc.x > this.loc.x + this.width) {
             //checks that it is right
             if (game.hero.loc.x < this.loc.x + this.width + 10) {
-                if (game.hero.loc.y+game.hero.height-5 > this.loc.y &&game.hero.loc.y < this.loc.y+(game.hero.height)) {
+                if (game.hero.loc.y + game.hero.height - 5 > this.loc.y && game.hero.loc.y < this.loc.y + (game.hero.height)) {
                     hittingRight = true;
                     hittingLeft = false;
                 }
             }
         }
-        if(game.hero.loc.y+game.hero.height < this.loc.y-11){
+        if (game.hero.loc.y + game.hero.height < this.loc.y - 11) {
             hittingLeft = false;
-                    hittingRight = false;
+            hittingRight = false;
         }
     }
 }

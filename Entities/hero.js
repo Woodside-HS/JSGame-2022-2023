@@ -4,7 +4,7 @@ class Hero {
         this.vel = new JSVector(0, 0);
         this.height = 50;
         this.width = 50;
-        this.grav = new JSVector(0, 0.05);//gravity for when falling
+        this.grav = new JSVector(0, 0.2);//gravity for when falling
         this.inventory = {
             dbJump: false,
             dash: false,
@@ -65,7 +65,7 @@ class Hero {
         if (this.statusBlock.jumpCount < jumpLimit) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
             this.vel.y = 0 // stops the hero
-            this.vel.y -= 5 // pushes the hero up
+            this.vel.y -= 6 // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
         }
