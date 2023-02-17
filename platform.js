@@ -4,7 +4,7 @@ function Platform(x, y, s, ctx, cnvLoc){ // loc from upper left corner and size
     this.size = s;
     this.clr = "brown";
     this.height = 20;
-    
+    this.enemies = [];
     this.cnvLoc = cnvLoc;
 }
 
