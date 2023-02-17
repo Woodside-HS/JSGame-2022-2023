@@ -1,6 +1,6 @@
 // global variables for canvas and context
 var game, canvas, ctx, gameState;
-var hittingRight,hittingLeft;//varibles to keep the hero from moving thru the platform
+var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
 
 function init() {
@@ -12,7 +12,7 @@ function init() {
   ctx = canvas.getContext('2d'); // This is the context
   game = new Game();
   //setting defaults of variables
-  gameState = 1;//gameState controls where the player is, 0 is main menu, 1 is 1st level, etc
+  gameState = 0;//gameState controls where the player is, 0 is main menu, 1 is 1st level, etc
   hittingRight = false;
   hittingLeft = false;
   animate();

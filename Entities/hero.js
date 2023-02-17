@@ -41,7 +41,8 @@ class Hero {
         ctx.beginPath();//Malcom you need begin path
         //without begin path, it continues to render old boxes so it wont be cleared 
         // MY BAD LMAO!
-        ctx.fillText(this.loc.x + 20, this.loc.y - 20, this.statusBlock.hp)
+        ctx.font = "50px serif";
+        ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20)
         ctx.moveTo(this.loc.x, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);

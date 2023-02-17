@@ -24,9 +24,14 @@ class Game {
 
   }
   update = function () {
-    
+
     this.moveCam();
     if (gameState == 0) {
+      ctx.font = "50px serif";
+      ctx.fillText("click 'tile 1' to play ", 200, 200)
+      ctx.fillStyle = "green";
+      ctx.strokeStyle = "red";
+      ctx.fill();
 
     } else if (gameState == 1) {
       ctx.save();
@@ -36,13 +41,14 @@ class Game {
       this.hero.run();
       this.levels[0].run();
       ctx.restore();
-    } else if (gameState == 2){
+    } else if (gameState == 2) {
       ctx.save();
       ctx.translate(-this.camLoc.x, -this.camLoc.y);
       this.hero.loc.x = this.camLoc.x + 200;
       this.hero.run();
       this.levels[1].run();
       ctx.restore();
+
     }
 
   }
@@ -50,10 +56,10 @@ class Game {
   moveCam() {
     //changed to move the hero
     //if the hero gets too far to one side the camera follows him
-    if (this.clickingA&&!hittingRight) {
+    if (this.clickingA && !hittingRight) {
       this.camLoc.x -= 2;
     }
-    if (this.clickingD&&!hittingLeft) {
+    if (this.clickingD && !hittingLeft) {
       this.camLoc.x += 2;
     }
   }
