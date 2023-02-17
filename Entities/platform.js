@@ -29,8 +29,8 @@ class Platform {
         for (let i = this.enemies.length - 1; i >= 0; i--) {
             //goes backwards to aid with splices
             this.enemies[i].run();
-            if(this.enemies[i].isdead){
-                this.enemies.splice(i,1)
+            if (this.enemies[i].isdead) {
+                this.enemies.splice(i, 1)
             }
         }
         for (let i = this.powerups.length - 1; i >= 0; i--) {
@@ -65,6 +65,7 @@ class Platform {
         ) {
             // console.log("touching platform");
             game.hero.statusBlock.onPlatform = true;
+            game.hero.statusBlock.jumpCount = 0
             game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
             return true;
         } else {

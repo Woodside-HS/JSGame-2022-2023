@@ -2,8 +2,8 @@ class Hero {
     constructor() {
         this.loc = new JSVector(200, 200);//ideally loc would only be a y value for how far up the screen they are
         this.vel = new JSVector(0, 0);
-        this.cursorLoc = new JSVector(0,0);//location of the cursor aids in attacking
-        this.posNeg =true;//related to attacking
+        this.cursorLoc = new JSVector(0, 0);//location of the cursor aids in attacking
+        this.posNeg = true;//related to attacking
         this.height = 50;
         this.width = 50;
         this.grav = new JSVector(0, 0.2);//gravity for when falling
@@ -83,7 +83,7 @@ class Hero {
     }
 
     jump() {
-        let jumpLimit = 2000000000000000000; //! change this later! I set it to a large number just for testing
+        let jumpLimit = 1; //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
         if (this.statusBlock.jumpCount < jumpLimit) {
@@ -95,28 +95,28 @@ class Hero {
         }
     }
     attack() {
-        this.posNeg =true;//right side
-        if(this.cursorLoc.x<this.loc.x){
+        this.posNeg = true;//right side
+        if (this.cursorLoc.x < this.loc.x) {
             this.posNeg = false;//left side
         }
-        
+
         if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
             console.log("is attacking")
             this.statusBlock.attackTimer--;
             ctx.save()
             ctx.beginPath();
-            if(this.posNeg){
+            if (this.posNeg) {
                 ctx.moveTo(this.loc.x + (50), this.loc.y + 0);//top left
-            ctx.lineTo(this.loc.x + (80), this.loc.y + 0);//top right
-            ctx.lineTo(this.loc.x + (80), this.loc.y + this.height);//bottom right
-            ctx.lineTo(this.loc.x + (50), this.loc.y + this.height);//bottom left
+                ctx.lineTo(this.loc.x + (80), this.loc.y + 0);//top right
+                ctx.lineTo(this.loc.x + (80), this.loc.y + this.height);//bottom right
+                ctx.lineTo(this.loc.x + (50), this.loc.y + this.height);//bottom left
             } else {
                 ctx.moveTo(this.loc.x - (30), this.loc.y + 0);//top left
-            ctx.lineTo(this.loc.x + (0), this.loc.y + 0);//top right
-            ctx.lineTo(this.loc.x + (0), this.loc.y + this.height);//bottom right
-            ctx.lineTo(this.loc.x - (30), this.loc.y + this.height);//bottom left
+                ctx.lineTo(this.loc.x + (0), this.loc.y + 0);//top right
+                ctx.lineTo(this.loc.x + (0), this.loc.y + this.height);//bottom right
+                ctx.lineTo(this.loc.x - (30), this.loc.y + this.height);//bottom left
             }
-            
+
             ctx.closePath()
             ctx.fillStyle = "darkgreen";
             ctx.strokeStyle = "black";
