@@ -1,11 +1,18 @@
 class Platform {
-    constructor(x, y, width, clr, enemyYN, coinYN) {
+    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, barrierYN) {
+        //YN = yes/no
         this.loc = new JSVector(x, y);
         this.width = width;
-        this.height = 10;
+        this.height = height;
         this.clr = clr;
         this.enemies = [];
         this.powerups = [];
+        this.coinCost = 0;
+        this.barrier = barrierYN;
+        if (coinCost) {
+            this.coinCost = coinCost;
+            //overwrites the coinc cost assuming there is one
+        }
         if (enemyYN) {
             this.loadEnemies();
         }
@@ -20,10 +27,20 @@ class Platform {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5);
     }
     run() {
-        this.render();
-        this.checkHero();
-        this.runEntities();
-        this.sideCollision();
+        if (game.hero.statusBlock.coins >= this.coinCost) {
+            this.render();
+            this.checkHero();
+            this.runEntities();
+            this.sideCollision();
+        } else {
+            this.coinLess();
+        }
+
+    }
+    coinLess() {
+        ctx.fillText("you dont have enough coins", this.loc.x, this.loc.y);
+        ctx.fillStyle = this.clr;
+        ctx.fill();
     }
     runEntities() {
         for (let i = this.enemies.length - 1; i >= 0; i--) {
@@ -46,8 +63,8 @@ class Platform {
         ctx.beginPath();
         ctx.moveTo(this.loc.x, this.loc.y);//top left
         ctx.lineTo(this.loc.x + this.width, this.loc.y);//top right
-        ctx.lineTo(this.loc.x + this.width, this.loc.y + 10);//bottom right
-        ctx.lineTo(this.loc.x, this.loc.y + 10);//bottom left
+        ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);//bottom right
+        ctx.lineTo(this.loc.x, this.loc.y + this.height);//bottom left
         //platforms will have uniform height fo now
         ctx.closePath()
         ctx.fillStyle = this.clr;
@@ -66,7 +83,10 @@ class Platform {
             // console.log("touching platform");
             game.hero.statusBlock.onPlatform = true;
             game.hero.statusBlock.jumpCount = 0
-            game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            if(!this.barrier){
+                //only works teleports if it is not meant to be a barrier
+                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            }
             return true;
         } else {
             return false;
