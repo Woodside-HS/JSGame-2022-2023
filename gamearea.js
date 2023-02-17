@@ -50,6 +50,11 @@ function GameArea() {
     gameState = 1;
     console.log("gameState = 1!!!") // gameState = 1 means the your playing
   }, false);
-
+  this.tiles[1].addEventListener("click", function () {
+    gameState++;
+    game.hero.loc.x = 200;
+    game.hero.loc.y = 200;
+    game.hero.vel.setMagnitude(0);
+  }, false)
 
 }
