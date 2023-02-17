@@ -8,7 +8,8 @@ window.addEventListener("keydown", function (event) {
             game.clickingD = true
             break;
 
-        case "KeyQ":
+        case "KeyF":
+            game.mouseDown = true;
 
             break;
         case "Space":
@@ -27,16 +28,18 @@ window.addEventListener("keyup", function (event) {
             game.clickingD = false;
             break;
 
-        case "KeyQ":
+        case "KeyF":
+            game.mouseDown = false;
+
             break;
     }
 }, false);
 
-window.addEventListener('mousedown', function (event) {
-    game.mouseDown = true;
-    // game.hero.attack();
-}, false);
+// window.addEventListener('mousedown', function (event) {
+//     game.mouseDown = true;
+//     // game.hero.attack();
+// }, false);
 
-window.addEventListener("mouseup", function (event) {
-    game.mouseDown = false;
-}, false);
+// window.addEventListener("mouseup", function (event) {
+//     game.mouseDown = false;
+// }, false);
