@@ -58,15 +58,15 @@ function World() {
 World.prototype.run = function () {
   let ctx = this.ctx;
   ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
+  if(!hero.death){
   ctx.save();
   ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
-  if(!hero.death){
   for(let i = 0; i<this.platforms.length; i++){
     this.platforms[i].run();
   }
+  ctx.restore();
   hero.run();
 }  
-  ctx.restore();
  // }
 }
 
