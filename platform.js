@@ -1,11 +1,11 @@
-function Platform(x, y, s, ctx){ // loc from upper left corner and size
+function Platform(x, y, s, ctx, cnvLoc){ // loc from upper left corner and size
     this.loc = new JSVector(x, y);
     this.ctx = ctx;
     this.size = s;
     this.clr = "brown";
     this.height = 20;
-    this.enemies = [];
-    this.loadEnemies(1);
+    
+    this.cnvLoc = cnvLoc;
 }
 
 
@@ -39,13 +39,15 @@ Platform.prototype.loadEnemies = function(n){
 }
 
 Platform.prototype.checkChar = function(){
-    if(this.loc.x <= hero.loc.x && this.loc.x + this.size >= hero.loc.x){
+    let temp = false;
+    if(this.loc.x <= (hero.loc.x + this.cnvLoc.x) && (this.loc.x + this.size) >= (hero.loc.x + this.cnvLoc.x)){
         if(hero.loc.y >= this.loc.y && hero.loc.y <= this.loc.y + this.height){
             hero.vel.y = 0;
             hero.loc.y = this.loc.y;
-            hero.onPlatform = true;
+            temp = true;
         }
     }
+    hero.onPlatform = temp;
 }
 
 //stops character

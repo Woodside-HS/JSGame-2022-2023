@@ -18,6 +18,13 @@ Hero.prototype.run = function () {
     this.render();
     this.update();
     this.checkPlatform();
+    //this.checkPlatform();
+    if(!this.onPlatform){
+        this.loc.add(this.vel);
+        this.vel.add(this.acc);
+        this.vel.limit(2);
+    }
+    //this.checkPlatform();
     //this.checkDeath();
 
 }
