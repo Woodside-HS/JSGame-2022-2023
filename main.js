@@ -17,7 +17,14 @@ function init() {
   hittingLeft = false;
   animate();
 }
-
+function increaseGameState(){
+  console.log("increasing game state "+(gameState+1));
+  //made a function because its funny
+  gameState++;
+  game.hero.loc.x = 200;
+  game.hero.loc.y = 200;
+  game.hero.vel.setMagnitude(0);
+}
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);

@@ -19,7 +19,8 @@ class Game {
       height: 600
     }
 
-    this.levels[0] = new Levels()
+    this.levels[0] = new Levels(1);
+    this.levels[1] = new Levels(2);
 
   }
   update = function () {
@@ -34,6 +35,13 @@ class Game {
       //moves the hero with the camera, temporarilly disabled to make sure level works
       this.hero.run();
       this.levels[0].run();
+      ctx.restore();
+    } else if (gameState == 2){
+      ctx.save();
+      ctx.translate(-this.camLoc.x, -this.camLoc.y);
+      this.hero.loc.x = this.camLoc.x + 200;
+      this.hero.run();
+      this.levels[1].run();
       ctx.restore();
     }
 
