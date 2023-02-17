@@ -14,13 +14,15 @@ Platform.prototype.run = function(){
 
 
 Platform.prototype.checkChar = function(){
+    let temp = false;
     if(this.loc.x <= (hero.loc.x + this.cnvLoc.x) && (this.loc.x + this.size) >= (hero.loc.x + this.cnvLoc.x)){
         if(hero.loc.y >= this.loc.y && hero.loc.y <= this.loc.y + this.height){
             hero.vel.y = 0;
             hero.loc.y = this.loc.y;
-            hero.onPlatform = true;
+            temp = true;
         }
     }
+    hero.onPlatform = temp;
 }
 
 
