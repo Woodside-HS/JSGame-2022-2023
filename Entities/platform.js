@@ -1,5 +1,5 @@
 class Platform {
-    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, barrierYN) {
+    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost) {
         //YN = yes/no
         this.loc = new JSVector(x, y);
         this.width = width;
@@ -8,7 +8,6 @@ class Platform {
         this.enemies = [];
         this.powerups = [];
         this.coinCost = 0;
-        this.barrier = barrierYN;
         if (coinCost) {
             this.coinCost = coinCost;
             //overwrites the coinc cost assuming there is one
@@ -82,11 +81,8 @@ class Platform {
         ) {
             // console.log("touching platform");
             game.hero.statusBlock.onPlatform = true;
-            game.hero.statusBlock.jumpCount = 0
-            if(!this.barrier){
-                //only works teleports if it is not meant to be a barrier
+            game.hero.statusBlock.jumpCount = 0;
                 game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
-            }
             return true;
         } else {
             return false;
