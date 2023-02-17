@@ -6,11 +6,24 @@ class Enemy {
         this.width = platformWidth;
         this.size = enemySize;
         this.move = 1;
+        this.isdead=false;
     }
     run(){
         this.render();
         this.movePlatform();
         this.checkHero();
+        this.checkAttack();
+    }
+    checkAttack(){
+        if(game.hero.statusBlock.isAttacking){
+            //currently only works if enemy is on right side of hero
+            if(this.loc.x>game.hero.loc.x && this.loc.x<game.hero.loc.x+80){
+                //enemy is within attack bounds
+                if(this.loc.y>game.hero.loc.y&&this.loc.y<game.hero.loc.y+game.hero.height){
+                    this.isdead = true;
+                }
+            }
+        }
     }
     movePlatform(){
         this.loc.x+=this.move;

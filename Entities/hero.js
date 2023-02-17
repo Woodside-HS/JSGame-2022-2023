@@ -71,6 +71,7 @@ class Hero {
     jump() {
         let jumpLimit = 2000000000000000000; //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
+        //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
         if (this.statusBlock.jumpCount < jumpLimit) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
             this.vel.y = 0 // stops the hero
@@ -85,12 +86,12 @@ class Hero {
             this.statusBlock.attackTimer--;
             ctx.save()
             ctx.beginPath();
-            ctx.moveTo(this.loc.x + 60, this.loc.y + 20);
-            ctx.lineTo(this.loc.x + 70, this.loc.y + 20);
-            ctx.lineTo(this.loc.x + 70, this.loc.y + 30);
-            ctx.lineTo(this.loc.x + 60, this.loc.y + 30)
+            ctx.moveTo(this.loc.x + 50, this.loc.y + 0);//top left
+            ctx.lineTo(this.loc.x + 80, this.loc.y + 0);//top right
+            ctx.lineTo(this.loc.x + 80, this.loc.y + this.height);//bottom right
+            ctx.lineTo(this.loc.x + 50, this.loc.y + this.height);//bottom left
             ctx.closePath()
-            ctx.fillStyle = "green";
+            ctx.fillStyle = "darkgreen";
             ctx.strokeStyle = "black";
             ctx.fill();
             ctx.restore();

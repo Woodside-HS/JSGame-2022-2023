@@ -29,6 +29,9 @@ class Platform {
         for (let i = this.enemies.length - 1; i >= 0; i--) {
             //goes backwards to aid with splices
             this.enemies[i].run();
+            if(this.enemies[i].isdead){
+                this.enemies.splice(i,1)
+            }
         }
         for (let i = this.powerups.length - 1; i >= 0; i--) {
             //goes backwards to aid with splices
