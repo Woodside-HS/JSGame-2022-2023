@@ -56,6 +56,7 @@ function World() {
 
 // run the world in animation
 World.prototype.run = function () {
+  if(!hero.death){
   let ctx = this.ctx;
   ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
   ctx.save();
@@ -65,7 +66,7 @@ World.prototype.run = function () {
     this.platforms[i].run();
   }
   ctx.restore();
-
+  }
 }
 
 

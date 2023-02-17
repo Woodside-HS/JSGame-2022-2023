@@ -30,6 +30,9 @@ Enemy.prototype.run = function () {
 Enemy.prototype.update = function(){
     this.loc.add(this.vel);
     //this.vel.add(this.acc);
+    if(this.loc.distance(hero.loc) < 10){
+        hero.death = true;
+    }
     
 }
 

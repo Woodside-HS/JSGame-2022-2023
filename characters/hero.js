@@ -10,6 +10,7 @@ function Hero(width, ctx) {
     this.movingRight = false;
     this.movingLeft = false;
     this.onPlatform = false;
+    this.death = false;
 
   
 }
