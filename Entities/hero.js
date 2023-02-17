@@ -13,6 +13,7 @@ class Hero {
         }
         this.statusBlock = {
             hp: 100,
+            isDead: false,
             coins: 0,
             shots: 10,
             onPlatform: false,
@@ -54,6 +55,16 @@ class Hero {
         ctx.restore()
     }
     update() {
+        //! %%%%%%%%%%%%%%%  
+        //! NOTE: we dont exactly need the "isDead" varible if the game ends when isDead = true but it might be usfull in the futre
+        if (this.statusBlock.hp <= 0) { // the hero "dies" when hp <= 0
+            this.statusBlock.isDead = true;
+        }
+
+        if (this.statusBlock.isDead) { // if the hero is dead it brings you to the start screen (gameState1)
+            gameState = 0;
+        }
+        //!%%%%%%%%%%%%%%
         if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
             this.statusBlock.isAttacking = true;
         } else if (this.statusBlock.onCoolDown) { // runs the cooldown timer
