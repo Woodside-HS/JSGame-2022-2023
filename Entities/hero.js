@@ -19,14 +19,9 @@ class Hero {
             jumpCount: 0,
             isAttacking: false,
             onCoolDown: false,
+            coolDownTimer: 100, // the length of the attack cooldown 
+            attackTimer: 50,  // the length/amount of time that the hero attacks for
         }
-
-        this.attackRate = 20
-        this.attackTimer = 0;
-        // this.clicks = 0;
-        // this.attacks = 0;
-        this.coolDownTimer = 100; // the length of the attack cooldown
-        this.swinging = 50 // the length of the attck
     }
 
     run() {
@@ -58,15 +53,15 @@ class Hero {
         ctx.restore()
     }
     update() {
-        if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and you're not on cooldown
+        if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
             this.statusBlock.isAttacking = true;
         } else if (this.statusBlock.onCoolDown) { // runs the cooldown timer
             console.log("onCoolDown (cant attack)")
-            this.coolDownTimer--;
+            this.statusBlock.coolDownTimer--;
         }
-        if (this.coolDownTimer <= 0 && this.statusBlock.onCoolDown) { // if the cooldown timer is 0 turns cooldown off
+        if (this.statusBlock.coolDownTimer <= 0 && this.statusBlock.onCoolDown) { // if the cooldown timer is 0 turns cooldown off
             this.statusBlock.onCoolDown = false;
-            this.coolDownTimer = 100
+            this.statusBlock.coolDownTimer = 100
         }
         this.attack();
 
@@ -87,7 +82,7 @@ class Hero {
     attack() {
         if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
             console.log("is attacking")
-            this.swinging--;
+            this.statusBlock.attackTimer--;
             ctx.save()
             ctx.beginPath();
             ctx.moveTo(this.loc.x + 60, this.loc.y + 20);
@@ -100,8 +95,8 @@ class Hero {
             ctx.fill();
             ctx.restore();
         }
-        if (this.swinging <= 0) {
-            this.swinging = 100
+        if (this.statusBlock.attackTimer <= 0) {
+            this.statusBlock.attackTimer = 100
             this.statusBlock.isAttacking = false
             this.statusBlock.onCoolDown = true;
         }
