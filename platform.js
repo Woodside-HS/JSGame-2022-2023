@@ -6,15 +6,28 @@ function Platform(x, y, s, ctx){ // loc from upper left corner and size
     this.height = 20;
 }
 
+Platform.prototype.run = function(){
+    this.render();
+    this.checkChar();
+}
 
-//render
+
+Platform.prototype.checkChar = function(){
+    if(this.loc.x <= hero.loc.x && this.loc.x + this.size >= hero.loc.x){
+        if(hero.loc.y >= this.loc.y && hero.loc.y <= this.loc.y + this.height){
+            hero.vel.y = 0;
+            hero.loc.y = this.loc.y;
+            hero.onPlatform = true;
+        }
+    }
+}
 
 
 Platform.prototype.render = function(){
     let ctx = this.ctx;
     ctx.beginPath();
-    ctx.strokeStyle = "black";
     ctx.fillStyle = this.clr;
+    ctx.strokeStyle = "black";
     ctx.moveTo(this.loc.x, this.loc.y);
     ctx.lineTo(this.loc.x+ this.size, this.loc.y);
     ctx.lineTo(this.loc.x + this.size, this.loc.y + this.height);
@@ -23,19 +36,4 @@ Platform.prototype.render = function(){
     ctx.fill();
     ctx.stroke();
     ctx.closePath();
-
- 
-    
-
 }
-
-//stops character
-// Platform.prototype.stopChar = function(){
-//     if(h1.loc.x + 10 >= this.loc.x && h1.loc.x -10 <= this.loc.x + this.size){
-//         if(h1.loc.y + 10 >=this.loc.y && h1.loc.y + 10 <this.loc.y+2){
-//           h1.onPlatform = true;
-//           h1.jVel = 0;
-//           check = true;
-//         }
-//     }
-// }
