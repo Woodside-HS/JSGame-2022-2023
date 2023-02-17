@@ -12,6 +12,5 @@ function init(){
 
 function animate(){
   world.run();
-  hero.run();
   requestAnimationFrame(animate);
 }

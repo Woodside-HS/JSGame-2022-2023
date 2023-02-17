@@ -56,17 +56,18 @@ function World() {
 
 // run the world in animation
 World.prototype.run = function () {
-  if(!hero.death){
   let ctx = this.ctx;
   ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
   ctx.save();
   ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
-  //this.hero.run();  
+  if(!hero.death){
   for(let i = 0; i<this.platforms.length; i++){
     this.platforms[i].run();
   }
+  hero.run();
+}  
   ctx.restore();
-  }
+ // }
 }
 
 
