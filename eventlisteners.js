@@ -33,10 +33,10 @@ window.addEventListener("keyup", function (event) {
 }, false);
 
 window.addEventListener('mousedown', function (event) {
-    // game.mouseDown = true;
-    game.hero.attack();
+    game.mouseDown = true;
+    // game.hero.attack();
 }, false);
 
-  // window.addEventListener("mouseup", function (event) {
-  //   game.mouseDown = false;
-  // }, false);
+window.addEventListener("mouseup", function (event) {
+    game.mouseDown = false;
+}, false);

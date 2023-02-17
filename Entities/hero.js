@@ -18,12 +18,15 @@ class Hero {
             onPlatform: false,
             jumpCount: 0,
             isAttacking: false,
+            onCoolDown: false,
         }
 
         this.attackRate = 20
         this.attackTimer = 0;
         // this.clicks = 0;
         // this.attacks = 0;
+        this.coolDownTimer = 100; // the length of the attack cooldown
+        this.swinging = 50 // the length of the attck
     }
 
     run() {
@@ -55,6 +58,17 @@ class Hero {
         ctx.restore()
     }
     update() {
+        if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and you're not on cooldown
+            this.statusBlock.isAttacking = true;
+        } else if (this.statusBlock.onCoolDown) { // runs the cooldown timer
+            console.log("onCoolDown (cant attack)")
+            this.coolDownTimer--;
+        }
+        if (this.coolDownTimer <= 0 && this.statusBlock.onCoolDown) { // if the cooldown timer is 0 turns cooldown off
+            this.statusBlock.onCoolDown = false;
+            this.coolDownTimer = 100
+        }
+        this.attack();
 
 
     }
@@ -71,18 +85,9 @@ class Hero {
         }
     }
     attack() {
-        // if (this.attackTimer <= this.attackRate) {
-        //     this.statusBlock.isAttacking = true;
-        // }
-        // if (this.statusBlock.isAttacking) {
-        //     this.attackTimer++;
-        // }
-        // if (this.attackTimer >= this.attackRate) {
-        //     this.statusBlock.isAttacking = false
-        //     this.attackTimer = 0
-        // }
-        console.log(this.attackTimer)
-        if (this.statusBlock.isAttacking) {
+        if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
+            console.log("is attacking")
+            this.swinging--;
             ctx.save()
             ctx.beginPath();
             ctx.moveTo(this.loc.x + 60, this.loc.y + 20);
@@ -94,6 +99,11 @@ class Hero {
             ctx.strokeStyle = "black";
             ctx.fill();
             ctx.restore();
+        }
+        if (this.swinging <= 0) {
+            this.swinging = 100
+            this.statusBlock.isAttacking = false
+            this.statusBlock.onCoolDown = true;
         }
     }
 }
