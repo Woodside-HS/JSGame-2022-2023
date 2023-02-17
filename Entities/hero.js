@@ -58,7 +58,7 @@ class Hero {
     }
     update() {
         //! %%%%%%%%%%%%%%%  
-        if (this.statusBlock.hp <= 0) { // the hero "dies" when hp <= 0
+        if (this.statusBlock.hp <= 0||this.loc.y>canvas.height) { // the hero "dies" when hp <= 0
             this.statusBlock.isDead = true;
         }
 
@@ -136,5 +136,7 @@ class Hero {
 
     reSetHero() {
         //TODO im not sure we need this function but it might be usfull in the future
+        this.statusBlock.hp = 101;
+
     }
 }
