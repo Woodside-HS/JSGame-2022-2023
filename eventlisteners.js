@@ -1,11 +1,15 @@
 window.addEventListener("keydown", function (event) {
     switch (event.code) {
         case "KeyA":
-            game.clickingA = true;
+            if (!stopMovement) {
+                game.clickingA = true;
+            }
             break;
 
         case "KeyD":
-            game.clickingD = true
+            if (!stopMovement) {
+                game.clickingD = true
+            }
             break;
 
         case "KeyF":
@@ -13,7 +17,9 @@ window.addEventListener("keydown", function (event) {
 
             break;
         case "Space":
-            game.hero.jump();
+            if (!stopMovement) {
+                game.hero.jump();
+            }
             break;
     }
 }, false);

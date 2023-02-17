@@ -1,6 +1,6 @@
 class Hero {
-    constructor() {
-        this.loc = new JSVector(200, 200);//ideally loc would only be a y value for how far up the screen they are
+    constructor(x, y) {
+        this.loc = new JSVector(x, y);//ideally loc would only be a y value for how far up the screen they are
         this.vel = new JSVector(0, 0);
         this.cursorLoc = new JSVector(0, 0);//location of the cursor aids in attacking
         this.posNeg = true;//related to attacking
@@ -58,13 +58,17 @@ class Hero {
     }
     update() {
         //! %%%%%%%%%%%%%%%  
-        //! NOTE: we dont exactly need the "isDead" varible if the game ends when isDead = true but it might be usfull in the futre
         if (this.statusBlock.hp <= 0) { // the hero "dies" when hp <= 0
             this.statusBlock.isDead = true;
         }
 
         if (this.statusBlock.isDead) { // if the hero is dead it brings you to the start screen (gameState1)
             gameState = 0;
+            /** 
+            *! i have not made this function yet!!!!!
+            *TODO im not sure we need to make this function but it might be helpfull
+            */
+            this.reSetHero();
         }
         //!%%%%%%%%%%%%%%
         if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
@@ -128,5 +132,9 @@ class Hero {
             this.statusBlock.isAttacking = false
             this.statusBlock.onCoolDown = true;
         }
+    }
+
+    reSetHero() {
+        //TODO im not sure we need this function but it might be usfull in the future
     }
 }

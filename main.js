@@ -1,5 +1,6 @@
 // global variables for canvas and context
 var game, canvas, ctx, gameState;
+var stopMovement = false
 var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
 

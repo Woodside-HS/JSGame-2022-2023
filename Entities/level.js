@@ -9,13 +9,13 @@ class Levels {
         //this function hard codes all of the platforms in by hand
         if (this.id == 1) {
             //first level
-            this.platforms[0] = new Platform(0, 600, 500, 10, "red", false, true, 0);
-            this.platforms[1] = new Platform(600, 600, 500, 10, "green", true, false, 0);
+            this.platforms[0] = new Platform(0, 600, 500, 10, "red", false, true, 0, false);
+            this.platforms[1] = new Platform(600, 600, 500, 10, "green", true, false, 0, false);
         }
         if (this.id == 2) {
             //level 2
-            this.platforms[0] = new Platform(0, 600, 1000, 10, "pink", true, true, 0);
-            this.platforms[1] = new Platform(1100, 200, 20, 400, "orange", false, false, 1);
+            this.platforms[0] = new Platform(0, 600, 1000, 10, "pink", true, true, 0, true);
+            this.platforms[1] = new Platform(1100, 500, 20, 100, "orange", false, false, 1, false);
         }
 
     }

@@ -1,12 +1,14 @@
 class Platform {
-    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost) {
-        //YN = yes/no
+    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, trapYN) {
+        //* YN = yes/no
         this.loc = new JSVector(x, y);
         this.width = width;
         this.height = height;
         this.clr = clr;
         this.enemies = [];
         this.powerups = [];
+        this.traps = [];
+
         this.coinCost = 0;
         if (coinCost) {
             this.coinCost = coinCost;
@@ -18,6 +20,9 @@ class Platform {
         if (coinYN) {
             this.loadCoins();
         }
+        if (trapYN) {
+            this.loadTrap();
+        }
     }
     loadEnemies() {
         this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 10);
@@ -25,6 +30,10 @@ class Platform {
     loadCoins() {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5);
     }
+    loadTrap() {
+        this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
+    }
+
     run() {
         if (game.hero.statusBlock.coins >= this.coinCost) {
             this.render();
@@ -57,6 +66,15 @@ class Platform {
                 //splices out the coin if it has been collected
             }
         }
+
+        for (let i = this.traps.length - 1; i >= 0; i--) {
+            //goes backwards to aid with splices
+            this.traps[i].run();
+            if (this.traps[i].statusBlock.isDead) {
+                this.traps.splice(i, 1);
+                //splices out the trap if it dead
+            }
+        }
     }
     render() {
         ctx.beginPath();
@@ -82,7 +100,7 @@ class Platform {
             // console.log("touching platform");
             game.hero.statusBlock.onPlatform = true;
             game.hero.statusBlock.jumpCount = 0;
-                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
             return true;
         } else {
             return false;

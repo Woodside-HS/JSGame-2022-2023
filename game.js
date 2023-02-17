@@ -3,7 +3,9 @@ class Game {
     this.gamePaused = false;
     this.ga = new GameArea();
     this.levels = [];
-    this.hero = new Hero();
+    this.startX = 200
+    this.startY = 200
+    this.hero = new Hero(this.startX, this.startY);
     this.camLoc = new JSVector(0, 0);
 
     this.clickingA = false;
@@ -27,6 +29,11 @@ class Game {
 
     this.moveCam();
     if (gameState == 0) {
+      this.hero.statusBlock.isDead = false
+      this.hero.loc.x = this.startX // resets the hero location
+      this.hero.loc.y = this.startY// resets the hero location
+      this.camLoc.x = 0
+      this.camLoc.y = 0
       ctx.font = "50px serif";
       ctx.fillText("click 'tile 1' to play ", 200, 200)
       ctx.fillStyle = "green";
@@ -45,6 +52,7 @@ class Game {
       ctx.save();
       ctx.translate(-this.camLoc.x, -this.camLoc.y);
       this.hero.loc.x = this.camLoc.x + 200;
+      stopMovement = false
       this.hero.run();
       this.levels[1].run();
       ctx.restore();
