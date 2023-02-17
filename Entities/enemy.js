@@ -17,12 +17,18 @@ class Enemy {
     checkAttack(){
         if(game.hero.statusBlock.isAttacking){
             //currently only works if enemy is on right side of hero
-            if(this.loc.x>game.hero.loc.x && this.loc.x<game.hero.loc.x+80){
+            if(this.loc.x>game.hero.loc.x && this.loc.x<game.hero.loc.x+80 && game.hero.posNeg){
+                //enemy is within attack bounds
+                if(this.loc.y>game.hero.loc.y&&this.loc.y<game.hero.loc.y+game.hero.height){
+                    this.isdead = true;
+                }
+            } else if(this.loc.x<game.hero.loc.x && this.loc.x>game.hero.loc.x-40){
                 //enemy is within attack bounds
                 if(this.loc.y>game.hero.loc.y&&this.loc.y<game.hero.loc.y+game.hero.height){
                     this.isdead = true;
                 }
             }
+            
         }
     }
     movePlatform(){
