@@ -1,9 +1,10 @@
-function Platform(x, y, s, ctx){ // loc from upper left corner and size
+function Platform(x, y, s, ctx, cnvLoc){ // loc from upper left corner and size
     this.loc = new JSVector(x, y);
     this.ctx = ctx;
     this.size = s;
     this.clr = "brown";
     this.height = 20;
+    this.cnvLoc = cnvLoc;
 }
 
 Platform.prototype.run = function(){
@@ -13,7 +14,7 @@ Platform.prototype.run = function(){
 
 
 Platform.prototype.checkChar = function(){
-    if(this.loc.x <= hero.loc.x && this.loc.x + this.size >= hero.loc.x){
+    if(this.loc.x <= (hero.loc.x + this.cnvLoc.x) && (this.loc.x + this.size) >= (hero.loc.x + this.cnvLoc.x)){
         if(hero.loc.y >= this.loc.y && hero.loc.y <= this.loc.y + this.height){
             hero.vel.y = 0;
             hero.loc.y = this.loc.y;
