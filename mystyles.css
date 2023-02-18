@@ -10,7 +10,7 @@ body{
  width: 900px;
  margin:auto;
  margin-top: 20px;
-
+  
 }
 
 .tile{
@@ -23,4 +23,5 @@ body{
   background-color: #d5dee0;
   border-radius: 100%;
   border: solid black 2px;
+  background: linear-gradient(to right, #ff0000, #f85b00, #f08200, #e8a120, #e1bc49, #dbc950, #d4d65b, #cbe268, #b7e958, #9bf04c, #72f846, #00ff47);
 }
