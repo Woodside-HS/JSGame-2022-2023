@@ -26,6 +26,7 @@ class Hero {
             coolDownTimer: 100, // the length of the attack cooldown 
             attackTimer: 50,  // the length/amount of time that the hero attacks for
         }
+        this.jumpBoostTick = 100
     }
 
     run() {
@@ -54,6 +55,21 @@ class Hero {
         ctx.closePath()
         ctx.fillStyle = "green";
         ctx.strokeStyle = "black";
+
+        if (this.inventory.jumpBoost) {
+            this.jumpBoostTick--
+            if (this.jumpBoostTick <= 0) {
+                this.inventory.jumpBoost = false;
+            }
+            ctx.moveTo(this.loc.x, this.loc.y);
+            ctx.lineTo(this.loc.x + this.width, this.loc.y);
+            ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
+            ctx.lineTo(this.loc.x, this.loc.y + this.height);
+            ctx.fillStyle = "blue";
+            ctx.strokeStyle = "black";
+        }
+
+
         ctx.fill();
         ctx.restore()
     }
