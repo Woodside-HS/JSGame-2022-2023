@@ -7,6 +7,8 @@ function Platform(x, y, s, ctx, cnvLoc){ // loc from upper left corner and size
     this.cnvLoc = cnvLoc;
     this.enemies = [];
     this.loadEnemies(1);
+    this.coins = [];
+    this.loadCoins(1);
 }
 
 Platform.prototype.run = function(){
@@ -31,10 +33,17 @@ Platform.prototype.loadEnemies = function(n){
     this.enemies.push(new Enemy(this.loc.x, this.loc.y, this.loc, this.size, this.ctx));
 }
 
+Platform.prototype.loadCoins = function(n){
+    this.coins.push(new Coin(this.loc.x, this.loc.y, this.loc, this.size, this.ctx))
+}
+
 
 Platform.prototype.render = function(){
     for (let i = 0; i < this.enemies.length; i++) {
         this.enemies[i].run();
+    }
+    for (let i = 0; i < this.coins.length; i++) {
+        this.coins[i].run();
     }
     let ctx = this.ctx;
     ctx.beginPath();
