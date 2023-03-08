@@ -91,10 +91,10 @@ class Hero {
         let jumpLimit = 1; //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
-        if (this.statusBlock.jumpCount < jumpLimit && !this.inventory.jumpBoost) {
+        if (this.statusBlock.jumpCount < jumpLimit) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
             this.vel.y = 0; // stops the hero
-            if(this.inventory.jumpBoost){
+            if (this.inventory.jumpBoost) {
                 this.vel.y -= 10;
             } else {
                 this.vel.y -= 8; // pushes the hero up
