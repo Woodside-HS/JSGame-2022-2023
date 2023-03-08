@@ -11,12 +11,16 @@ function Hero(width, ctx) {
     this.movingLeft = false;
     this.onPlatform = false;
     this.death = false;
+    this.jumping = false; //testing this
 
   
 }
 
 
 Hero.prototype.run = function () {
+    // if(this.onPlatform){ //test
+    //     this.jumping = false; 
+    // }
     this.render();
     //this.checkPlatform();
     if(!this.onPlatform){
@@ -29,29 +33,12 @@ Hero.prototype.run = function () {
 }
 
 Hero.prototype.jump = function () {
-    //if(count < 4){
     this.loc.y = this.loc.y - 10;
     this.vel.y = this.jumpCoef;
     this.onPlatform = false;
     this.vel.limit(2); //limit to twice
-  //  this.count++;
-   // }
+    this.jumping = true; //test
 }
-
-// Hero.prototype.checkPlatform = function(){
-//     for(let i = 0; i<world.platforms.length; i++){
-//         //console.log(world.platforms[i].size);
-//     if(this.loc.x >= world.platforms[i].loc.x && this.loc.x <= world.platforms[i].size+world.platforms[i].loc.x){
-//         console.log(i);
-//         if(this.loc.y >= world.platforms[i].loc.y && this.loc.y <= world.platforms[i].loc.y + world.platforms[i].height){
-//             this.vel.y = 0;
-//             this.loc.y = world.platforms[i].loc.y;
-//             //this.count = 0; //remember to add later
-//         }
-//         //(this.loc.y >= world.platforms[i].loc.y && this.loc.y <= world.platforms[i].loc.y + world.platforms[i].height) && ((this.loc.x >= world.platforms[i].loc.x) && (this.loc.x <= world.platforms[i].size+world.platforms[i].loc.x)) && this.vel.y >=0
-//     }
-// }
-// }
 
 
 Hero.prototype.render = function () {

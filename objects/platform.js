@@ -25,6 +25,9 @@ Platform.prototype.checkChar = function(){
         }
     }
     hero.onPlatform = temp;
+    if(temp){
+        hero.jumping = false;
+    }
 }
 
 Platform.prototype.loadEnemies = function(n){
