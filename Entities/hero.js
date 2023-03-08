@@ -93,8 +93,8 @@ class Hero {
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
         if (this.statusBlock.jumpCount < jumpLimit && !this.inventory.jumpBoost) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
-            this.vel.y = 0 // stops the hero
-            this.vel.y -= 6 // pushes the hero up
+            this.vel.y = 0; // stops the hero
+            this.vel.y -= 8; // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
         } else if (this.statusBlock.jumpCount < jumpLimit && this.inventory.jumpBoost) { // if you have a jumpboost than you jump higher 

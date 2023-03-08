@@ -1,6 +1,6 @@
 class Trap {
     constructor(x, y, width) {
-        this.randomX = Math.floor(Math.random() * width);
+        this.randomX = Math.floor(x+Math.random() * width);
         this.loc = new JSVector(this.randomX, y);
         this.width = width;
         this.hitBox = {

@@ -53,9 +53,7 @@ class Platform {
 
     }
     coinLess() {
-        ctx.fillText("you dont have enough coins", this.loc.x, this.loc.y);
-        ctx.fillStyle = this.clr;
-        ctx.fill();
+        ctx.fillText("you dont have enough coins", this.loc.x, this.loc.y, this.width);
     }
     runEntities() {
         for (let i = this.enemies.length - 1; i >= 0; i--) {

@@ -48,7 +48,7 @@ function GameArea() {
   // if clicked itll run the game!
   this.tiles[0].addEventListener('click', function () {
     gameState = 1;
-    console.log("gameState = 1!!!") // gameState = 1 means the your playing
+    console.log("gameState = 1!!!") // gameState = 1 means the you are playing on level 1
   }, false);
   this.tiles[1].addEventListener("click", function () {
     gameState++;
