@@ -8,7 +8,7 @@ class Coin {
         this.size = radius;
         this.collected = false;
         this.coinClr = "yellow";
-        this.jumpBoostClr = "blue"
+        this.jumpBoostClr = "lightblue"
         this.isJumpBoost = isJumpBoost;
 
     }

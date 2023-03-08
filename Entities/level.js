@@ -11,15 +11,15 @@ class Levels {
             //first level
             this.platforms[0] = new Platform(-100, 600, 12000, 10, "brown", false, false, 0, false);//ground platform
             //TODO need a barrier to keep player from going left
-            this.platforms[1] = new Platform(400, 500, 200, 10, "blue", false, true, 0, false);//first platform
-            this.platforms[2] = new Platform(700, 450, 200, 10, "blue", false, true, 0, false);
-            this.platforms[3] = new Platform(1450, 200, 200, 10, "blue", true, false, 0, false);//top platform with enemy
-            this.platforms[4] = new Platform(650, 250, 100, 10, "blue", false, true, 0, false);//upper left platform
-            this.platforms[5] = new Platform(900, 350, 200, 10, "blue", false, false, 0, true);//trap platform
-            this.platforms[6] = new Platform(1200, 400, 300, 10, "blue", false, false, 0, false);
+            this.platforms[1] = new Platform(400, 500, 200, 10, "blue", false, true, 0, false, false);//first platform
+            this.platforms[2] = new Platform(700, 450, 200, 10, "blue", false, false, 0, false, true);//second platform
+            this.platforms[3] = new Platform(1450, 200, 200, 10, "blue", true, false, 0, false, false);//top platform with enemy
+            this.platforms[4] = new Platform(650, 250, 100, 10, "blue", false, true, 0, false, false);//upper left platform
+            this.platforms[5] = new Platform(900, 350, 200, 10, "blue", false, false, 0, true, false);//trap platform
+            this.platforms[6] = new Platform(1200, 400, 300, 10, "blue", false, false, 0, false, false);
             //! when the height is below like 200(top of screen), it should generally be more difficult but have more coins
-            this.platforms[7] = new Platform(1100, 500, 150, 10, "blue", false, false, 0, false);
-            this.platforms[8] = new Platform(1150, 150, 150, 10, "blue", true, true, 0, false);
+            this.platforms[7] = new Platform(1100, 500, 150, 10, "blue", false, false, 0, false, false);
+            this.platforms[8] = new Platform(1150, 150, 150, 10, "blue", true, true, 0, false, false);
         }
         if (this.id == 2) {
             //level 2
