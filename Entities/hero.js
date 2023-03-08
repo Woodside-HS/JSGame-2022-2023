@@ -12,6 +12,7 @@ class Hero {
             dash: false,
             loveRay: false,
             block: false,
+            jumpBoost: false,
         }
         this.statusBlock = {
             hp: 100,
@@ -58,7 +59,7 @@ class Hero {
     }
     update() {
         //! %%%%%%%%%%%%%%%  
-        if (this.statusBlock.hp <= 0||this.loc.y>canvas.height) { // the hero "dies" when hp <= 0
+        if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) { // the hero "dies" when hp <= 0
             this.statusBlock.isDead = true;
         }
 
@@ -90,10 +91,16 @@ class Hero {
         let jumpLimit = 1; //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
-        if (this.statusBlock.jumpCount < jumpLimit) {
+        if (this.statusBlock.jumpCount < jumpLimit && !this.inventory.jumpBoost) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
             this.vel.y = 0 // stops the hero
             this.vel.y -= 6 // pushes the hero up
+            this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
+            this.statusBlock.jumpCount++;
+        } else if (this.statusBlock.jumpCount < jumpLimit && this.inventory.jumpBoost) { // if you have a jumpboost than you jump higher 
+            // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
+            this.vel.y = 0 // stops the hero
+            this.vel.y -= 8 // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
         }
