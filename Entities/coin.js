@@ -40,16 +40,38 @@ class Coin {
         ctx.fill();
         ctx.restore();
     }
+    // checkHero() {
+    //     let dist = this.loc.distanceSquared(game.hero.loc);
+    //     if (dist < game.hero.height * game.hero.height && this.isJumpBoost) { // checks if its a jumpboost
+    //         game.hero.inventory.jumpBoost = true
+    //         console.log("you got a jumpboost");
+    //         this.collected = true;
+    //     } else if (dist < game.hero.height * game.hero.height) { // if its not any other powerup itll be a coin.
+    //         game.hero.statusBlock.coins++;
+    //         console.log(game.hero.statusBlock.coins);
+    //         this.collected = true;
+    //     }
+    // }
+
     checkHero() {
-        let dist = this.loc.distanceSquared(game.hero.loc);
-        if (dist < game.hero.height * game.hero.height && this.isJumpBoost) { // checks if its a jumpboost
-            game.hero.inventory.jumpBoost = true
-            console.log("you got a jumpboost");
+        let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
+        let heroH = game.hero.height; // the heros height
+        let heroW = game.hero.width; // the heros width
+        if ( //checks if the heros location is overlaping with the coin/thing
+            heroLoc.x + heroW > this.loc.x &&
+            heroLoc.x < this.loc.x + this.size &&
+            heroLoc.y + heroH > this.loc.y &&
+            heroLoc.y < this.loc.y + this.size
+        ) {
+            if (this.isJumpBoost) { // checks if it jumpboosdt
+                game.hero.inventory.jumpBoost = true
+                console.log("you got a jumpboost");
+            } else { //if its not anything it will be a coin.
+                game.hero.statusBlock.coins++;
+                console.log(game.hero.statusBlock.coins);
+            }
             this.collected = true;
-        } else if (dist < game.hero.height * game.hero.height) { // if its not any other powerup itll be a coin.
-            game.hero.statusBlock.coins++;
-            console.log(game.hero.statusBlock.coins);
-            this.collected = true;
+
         }
     }
-}
+} 
