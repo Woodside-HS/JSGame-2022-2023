@@ -103,9 +103,14 @@ class Platform {
             heroLoc.y < this.loc.y + this.height
         ) {
             // console.log("touching platform");
-            game.hero.statusBlock.onPlatform = true;
-            game.hero.statusBlock.jumpCount = 0;
-            game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            if (game.hero.vel.y > 0) { // checks if the hero is falling 
+                game.hero.statusBlock.onPlatform = true;
+                game.hero.statusBlock.jumpCount = 0;
+                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            } else {
+                game.hero.loc.y = this.loc.y + this.height // makes it so you cant go through the floor
+                game.hero.vel.y = 0;
+            }
             return true;
         } else {
             return false;
