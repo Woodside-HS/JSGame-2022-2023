@@ -21,8 +21,8 @@ function World() {
   this.platforms = [];
   this.platforms[0] = new Platform(0, 300, 100, this.ctx, this.cnvLoc);
   this.platforms[1] = new Platform(125, 325, 75, this.ctx, this.cnvLoc);
-  this.platforms[2] = new Platform(250, 350, 50, this.ctx, this.cnvLoc);
-  this.platforms[3] = new Platform(325, 400, 75, this.ctx, this.cnvLoc);
+  this.platforms[2] = new Platform(230, 350, 50, this.ctx, this.cnvLoc);
+  this.platforms[3] = new Platform(305, 400, 75, this.ctx, this.cnvLoc);
   this.platforms[4] = new Platform(450, 375, 50, this.ctx, this.cnvLoc);
   this.platforms[5] = new Platform(525, 350, 100, this.ctx, this.cnvLoc);
   this.platforms[6] = new Platform(650, 375, 25, this.ctx, this.cnvLoc);
@@ -74,14 +74,14 @@ World.prototype.run = function () {
   }
   ctx.restore();
   hero.run();
-}  //if dead hero statement
+}  
   if(this.worldMovingRight){
     this.cnvLoc.x += this.ms;
   }
   if(this.worldMovingLeft){
     this.cnvLoc.x -= this.ms;
   }
-} //run function
+} 
 
 
 World.prototype.getRandomColor = function () {
