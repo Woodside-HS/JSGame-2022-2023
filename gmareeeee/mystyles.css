@@ -1,0 +1,36 @@
+
+
+body{
+   background-color: #000000;
+   margin:0;
+ }
+
+canvas{
+  background-color: white;
+  margin:auto;
+  margin-top: 20px;
+  margin-left: 20px;
+
+}
+
+h1 {
+  color: white;
+  margin: 10px;
+}
+
+p {
+  color: white;
+  margin: 10px;
+}
+
+.tile{
+  float:left;
+  padding:20px;
+  width:45px;
+  height:35px;
+  margin-left: 80px;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 100%;
+  border: solid black 2px;
+}
