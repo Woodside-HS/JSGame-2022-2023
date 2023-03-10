@@ -1,11 +1,12 @@
 function Coin(x, y, platformLoc, width, ctx) {
     this.platformID = 1;
     this.loc = new JSVector(x, y);
+    this.relativeLoc = null;
     this.leftLimit = platformLoc.x;
     this.rightLimit = platformLoc.x + width;
     //this.vel = new JSVector(.5, 0);
     //this.acc = new JSVector(0,.05);
-    this.clr = "green";
+    this.clr = "yellow";
     this.size = 5;
     this.rad = 5;
     this.height = 5
@@ -19,6 +20,22 @@ function Coin(x, y, platformLoc, width, ctx) {
 Coin.prototype.run = function () {
     this.render();
     this.update();
+    let ctx = this.ctx;
+    ctx.strokeStyle = "white";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(this.loc.x, this.loc.y);
+    ctx.lineTo(this.relativeLoc.x, this.relativeLoc.y)
+   
+    ctx.closePath();
+    ctx.stroke();
+
+    if(this.relativeLoc.distance(hero.loc) < this.rad){
+        
+        //this.collectCoin();
+        console.log("coin collected")
+    }
+    
 
 
 }
@@ -26,11 +43,17 @@ Coin.prototype.run = function () {
 Coin.prototype.update = function(){
     //this.loc.add(this.vel);
     //this.vel.add(this.acc);
-    if(this.loc.distance(hero.loc) < 10){
-        hero.death = true;
-    }
+    this.relativeLoc  = new JSVector(world.cnvLoc.x + hero.loc.x, world.cnvLoc.y + hero.loc.y);
+
     
 }
+
+Coin.prototype.collectCoin = function() {
+    coinCount++;
+    displayCoinCount();
+    //Platform.coins.splice(this);
+}
+
 
 
 
@@ -40,10 +63,10 @@ Coin.prototype.update = function(){
 Coin.prototype.render = function () {
     let ctx = this.ctx;
     ctx.beginPath();
-    ctx.arc(this.loc.x, this.loc.y, this.rad);
+    ctx.arc(this.loc.x+this.rightLimit, this.loc.y-20, this.rad, 0, Math.PI*2);
     ctx.closePath();
     ctx.fillStyle = this.clr;
-    ctx.strokeStyle = "green";
+    ctx.strokeStyle = "yellow";
     ctx.stroke();
     ctx.fill();
 }

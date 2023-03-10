@@ -5,19 +5,15 @@ window.addEventListener("keydown", function (event) {
         case "KeyA":
             world.worldMovingLeft = true;
             //world.heroMovingLeft = true;
-            if ((world.cnvLoc.x > world.dims.left) && world.worldMovingLeft == true)
-                world.cnvLoc.x -= 5;
-                //world.hero.loc.x -= 5;
+            
           break;
         case "KeyD":
             world.worldMovingRight = true;
             //world.heroMovingRight = true;
-            if ((world.cnvLoc.x + world.cnv.width < world.dims.right) && world.worldMovingRight == true)
-                world.cnvLoc.x += 5;
-                //world.hero.loc.x += 5;
           break;
         
     }
+ 
 }, false);
 
 //Keyup listeners

@@ -4,7 +4,7 @@ function World() {
   this.ctx = this.cnv.getContext('2d');
   //  vector to locate canvas in the world
 
-  
+
 
 
   this.dims = {
@@ -44,13 +44,14 @@ function World() {
   this.platforms[22] = new Platform(2025, 250, 50, this.ctx, this.cnvLoc);
   this.platforms[23] = new Platform(2125, 275, 75, this.ctx, this.cnvLoc);
   this.platforms[24] = new Platform(2250, 300, 150, this.ctx, this.cnvLoc);
-  
+
   this.worldMovingRight = false;
   this.worldMovingLeft = false;
+  this.ms = .5;
 
 
- 
-  
+
+
 }//++++++++++++++++++++++++++++++  end world constructor
 
 
@@ -58,16 +59,23 @@ function World() {
 World.prototype.run = function () {
   let ctx = this.ctx;
   ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
-  if(!hero.death){
-  ctx.save();
-  ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
-  for(let i = 0; i<this.platforms.length; i++){
-    this.platforms[i].run();
+  displayCoinCount();
+  if (!hero.death) {
+    ctx.save();
+    ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y);
+    for (let i = 0; i < this.platforms.length; i++) {
+      this.platforms[i].run();
+    }
+    ctx.restore();
+    hero.run();
   }
-  ctx.restore();
-  hero.run();
-}  
- // }
+  if(this.worldMovingRight){
+    this.cnvLoc.x += this.ms;
+  }
+  if(this.worldMovingLeft){
+    this.cnvLoc.x -= this.ms;
+  }
+  // }
 }
 
 

@@ -11,6 +11,8 @@ function Hero(width, ctx) {
     this.movingLeft = false;
     this.onPlatform = false;
     this.death = false;
+    this.slowed = false;
+ 
 
   
 }
@@ -24,6 +26,14 @@ Hero.prototype.run = function () {
         this.vel.add(this.acc);
         this.vel.limit(2);
     }
+    // if(this.slowed=true && this.count < 120){
+    //     this.count++;
+    //     this.vel.x.limit(.5);
+
+    // }
+    // if(this.count >= 120){
+    //     this.slowed = false;
+    // }
     //this.checkPlatform();
     //this.checkDeath();
 }
