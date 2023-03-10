@@ -1,6 +1,6 @@
 class Trap {
     constructor(x, y, width) {
-        this.randomX = Math.floor(x+Math.random() * width);
+        this.randomX = Math.floor(x + Math.random() * width);
         this.loc = new JSVector(this.randomX, y);
         this.width = width;
         this.hitBox = {
@@ -100,9 +100,11 @@ class Trap {
             heroLoc.y < this.hitBox.y + this.hitBox.height
         ) {
             // console.log("touching trap");
+            this.clr = "red"
             this.statusBlock.isTrapping = true
             return true;
         } else {
+            this.clr = "gray"
             return false;
         }
     }
