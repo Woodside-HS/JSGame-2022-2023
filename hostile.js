@@ -1,4 +1,4 @@
-function Hostile(x, y, ctx, goblinAnims, platformLoc, platformWidth) {
+function Hostile(x, y, ctx, platformLoc, platformWidth) {
     this.ctx = ctx;
     this.loc = new JSVector(x, y);
     this.vel = new JSVector(0, 0);

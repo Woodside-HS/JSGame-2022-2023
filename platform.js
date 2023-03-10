@@ -62,7 +62,7 @@ Platform.prototype.run = function () {
 Platform.prototype.generateHostiles = function (n) {
     for (let i = 0; i < n; i++) {
         let x = Math.round(randomNumber(this.loc.x, this.loc.x + this.width));
-        this.hostiles.push(new Hostile(x, this.loc.y, this.ctx, goblinAnims, this.loc, this.width));
+        this.hostiles.push(new Hostile(x, this.loc.y, this.ctx, this.loc, this.width));
     }
 }
 
