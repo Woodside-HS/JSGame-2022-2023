@@ -30,7 +30,10 @@ Enemy.prototype.update = function(){
     let temp = world.cnvLoc.copy(); 
     temp.add(hero.loc);
     if(this.loc.distance(temp) < 10){
+        hero.life-=1;
+        if(hero.life<0){
         hero.death = true;
+        }
     }
     
 }

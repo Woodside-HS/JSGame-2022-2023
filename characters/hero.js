@@ -14,6 +14,7 @@ function Hero(width, ctx) {
     this.jumping = false; //testing this
     this.jump2 = [false, 0];
     this.slowed = false;
+    this.life = 200;
  
 
   
