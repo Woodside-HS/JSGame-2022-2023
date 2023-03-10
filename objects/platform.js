@@ -36,7 +36,7 @@ Platform.prototype.checkChar = function(){
 }
 
 Platform.prototype.loadEnemies = function(n){
-    if(this.size>75){
+    if(this.size>75 && this.loc.x != 0){
     this.enemies.push(new Enemy(this.loc.x, this.loc.y, this.loc, this.size, this.ctx));
     }
 }

@@ -7,7 +7,7 @@ window.onload = init;
 
 function init(){
     world = new World();
-    hero = new Hero(5, world.ctx);
+    hero = new Hero(7, world.ctx);
     animate();
 }
 

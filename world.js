@@ -69,8 +69,6 @@ World.prototype.run = function () {
     for (let i = 0; i < this.platforms.length; i++) {
       this.platforms[i].run();
     }
-    ctx.restore();
-    hero.run();
   for(let i = 0; i<this.powerups.length; i++){
     this.powerups[i].run();
   }
