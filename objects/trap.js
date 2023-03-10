@@ -48,9 +48,9 @@ Trap.prototype.render = function () {
     ctx.lineTo(this.loc.x + this.size, this.loc.y);
     ctx.lineTo(this.loc.x + this.size, this.loc.y - this.height);
     ctx.lineTo(this.loc.x, this.loc.y - this.height);
-    ctx.closePath();
     ctx.fillStyle = this.clr;
     ctx.strokeStyle = "red";
     ctx.stroke();
     ctx.fill();
+    ctx.closePath();
 }

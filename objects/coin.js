@@ -20,15 +20,14 @@ function Coin(x, y, platformLoc, width, ctx) {
 Coin.prototype.run = function () {
     this.render();
     this.update();
-    let ctx = this.ctx;
-    ctx.strokeStyle = "white";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.relativeLoc.x, this.relativeLoc.y)
-   
-    ctx.closePath();
-    ctx.stroke();
+    // let ctx = this.ctx;
+    // ctx.strokeStyle = "white";
+    // ctx.lineWidth = 1;
+    // ctx.beginPath();
+    // ctx.moveTo(this.loc.x, this.loc.y);
+    // ctx.lineTo(this.relativeLoc.x, this.relativeLoc.y)
+    // ctx.stroke();
+    // ctx.closePath();
 
     if(this.relativeLoc.distance(hero.loc) < this.rad){
         
@@ -64,9 +63,9 @@ Coin.prototype.render = function () {
     let ctx = this.ctx;
     ctx.beginPath();
     ctx.arc(this.loc.x+this.rightLimit, this.loc.y-20, this.rad, 0, Math.PI*2);
-    ctx.closePath();
     ctx.fillStyle = this.clr;
     ctx.strokeStyle = "yellow";
     ctx.stroke();
     ctx.fill();
+    ctx.closePath();
 }
