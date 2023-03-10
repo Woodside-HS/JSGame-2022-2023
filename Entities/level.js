@@ -20,16 +20,16 @@ class Levels {
             //! when the height is below like 200(top of screen), it should generally be more difficult but have more coins
             this.platforms[7] = new Platform(1100, 500, 150, 10, "blue", false, false, 0, false, false);
             this.platforms[8] = new Platform(1150, 150, 150, 10, "blue", true, true, 0, false, false);
-            this.platforms[9] = new Platform(1700, 150, 200, 10 , "blue", false, true, 0, true, false);
-            this.platforms[10] = new Platform(1650, 450, 150, 10 , "blue", false, false, 0, true, false);
-            this.platforms[11] = new Platform(1700, 275, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[12] = new Platform(1900, 325, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[13] = new Platform(2100, 350, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[14] = new Platform(2400, 250, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[15] = new Platform(2700, 300, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[16] = new Platform(3000, 325, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[17] = new Platform(3300, 350, 150, 10 , "blue", false, true, 0, false, false);
-            this.platforms[18] = new Platform(3600, 275, 150, 10 , "blue", false, true, 0, false, false);
+            this.platforms[9] = new Platform(1700, 150, 200, 10, "blue", false, true, 0, true, false);
+            this.platforms[10] = new Platform(1650, 450, 150, 10, "blue", false, false, 0, true, false);
+            this.platforms[11] = new Platform(1700, 275, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[12] = new Platform(1900, 325, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[13] = new Platform(2100, 350, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[14] = new Platform(2400, 250, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[15] = new Platform(2700, 300, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[16] = new Platform(3000, 325, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[17] = new Platform(3300, 350, 150, 10, "blue", false, true, 0, false, false);
+            this.platforms[18] = new Platform(3600, 275, 150, 10, "blue", false, true, 0, false, false);
         }
         if (this.id == 2) {
             //level 2

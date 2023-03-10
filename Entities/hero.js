@@ -35,13 +35,12 @@ class Hero {
         this.render();
         this.update();
         // this.attack();
-        if (!this.statusBlock.onPlatform) {
-            this.vel.add(this.grav);
-        } else {
-            this.vel.y = 0 // stops the hero on the platform
-        }
+        this.vel.add(this.grav);
         this.loc.add(this.vel);
-        game.hero.statusBlock.onPlatform = false;
+
+        if (this.vel.y > 0) {
+            this.statusBlock.onPlatform = false
+        }
     }
     render() {
         ctx.save(); // draws the hero 
@@ -102,6 +101,9 @@ class Hero {
     }
 
     jump() {
+        if (!this.statusBlock.onPlatform && !this.inventory.dbJump) { // this checks if you are on a platform and if you have double jump
+            return
+        }
         let jumpLimit = 1; //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit

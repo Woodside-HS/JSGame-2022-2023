@@ -104,17 +104,17 @@ class Platform {
         ) {
             // console.log("touching platform");
             if (game.hero.vel.y > 0) { // checks if the hero is falling 
-                game.hero.statusBlock.onPlatform = true;
                 game.hero.statusBlock.jumpCount = 0;
-                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
-            } else {
-                game.hero.loc.y = this.loc.y + this.height // makes it so you cant go through the floor
                 game.hero.vel.y = 0;
+                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            } else { // makes it so you cant go through the bottom of the platform
+                game.hero.vel.y = 0;
+                game.hero.loc.y = this.loc.y + this.height // sets the hero the bottom of the platform so it wont go past
             }
+            game.hero.statusBlock.onPlatform = true;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
     sideCollision() {
 
