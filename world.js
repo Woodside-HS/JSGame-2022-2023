@@ -44,6 +44,9 @@ function World() {
   this.platforms[22] = new Platform(2025, 250, 50, this.ctx, this.cnvLoc);
   this.platforms[23] = new Platform(2125, 275, 75, this.ctx, this.cnvLoc);
   this.platforms[24] = new Platform(2250, 300, 150, this.ctx, this.cnvLoc);
+
+  this.powerups = [];
+  this.powerups[0] = new DoubleJump(350, 350, this.ctx, this);
   
   this.worldMovingRight = false;
   this.worldMovingLeft = false;
@@ -63,6 +66,9 @@ World.prototype.run = function () {
   ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
   for(let i = 0; i<this.platforms.length; i++){
     this.platforms[i].run();
+  }
+  for(let i = 0; i<this.powerups.length; i++){
+    this.powerups[i].run();
   }
   ctx.restore();
   hero.run();

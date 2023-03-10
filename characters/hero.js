@@ -12,32 +12,27 @@ function Hero(width, ctx) {
     this.onPlatform = false;
     this.death = false;
     this.jumping = false; //testing this
+    this.jump2 = [false, 0];
 
   
 }
 
 
 Hero.prototype.run = function () {
-    // if(this.onPlatform){ //test
-    //     this.jumping = false; 
-    // }
     this.render();
-    //this.checkPlatform();
     if(!this.onPlatform){
         this.loc.add(this.vel);
         this.vel.add(this.acc);
         this.vel.limit(2);
     }
-    //this.checkPlatform();
-    //this.checkDeath();
 }
 
 Hero.prototype.jump = function () {
     this.loc.y = this.loc.y - 10;
     this.vel.y = this.jumpCoef;
     this.onPlatform = false;
-    this.vel.limit(2); //limit to twice
-    this.jumping = true; //test
+    this.vel.limit(2);
+    this.jumping = true;
 }
 
 

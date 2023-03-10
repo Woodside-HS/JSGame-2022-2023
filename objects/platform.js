@@ -27,11 +27,14 @@ Platform.prototype.checkChar = function(){
     hero.onPlatform = temp;
     if(temp){
         hero.jumping = false;
+        hero.jump2[1] = 0;
     }
 }
 
 Platform.prototype.loadEnemies = function(n){
+    if(this.size>75){
     this.enemies.push(new Enemy(this.loc.x, this.loc.y, this.loc, this.size, this.ctx));
+    }
 }
 
 

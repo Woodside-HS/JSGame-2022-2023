@@ -39,9 +39,13 @@ window.addEventListener("keyup", function (event) {
 window.addEventListener("keypress", function (event) {
     switch (event.code) {
       case "Space":
-        //if on platform && !(double jump) allow jump. If double jump, allow 2 jumps. Variable?
-        if(!hero.jumping){ //test
-        hero.jump();
+        if(!hero.jumping && !hero.jump2[0]){ //test
+            hero.jump();
+        }
+        else if(hero.jump2[0] && hero.jump2[1] <2){
+            hero.jump();
+            hero.jump2[1]++;
+            console.log(hero.jump2);
         }
         break;
       

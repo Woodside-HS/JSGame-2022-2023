@@ -1,4 +1,4 @@
-function Enemy(x, y, platformLoc, width, ctx) {
+function Enemy(x, y, platformLoc, width, ctx, world) {
     this.platformID = 1;
     this.loc = new JSVector(x, y);
     this.leftLimit = platformLoc.x;
@@ -9,9 +9,6 @@ function Enemy(x, y, platformLoc, width, ctx) {
     this.size = 5;
     this.height = 5
     this.ctx = ctx;
-    
-    
-  
 }
 
 
@@ -30,7 +27,9 @@ Enemy.prototype.run = function () {
 Enemy.prototype.update = function(){
     this.loc.add(this.vel);
     //this.vel.add(this.acc);
-    if(this.loc.distance(hero.loc) < 10){
+    let temp = world.cnvLoc.copy(); 
+    temp.add(hero.loc);
+    if(this.loc.distance(temp) < 10){
         hero.death = true;
     }
     
