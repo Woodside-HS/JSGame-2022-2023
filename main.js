@@ -1,6 +1,7 @@
 //Global
 let world;
 let hero;
+let coinCount = 0;
 window.onload = init;
 
 
@@ -14,3 +15,13 @@ function animate(){
   world.run();
   requestAnimationFrame(animate);
 }
+
+
+
+function displayCoinCount() {
+  const coinCountElement = document.getElementById('coin-count');
+  coinCountElement.innerHTML = coinCount.toString();
+}
+
+
+

@@ -13,6 +13,8 @@ function Hero(width, ctx) {
     this.death = false;
     this.jumping = false; //testing this
     this.jump2 = [false, 0];
+    this.slowed = false;
+ 
 
   
 }
@@ -25,6 +27,16 @@ Hero.prototype.run = function () {
         this.vel.add(this.acc);
         this.vel.limit(2);
     }
+    // if(this.slowed=true && this.count < 120){
+    //     this.count++;
+    //     this.vel.x.limit(.5);
+
+    // }
+    // if(this.count >= 120){
+    //     this.slowed = false;
+    // }
+    //this.checkPlatform();
+    //this.checkDeath();
 }
 
 Hero.prototype.jump = function () {
@@ -43,9 +55,9 @@ Hero.prototype.render = function () {
     ctx.lineTo(this.loc.x + this.size, this.loc.y);
     ctx.lineTo(this.loc.x + this.size, this.loc.y - this.height);
     ctx.lineTo(this.loc.x, this.loc.y - this.height);
-    ctx.closePath();
     ctx.fillStyle = this.clr;
     ctx.strokeStyle = "blue";
     ctx.stroke();
     ctx.fill();
+    ctx.closePath();
 }

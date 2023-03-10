@@ -4,7 +4,7 @@ function World() {
   this.ctx = this.cnv.getContext('2d');
   //  vector to locate canvas in the world
 
-  
+
 
 
   this.dims = {
@@ -50,10 +50,11 @@ function World() {
   
   this.worldMovingRight = false;
   this.worldMovingLeft = false;
+  this.ms = .5;
 
 
- 
-  
+
+
 }//++++++++++++++++++++++++++++++  end world constructor
 
 
@@ -61,20 +62,28 @@ function World() {
 World.prototype.run = function () {
   let ctx = this.ctx;
   ctx.clearRect(0, 0, this.cnv.width, this.cnv.height);
-  if(!hero.death){
-  ctx.save();
-  ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y); 
-  for(let i = 0; i<this.platforms.length; i++){
-    this.platforms[i].run();
-  }
+  displayCoinCount();
+  if (!hero.death) {
+    ctx.save();
+    ctx.translate(-this.cnvLoc.x, -this.cnvLoc.y);
+    for (let i = 0; i < this.platforms.length; i++) {
+      this.platforms[i].run();
+    }
+    ctx.restore();
+    hero.run();
   for(let i = 0; i<this.powerups.length; i++){
     this.powerups[i].run();
   }
   ctx.restore();
   hero.run();
-}  
- // }
-}
+}  //if dead hero statement
+  if(this.worldMovingRight){
+    this.cnvLoc.x += this.ms;
+  }
+  if(this.worldMovingLeft){
+    this.cnvLoc.x -= this.ms;
+  }
+} //run function
 
 
 World.prototype.getRandomColor = function () {
