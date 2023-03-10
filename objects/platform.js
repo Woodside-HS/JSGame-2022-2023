@@ -42,11 +42,19 @@ Platform.prototype.loadEnemies = function(n){
 }
 
 Platform.prototype.loadCoins = function(n){
-    this.coins.push(new Coin(this.loc.x, this.loc.y, this.loc, this.size, this.ctx))
+    if(this.size>50){
+        this.coins.push(new Coin(this.loc, this.size/2, this.ctx));
+        let temp = this.loc.copy();
+        temp.x += this.size/2;
+        this.coins.push(new Coin(temp, this.size/2, this.ctx));
+    }
+    else{
+        this.coins.push(new Coin(this.loc, this.size, this.ctx));
+        }
 }
 
 Platform.prototype.loadTraps = function(n){
-    this.coins.push(new Trap(this.loc.x, this.loc.y, this.loc, this.size, this.ctx))
+    this.traps.push(new Trap(this.loc.x, this.loc.y, this.loc, this.size, this.ctx))
 }
 
 

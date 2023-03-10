@@ -27,13 +27,13 @@ function World() {
   this.platforms[5] = new Platform(525, 350, 100, this.ctx, this.cnvLoc);
   this.platforms[6] = new Platform(650, 375, 25, this.ctx, this.cnvLoc);
   this.platforms[7] = new Platform(700, 350, 25, this.ctx, this.cnvLoc);
-  this.platforms[8] = new Platform(750, 325, 25, this.ctx, this.cnvLoc);
+  this.platforms[8] = new Platform(750, 325, 50, this.ctx, this.cnvLoc);
   this.platforms[9] = new Platform(825, 300, 50, this.ctx, this.cnvLoc);
-  this.platforms[10] = new Platform(900, 275, 100, this.ctx, this.cnvLoc);
+  this.platforms[10] = new Platform(900, 275, 120, this.ctx, this.cnvLoc);
   this.platforms[11] = new Platform(1050, 250, 25, this.ctx, this.cnvLoc);
-  this.platforms[12] = new Platform(1100, 275, 75, this.ctx, this.cnvLoc);
+  this.platforms[12] = new Platform(1100, 275, 100, this.ctx, this.cnvLoc);
   this.platforms[13] = new Platform(1225, 300, 75, this.ctx, this.cnvLoc);
-  this.platforms[14] = new Platform(1325, 325, 100, this.ctx, this.cnvLoc);
+  this.platforms[14] = new Platform(1325, 325, 120, this.ctx, this.cnvLoc);
   this.platforms[15] = new Platform(1475, 300, 25, this.ctx, this.cnvLoc);
   this.platforms[16] = new Platform(1525, 275, 50, this.ctx, this.cnvLoc);
   this.platforms[17] = new Platform(1575, 250, 25, this.ctx, this.cnvLoc);
@@ -47,6 +47,8 @@ function World() {
 
   this.powerups = [];
   this.powerups[0] = new DoubleJump(350, 350, this.ctx, this);
+  this.powerups[1] = new DoubleCoins(50, 275, this.ctx, this);
+  this.fall = new FallTrap(this.ctx);
   
   this.worldMovingRight = false;
   this.worldMovingLeft = false;
@@ -72,6 +74,7 @@ World.prototype.run = function () {
   for(let i = 0; i<this.powerups.length; i++){
     this.powerups[i].run();
   }
+  this.fall.run();
   ctx.restore();
   hero.run();
 }  

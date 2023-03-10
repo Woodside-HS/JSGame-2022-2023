@@ -41,7 +41,6 @@ window.addEventListener("keypress", function (event) {
         else if(hero.jump2[0] && hero.jump2[1] <2){
             hero.jump();
             hero.jump2[1]++;
-            console.log(hero.jump2);
         }
         break;
       
