@@ -9,7 +9,7 @@ class Coin {
         this.collected = false;
         this.coinClr = "yellow";
         this.jumpBoostClr = "lightblue"
-        this.isJumpBoost = isJumpBoost;
+        this.isJumpBoost = isJumpBoost; // change
 
     }
     run() {
@@ -32,9 +32,9 @@ class Coin {
         ctx.beginPath();
         ctx.arc(this.loc.x, this.loc.y - this.bounce, this.size, 0, Math.PI * 2);
         ctx.closePath();//beginning and closing path just to be sure
-        if (this.isJumpBoost) {
+        if (this.isJumpBoost) {   //delete jump boost lines
             ctx.fillStyle = this.jumpBoostClr;
-        } else {
+        } else { 
             ctx.fillStyle = "yellow";
         }
         ctx.fill();
@@ -63,7 +63,7 @@ class Coin {
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.size
         ) {
-            if (this.isJumpBoost) { // checks if it jumpboosdt
+            if (this.isJumpBoost) { // checks if it jumpboosdt  //delete 66-75
                 game.hero.inventory.jumpBoost = true
                 console.log("you got a jumpboost");
             } else { //if its not anything it will be a coin.
