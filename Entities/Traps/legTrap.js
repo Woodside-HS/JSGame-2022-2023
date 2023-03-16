@@ -1,8 +1,7 @@
-class Trap {
+class LegTrap {
     constructor(x, y, width) {
         this.randomX = Math.floor(x + Math.random() * width);
         this.loc = new JSVector(this.randomX, y);
-        this.width = width;
         this.hitBox = {
             x: this.loc.x - 40,
             y: this.loc.y - 10,
@@ -53,6 +52,22 @@ class Trap {
         ctx.strokeStyle = "black";
         ctx.fill();
         ctx.restore();
+
+
+        ctx.save()
+        ctx.beginPath()
+        ctx.translate(this.loc.x, this.loc.y)
+        ctx.moveTo(-15, -15)
+        ctx.lineTo(+ 15, -15)
+        ctx.lineTo(+ 15, - 10)
+        ctx.lineTo(-15, - 10)
+
+        ctx.closePath();//beginning and closing path just to be sure
+        ctx.fillStyle = this.clr;
+        ctx.strokeStyle = "black";
+        ctx.fill();
+        ctx.restore();
+
     }
     update() {
         if (!this.statusBlock.isClosed) {
