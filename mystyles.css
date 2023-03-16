@@ -27,7 +27,8 @@ body{
 }
 
 #coin-count {
-  position: fixed;
+  position: absolute;
+  float: left;
   top: 10px;
   right: 10px;
   background-color: gold;
