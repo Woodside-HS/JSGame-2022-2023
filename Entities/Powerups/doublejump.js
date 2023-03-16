@@ -1,4 +1,4 @@
-class DoubleCoins extends Coin{
+class DoubleJump extends Coin{
     constructor(x, y, width, radius) {
         super(x, y, width, radius);
         this.clr = "light blue";

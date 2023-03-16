@@ -103,7 +103,7 @@ class Hero {
         // }
 
         //double jump timer
-        if(this.intenvory.dbJump){
+        if(this.inventory.dbJump){
             this.clr = "purple";
             if(this.statusBlock.dbJumpCounter >750){
                 this.inventory.dbJump = false;
@@ -114,7 +114,7 @@ class Hero {
 
 
         //double coin timer
-        if(this.intenvory.dbCoin){
+        if(this.inventory.dbCoin){
             this.statusBlock.dbCoinCounter++;
             if(this.statusBlock.dbCoinCounter >750){
                 this.inventory.dbCoin = false;
