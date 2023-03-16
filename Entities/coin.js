@@ -10,6 +10,8 @@ class Coin {
         this.coinClr = "yellow";
         this.jumpBoostClr = "lightblue"
         this.isJumpBoost = isJumpBoost;
+        this.double = false;
+        
 
     }
     run() {
@@ -71,7 +73,11 @@ class Coin {
                 console.log(game.hero.statusBlock.coins);
             }
             this.collected = true;
+            coinCount ++;
+            displayCoinCount();
 
         }
     }
+
+    
 } 

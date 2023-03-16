@@ -3,6 +3,7 @@ var game, canvas, ctx, gameState;
 var stopMovement = false
 var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
+let coinCount = 0;
 
 function init() {
   canvas = document.createElement('canvas');
@@ -24,5 +25,11 @@ function animate() {
   game.update();
   requestAnimationFrame(animate);
 }
+
+function displayCoinCount() {
+  const coinCountElement = document.getElementById('coin-count');
+  coinCountElement.innerHTML = coinCount.toString();
+}
+
 
 
