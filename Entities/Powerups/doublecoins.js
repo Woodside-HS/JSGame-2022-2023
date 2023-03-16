@@ -1,7 +1,7 @@
 class DoubleCoins extends Coin{
     constructor(x, y, width, radius) {
         super(x, y, width, radius);
-        this.clr = "red";
+        this.clr = "orange";
 
     }
    
