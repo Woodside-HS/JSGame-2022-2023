@@ -71,10 +71,11 @@ class Coin {
             } else { //if its not anything it will be a coin.
                 game.hero.statusBlock.coins++;
                 console.log(game.hero.statusBlock.coins);
+                coinCount ++; //adds one to the coin count
             }
             this.collected = true;
-            coinCount ++;
-            displayCoinCount();
+            
+            displayCoinCount(); //displays the coin count
 
         }
     }
