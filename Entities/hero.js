@@ -205,9 +205,9 @@ class Hero {
     }
 
     shoot(){
-        if (game.clickingA) {
+        if (this.indc<0) {
             this.shootingDirection = true;
-        } else if (game.clickingD){
+        } else if (this.indc>0){
             this.shootingDirection = false;
         }
         
