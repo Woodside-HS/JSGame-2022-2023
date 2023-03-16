@@ -25,6 +25,8 @@ class Game {
 
   }
   update = function () {
+    
+    
 
     this.moveCam();
     if (gameState == 0) {

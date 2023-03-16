@@ -64,7 +64,11 @@ class Coin {
             }
            // console.log(game.hero.statusBlock.coins);
             this.collected = true;
+            
+            displayCoinCount(); //displays the coin count
 
         }
     }
+
+    
 } 
