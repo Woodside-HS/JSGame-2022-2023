@@ -33,7 +33,7 @@ class Hero {
             dbCoinCounter: 0,
             dbJumpCounter: 0
         }
-
+        this.indc = 0;
     }
 
     run() {
@@ -62,6 +62,18 @@ class Hero {
         ctx.fillStyle = this.clr;
         ctx.strokeStyle = "black";
         ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(this.loc.x,this.loc.y);
+        if(game.clickingA){
+            this.indc = -20;
+        }
+        if(game.clickingD){
+            this.indc = 20;
+        }
+        ctx.lineTo(this.loc.x+this.indc,this.loc.y);
+        ctx.strokeStyle = "orange";
+        ctx.stroke();
+        ctx.closePath();
         ctx.restore()
     }
     update() {
