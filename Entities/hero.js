@@ -8,6 +8,8 @@ class Hero {
         this.width = 50;
         this.grav = new JSVector(0, 0.2);//gravity for when falling
         this.clr = "green"
+        this.bullets = [];
+        this.shootingDirection = true; //true = right, false = left
         this.inventory = {
             dbJump: false,
             dbCoin: false,
@@ -133,6 +135,13 @@ class Hero {
                 this.statusBlock.dbCoinCounter = 0;
             }
         }
+
+        for (let i = 0; i < this.bullets.length; i++) {
+            this.bullets[i].run();
+            if (this.bullets[i].isDead) {
+                this.bullets.splice(i , 1);
+            }
+        }
     }
 
     jump() {
@@ -193,6 +202,16 @@ class Hero {
             this.statusBlock.isAttacking = false
             this.statusBlock.onCoolDown = true;
         }
+    }
+
+    shoot(){
+        if (this.indc<0) {
+            this.shootingDirection = true;
+        } else if (this.indc>0){
+            this.shootingDirection = false;
+        }
+        
+        this.bullets.push(new Bullet(this.loc.x, this.loc.y, ctx, this.shootingDirection));
     }
 
     reSetHero() {
