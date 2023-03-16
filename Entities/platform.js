@@ -35,7 +35,9 @@ class Platform {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);
     }
     loadTrap() {
-        this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
+        // this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
+        this.traps[0] = new LegTrap(this.loc.x, this.loc.y, this.width)
+
     }
     loadPowerUp() {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, true)
