@@ -21,6 +21,11 @@ window.addEventListener("keydown", function (event) {
                 game.hero.jump();
             }
             break;
+
+        case "KeyP":
+            game.hero.shoot();
+
+            break;
     }
 }, false);
 

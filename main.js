@@ -51,3 +51,10 @@ function debugUpdate() {
   }
 }
 
+function displayCoinCount() {
+  const coinCountElement = document.getElementById('coin-count');
+  coinCountElement.innerHTML = game.hero.statusBlock.coins.toString();
+}
+
+
+
