@@ -119,7 +119,8 @@ class Hero {
         //double jump timer
         if(this.inventory.dbJump){
             this.clr = "purple";
-            if(this.statusBlock.dbJumpCounter >750){
+            this.statusBlock.dbJumpCounter++;
+            if(this.statusBlock.dbJumpCounter >1000){
                 this.inventory.dbJump = false;
                 this.statusBlock.dbJumpCounter = 0;
                 this.clr = "green";
@@ -130,9 +131,11 @@ class Hero {
         //double coin timer
         if(this.inventory.dbCoin){
             this.statusBlock.dbCoinCounter++;
-            if(this.statusBlock.dbCoinCounter >750){
+            this.clr = "orange"
+            if(this.statusBlock.dbCoinCounter >1000){
                 this.inventory.dbCoin = false;
                 this.statusBlock.dbCoinCounter = 0;
+                this.clr = "green";
             }
         }
 
