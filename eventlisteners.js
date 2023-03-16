@@ -57,3 +57,40 @@ window.addEventListener('mousedown', function (event) {
 window.addEventListener("mouseup", function (event) {
     game.mouseDown = false;
 }, false);
+
+
+function debugViewCheckBoxClicked() {
+    const checkbox = document.getElementById('DebugViewCheckBox');
+    if (checkbox.checked) {
+        console.log('Debug View Enabled');
+        debugView = true;
+        createDebugDOM();
+    } else {
+        console.log('Debug View Disabled');
+        debugView = false;
+    }
+}
+
+function createDebugDOM() {
+    const debugDiv = document.getElementById('debugDiv');
+
+    const playerLoc = document.createElement('p');
+    playerLoc.setAttribute('id', 'PlayerLoc');
+    debugDiv.appendChild(playerLoc);
+
+    const playerVel = document.createElement('p');
+    playerVel.setAttribute('id', 'PlayerVel');
+    debugDiv.appendChild(playerVel);
+
+    const playerCursorLoc = document.createElement('p');
+    playerCursorLoc.setAttribute('id', 'PlayerCursorLoc');
+    debugDiv.appendChild(playerCursorLoc);
+
+    const playerHP = document.createElement('p');
+    playerHP.setAttribute('id', 'PlayerHP');
+    debugDiv.appendChild(playerHP);
+
+    const playerCoins = document.createElement('p');
+    playerCoins.setAttribute('id', 'PlayerCoins');
+    debugDiv.appendChild(playerCoins);
+}

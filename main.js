@@ -3,6 +3,7 @@ var game, canvas, ctx, gameState;
 var stopMovement = false
 var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
+var debugView = false;
 
 function init() {
   canvas = document.createElement('canvas');
@@ -21,8 +22,33 @@ function init() {
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  debugUpdate();
   game.update();
   requestAnimationFrame(animate);
+}
+
+function debugUpdate() {
+  if (debugView) {
+    const playerLoc = document.getElementById('PlayerLoc');
+    playerLoc.textContent = 'Player location:' + game.hero.loc;
+
+    const playerVel = document.getElementById('PlayerVel');
+    playerVel.textContent = 'Player Vel:' + game.hero.vel;
+
+    const playerCursorLoc = document.getElementById('PlayerCursorLoc');
+    playerCursorLoc.textContent = 'Player CursorLoc:' + game.hero.playerCursorLoc;
+
+    const playerHP = document.getElementById('PlayerHP');
+    playerHP.textContent = 'Player HP:' + game.hero.statusBlock.hp;
+
+    const playerCoins = document.getElementById('PlayerCoins');
+    playerCoins.textContent = 'Player Coins:' + game.hero.statusBlock.coins;
+  } else {
+    const div = document.getElementById('debugDiv');
+    while (div.firstChild) {
+      div.removeChild(div.firstChild);
+    }
+  }
 }
 
 function displayCoinCount() {
