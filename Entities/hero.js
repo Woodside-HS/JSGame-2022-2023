@@ -10,6 +10,7 @@ class Hero {
         this.clr = "green"
         this.inventory = {
             dbJump: false,
+            dbCoin: false,
             dash: false,
             loveRay: false,
             block: false,
@@ -27,6 +28,8 @@ class Hero {
             coolDownTimer: 100, // the length of the attack cooldown 
             attackTimer: 50,  // the length/amount of time that the hero attacks for
             jumpBoostCounter: 0,
+            dbCoinCounter: 0,
+            dbJumpCounter: 0
         }
 
     }
@@ -87,16 +90,36 @@ class Hero {
         this.attack();
 
         //jumpboost timer/color changer
-        let jumpBoostTimer = 1000
-        if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
-            this.inventory.jumpBoost = false; // removes the jumpboost
-            this.statusBlock.jumpBoostCounter = 0 // resets the timer.
+        // let jumpBoostTimer = 1000
+        // if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
+        //     this.inventory.jumpBoost = false; // removes the jumpboost
+        //     this.statusBlock.jumpBoostCounter = 0 // resets the timer.
+        // }
+
+        // if (this.inventory.jumpBoost) {
+        //     this.clr = "lightblue"
+        // } else if (!this.inventory.jumpBoost) {
+        //     this.clr = "green"
+        // }
+
+        //double jump timer
+        if(this.intenvory.dbJump){
+            this.clr = "purple";
+            if(this.statusBlock.dbJumpCounter >750){
+                this.inventory.dbJump = false;
+                this.statusBlock.dbJumpCounter = 0;
+                this.clr = "green";
+            }
         }
 
-        if (this.inventory.jumpBoost) {
-            this.clr = "lightblue"
-        } else if (!this.inventory.jumpBoost) {
-            this.clr = "green"
+
+        //double coin timer
+        if(this.intenvory.dbCoin){
+            this.statusBlock.dbCoinCounter++;
+            if(this.statusBlock.dbCoinCounter >750){
+                this.inventory.dbCoin = false;
+                this.statusBlock.dbCoinCounter = 0;
+            }
         }
     }
 
@@ -104,17 +127,20 @@ class Hero {
         if (!this.statusBlock.onPlatform && !this.inventory.dbJump) { // this checks if you are on a platform and if you have double jump
             return
         }
-        let jumpLimit = 1; //! change this later! I set it to a large number just for testing
+        if(this.inventory.dbJump){
+            let jumpLimit = 2;
+        }
+        else{
+         let jumpLimit = 1; 
+        }
+        
+        
+        //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
         if (this.statusBlock.jumpCount < jumpLimit) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
-            this.vel.y = 0; // stops the hero
-            if (this.inventory.jumpBoost) {
-                this.vel.y -= 10;
-            } else {
-                this.vel.y -= 8; // pushes the hero up
-            }
+            this.vel.y = 0; // stops the hero this.vel.y -= 8; // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
         }
