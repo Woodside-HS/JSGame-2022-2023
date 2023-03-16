@@ -1,11 +1,11 @@
 class Enemy {
-    constructor(x, y, platformWidth, enemySize) {
-        this.loc = new JSVector(x, y - enemySize);//enemies location, does change
-        //adds size so that it runs on top of the platform
+    constructor(x, y, platformWidth, h, w) {
+        this.loc = new JSVector(x, y - h);//enemies location, does change
         this.pLoc = new JSVector(x, y);//platforms location, should not change
-        this.width = platformWidth;
-        this.size = enemySize;
-        this.move = 1;
+        this.pWidth = platformWidth;
+        this.h = h;
+        this.w = w;
+        this.move = 1; // the speed of the enemy movement
         this.isdead = false;
     }
     run() {
@@ -33,7 +33,7 @@ class Enemy {
     }
     movePlatform() {
         this.loc.x += this.move;
-        if (this.loc.x > this.pLoc.x + this.width - this.size) {
+        if (this.loc.x > this.pLoc.x + this.pWidth - this.w) {
             //if the enemy goes to far the movement type gets reversed
             this.move = -1;
         }
@@ -46,23 +46,14 @@ class Enemy {
         ctx.save();//renders as simple box for now
         ctx.beginPath();
         ctx.moveTo(this.loc.x, this.loc.y);
-        ctx.lineTo(this.loc.x + this.size, this.loc.y);
-        ctx.lineTo(this.loc.x + this.size, this.loc.y + this.size);
-        ctx.lineTo(this.loc.x, this.loc.y + this.size);
+        ctx.lineTo(this.loc.x + this.w, this.loc.y);
+        ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
+        ctx.lineTo(this.loc.x, this.loc.y + this.h);
         ctx.closePath()
         ctx.fillStyle = "orange";
         ctx.fill();
         ctx.restore()
     }
-    // checkHero(){
-    //     let dist = this.loc.distanceSquared(game.hero.loc);
-    //     //gets the distance from this enemy to hero;
-    //     if(dist<game.hero.height*game.hero.height){
-    //         //using height cause square
-    //        game.hero.statusBlock.hp--;
-    //        //console.log(game.hero.statusBlock.hp); works for now
-    //     }
-    // }
 
     checkHero() {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
@@ -70,9 +61,9 @@ class Enemy {
         let heroW = game.hero.width; // the heros width
         if ( //checks if the heros location is overlaping with the coin/thing
             heroLoc.x + heroW > this.loc.x &&
-            heroLoc.x < this.loc.x + this.size &&
+            heroLoc.x < this.loc.x + this.w &&
             heroLoc.y + heroH > this.loc.y &&
-            heroLoc.y < this.loc.y + this.size
+            heroLoc.y < this.loc.y + this.h
         ) {
             game.hero.statusBlock.hp--;
         }
