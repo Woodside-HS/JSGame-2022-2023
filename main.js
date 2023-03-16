@@ -28,7 +28,7 @@ function animate() {
 
 function displayCoinCount() {
   const coinCountElement = document.getElementById('coin-count');
-  coinCountElement.innerHTML = coinCount.toString();
+  coinCountElement.innerHTML = hero.statusBlock.coins.toString();
 }
 
 
