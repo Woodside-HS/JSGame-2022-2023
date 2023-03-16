@@ -8,6 +8,8 @@ class Hero {
         this.width = 50;
         this.grav = new JSVector(0, 0.2);//gravity for when falling
         this.clr = "green"
+        this.bullets = [];
+        this.shootingDirection = true; //true = right, false = left
         this.inventory = {
             dbJump: false,
             dbCoin: false,
@@ -31,7 +33,7 @@ class Hero {
             dbCoinCounter: 0,
             dbJumpCounter: 0
         }
-
+        this.indc = 0;
     }
 
     run() {
@@ -60,6 +62,18 @@ class Hero {
         ctx.fillStyle = this.clr;
         ctx.strokeStyle = "black";
         ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(this.loc.x,this.loc.y);
+        if(game.clickingA){
+            this.indc = -20;
+        }
+        if(game.clickingD){
+            this.indc = 20;
+        }
+        ctx.lineTo(this.loc.x+this.indc,this.loc.y);
+        ctx.strokeStyle = "orange";
+        ctx.stroke();
+        ctx.closePath();
         ctx.restore()
     }
     update() {
@@ -105,7 +119,8 @@ class Hero {
         //double jump timer
         if(this.inventory.dbJump){
             this.clr = "purple";
-            if(this.statusBlock.dbJumpCounter >750){
+            this.statusBlock.dbJumpCounter++;
+            if(this.statusBlock.dbJumpCounter >1000){
                 this.inventory.dbJump = false;
                 this.statusBlock.dbJumpCounter = 0;
                 this.clr = "green";
@@ -116,9 +131,18 @@ class Hero {
         //double coin timer
         if(this.inventory.dbCoin){
             this.statusBlock.dbCoinCounter++;
-            if(this.statusBlock.dbCoinCounter >750){
+            this.clr = "orange"
+            if(this.statusBlock.dbCoinCounter >1000){
                 this.inventory.dbCoin = false;
                 this.statusBlock.dbCoinCounter = 0;
+                this.clr = "green";
+            }
+        }
+
+        for (let i = 0; i < this.bullets.length; i++) {
+            this.bullets[i].run();
+            if (this.bullets[i].isDead) {
+                this.bullets.splice(i , 1);
             }
         }
     }
@@ -181,6 +205,16 @@ class Hero {
             this.statusBlock.isAttacking = false
             this.statusBlock.onCoolDown = true;
         }
+    }
+
+    shoot(){
+        if (this.indc<0) {
+            this.shootingDirection = true;
+        } else if (this.indc>0){
+            this.shootingDirection = false;
+        }
+        
+        this.bullets.push(new Bullet(this.loc.x, this.loc.y, ctx, this.shootingDirection));
     }
 
     reSetHero() {

@@ -1,5 +1,5 @@
 class Platform {
-    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, trapYN, powerUpInt) { 
+    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, trapYN, powerUpInt) {
         /* PowerUp Int
         0 = no Power Up
         1 = Double Jump
@@ -29,24 +29,26 @@ class Platform {
             this.loadTrap();
         }
 
-        if (powerUpInt>0) {
+        if (powerUpInt > 0) {
             this.loadPowerUp(powerUpInt);
         }
     }
     loadEnemies() {
-        this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 10);
+        this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 30, 15);
     }
     loadCoins() {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);
     }
     loadTrap() {
-        this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
+        // this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
+        this.traps[0] = new LegTrap(this.loc.x, this.loc.y, this.width)
+
     }
     loadPowerUp(type) {
-        if(type == 1){
+        if (type == 1) {
             this.powerups[0] = new DoubleJump(this.loc.x, this.loc.y, this.width, 5, true);
         }
-        else if(type == 2){
+        else if (type == 2) {
             this.powerups[0] = new DoubleCoins(this.loc.x, this.loc.y, this.width, 5, true);
         }
     }
