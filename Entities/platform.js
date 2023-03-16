@@ -1,5 +1,10 @@
 class Platform {
-    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, trapYN, powerUpYN) {
+    constructor(x, y, width, height, clr, enemyYN, coinYN, coinCost, trapYN, powerUpInt) { 
+        /* PowerUp Int
+        0 = no Power Up
+        1 = Double Jump
+        2 = Double Coin
+        */
         //* YN = yes/no
         this.loc = new JSVector(x, y);
         this.width = width;
@@ -24,8 +29,8 @@ class Platform {
             this.loadTrap();
         }
 
-        if (powerUpYN) {
-            this.loadPowerUp();
+        if (powerUpInt>0) {
+            this.loadPowerUp(powerUpInt);
         }
     }
     loadEnemies() {
@@ -37,8 +42,13 @@ class Platform {
     loadTrap() {
         this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
     }
-    loadPowerUp() {
-        this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, true)
+    loadPowerUp(type) {
+        if(type == 1){
+            this.powerups[0] = new DoubleJump(this.loc.x, this.loc.y, this.width, 5, true);
+        }
+        else if(type == 2){
+            this.powerups[0] = new DoubleCoins(this.loc.x, this.loc.y, this.width, 5, true);
+        }
     }
 
     run() {

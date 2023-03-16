@@ -12,6 +12,7 @@ class Hero {
         this.shootingDirection = true; //true = right, false = left
         this.inventory = {
             dbJump: false,
+            dbCoin: false,
             dash: false,
             loveRay: false,
             block: false,
@@ -29,6 +30,8 @@ class Hero {
             coolDownTimer: 100, // the length of the attack cooldown 
             attackTimer: 50,  // the length/amount of time that the hero attacks for
             jumpBoostCounter: 0,
+            dbCoinCounter: 0,
+            dbJumpCounter: 0
         }
 
     }
@@ -79,7 +82,7 @@ class Hero {
         if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
             this.statusBlock.isAttacking = true;
         } else if (this.statusBlock.onCoolDown) { // runs the cooldown timer
-            console.log("onCoolDown (cant attack)")
+            //console.log("onCoolDown (cant attack)")
             this.statusBlock.coolDownTimer--;
         }
         if (this.statusBlock.coolDownTimer <= 0 && this.statusBlock.onCoolDown) { // if the cooldown timer is 0 turns cooldown off
@@ -89,16 +92,36 @@ class Hero {
         this.attack();
 
         //jumpboost timer/color changer
-        let jumpBoostTimer = 1000
-        if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
-            this.inventory.jumpBoost = false; // removes the jumpboost
-            this.statusBlock.jumpBoostCounter = 0 // resets the timer.
+        // let jumpBoostTimer = 1000
+        // if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
+        //     this.inventory.jumpBoost = false; // removes the jumpboost
+        //     this.statusBlock.jumpBoostCounter = 0 // resets the timer.
+        // }
+
+        // if (this.inventory.jumpBoost) {
+        //     this.clr = "lightblue"
+        // } else if (!this.inventory.jumpBoost) {
+        //     this.clr = "green"
+        // }
+
+        //double jump timer
+        if(this.inventory.dbJump){
+            this.clr = "purple";
+            if(this.statusBlock.dbJumpCounter >750){
+                this.inventory.dbJump = false;
+                this.statusBlock.dbJumpCounter = 0;
+                this.clr = "green";
+            }
         }
 
-        if (this.inventory.jumpBoost) {
-            this.clr = "lightblue"
-        } else if (!this.inventory.jumpBoost) {
-            this.clr = "green"
+
+        //double coin timer
+        if(this.inventory.dbCoin){
+            this.statusBlock.dbCoinCounter++;
+            if(this.statusBlock.dbCoinCounter >750){
+                this.inventory.dbCoin = false;
+                this.statusBlock.dbCoinCounter = 0;
+            }
         }
 
         for (let i = 0; i < this.bullets.length; i++) {
@@ -113,17 +136,22 @@ class Hero {
         if (!this.statusBlock.onPlatform && !this.inventory.dbJump) { // this checks if you are on a platform and if you have double jump
             return
         }
-        let jumpLimit = 1; //! change this later! I set it to a large number just for testing
+        let jumpLimit;
+        if(this.inventory.dbJump){
+            jumpLimit = 2;
+        }
+        else{
+            jumpLimit = 1; 
+        }
+        
+        
+        //! change this later! I set it to a large number just for testing
         //we might not need a jumplimit but its good to have for now
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
         if (this.statusBlock.jumpCount < jumpLimit) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
             this.vel.y = 0; // stops the hero
-            if (this.inventory.jumpBoost) {
-                this.vel.y -= 10;
-            } else {
-                this.vel.y -= 8; // pushes the hero up
-            }
+            this.vel.y -= 8; // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
         }
@@ -135,7 +163,7 @@ class Hero {
         }
 
         if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
-            console.log("is attacking")
+            //console.log("is attacking")
             this.statusBlock.attackTimer--;
             ctx.save()
             ctx.beginPath();
