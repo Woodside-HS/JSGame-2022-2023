@@ -62,7 +62,7 @@ class Coin {
             if(game.hero.inventory.dbCoin){
                 game.hero.statusBlock.coins++;
             }
-            console.log(game.hero.statusBlock.coins);
+           // console.log(game.hero.statusBlock.coins);
             this.collected = true;
 
         }

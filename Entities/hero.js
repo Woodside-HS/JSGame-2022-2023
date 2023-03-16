@@ -80,7 +80,7 @@ class Hero {
         if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
             this.statusBlock.isAttacking = true;
         } else if (this.statusBlock.onCoolDown) { // runs the cooldown timer
-            console.log("onCoolDown (cant attack)")
+            //console.log("onCoolDown (cant attack)")
             this.statusBlock.coolDownTimer--;
         }
         if (this.statusBlock.coolDownTimer <= 0 && this.statusBlock.onCoolDown) { // if the cooldown timer is 0 turns cooldown off
@@ -127,11 +127,12 @@ class Hero {
         if (!this.statusBlock.onPlatform && !this.inventory.dbJump) { // this checks if you are on a platform and if you have double jump
             return
         }
+        let jumpLimit;
         if(this.inventory.dbJump){
-            let jumpLimit = 2;
+            jumpLimit = 2;
         }
         else{
-         let jumpLimit = 1; 
+            jumpLimit = 1; 
         }
         
         
@@ -140,7 +141,8 @@ class Hero {
         //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
         if (this.statusBlock.jumpCount < jumpLimit) {
             // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
-            this.vel.y = 0; // stops the hero this.vel.y -= 8; // pushes the hero up
+            this.vel.y = 0; // stops the hero
+            this.vel.y -= 8; // pushes the hero up
             this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
             this.statusBlock.jumpCount++;
         }
@@ -152,7 +154,7 @@ class Hero {
         }
 
         if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
-            console.log("is attacking")
+            //console.log("is attacking")
             this.statusBlock.attackTimer--;
             ctx.save()
             ctx.beginPath();
