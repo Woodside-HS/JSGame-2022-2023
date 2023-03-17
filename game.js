@@ -43,8 +43,9 @@ class Game {
 
     } else if (gameState == 1) {
       ctx.save();
+      this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
       ctx.translate(-this.camLoc.x, -this.camLoc.y);//moves the "camera" along the canvas
-      this.hero.loc.x = this.camLoc.x + 200;
+      //this.hero.loc.x = this.camLoc.x + 200;
       //moves the hero with the camera, temporarilly disabled to make sure level works
       this.hero.run();
       this.levels[0].run();
@@ -66,10 +67,10 @@ class Game {
     //changed to move the hero
     //if the hero gets too far to one side the camera follows him
     if (this.clickingA && !hittingRight) {
-      this.camLoc.x -= 2;
+      this.hero.loc.x -= 2;
     }
     if (this.clickingD && !hittingLeft) {
-      this.camLoc.x += 2;
+      this.hero.loc.x += 2;
     }
   }
 }//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Ball constructor
