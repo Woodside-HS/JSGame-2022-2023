@@ -43,7 +43,7 @@ class Game {
       this.camLoc.x = 0;
       this.camLoc.y = 0;
       ctx.font = "50px serif";
-      ctx.fillText("click 'Begin Game' to play ", 200, 200)
+      ctx.fillText("click 'Begin Game' to play ", 200, 200);
       ctx.fillStyle = "green";
       ctx.strokeStyle = "red";
       ctx.fill();

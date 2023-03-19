@@ -216,6 +216,9 @@ class Hero {
         this.statusBlock.hp = 100;
         this.statusBlock.isDead = false;
         this.statusBlock.coins = 0;
-        stopMovement = false;
+        stopMovement = false;//doesn't work with traps for some reason
+
+        const coinCountElement = document.getElementById('coin-count');
+        coinCountElement.innerHTML = 0; //reset the coin count to 0 once dead
     }
 }
