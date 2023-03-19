@@ -11,7 +11,6 @@ class Game {
       false
     );
 
-    // Set the dimensions of the game area
     this.dims = {
       top: 0,
       bottom: 600,
@@ -27,7 +26,6 @@ class Game {
 
   update = () => {
     this.moveCam();
-    // Use a ternary operator to call the appropriate function based on the game state
     gameState == 0
       ? this.menuScreen()
       : gameState == 1
@@ -35,9 +33,7 @@ class Game {
       : this.endState();
   };
 
-  // Game state 0
   menuScreen = () => {
-    // Set the hero's status to not dead, the hero's location to the starting position, and reset the camera position
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
@@ -52,10 +48,8 @@ class Game {
     );
   };
 
-  // Game state 1
   playState = () => {
     ctx.save();
-    // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
     this.hero.run();
@@ -74,7 +68,6 @@ class Game {
   };
 
   moveCam = () => {
-    // Susbtitude Event handlers
     this.clickingA && !hittingRight ? (this.hero.loc.x -= 2) : null;
     this.clickingD && !hittingLeft ? (this.hero.loc.x += 2) : null;
   };
