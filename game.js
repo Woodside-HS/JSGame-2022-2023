@@ -17,34 +17,29 @@ class Game {
       left: 0,
       right: 2000,
       width: 2000,
-      height: 600
-    }
+      height: 600,
+    };
 
     this.levels[0] = new Levels(1);
     this.levels[1] = new Levels(2);
-
   }
   update = function () {
-    
-    
-
     this.moveCam();
     if (gameState == 0) {
-      this.hero.statusBlock.isDead = false
-      this.hero.loc.x = this.startX // resets the hero location
-      this.hero.loc.y = this.startY// resets the hero location
+      this.hero.statusBlock.isDead = false;
+      this.hero.loc.x = this.startX; // resets the hero location
+      this.hero.loc.y = this.startY; // resets the hero location
       this.camLoc.x = 0;
       this.camLoc.y = 0;
       ctx.font = "50px serif";
-      ctx.fillText("click 'tile 1' to play ", 200, 200)
+      ctx.fillText("click 'tile 1' to play ", 200, 200);
       ctx.fillStyle = "green";
       ctx.strokeStyle = "red";
       ctx.fill();
-
     } else if (gameState == 1) {
       ctx.save();
       this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
-      ctx.translate(-this.camLoc.x, -this.camLoc.y);//moves the "camera" along the canvas
+      ctx.translate(-this.camLoc.x, -this.camLoc.y); //moves the "camera" along the canvas
       //this.hero.loc.x = this.camLoc.x + 200;
       //moves the hero with the camera, temporarilly disabled to make sure level works
       this.hero.run();
@@ -54,14 +49,12 @@ class Game {
       ctx.save();
       ctx.translate(-this.camLoc.x, -this.camLoc.y);
       this.hero.loc.x = this.camLoc.x + 200;
-      stopMovement = false
+      stopMovement = false;
       this.hero.run();
       this.levels[1].run();
       ctx.restore();
-
     }
-
-  }
+  };
 
   moveCam() {
     //changed to move the hero
@@ -73,4 +66,4 @@ class Game {
       this.hero.loc.x += 2;
     }
   }
-}//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Ball constructor
+} //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  end Ball constructor

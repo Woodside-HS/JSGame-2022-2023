@@ -52,23 +52,21 @@ window.addEventListener(
   false
 );
 
-const { game } = window;
-const { hero } = game;
-
 window.addEventListener(
   "mousedown",
-  (event) => {
+  function (event) {
     game.mouseDown = true;
+    // game.hero.attack();
     cursor = new JSVector(event.offsetX, event.offsetY);
-    hero.cursorLoc.x = cursor.x + game.camLoc.x;
-    hero.cursorLoc.y = cursor.y + game.camLoc.y;
+    game.hero.cursorLoc.x = cursor.x + game.camLoc.x;
+    game.hero.cursorLoc.y = cursor.y + game.camLoc.y;
   },
   false
 );
 
 window.addEventListener(
   "mouseup",
-  (event) => {
+  function (event) {
     game.mouseDown = false;
   },
   false
