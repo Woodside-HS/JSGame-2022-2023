@@ -68,7 +68,7 @@ function drawText(context, text, font, x, y, fill, stroke) {
   context.stroke();
 }
 
-function resizeCanvas() {
+function resizeCanvas(game) {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 }

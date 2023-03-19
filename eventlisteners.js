@@ -101,5 +101,11 @@ function createDebugDOM() {
 }
 
 window.addEventListener("resize", function () {
+  game.camLoc.y = -cnv.height + game.dims.height + 100;
+  resizeCanvas();
+});
+
+document.addEventListener("resize", function () {
+  game.camLoc.y = -cnv.height + game.dims.height + 100;
   resizeCanvas();
 });

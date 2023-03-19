@@ -2,14 +2,6 @@ class Game {
   constructor() {
     // Initiate a new GameArea
     this.ga = new GameArea();
-    this.levels = [];
-    this.start = new JSVector(200, 200);
-    this.hero = new Hero(this.start.x, this.start.y);
-    this.camLoc = new JSVector(0, 0);
-
-    [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
-      false
-    );
 
     // Set the dimensions of the game area
     this.dims = {
@@ -20,6 +12,15 @@ class Game {
       width: 2000,
       height: 600,
     };
+
+    this.levels = [];
+    this.start = new JSVector(200, 200);
+    this.hero = new Hero(this.start.x, this.start.y);
+    this.camLoc = new JSVector(0, -cnv.height + this.dims.height + 100);
+    console.log(this.camLoc);
+    [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
+      false
+    );
 
     this.levels[0] = new Levels(1);
     this.levels[1] = new Levels(2);
@@ -40,7 +41,7 @@ class Game {
     // Set the hero's status to not dead, the hero's location to the starting position, and reset the camera position
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
-    this.camLoc.Zero();
+    this.camLoc.x = 0;
     drawText(
       ctx,
       "click 'tile 1' to play ",
