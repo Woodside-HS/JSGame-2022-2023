@@ -15,15 +15,9 @@ JSVector.prototype.setMagnitude = function (mag) {
   return this;
 };
 
-JSVector.prototype.Zero = function () {
-  this.x = 0;
-  this.y = 0;
-  return this;
-};
-
 // Get the magnitude of the vector using pythagorean theorem
 JSVector.prototype.getMagnitude = function () {
-  return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+  return Math.sqrt(this.x * this.x + this.y * this.y);
 };
 
 // Set the angle (direction) of the vector,
@@ -38,6 +32,13 @@ JSVector.prototype.setDirection = function (angle) {
 // Get the direction (angle) of the vector
 JSVector.prototype.getDirection = function () {
   return Math.atan2(this.y, this.x);
+};
+
+// Zero the vector
+JSVector.prototype.Zero = function () {
+  this.x = 0;
+  this.y = 0;
+  return this;
 };
 
 // Add another vector to this vector
@@ -66,15 +67,15 @@ JSVector.subGetNew = function (v1, v2) {
 
 // Multiply this vector by a scalar
 JSVector.prototype.multiply = function (scalar) {
-  this.x = this.x * scalar;
-  this.y = this.y * scalar;
+  this.x *= scalar;
+  this.y *= scalar;
   return this;
 };
 
 // Divide this vector by a scalar
 JSVector.prototype.divide = function (scalar) {
-  this.x = this.x / scalar;
-  this.y = this.y / scalar;
+  this.x /= scalar;
+  this.y /= scalar;
   return this;
 };
 
@@ -107,14 +108,12 @@ JSVector.prototype.distanceSquared = function (v2) {
 // Rotate this vector by some number of radians
 // using the rotation matrix |  cos   -sin  |
 //                           |  sin   +cos  |
-
 JSVector.prototype.rotate = function (angle) {
-  let vx = this.x,
-    vy = this.y;
-  let cos = Math.cos(angle),
-    sin = Math.sin(angle);
-  this.x = vx * cos - vy * sin;
-  this.y = vx * sin + vy * cos;
+  const { x, y } = this;
+  const cos = Math.cos(angle);
+  const sin = Math.sin(angle);
+  this.x = x * cos - y * sin;
+  this.y = x * sin + y * cos;
   return this;
 };
 
@@ -136,6 +135,4 @@ JSVector.prototype.toString = function () {
   var a = this.getDirection().toFixed(2);
 
   return "x:" + x + ", y: " + y + ", mag: " + m + ", a: " + a;
-
-  // return(` x: ${x_}, y: ${y_}, mag: ${m}, angle: ${a}`);
 };
