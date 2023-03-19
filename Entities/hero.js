@@ -83,12 +83,7 @@ class Hero {
         }
 
         if (this.statusBlock.isDead) { // if the hero is dead it brings you to the start screen (gameState1)
-            gameState = 0;
-            /** 
-            *! i have not made this function yet!!!!!
-            *TODO im not sure we need to make this function but it might be helpfull
-            */
-            this.reSetHero();
+            gameState = -1;
         }
         //!%%%%%%%%%%%%%%
         if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
@@ -218,8 +213,9 @@ class Hero {
     }
 
     reSetHero() {
-        //TODO im not sure we need this function but it might be usfull in the future
-        this.statusBlock.hp = 101;
-
+        this.statusBlock.hp = 100;
+        this.statusBlock.isDead = false;
+        this.statusBlock.coins = 0;
+        stopMovement = false;
     }
 }

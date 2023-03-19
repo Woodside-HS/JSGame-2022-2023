@@ -29,14 +29,21 @@ class Game {
     
 
     this.moveCam();
-    if (gameState == 0) {
+    if(gameState == -1){
+      //this is hte dead gamestate
+      ctx.save();
+      ctx.font = "50px serif";
+      ctx.fillText("GAME OVER, press \"Reset Game\" and then \"Begin Game\"", 10, 100);
+      ctx.restore();
+
+    } else if (gameState == 0) {
       this.hero.statusBlock.isDead = false
       this.hero.loc.x = this.startX // resets the hero location
       this.hero.loc.y = this.startY// resets the hero location
       this.camLoc.x = 0;
       this.camLoc.y = 0;
       ctx.font = "50px serif";
-      ctx.fillText("click 'tile 1' to play ", 200, 200)
+      ctx.fillText("click 'Begin Game' to play ", 200, 200)
       ctx.fillStyle = "green";
       ctx.strokeStyle = "red";
       ctx.fill();
@@ -58,7 +65,6 @@ class Game {
       this.hero.run();
       this.levels[1].run();
       ctx.restore();
-
     }
 
   }

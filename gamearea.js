@@ -21,9 +21,10 @@ function GameArea() {
     this.tiles[i] = document.createElement("div");
     this.tileMenuDiv.appendChild(this.tiles[i]);
     this.tiles[i].setAttribute("class", "tile");
-    this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
-    //this.t1Text.style.padding = "10px";
-    this.tiles[i].appendChild(this.tileText[i]);
+    if(i>=3){
+      this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
+      this.tiles[i].appendChild(this.tileText[i]);
+    }
   }
 
   //  Add listeners to tile objects
@@ -44,6 +45,12 @@ function GameArea() {
     }, false);
   }
 
+  this.tileText[0] = document.createTextNode("Begin Game");
+  this.tiles[0].appendChild(this.tileText[0]);
+  this.tileText[1] = document.createTextNode("Next Level");
+  this.tiles[1].appendChild(this.tileText[1]);
+  this.tileText[2] = document.createTextNode("Reset Game");
+  this.tiles[2].appendChild(this.tileText[2]);
   // "title 1" click listener
   // if clicked itll run the game!
   this.tiles[0].addEventListener('click', function () {
@@ -56,5 +63,11 @@ function GameArea() {
     game.hero.loc.y = 200;
     game.hero.vel.setMagnitude(0);
   }, false)
-
+  this.tiles[2].addEventListener("click", function () {
+    gameState = 0;//Returns hero to Main Menu
+    game.hero.vel.setMagnitude(0);//makes sure that the hero is not moving
+    game.levels[0] = new Levels(1);//resets the level, more needs to be added when more levels are added
+    game.levels[1] = new Levels(2);
+    game.hero.reSetHero();
+  }, false)
 }
