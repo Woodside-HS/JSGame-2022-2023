@@ -42,6 +42,8 @@ class Game {
       this.hero.loc.y = this.startY// resets the hero location
       this.camLoc.x = 0;
       this.camLoc.y = 0;
+      ctx.beginPath();
+      ctx.closePath();//I need this to make sure that it doesnt draw a platform, dunno why that happens
       ctx.font = "50px serif";
       ctx.fillText("click 'Begin Game' to play ", 200, 200);
       ctx.fillStyle = "green";
