@@ -1,96 +1,103 @@
-window.addEventListener("keydown", function (event) {
-    switch (event.code) {
-        case "KeyA":
-            if (!stopMovement) {
-                game.clickingA = true;
-            }
-            break;
-
-        case "KeyD":
-            if (!stopMovement) {
-                game.clickingD = true
-            }
-            break;
-
-        case "KeyF":
-            game.mouseDown = true;
-
-            break;
-        case "Space":
-            if (!stopMovement) {
-                game.hero.jump();
-            }
-            break;
-
-        case "KeyP":
-            game.hero.shoot();
-
-            break;
-    }
-}, false);
-
-window.addEventListener("keyup", function (event) {
-    switch (event.code) {
-
-        case "KeyA":
-            game.clickingA = false;
-            break;
-        case "KeyD":
-            game.clickingD = false;
-            break;
-
-        case "KeyF":
-            game.mouseDown = false;
-
-            break;
-    }
-}, false);
-
-window.addEventListener('mousedown', function (event) {
+const keyDownActions = {
+  // Optimized keydown actions using arrow functions
+  KeyA: () => {
+    if (!stopMovement) game.clickingA = true;
+  },
+  KeyD: () => {
+    if (!stopMovement) game.clickingD = true;
+  },
+  KeyF: () => {
     game.mouseDown = true;
-    // game.hero.attack();
-    cursor = new JSVector(event.offsetX, event.offsetY);//gets the location of the cursor whenever it is over the canvas
-    game.hero.cursorLoc.x = cursor.x + game.camLoc.x;
-    game.hero.cursorLoc.y = cursor.y + game.camLoc.y;
-}, false);
+  },
+  Space: () => {
+    if (!stopMovement) game.hero.jump();
+  },
+  KeyP: () => {
+    game.hero.shoot();
+  },
+};
 
-window.addEventListener("mouseup", function (event) {
+const keyUpActions = {
+  // Optimized keyup actions using arrow functions
+  KeyA: () => {
+    game.clickingA = false;
+  },
+  KeyD: () => {
+    game.clickingD = false;
+  },
+  KeyF: () => {
     game.mouseDown = false;
-}, false);
+  },
+};
 
+window.addEventListener(
+  "keydown",
+  function (event) {
+    const action = keyDownActions[event.code];
+    if (action) {
+      action();
+    }
+  },
+  false
+);
+
+window.addEventListener(
+  "keyup",
+  function (event) {
+    const action = keyUpActions[event.code];
+    if (action) {
+      action();
+    }
+  },
+  false
+);
+
+const { game } = window;
+const { hero } = game;
+
+window.addEventListener(
+  "mousedown",
+  (event) => {
+    game.mouseDown = true;
+    cursor = new JSVector(event.offsetX, event.offsetY);
+    hero.cursorLoc.x = cursor.x + game.camLoc.x;
+    hero.cursorLoc.y = cursor.y + game.camLoc.y;
+  },
+  false
+);
+
+window.addEventListener(
+  "mouseup",
+  (event) => {
+    game.mouseDown = false;
+  },
+  false
+);
 
 function debugViewCheckBoxClicked() {
-    const checkbox = document.getElementById('DebugViewCheckBox');
-    if (checkbox.checked) {
-        console.log('Debug View Enabled');
-        debugView = true;
-        createDebugDOM();
-    } else {
-        console.log('Debug View Disabled');
-        debugView = false;
-    }
+  // Optimized debug view checkbox clicked using ternary functions
+  const { checked } = document.getElementById("DebugViewCheckBox");
+  console.log(`Debug View ${checked ? "Enabled" : "Disabled"}`);
+  debugView = checked;
+  if (checked) {
+    createDebugDOM();
+  }
 }
 
 function createDebugDOM() {
-    const debugDiv = document.getElementById('debugDiv');
+  // Optimized function to create the DOM for the debug view through looping through an array of properties
+  const debugDiv = document.getElementById("debugDiv");
+  const elementIds = [
+    "PlayerLoc",
+    "PlayerVel",
+    "PlayerCursorLoc",
+    "PlayerHP",
+    "PlayerCoins",
+  ];
 
-    const playerLoc = document.createElement('p');
-    playerLoc.setAttribute('id', 'PlayerLoc');
-    debugDiv.appendChild(playerLoc);
-
-    const playerVel = document.createElement('p');
-    playerVel.setAttribute('id', 'PlayerVel');
-    debugDiv.appendChild(playerVel);
-
-    const playerCursorLoc = document.createElement('p');
-    playerCursorLoc.setAttribute('id', 'PlayerCursorLoc');
-    debugDiv.appendChild(playerCursorLoc);
-
-    const playerHP = document.createElement('p');
-    playerHP.setAttribute('id', 'PlayerHP');
-    debugDiv.appendChild(playerHP);
-
-    const playerCoins = document.createElement('p');
-    playerCoins.setAttribute('id', 'PlayerCoins');
-    debugDiv.appendChild(playerCoins);
+  elementIds.forEach((id) => {
+    const element = document.createElement("p");
+    element.id = id;
+    debugDiv.appendChild(element);
+  });
 }
