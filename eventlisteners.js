@@ -99,3 +99,7 @@ function createDebugDOM() {
     debugDiv.appendChild(element);
   });
 }
+
+window.addEventListener("resize", function () {
+  resizeCanvas();
+});

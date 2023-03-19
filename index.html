@@ -22,16 +22,31 @@
   </head>
 
   <body>
-    <div id="wrapperDiv"></div>
-    <input
-      type="checkbox"
-      id="DebugViewCheckBox"
-      name="DebugViewCheckBoxName"
-      value="checkboxValue"
-      onclick="debugViewCheckBoxClicked()"
-    />
-    <label for="DebugViewCheckBoxName">Debug View</label>
-    <div id="debugDiv"></div>
+    <div id="canvasWrapper">
+      <canvas id="cnv"> </canvas>
+    </div>
+    <div class="top-menu">
+      <button id="playButton">Play</button>
+      <button>Button 2</button>
+      <button>Button 3</button>
+      <button>Button 4</button>
+      <button>Button 5</button>
+      <button>Button 6</button>
+      <button>Button 7</button>
+    </div>
+    <div class="right-menu">
+      <div id="debugWrapper">
+        <input
+          type="checkbox"
+          id="DebugViewCheckBox"
+          name="DebugViewCheckBoxName"
+          value="checkboxValue"
+          onclick="debugViewCheckBoxClicked()"
+        />
+        <label for="DebugViewCheckBoxName">Debug View</label>
+        <div id="debugDiv"></div>
+      </div>
+    </div>
     <div id="coin-count">0</div>
   </body>
 </html>

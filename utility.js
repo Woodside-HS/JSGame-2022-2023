@@ -67,3 +67,16 @@ function drawText(context, text, font, x, y, fill, stroke) {
   context.fill();
   context.stroke();
 }
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+function unselectButton(button) {
+  button.disabled = true;
+
+  setTimeout(function () {
+    button.disabled = false;
+  }, 10);
+}
