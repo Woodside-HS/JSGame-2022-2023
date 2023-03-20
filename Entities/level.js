@@ -118,7 +118,7 @@ class Levels {
         false,
         0
       );
-      this.platforms[9] = new Platform(
+      this.platforms[9] = new Platform( // has a trap and a heathPack 
         1700,
         150,
         200,
@@ -128,7 +128,7 @@ class Levels {
         true,
         0,
         true,
-        0
+        3
       );
       this.platforms[10] = new Platform(
         1650,
@@ -140,7 +140,7 @@ class Levels {
         false,
         0,
         true,
-        0
+        1
       );
       this.platforms[11] = new Platform(
         1700,
