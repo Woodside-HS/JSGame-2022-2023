@@ -54,6 +54,7 @@ class Trap {
     ctx.restore();
   }
   update() {
+    if(!game.hero.inventory.invulnerability){
     if (!this.statusBlock.isClosed) {
       this.checkHero();
       if (
@@ -65,7 +66,7 @@ class Trap {
       //* 1.5 is the angle were the trap is point up
       if (this.rightAngle <= -1.5 || this.leftAngle >= 1.5) {
         this.statusBlock.isClosed = true;
-        if (this.statusBlock.isTrapped) {
+      if(this.statusBlock.isTrapped){
           game.hero.statusBlock.isDead = true;
           this.reSetTrap(); // resets the trap for the next run of the game
         }
@@ -81,6 +82,7 @@ class Trap {
         this.statusBlock.isTrapped = true;
       }
     }
+  }
   }
   checkHero() {
     let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location

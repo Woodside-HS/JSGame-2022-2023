@@ -15,6 +15,7 @@ class Platform {
         0 = no Power Up
         1 = Double Jump
         2 = Double Coin
+        3 = Invulnerability
         */
     //* YN = yes/no
     this.loc = new JSVector(x, y);
@@ -63,7 +64,8 @@ class Platform {
         5,
         true
       );
-    } else if (type == 2) {
+    } 
+    else if (type == 2) {
       this.powerups[0] = new DoubleCoins(
         this.loc.x,
         this.loc.y,
@@ -71,6 +73,16 @@ class Platform {
         5,
         true
       );
+    }
+    else if(type == 3){
+      this.powerups[0] = new Invulnerability(
+        this.loc.x,
+        this.loc.y,
+        this.width,
+        5,
+        true
+      );
+
     }
   }
 
