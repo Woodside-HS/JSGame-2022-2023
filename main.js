@@ -4,7 +4,7 @@ var stopMovement = false
 var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
 var debugView = false;
-
+ 
 function init() {
   canvas = document.createElement('canvas');
   canvas.style.border = 'solid black 2px';
