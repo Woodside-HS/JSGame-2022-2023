@@ -91,7 +91,7 @@ class Levels {
         false,
         0,
         false,
-        0
+        3
       );
       //! when the height is below like 200(top of screen), it should generally be more difficult but have more coins
       this.platforms[7] = new Platform(
@@ -212,7 +212,7 @@ class Levels {
         true,
         0,
         false,
-        0
+        3
       );
       this.platforms[17] = new Platform(
         3300,

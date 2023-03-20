@@ -67,6 +67,7 @@ class LegTrap {
     ctx.restore();
   }
   update() {
+    if(!game.hero.inventory.invulnerability){
     if (!this.statusBlock.isClosed) {
       this.checkHero();
       if (
@@ -94,6 +95,7 @@ class LegTrap {
         this.statusBlock.isTrapped = true;
       }
     }
+  }
   }
   checkHero() {
     let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
