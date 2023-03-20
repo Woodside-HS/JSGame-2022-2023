@@ -53,3 +53,20 @@ body {
   font-weight: bold;
   font-size: 20px;
 }
+
+#health-count {
+  position: absolute;
+  float: left;
+  top: 30px;
+  right: 10px;
+  background-color: gold;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
