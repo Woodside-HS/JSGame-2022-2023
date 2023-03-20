@@ -39,10 +39,11 @@ class Levels {
         200,
         10,
         "blue",
-        false,
+        true,
         false,
         0,
         false,
+        1,
         1
       ); //second platform
       this.platforms[3] = new Platform(
@@ -55,7 +56,8 @@ class Levels {
         false,
         0,
         false,
-        0
+        0,
+        2
       ); //top platform with enemy
       this.platforms[4] = new Platform(
         650,
@@ -67,7 +69,8 @@ class Levels {
         true,
         0,
         false,
-        2
+        2,
+        0
       ); //upper left platform
       this.platforms[5] = new Platform(
         900,
@@ -79,6 +82,7 @@ class Levels {
         false,
         0,
         true,
+        0,
         0
       ); //trap platform
       this.platforms[6] = new Platform(
@@ -91,6 +95,7 @@ class Levels {
         false,
         0,
         false,
+        0,
         0
       );
       //! when the height is below like 200(top of screen), it should generally be more difficult but have more coins
@@ -104,6 +109,7 @@ class Levels {
         false,
         0,
         false,
+        0,
         0
       );
       this.platforms[8] = new Platform(
@@ -116,7 +122,8 @@ class Levels {
         true,
         0,
         false,
-        0
+        0,
+        1
       );
       this.platforms[9] = new Platform(
         1700,
@@ -128,7 +135,8 @@ class Levels {
         true,
         0,
         true,
-        0
+        0,
+        1
       );
       this.platforms[10] = new Platform(
         1650,
@@ -140,7 +148,8 @@ class Levels {
         false,
         0,
         true,
-        0
+        0,
+        1
       );
       this.platforms[11] = new Platform(
         1700,
@@ -152,7 +161,8 @@ class Levels {
         true,
         0,
         false,
-        0
+        0,
+        1
       );
       this.platforms[12] = new Platform(
         1900,
@@ -164,6 +174,7 @@ class Levels {
         true,
         0,
         false,
+        1,
         1
       );
       this.platforms[13] = new Platform(
@@ -176,7 +187,8 @@ class Levels {
         true,
         0,
         false,
-        0
+        0,
+        1
       );
       this.platforms[14] = new Platform(
         2400,
@@ -188,7 +200,8 @@ class Levels {
         true,
         0,
         false,
-        2
+        2,
+        1
       );
       this.platforms[15] = new Platform(
         2700,
@@ -200,7 +213,8 @@ class Levels {
         true,
         0,
         false,
-        0
+        0,
+        1
       );
       this.platforms[16] = new Platform(
         3000,
@@ -212,7 +226,8 @@ class Levels {
         true,
         0,
         false,
-        0
+        0,
+        1
       );
       this.platforms[17] = new Platform(
         3300,
@@ -224,7 +239,8 @@ class Levels {
         true,
         0,
         false,
-        0
+        0,
+        1
       );
       this.platforms[18] = new Platform(
         3600,
@@ -232,11 +248,12 @@ class Levels {
         150,
         10,
         "blue",
-        false,
+        true,
         true,
         0,
         false,
-        0
+        0,
+        3
       );
     }
     if (this.id == 2) {

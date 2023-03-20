@@ -31,13 +31,17 @@ class Bullet {
         this.distance = game.levels[0].platforms[i].enemies[j].loc.distance(
           this.loc
         );
-        if (this.distance < 10) {
+        if (this.distance < 15) {
+          if(game.levels[0].platforms[i].enemyInt == 3){
+            game.levels[0].platforms[i].enemies.health -=10;
+          } else {
           game.levels[0].platforms[i].enemies.splice(j, 1);
+          }
           this.isDead = true;
-        }
       }
     }
   }
+}
 
   render() {
     let ctx = this.ctx;

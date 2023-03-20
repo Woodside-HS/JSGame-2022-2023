@@ -32,7 +32,7 @@ class Platform {
       //overwrites the coinc cost assuming there is one
     }
     if (enemyYN && enemyInt>0) {
-      this.loadEnemies(EnemyInt);
+      this.loadEnemies(enemyInt);
     }
     if (coinYN) {
       this.loadCoins();
@@ -48,9 +48,10 @@ class Platform {
   loadEnemies(type) {
     if(type == 1){
     this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 30, 15);
-    }
-    if(type == 2){
+    } else if(type == 2){
       this.enemies[0] = new Enemy2(this.loc.x,this.loc.y,this.width,30,15);
+    } else if(type == 3){
+      this.enemies[0] = new Enemy3(this.loc.x,this.loc.y,this.width,60,30);
     }
   }
   loadCoins() {
