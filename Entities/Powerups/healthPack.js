@@ -2,6 +2,7 @@ class HealthPack extends Coin {
     constructor(x, y, width, radius) {
         super(x, y, width, radius);
         this.clr = "red"
+        this.healthAdded = 50;
     }
     render() {
         ctx.save();
@@ -25,7 +26,7 @@ class HealthPack extends Coin {
             heroLoc.y < this.loc.y + this.size
         ) {
             this.collected = true;
-            game.hero.statusBlock.hp = 100;
+            game.hero.statusBlock.hp += this.healthAdded;
         }
     }
 }
