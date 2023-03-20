@@ -8,6 +8,7 @@ class Enemy2 extends Enemy {
     this.w = w;
     this.move = 3;
     this.isdead = false;
+    this.health = 10;
   }
 
   run() {

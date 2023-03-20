@@ -170,12 +170,12 @@ class Levels {
         150,
         10,
         "blue",
-        false,
+        true,
         true,
         0,
         false,
         1,
-        1
+        2
       );
       this.platforms[13] = new Platform(
         2100,
@@ -209,12 +209,12 @@ class Levels {
         150,
         10,
         "blue",
-        false,
+        true,
         true,
         0,
         false,
         0,
-        1
+        2
       );
       this.platforms[16] = new Platform(
         3000,
@@ -235,12 +235,12 @@ class Levels {
         150,
         10,
         "blue",
-        false,
+        true,
         true,
         0,
         false,
         0,
-        1
+        3
       );
       this.platforms[18] = new Platform(
         3600,
@@ -248,7 +248,7 @@ class Levels {
         150,
         10,
         "blue",
-        true,
+        false,
         true,
         0,
         false,

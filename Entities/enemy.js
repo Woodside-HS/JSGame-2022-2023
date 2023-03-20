@@ -7,6 +7,7 @@ class Enemy {
     this.w = w;
     this.move = 1; // the speed of the enemy movement
     this.isdead = false;
+    this.health = 10;
   }
   run() {
     this.render();

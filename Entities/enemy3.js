@@ -7,7 +7,7 @@ class Enemy3 extends Enemy {
     this.h = h;
     this.w = w;
     this.move = .05;
-    this.health = 100;
+    this.health = 500;
     this.isdead = false;
   }
 
