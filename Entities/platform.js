@@ -15,7 +15,7 @@ class Platform {
             0 = no Power Up
             1 = Double Jump
             2 = Double Coin
-            3 = Health Pack
+        3 = Health Pack
             */
         //* YN = yes/no
         this.loc = new JSVector(x, y);
@@ -52,7 +52,6 @@ class Platform {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);
     }
     loadTrap() {
-        // this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
         this.traps[0] = new LegTrap(this.loc.x, this.loc.y, this.width);
     }
     loadPowerUp(type) {
