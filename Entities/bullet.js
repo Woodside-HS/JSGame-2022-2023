@@ -2,7 +2,7 @@ class Bullet {
   constructor(x, y, ctx, shootingDirection) {
     this.x = x;
     this.y = y;
-    this.loc = new JSVector(x + 20, y + 45);
+    this.loc = new JSVector(x + 20, y + 20);
     if (shootingDirection) {
       this.vel = new JSVector(-10, 0);
     } else {
