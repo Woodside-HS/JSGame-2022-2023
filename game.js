@@ -95,7 +95,7 @@ class Game {
   moveCam = () => {
     // Susbtitude Event handlers
     //dont use hero.loc, use camLoc instead because heroloc only works on lvl 1
-    this.clickingA && !hittingRight ? (this.camLoc.x -= 2) : null;
-    this.clickingD && !hittingLeft ? (this.camLoc.x += 2) : null;
+    this.clickingA && !hittingRight ? (this.hero.loc.x -= 2) : null;
+    this.clickingD && !hittingLeft ? (this.hero.loc.x += 2) : null;
   };
 }
