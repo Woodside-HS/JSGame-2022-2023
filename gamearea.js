@@ -84,7 +84,7 @@ function GameArea() {
     game.hero.vel.setMagnitude(0);
   }, false)
   this.tiles[2].addEventListener("click", function () {
-    gameState = 0;//Returns hero to Main Menu
+    gameState = -1;//Returns hero to Main Menu
     game.hero.vel.setMagnitude(0);//makes sure that the hero is not moving
     game.levels[0] = new Levels(1);//resets the level, more needs to be added when more levels are added
     game.levels[1] = new Levels(2);
