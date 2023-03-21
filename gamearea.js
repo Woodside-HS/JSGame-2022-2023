@@ -79,8 +79,6 @@ function GameArea() {
   }, false);
   this.tiles[1].addEventListener("click", function () {
     gameState++;
-    game.hero.loc.x = 200;
-    game.hero.loc.y = 200;
     game.hero.vel.setMagnitude(0);
   }, false)
   this.tiles[2].addEventListener("click", function () {
