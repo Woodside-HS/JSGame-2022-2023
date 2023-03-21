@@ -69,7 +69,7 @@ function GameArea() {
   this.tiles[0].appendChild(this.tileText[0]);
   this.tileText[1] = document.createTextNode("Next Level");
   this.tiles[1].appendChild(this.tileText[1]);
-  this.tileText[2] = document.createTextNode("Reset Game");
+  this.tileText[2] = document.createTextNode("Respawn");
   this.tiles[2].appendChild(this.tileText[2]);
   // "title 1" click listener
   // if clicked itll run the game!
@@ -84,8 +84,10 @@ function GameArea() {
     game.hero.vel.setMagnitude(0);
   }, false)
   this.tiles[2].addEventListener("click", function () {
-    gameState = -1;//Returns hero to Main Menu
+    gameState = game.lvlDiedOn;
     game.hero.vel.setMagnitude(0);//makes sure that the hero is not moving
+    game.camLoc.x = 200;//resets the hero's position to start of level
+    game.camLoc.y = 200;//resets the hero's position to start
     game.levels[0] = new Levels(1);//resets the level, more needs to be added when more levels are added
     game.levels[1] = new Levels(2);
     game.hero.reSetHero();

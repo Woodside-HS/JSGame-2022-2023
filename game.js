@@ -6,6 +6,7 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
+    this.lvlDiedOn = 0;
 
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -28,11 +29,23 @@ class Game {
   update = () => {
     this.moveCam();
     // Use a ternary operator to call the appropriate function based on the game state
-    gameState == 0
-      ? this.menuScreen()
-      : gameState == 1
-      ? this.playState()
-      : this.endState();
+    if(gameState == -1){
+      this.camLoc.Zero();
+      this.deadState();
+    } else if(gameState == 0){
+      this.menuScreen();
+    } else if(gameState == 1){
+      this.playState();
+    } else {
+      //if nothing else do end state
+      this.endState();
+    }
+    //ternary operators are dumb
+    // gameState == 0
+    //   ? this.menuScreen()
+    //   : gameState == 1
+    //   ? this.playState()
+    //   : this.endState();
   };
 
   // Game state 0
@@ -52,6 +65,12 @@ class Game {
     );
   };
 
+  deadState = () => {
+    ctx.clearRect(0, 0, this.dims.width, this.dims.height);
+    ctx.save();
+    drawText(ctx,"You died :(", "50px serif", 200, 200, "red", "black");
+    ctx.restore();
+  }
   // Game state 1
   playState = () => {
     ctx.save();

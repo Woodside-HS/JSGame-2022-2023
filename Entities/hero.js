@@ -84,6 +84,7 @@ class Hero {
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
       this.statusBlock.isDead = true;
+      game.lvlDiedOn = gameState;
     }
 
         if (this.statusBlock.isDead) { // if the hero is dead it brings you to the start screen (gameState1)
@@ -231,10 +232,6 @@ class Hero {
     reSetHero() {
         this.statusBlock.hp = 100;
         this.statusBlock.isDead = false;
-        this.statusBlock.coins = 0;
         stopMovement = false;//doesn't work with traps for some reason
-
-        const coinCountElement = document.getElementById('coin-count');
-        coinCountElement.innerHTML = 0; //reset the coin count to 0 once dead
     }
 }
