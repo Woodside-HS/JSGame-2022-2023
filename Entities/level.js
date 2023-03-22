@@ -4,6 +4,9 @@ class Levels {
     this.platforms = [];
     this.obstacles = [];
     this.loadPlatforms();
+    this.bg1 = new JSVector(0, 0);
+    this.bg2 = new JSVector(0, 0);
+    this.bg3 = new JSVector(0, 0);
   }
   loadPlatforms() {
     //this function hard codes all of the platforms in by hand
@@ -267,7 +270,28 @@ class Levels {
       );
     }
   }
+
+  renderParralax() {
+    //parallax
+    //drawa bunch of backgrounds over and over again
+    for (let i = 0; i < 10; i++) {
+      ctx.drawImage(level1Bacgrkounds[0], this.bg1.x + canvas.width * i, this.bg1.y, canvas.width, canvas.height);
+    }
+
+
+    for (let i = 0; i < 10; i++) {
+      ctx.drawImage(level1Bacgrkounds[1], this.bg2.x + canvas.width * i, this.bg2.y, canvas.width, canvas.height);
+    }
+    for (let i = 0; i < 10; i++) {
+      ctx.drawImage(level1Bacgrkounds[2], this.bg3.x + canvas.width * i, this.bg3.y, canvas.width, canvas.height);
+    }
+
+    this.bg2.x = lerp(this.bg2.x, (game.hero.loc.x / 2) - game.start.x, 0.4);
+    this.bg3.x = lerp(this.bg3.x, (game.hero.loc.x / 1.5) - game.start.x, 0.4);
+
+  }
   run() {
+    this.renderParralax();
     // console.log("level was run")
     this.runEntities();
   }

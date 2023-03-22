@@ -39,16 +39,11 @@ class Hero {
     this.indc = 0;
   }
 
+
   run() {
     this.render();
-    this.update();
     // this.attack();
-    this.vel.add(this.grav);
-    this.loc.add(this.vel);
 
-    if (this.vel.y > 0) {
-      this.statusBlock.onPlatform = false;
-    }
   }
   render() {
     ctx.save(); // draws the hero
@@ -80,6 +75,12 @@ class Hero {
     ctx.restore();
   }
   update() {
+    this.vel.add(this.grav);
+    this.loc.add(this.vel);
+
+    if (this.vel.y > 0) {
+      this.statusBlock.onPlatform = false;
+    }
     //! %%%%%%%%%%%%%%%
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
@@ -156,7 +157,7 @@ class Hero {
         this.clr = "green";
       }
     }
-    
+
 
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();

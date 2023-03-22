@@ -31,8 +31,8 @@ class Game {
     gameState == 0
       ? this.menuScreen()
       : gameState == 1
-      ? this.playState()
-      : this.endState();
+        ? this.playState()
+        : this.endState();
   };
 
   // Game state 0
@@ -58,8 +58,9 @@ class Game {
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.hero.run();
+    this.hero.update();
     this.levels[0].run();
+    this.hero.run();
     ctx.restore();
   };
 
@@ -68,8 +69,9 @@ class Game {
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
     this.hero.loc.x = this.camLoc.x + 200;
     stopMovement = false;
-    this.hero.run();
+
     this.levels[1].run();
+    this.hero.run();
     ctx.restore();
   };
 

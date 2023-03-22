@@ -5,6 +5,12 @@ var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the p
 window.onload = init;//  After the window has been loaded, go to init
 var debugView = false;
 
+var level1Bacgrkounds = [];
+for (let index = 1; index < 4; index++) {
+  let background = new Image();
+  background.src = "resources/backgrounds/bg" + index + ".png";
+  level1Bacgrkounds.push(background);
+}
 function init() {
   canvas = document.createElement('canvas');
   canvas.style.border = 'solid black 2px';
