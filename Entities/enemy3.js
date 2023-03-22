@@ -84,7 +84,9 @@ class Enemy3 extends Enemy {
       heroLoc.y + heroH > this.loc.y &&
       heroLoc.y < this.loc.y + this.h
     ) {
-      game.hero.statusBlock.hp--;
+      if(!game.hero.inventory.invulnerability){
+        game.hero.statusBlock.hp-=2;
+        }
     }
   }
 }
