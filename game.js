@@ -31,8 +31,8 @@ class Game {
     gameState == 0
       ? this.menuScreen()
       : gameState == 1
-      ? this.playState()
-      : this.endState();
+        ? this.playState()
+        : this.endState();
   };
 
   // Game state 0
@@ -41,6 +41,7 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
+
     drawText(
       ctx,
       "click 'tile 1' to play ",
@@ -50,6 +51,7 @@ class Game {
       "green",
       "red"
     );
+
   };
 
   // Game state 1
@@ -58,8 +60,11 @@ class Game {
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.hero.run();
+    this.hero.update();
     this.levels[0].run();
+    this.hero.run();
+
+
     ctx.restore();
   };
 

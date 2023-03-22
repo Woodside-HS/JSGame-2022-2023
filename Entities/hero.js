@@ -37,30 +37,26 @@ class Hero {
       powerUpLength: 1000
     };
     this.indc = 0;
+    this.heroImgTicks = 0;
   }
 
   run() {
     this.render();
-    this.update();
-    // this.attack();
-    this.vel.add(this.grav);
-    this.loc.add(this.vel);
-
-    if (this.vel.y > 0) {
-      this.statusBlock.onPlatform = false;
-    }
+    //* update gets called from when hero is getting run.
   }
   render() {
     ctx.save(); // draws the hero
-    ctx.beginPath(); //Malcom you need begin path
-    //without begin path, it continues to render old boxes so it wont be cleared
-    // MY BAD LMAO!
+    ctx.beginPath();
     ctx.font = "50px serif";
     ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
-    ctx.lineTo(this.loc.x, this.loc.y + this.height);
+    // ctx.moveTo(this.loc.x, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.width, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
+    // ctx.lineTo(this.loc.x, this.loc.y + this.height);
+
+    for (let i = 0; i < heroImgs.length; i++) {
+      ctx.drawImage(heroImgs[i], this.loc.x, this.loc.y, this.width, this.height)
+    }
     ctx.closePath();
     ctx.fillStyle = this.clr;
     ctx.strokeStyle = "black";
@@ -79,7 +75,13 @@ class Hero {
     ctx.closePath();
     ctx.restore();
   }
-  update() {
+  update() {    //* update gets called from when hero is getting run.
+    this.vel.add(this.grav);
+    this.loc.add(this.vel);
+
+    if (this.vel.y > 0) {
+      this.statusBlock.onPlatform = false;
+    }
     //! %%%%%%%%%%%%%%%
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
@@ -156,7 +158,7 @@ class Hero {
         this.clr = "green";
       }
     }
-    
+
 
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();

@@ -1,30 +1,30 @@
 class Platform {
-  constructor(
-    x,
-    y,
-    width,
-    height,
-    clr,
-    enemyYN,
-    coinYN,
-    coinCost,
-    trapYN,
-    powerUpInt
-  ) {
-    /* PowerUp Int
-        0 = no Power Up
-        1 = Double Jump
-        2 = Double Coin
-        3 = Invulnerability
-        */
-    //* YN = yes/no
-    this.loc = new JSVector(x, y);
-    this.width = width;
-    this.height = height;
-    this.clr = clr;
-    this.enemies = [];
-    this.powerups = [];
-    this.traps = [];
+    constructor(
+        x,
+        y,
+        width,
+        height,
+        clr,
+        enemyYN,
+        coinYN,
+        coinCost,
+        trapYN,
+        powerUpInt
+    ) {
+        /* PowerUp Int
+            0 = no Power Up
+            1 = Double Jump
+            2 = Double Coin
+            3 = Invulnerability
+            */
+        //* YN = yes/no
+        this.loc = new JSVector(x, y);
+        this.width = width;
+        this.height = height;
+        this.clr = clr;
+        this.enemies = [];
+        this.powerups = [];
+        this.traps = [];
 
         this.coinCost = 0;
         if (coinCost) {
@@ -41,50 +41,50 @@ class Platform {
             this.loadTrap();
         }
 
-    if (powerUpInt > 0) {
-      this.loadPowerUp(powerUpInt);
+        if (powerUpInt > 0) {
+            this.loadPowerUp(powerUpInt);
+        }
     }
-  }
-  loadEnemies() {
-    this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 30, 15);
-  }
-  loadCoins() {
-    this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);
-  }
-  loadTrap() {
-    // this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
-    this.traps[0] = new LegTrap(this.loc.x, this.loc.y, this.width);
-  }
-  loadPowerUp(type) {
-    if (type == 1) {
-      this.powerups[0] = new DoubleJump(
-        this.loc.x,
-        this.loc.y,
-        this.width,
-        5,
-        true
-      );
-    } 
-    else if (type == 2) {
-      this.powerups[0] = new DoubleCoins(
-        this.loc.x,
-        this.loc.y,
-        this.width,
-        5,
-        true
-      );
+    loadEnemies() {
+        this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 30, 15);
     }
-    else if(type == 3){
-      this.powerups[0] = new Invulnerability(
-        this.loc.x,
-        this.loc.y,
-        this.width,
-        5,
-        true
-      );
+    loadCoins() {
+        this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);
+    }
+    loadTrap() {
+        // this.traps[0] = new Trap(this.loc.x, this.loc.y, this.width)
+        this.traps[0] = new LegTrap(this.loc.x, this.loc.y, this.width);
+    }
+    loadPowerUp(type) {
+        if (type == 1) {
+            this.powerups[0] = new DoubleJump(
+                this.loc.x,
+                this.loc.y,
+                this.width,
+                5,
+                true
+            );
+        }
+        else if (type == 2) {
+            this.powerups[0] = new DoubleCoins(
+                this.loc.x,
+                this.loc.y,
+                this.width,
+                5,
+                true
+            );
+        }
+        else if (type == 3) {
+            this.powerups[0] = new Invulnerability(
+                this.loc.x,
+                this.loc.y,
+                this.width,
+                5,
+                true
+            );
 
+        }
     }
-  }
 
     run() {
         if (game.hero.statusBlock.coins >= this.coinCost) {
@@ -152,7 +152,7 @@ class Platform {
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.height
         ) {
-            // console.log("touching platform");
+            console.log("touching platform");
             if (game.hero.vel.y > 0) {
                 // checks if the hero is falling
                 game.hero.statusBlock.jumpCount = 0;

@@ -5,6 +5,10 @@ var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the p
 window.onload = init;//  After the window has been loaded, go to init
 var debugView = false;
 
+var backgroundImgs = [];
+var heroImgs = [];
+
+
 function init() {
   canvas = document.createElement('canvas');
   canvas.style.border = 'solid black 2px';
@@ -17,11 +21,23 @@ function init() {
   gameState = 0;//gameState controls where the player is, 0 is main menu, 1 is 1st level, etc
   hittingRight = false;
   hittingLeft = false;
+
+
+  for (let i = 0; i < 2; i++) { // loads background images
+    backgroundImgs[i] = new Image(0, 0);
+    backgroundImgs[i].src = 'resources/backgrounds/bg' + (i + 1) + '.png';
+  }
+  for (let i = 0; i < 7; i++) {
+    heroImgs[i] = new Image(0, 0, 0);
+    heroImgs[i].src = 'resources/hero/hwr' + i + '.png';
+  }
+
   animate();
 }
 
 function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   debugUpdate();
   game.update();
   requestAnimationFrame(animate);

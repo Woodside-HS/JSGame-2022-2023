@@ -7,6 +7,7 @@ class Levels {
   }
   loadPlatforms() {
     //this function hard codes all of the platforms in by hand
+
     if (this.id == 1) {
       //first level
       this.platforms[0] = new Platform(
@@ -269,7 +270,10 @@ class Levels {
   }
   run() {
     // console.log("level was run")
+    ctx.drawImage(backgroundImgs[1], 0, 0);
+
     this.runEntities();
+
   }
   runEntities() {
     for (let i = this.platforms.length - 1; i >= 0; i--) {
