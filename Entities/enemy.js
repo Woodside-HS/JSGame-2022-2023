@@ -79,6 +79,7 @@ class Enemy {
       heroLoc.y < this.loc.y + this.h
     ) {
       game.hero.statusBlock.hp--;
+      displayHealthCount();
     }
   }
 }

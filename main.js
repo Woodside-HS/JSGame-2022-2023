@@ -58,7 +58,7 @@ function displayCoinCount() {
 
 function displayHealthCount() {
   const healthCountElement = document.getElementById('health-count');
-  coinCountElement.innerHTML = game.hero.hp.coins.toString();
+  healthCountElement.innerHTML = game.hero.statusBlock.hp.toString();
 }
 
 
