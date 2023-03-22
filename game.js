@@ -7,9 +7,14 @@ class Game {
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
 
-    [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
-      false
-    );
+    // [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
+    //   false
+    // );
+    this.gamePaused = false;
+    this.clickingA = false;
+    this.clickingD = false;
+    this.mouseDown = false;
+
 
     // Set the dimensions of the game area
     this.dims = {
@@ -31,8 +36,8 @@ class Game {
     gameState == 0
       ? this.menuScreen()
       : gameState == 1
-      ? this.playState()
-      : this.endState();
+        ? this.playState()
+        : this.endState();
   };
 
   // Game state 0
@@ -75,7 +80,15 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    this.clickingA && !hittingRight ? (this.hero.loc.x -= 2) : null;
-    this.clickingD && !hittingLeft ? (this.hero.loc.x += 2) : null;
-  };
+    // this.clickingA && !hittingRight ? (this.hero.vel.x = 1) : (this.hero.vel.x = lerp(this.hero.vel.x, 0, 0.1));
+    // this.clickingD && !hittingLeft ? (this.hero.vel.x = -1) : (this.hero.vel.x = lerp(this.hero.vel.x, 0, 0.1));
+    if (this.clickingA && !hittingRight) {
+      this.hero.vel.x = lerp(this.hero.vel.x, -2, 0.3);
+    } else if (this.clickingD && !hittingLeft) {
+      this.hero.vel.x = lerp(this.hero.vel.x, 2, 0.3);
+    } else {
+      this.hero.vel.x = lerp(this.hero.vel.x, 0, 0.1);
+    }
+  }
+
 }

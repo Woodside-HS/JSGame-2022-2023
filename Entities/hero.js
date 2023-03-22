@@ -5,7 +5,7 @@ class Hero {
     this.cursorLoc = new JSVector(0, 0); //location of the cursor aids in attacking
     this.posNeg = true; //related to attacking
     this.height = 50;
-    this.width = 50;
+    this.width = 20;
     this.grav = new JSVector(0, 0.2); //gravity for when falling
     this.clr = "green";
     this.bullets = [];
@@ -34,6 +34,13 @@ class Hero {
       dbJumpCounter: 0,
     };
     this.indc = 0;
+
+    this.rightArmDisplacement = new JSVector(-this.width / 3, -this.height / 3);
+    this.leftArmDisplacement = new JSVector(-2 * this.width / 3, -this.height / 3);
+    this.limbs = {
+      rightArm: new Limb(JSVector.subGetNew(this.loc, this.rightArmDisplacement), 30, this.width, this.loc.x + this.width / 3, 1),
+      leftArm: new Limb(JSVector.subGetNew(this.loc, this.leftArmDisplacement), 30, this.width, this.loc.x - this.width / 3, -1),
+    }
   }
 
   run() {
@@ -49,6 +56,7 @@ class Hero {
   }
   render() {
     ctx.save(); // draws the hero
+    this.limbs.leftArm.run(JSVector.subGetNew(this.loc, this.leftArmDisplacement), this.loc.x + this.width / 3);
     ctx.beginPath(); //Malcom you need begin path
     //without begin path, it continues to render old boxes so it wont be cleared
     // MY BAD LMAO!
@@ -74,6 +82,7 @@ class Hero {
     ctx.strokeStyle = "orange";
     ctx.stroke();
     ctx.closePath();
+    this.limbs.rightArm.run(JSVector.subGetNew(this.loc, this.rightArmDisplacement), this.loc.x + this.width * 2 / 3);
     ctx.restore();
   }
   update() {
