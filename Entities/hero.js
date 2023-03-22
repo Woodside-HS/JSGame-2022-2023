@@ -37,6 +37,12 @@ class Hero {
       powerUpLength: 1000
     };
     this.indc = 0;
+
+    //image stuff
+    this.move = [];
+    this.groove = 0;
+    this.grooveId = 0;
+    this.loadImages();
   }
 
   run() {
@@ -50,23 +56,33 @@ class Hero {
       this.statusBlock.onPlatform = false;
     }
   }
+  loadImages(){
+    for(let i=1; i<9;i++){
+      //the 9 has to be hardcoded inn
+      this.move[i] = document.createElement("img");
+      this.move[i].src  = "resources/Hero2/hwr000"+i+".png";
+    }
+  }
   render() {
-    ctx.save(); // draws the hero
-    ctx.beginPath(); //Malcom you need begin path
-    //without begin path, it continues to render old boxes so it wont be cleared
-    // MY BAD LMAO!
-    ctx.font = "50px serif";
-    ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
-    ctx.lineTo(this.loc.x, this.loc.y + this.height);
-    ctx.closePath();
-    ctx.fillStyle = this.clr;
-    ctx.strokeStyle = "black";
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
+    ctx.drawImage(this.move[0],this.loc.x,this.loc.y);
+    this.groove++;
+    if(this.groove%5 == 0){
+      this.grooveId++;
+      if(this.grooveId>=9){
+        this.grooveId = 0;
+      }
+    }
+    if(this.shootingDirection){
+      //ctx.drawImage(this.move[this.grooveId], this.loc.x,this.loc.y,this.width,this.height);
+    } else{
+      ctx.save();
+      ctx.translate(this.loc.x+this.width, this.loc.y);
+      ctx.scale(-1,1);
+      //ctx.drawImage(this.move[this.grooveId], 0, 0, this.width, this.height);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.restore();
+    }
+    //below is the indicator, gonna keep it for now
     if (game.clickingA) {
       this.indc = -20;
     }
