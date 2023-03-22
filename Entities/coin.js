@@ -15,7 +15,7 @@ class Coin {
     this.checkHero();
   }
   bounceCoin() {
-    //so the coing will move up and down gently
+    //so the coin will move up and down gently
     this.bounce += this.bounceAmount;
     if (this.bounce >= 1) {
       this.bounceAmount = -0.1;

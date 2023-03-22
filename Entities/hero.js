@@ -17,6 +17,7 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
+      invulnerability: false
     };
     this.statusBlock = {
       hp: 100,
@@ -32,6 +33,8 @@ class Hero {
       jumpBoostCounter: 0,
       dbCoinCounter: 0,
       dbJumpCounter: 0,
+      invulnerabilityCounter: 0,
+      powerUpLength: 1000
     };
     this.indc = 0;
   }
@@ -125,7 +128,7 @@ class Hero {
     if (this.inventory.dbJump) {
       this.clr = "purple";
       this.statusBlock.dbJumpCounter++;
-      if (this.statusBlock.dbJumpCounter > 1000) {
+      if (this.statusBlock.dbJumpCounter > this.statusBlock.powerUpLength) {
         this.inventory.dbJump = false;
         this.statusBlock.dbJumpCounter = 0;
         this.clr = "green";
@@ -136,12 +139,24 @@ class Hero {
     if (this.inventory.dbCoin) {
       this.statusBlock.dbCoinCounter++;
       this.clr = "orange";
-      if (this.statusBlock.dbCoinCounter > 1000) {
+      if (this.statusBlock.dbCoinCounter > this.statusBlock.powerUpLength) {
         this.inventory.dbCoin = false;
         this.statusBlock.dbCoinCounter = 0;
         this.clr = "green";
       }
     }
+
+    //invulnerability timer
+    if (this.inventory.invulnerability) {
+      this.statusBlock.invulnerabilityCounter++;
+      this.clr = "#DDDDDD";
+      if (this.statusBlock.invulnerabilityCounter > this.statusBlock.powerUpLength) {
+        this.inventory.invulnerability = false;
+        this.statusBlock.invulnerability = 0;
+        this.clr = "green";
+      }
+    }
+    
 
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
