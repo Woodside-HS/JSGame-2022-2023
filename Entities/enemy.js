@@ -78,7 +78,9 @@ class Enemy {
       heroLoc.y + heroH > this.loc.y &&
       heroLoc.y < this.loc.y + this.h
     ) {
+      if(!game.hero.inventory.invulnerability){
       game.hero.statusBlock.hp--;
+      }
     }
   }
 }
