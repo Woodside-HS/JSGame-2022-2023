@@ -4,6 +4,7 @@ var stopMovement = false
 var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
 var debugView = false;
+showPlatformIndex = true; //* show the index of the platform
 
 function init() {
   canvas = document.createElement('canvas');

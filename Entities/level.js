@@ -274,7 +274,7 @@ class Levels {
   runEntities() {
     for (let i = this.platforms.length - 1; i >= 0; i--) {
       //make sure to run for loops backwards to help with splicing
-      this.platforms[i].run();
+      this.platforms[i].run(i);
     }
   }
 }
