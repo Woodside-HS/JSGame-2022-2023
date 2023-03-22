@@ -51,11 +51,11 @@ class Enemy3 extends Enemy {
   }
   movePlatform() {
     this.loc.x += this.move;
-    if (this.loc.x > this.pLoc.x + this.pWidth - this.w) {
+    if (this.loc.x >= this.pLoc.x + this.pWidth - this.w) {
       //if the enemy goes to far the movement type gets reversed
-      this.move = .5;
+      this.move = -.5;
     }
-    if (this.loc.x < this.pLoc.x) {
+    if (this.loc.x <= this.pLoc.x) {
       //does not need to add size because loc is top left
       this.move = .5;
     }
