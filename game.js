@@ -27,12 +27,15 @@ class Game {
 
   update = () => {
     this.moveCam();
-    // Use a ternary operator to call the appropriate function based on the game state
-    gameState == 0
-      ? this.menuScreen()
-      : gameState == 1
-      ? this.playState()
-      : this.endState();
+      if(gameState == 0){
+        this.menuScreen();
+      }
+      else if(gameState == 1){
+        this.playState();
+      }
+      else{
+        this.endState();
+      }
   };
 
   // Game state 0
@@ -75,7 +78,17 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    this.clickingA && !hittingRight ? (this.hero.loc.x -= 2) : null;
-    this.clickingD && !hittingLeft ? (this.hero.loc.x += 2) : null;
+    if(this.clickingA && !hittingRight){
+      this.hero.loc.x -= 2
+     }
+     else{
+      null;
+     }
+    if(this.clickingD && !hittingLeft){
+      this.hero.loc.x += 2
+    }
+    else{
+      null;
+    }
   };
 }
