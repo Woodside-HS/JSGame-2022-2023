@@ -142,8 +142,9 @@ class Hero {
     if (game.clickingD) {
       this.indc = 20;
     }
-    ctx.beginPath();
+
     ctx.save();
+    ctx.beginPath();
     ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
     ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
     ctx.strokeStyle = "orange";

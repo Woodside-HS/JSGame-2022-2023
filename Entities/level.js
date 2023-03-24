@@ -49,6 +49,18 @@ loadPlatforms() {
   }
   
   runEntities() {
+    let hpPerc = (Math.PI*2)-(game.hero.statusBlock.hp/100)*Math.PI*2
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(canvas.width-20, 20, 10, hpPerc, Math.PI * 2);
+    ctx.arc(canvas.width-20, 20, 5, hpPerc, Math.PI * 2);
+    ctx.fillStyle = "red";
+    ctx.strokeStyle = "red";
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath(); //beginning and closing path just to be sure
+    ctx.restore();
+
     for (let i = this.platforms.length - 1; i >= 0; i--) {
       //make sure to run for loops backwards to help with splicing
       this.platforms[i].run();
