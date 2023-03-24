@@ -4,6 +4,7 @@ var stopMovement = false
 var hittingRight, hittingLeft;//varibles to keep the hero from moving thru the platform
 window.onload = init;//  After the window has been loaded, go to init
 var debugView = false;
+var tick = 0;
 
 var level1Bacgrkounds = [];
 for (let index = 1; index < 4; index++) {
@@ -11,6 +12,15 @@ for (let index = 1; index < 4; index++) {
   background.src = "resources/backgrounds/bg" + index + ".png";
   level1Bacgrkounds.push(background);
 }
+
+var heroIdle = [];
+for (let index = 1; index < 9; index++) {
+  let idle = new Image();
+  idle.src = "resources/Hero2/hwr000" + index + ".png";
+  heroIdle.push(idle);
+}
+
+
 function init() {
   canvas = document.createElement('canvas');
   canvas.style.border = 'solid black 2px';
@@ -30,6 +40,7 @@ function animate() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   debugUpdate();
   game.update();
+  tick++;
   requestAnimationFrame(animate);
 }
 

@@ -37,6 +37,7 @@ class Hero {
       powerUpLength: 1000
     };
     this.indc = 0;
+    this.currImage = 0;
   }
 
 
@@ -73,10 +74,29 @@ class Hero {
     ctx.stroke();
     ctx.closePath();
     ctx.restore();
+
+    ctx.drawImage(heroIdle[this.currImage], this.loc.x, this.loc.y, this.width, this.height); // draws the hero's image
   }
+  animate() {
+    if (tick % 5 == 0) {
+      if (game.clickingA || game.clickingD) {
+        this.currImage++;
+        if (this.currImage > 7) {
+          this.currImage = 0;
+        }
+      }
+      else {
+        this.currImage = 0;
+      }
+    }
+
+  }
+
   update() {
     this.vel.add(this.grav);
     this.loc.add(this.vel);
+
+    this.animate();
 
     if (this.vel.y > 0) {
       this.statusBlock.onPlatform = false;

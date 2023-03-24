@@ -280,10 +280,10 @@ class Levels {
 
 
     for (let i = 0; i < 10; i++) {
-      ctx.drawImage(level1Bacgrkounds[1], this.bg2.x + canvas.width * i, this.bg2.y, canvas.width, canvas.height);
+      ctx.drawImage(level1Bacgrkounds[2], this.bg2.x + canvas.width * i, this.bg2.y, canvas.width, canvas.height);
     }
     for (let i = 0; i < 10; i++) {
-      ctx.drawImage(level1Bacgrkounds[2], this.bg3.x + canvas.width * i, this.bg3.y, canvas.width, canvas.height);
+      ctx.drawImage(level1Bacgrkounds[1], this.bg3.x + canvas.width * i, this.bg3.y, canvas.width, canvas.height);
     }
 
     this.bg2.x = lerp(this.bg2.x, (game.hero.loc.x / 2) - game.start.x, 0.4);
