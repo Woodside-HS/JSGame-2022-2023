@@ -46,7 +46,7 @@ class Platform {
         }
     }
     loadEnemies() {
-        this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 30, 15);
+        this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 60, 60);
     }
     loadCoins() {
         this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);
@@ -132,12 +132,13 @@ class Platform {
     }
     render() {
         ctx.beginPath();
-        ctx.moveTo(this.loc.x, this.loc.y); //top left
-        ctx.lineTo(this.loc.x + this.width, this.loc.y); //top right
-        ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height); //bottom right
-        ctx.lineTo(this.loc.x, this.loc.y + this.height); //bottom left
-        //platforms will have uniform height fo now
-        ctx.closePath();
+        // ctx.moveTo(this.loc.x, this.loc.y); //top left
+        // ctx.lineTo(this.loc.x + this.width, this.loc.y); //top right
+        // ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height); //bottom right
+        // ctx.lineTo(this.loc.x, this.loc.y + this.height); //bottom left
+        // //platforms will have uniform height fo now
+        // ctx.closePath();
+        ctx.drawImage(platformImgs[0], this.loc.x, this.loc.y, this.width, this.height)
         ctx.fillStyle = this.clr;
         ctx.fill();
     }
@@ -152,7 +153,7 @@ class Platform {
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.height
         ) {
-            console.log("touching platform");
+            // console.log("touching platform");
             if (game.hero.vel.y > 0) {
                 // checks if the hero is falling
                 game.hero.statusBlock.jumpCount = 0;

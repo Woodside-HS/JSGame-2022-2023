@@ -37,11 +37,21 @@ class Levels {
       this.platforms[1] = new Platform(1100, 500, 20, 100, "orange", false, false, 1, false, false);
     }
   }
+  drawParallax() {
+    for (let i = 0; i < 1; i++) {
+      ctx.drawImage(backgroundImgs[0], 0, 0);
+    }
+    for (let i = 0; i < 1; i++) {
+      ctx.drawImage(backgroundImgs[1], 0, 0);
+    }
+    for (let i = 0; i < 1; i++) {
+      ctx.drawImage(backgroundImgs[2], 0, 0);
+    }
+  }
 
   run() {
     // console.log("level was run")
-    ctx.drawImage(backgroundImgs[1], 0, 0);
-
+    this.drawParallax();
     this.runEntities();
 
   }

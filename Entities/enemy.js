@@ -7,6 +7,11 @@ class Enemy {
     this.w = w;
     this.move = 1; // the speed of the enemy movement
     this.isdead = false;
+
+    this.enemyImgTick = 0
+    this.enemyImgIndex = 0;
+    this.animationSpeed = 10
+
   }
   run() {
     this.render();
@@ -56,12 +61,26 @@ class Enemy {
   }
   render() {
     ctx.save(); //renders as simple box for now
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.w, this.loc.y);
-    ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
-    ctx.lineTo(this.loc.x, this.loc.y + this.h);
-    ctx.closePath();
+    // ctx.beginPath();
+    // ctx.moveTo(this.loc.x, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.w, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
+    // ctx.lineTo(this.loc.x, this.loc.y + this.h);
+    // ctx.closePath();
+
+    this.enemyImgTick++;
+    for (let i = 0; i < enemyImgs.length; i++) {
+      ctx.drawImage(enemyImgs[this.enemyImgIndex], this.loc.x, this.loc.y, this.w, this.h);
+    }
+    if (this.enemyImgIndex >= enemyImgs.length - 1) {
+      this.enemyImgIndex = 0;
+    }
+
+    if (this.enemyImgTick >= this.animationSpeed) {
+      this.enemyImgIndex++
+      this.enemyImgTick = 0;
+    }
+
     ctx.fillStyle = "orange";
     ctx.fill();
     ctx.restore();
@@ -78,8 +97,8 @@ class Enemy {
       heroLoc.y + heroH > this.loc.y &&
       heroLoc.y < this.loc.y + this.h
     ) {
-      if(!game.hero.inventory.invulnerability){
-      game.hero.statusBlock.hp--;
+      if (!game.hero.inventory.invulnerability) {
+        game.hero.statusBlock.hp--;
       }
     }
   }

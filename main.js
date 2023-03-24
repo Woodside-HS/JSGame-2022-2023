@@ -7,6 +7,8 @@ var debugView = false;
 
 var backgroundImgs = [];
 var heroImgs = [];
+var platformImgs = [];
+var enemyImgs = [];
 
 
 function init() {
@@ -21,18 +23,31 @@ function init() {
   gameState = 0;//gameState controls where the player is, 0 is main menu, 1 is 1st level, etc
   hittingRight = false;
   hittingLeft = false;
+  loadImages();
 
 
-  for (let i = 0; i < 2; i++) { // loads background images
+
+  animate();
+}
+
+function loadImages() {
+  for (let i = 0; i < 3; i++) { // loads background images
     backgroundImgs[i] = new Image(0, 0,);
     backgroundImgs[i].src = 'resources/backgrounds/bg' + (i + 1) + '.png';
   }
   for (let i = 0; i < 7; i++) {
-    heroImgs[i] = new Image(0, 0, 0);
+    heroImgs[i] = new Image(0, 0);
     heroImgs[i].src = 'resources/hero/hwr' + i + '.png';
   }
+  for (let i = 0; i < 12; i++) {
+    enemyImgs[i] = new Image(0, 0);
+    enemyImgs[i].src = 'resources/enemy/el' + i + '.png';
+  }
 
-  animate();
+  for (let i = 0; i < 1; i++) {
+    platformImgs[i] = new Image(0, 0);
+    platformImgs[i].src = 'resources/platform/platfrom.png';
+  }
 }
 
 function animate() {
