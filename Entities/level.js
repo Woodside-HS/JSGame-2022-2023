@@ -3,11 +3,16 @@ class Levels {
     this.id = id;
     this.platforms = [];
     this.obstacles = [];
+    this.backgrounds = [];
     this.loadPlatforms();
   }
 loadPlatforms() {
       //this function hard codes all of the platforms in by hand
       if (this.id == 1) {
+          //backgrounds of first level
+          this.backgrounds[0] = new Background(0);
+          this.backgrounds[1] = new Background(1);
+          this.backgrounds[2] = new Background(2);
           //first level
           this.platforms[0] = new Platform(-100, 600, 12000, 20, "brown", false, false, 0, 0);//ground platform
           //TODO need a barrier to keep player from going left
@@ -47,6 +52,11 @@ loadPlatforms() {
     for (let i = this.platforms.length - 1; i >= 0; i--) {
       //make sure to run for loops backwards to help with splicing
       this.platforms[i].run();
+    }
+  }
+  runBG(){
+    for(let i = 0; i <this.backgrounds.length; i++){
+      this.backgrounds[i].run();
     }
   }
 }
