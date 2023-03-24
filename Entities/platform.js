@@ -25,7 +25,8 @@ class Platform {
     this.enemies = [];
     this.powerups = [];
     this.traps = [];
-
+    this.img;
+    this.loadImages();
         this.coinCost = 0;
         if (coinCost) {
             this.coinCost = coinCost;
@@ -85,6 +86,10 @@ class Platform {
 
     }
   }
+  loadImages(){
+    this.img = document.createElement("img");
+    this.img.src = "resources/Platform/platfrom.png";
+  }
 
     run() {
         if (game.hero.statusBlock.coins >= this.coinCost) {
@@ -131,15 +136,16 @@ class Platform {
         }
     }
     render() {
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x, this.loc.y); //top left
-        ctx.lineTo(this.loc.x + this.width, this.loc.y); //top right
-        ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height); //bottom right
-        ctx.lineTo(this.loc.x, this.loc.y + this.height); //bottom left
-        //platforms will have uniform height fo now
-        ctx.closePath();
-        ctx.fillStyle = this.clr;
-        ctx.fill();
+        ctx.drawImage(this.img,this.loc.x,this.loc.y,this.width,this.height);
+        // ctx.beginPath();
+        // ctx.moveTo(this.loc.x, this.loc.y); //top left
+        // ctx.lineTo(this.loc.x + this.width, this.loc.y); //top right
+        // ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height); //bottom right
+        // ctx.lineTo(this.loc.x, this.loc.y + this.height); //bottom left
+        // //platforms will have uniform height fo now
+        // ctx.closePath();
+        // ctx.fillStyle = this.clr;
+        // ctx.fill();
     }
     checkHero() {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
