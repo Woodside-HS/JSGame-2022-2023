@@ -69,17 +69,30 @@ class Hero {
     // MY BAD LMAO!
     ctx.font = "50px serif";
     ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
-    if(this.indc>0){
+    if(game.clickingD){
+      this.count++;
+      if(this.count%5 == 0)
+      this.tick++;
+      console.log(this.tick)
+      if(this.tick<8){
+      ctx.drawImage(this.images[this.tick],this.loc.x,this.loc.y,this.width,this.height);
+      
+      } else {
+        this.tick = 0;
+      }
+    } else if(game.clickingA){
       this.count++;
       if(this.count%5 == 0)
       this.tick++;
       if(this.tick<8){
-      ctx.drawImage(this.images[this.tick],this.loc.x,this.loc.y,this.width,this.height);
+        ctx.drawImage(this.images[this.tick], this.loc.x,this.loc.y,this.width,this.height);
       } else {
         this.tick = 0;
       }
-    } else {
+    } else if(!game.clickingD && !game.clickingA){
       ctx.drawImage(this.images[0], this.loc.x,this.loc.y,this.width,this.height);
+      this.count = 0;
+      this.tick = 0;
     }
     ctx.closePath();
     ctx.fillStyle = this.clr;
@@ -100,7 +113,7 @@ class Hero {
     ctx.restore();
   }
   update() {
-    //! %%%%%%%%%%%%%%%
+    //! %%%%%%%%%%%%%%%\
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
       this.statusBlock.isDead = true;

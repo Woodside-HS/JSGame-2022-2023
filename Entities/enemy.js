@@ -7,12 +7,24 @@ class Enemy {
     this.w = w;
     this.move = 1; // the speed of the enemy movement
     this.isdead = false;
+
+    this.images = [];
+    this.loadImages();
+    this.count = 0;
+    this.tick = 0;
   }
   run() {
     this.render();
     this.movePlatform();
     this.checkHero();
     this.checkAttack();
+  }
+
+  loadImages() {
+    for (let i = 0; i < 13; i++) {
+      this.images[i] = document.createElement("img");
+      this.images[i].src = "resources/enemy/el" + (i) + ".png";
+    }
   }
   checkAttack() {
     if (game.hero.statusBlock.isAttacking) {
@@ -57,10 +69,26 @@ class Enemy {
   render() {
     ctx.save(); //renders as simple box for now
     ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.w, this.loc.y);
-    ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
-    ctx.lineTo(this.loc.x, this.loc.y + this.h);
+    if(this.move == -1){
+      this.count++;
+      if(this.count%5 == 0)
+      this.tick++;
+      if(this.tick<13){
+        ctx.drawImage(this.images[this.tick],this.loc.x,this.loc.y,this.w+10,this.h);
+      } else {
+        this.tick = 0;
+      }
+    } else if(this.move == 1){
+      this.count++;
+      if(this.count%5 == 0)
+      this.tick++;
+      if(this.tick<13){
+        ctx.drawImage(this.images[this.tick],this.loc.x,this.loc.y,this.w+10,this.h);
+      } else {
+        this.tick = 0;
+      }
+    }
+    ctx.drawImage(this.images[this.tick],this.loc.x,this.loc.y,this.width,this.height);
     ctx.closePath();
     ctx.fillStyle = "orange";
     ctx.fill();
