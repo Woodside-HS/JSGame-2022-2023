@@ -39,7 +39,7 @@ class Hero {
     this.indc = 0;
 
     //image stuff
-    this.move = [];
+    this.moveFrames = [];
     this.groove = 0;
     this.grooveId = 0;
     this.loadImages();
@@ -57,28 +57,29 @@ class Hero {
     }
   }
   loadImages(){
-    for(let i=1; i<9;i++){
+    for(let i=0; i<8;i++){
       //the 9 has to be hardcoded inn
-      this.move[i] = document.createElement("img");
-      this.move[i].src  = "resources/Hero2/hwr000"+i+".png";
+      console.log("image " + i + " loaded");
+      this.moveFrames[i] = document.createElement("img");
+      this.moveFrames[i].src  = "resources/Hero2/hwr000"+(i+1)+".png";
     }
   }
   render() {
-    ctx.drawImage(this.move[0],this.loc.x,this.loc.y);
+    //ctx.drawImage(this.moveFrames[0],this.loc.x,this.loc.y);
     this.groove++;
     if(this.groove%5 == 0){
       this.grooveId++;
-      if(this.grooveId>=9){
+      if(this.grooveId>=8){
         this.grooveId = 0;
       }
     }
     if(this.shootingDirection){
-      //ctx.drawImage(this.move[this.grooveId], this.loc.x,this.loc.y,this.width,this.height);
+      ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x,this.loc.y,this.width,this.height);
     } else{
       ctx.save();
       ctx.translate(this.loc.x+this.width, this.loc.y);
       ctx.scale(-1,1);
-      //ctx.drawImage(this.move[this.grooveId], 0, 0, this.width, this.height);
+      ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.restore();
     }
@@ -89,6 +90,7 @@ class Hero {
     if (game.clickingD) {
       this.indc = 20;
     }
+    ctx.beginPath();
     ctx.lineTo(this.loc.x + this.indc, this.loc.y);
     ctx.strokeStyle = "orange";
     ctx.stroke();
@@ -126,20 +128,6 @@ class Hero {
       this.statusBlock.coolDownTimer = 100;
     }
     this.attack();
-
-    //jumpboost timer/color changer
-    // let jumpBoostTimer = 1000
-    // if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
-    //     this.inventory.jumpBoost = false; // removes the jumpboost
-    //     this.statusBlock.jumpBoostCounter = 0 // resets the timer.
-    // }
-
-    // if (this.inventory.jumpBoost) {
-    //     this.clr = "lightblue"
-    // } else if (!this.inventory.jumpBoost) {
-    //     this.clr = "green"
-    // }
-
     //double jump timer
     if (this.inventory.dbJump) {
       this.clr = "purple";
