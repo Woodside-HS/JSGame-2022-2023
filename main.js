@@ -24,7 +24,7 @@ function init() {
 
 
   for (let i = 0; i < 2; i++) { // loads background images
-    backgroundImgs[i] = new Image(0, 0);
+    backgroundImgs[i] = new Image(0, 0,);
     backgroundImgs[i].src = 'resources/backgrounds/bg' + (i + 1) + '.png';
   }
   for (let i = 0; i < 7; i++) {

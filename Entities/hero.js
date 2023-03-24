@@ -38,6 +38,8 @@ class Hero {
     };
     this.indc = 0;
     this.heroImgTicks = 0;
+    this.heroImgIndex = 0
+    this.animationSpeed = 5;
   }
 
   run() {
@@ -54,10 +56,25 @@ class Hero {
     // ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
     // ctx.lineTo(this.loc.x, this.loc.y + this.height);
 
-    for (let i = 0; i < heroImgs.length; i++) {
-      ctx.drawImage(heroImgs[i], this.loc.x, this.loc.y, this.width, this.height)
+    if (game.clickingD) {
+      this.heroImgTicks++;
+      for (let i = 0; i < heroImgs.length; i++) {
+        ctx.drawImage(heroImgs[this.heroImgIndex], this.loc.x, this.loc.y, this.width, this.height);
+      }
+      if (this.heroImgIndex >= heroImgs.length - 1) {
+        this.heroImgIndex = 0;
+      }
+
+      if (this.heroImgTicks > this.animationSpeed) {
+        this.heroImgIndex++;
+        this.heroImgTicks = 0;
+      }
+    } else {
+      ctx.drawImage(heroImgs[0], this.loc.x, this.loc.y, this.width, this.height);
+
     }
-    ctx.closePath();
+
+    // ctx.closePath();
     ctx.fillStyle = this.clr;
     ctx.strokeStyle = "black";
     ctx.fill();
