@@ -74,7 +74,7 @@ class Hero {
       }
     }
     if(this.shootingDirection){
-      ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x,this.loc.y,this.width,this.height);
+      ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x+game.camLoc.x,this.loc.y+game.camLoc.y,this.width,this.height);
     } else{
       ctx.save();
       ctx.translate(this.loc.x+this.width, this.loc.y);
