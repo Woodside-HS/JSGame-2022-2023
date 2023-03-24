@@ -40,8 +40,8 @@ class Hero {
 
     //image stuff
     this.moveFrames = [];
-    this.groove = 0;//this is the when moving part
-    this.grooveId = 0;
+    this.groove = 0;///grove is the varibale ID that counts down to the switching of frames
+    this.grooveId = 0;//Grove Id is the current frame number.
     this.loadImages();
     this.timeSinceMoved = 0;
   }
@@ -57,46 +57,47 @@ class Hero {
       this.statusBlock.onPlatform = false;
     }
   }
-  loadImages(){
-    for(let i=0; i<8;i++){
+  loadImages() {
+    for (let i = 0; i < 8; i++) {
       //the 9 has to be hardcoded inn
-      console.log("image " + i + " loaded");
       this.moveFrames[i] = document.createElement("img");
-      this.moveFrames[i].src  = "resources/Hero2/hwr000"+(i+1)+".png";
+      this.moveFrames[i].src = "resources/Hero2/hwr000" + (i + 1) + ".png";
     }
   }
   render() {
-    //ctx.drawImage(this.moveFrames[0],this.loc.x,this.loc.y);
-    if(!game.clickingA || !game.clickingD){
+    //this is the code that checks if the hero is moving or not
+    if(!game.clickingA && !game.clickingD){
       this.timeSinceMoved++;
-    } else {
+    }else {
       this.timeSinceMoved = 0;
+      
       this.groove++;
-    if(this.groove%5 == 0){
-      this.grooveId++;
-      if(this.grooveId>=8){
-        this.grooveId = 0;
+      if (this.groove % 5 == 0) {
+        this.grooveId++;
+        if (this.grooveId >= 8) {
+          this.grooveId = 0;
+        }
       }
     }
-    }
-    if(this.timeSinceMoved>5){
+    if (this.timeSinceMoved > 5) {
       //this only works if it has been more then 5 frames since you have stopped moving
       //TODO ideally this would be where the idle frames go but we dont have any rn
-      ctx.drawImage(this.moveFrames[0], this.loc.x+game.camLoc.x,this.loc.y+game.camLoc.y,this.width,this.height);
+      ctx.drawImage(this.moveFrames[0], this.loc.x + game.camLoc.x, this.loc.y + game.camLoc.y, this.width, this.height);
     } else {
-      if(this.shootingDirection){
-        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x+game.camLoc.x,this.loc.y+game.camLoc.y,this.width,this.height);
-      } else{
+      if (game.clickingD) {
+        //I dont understand this bug at all????????????????
+        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x + game.camLoc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+      } else {
         ctx.save();
-        ctx.translate(this.loc.x+this.width, this.loc.y);
-        ctx.scale(-1,1);
+        ctx.translate(this.loc.x + this.width, this.loc.y);
+        ctx.scale(-1, 1);
         ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.restore();
       }
-      
+
     }
-    
+
     //below is the indicator, gonna keep it for now
     if (game.clickingA) {
       this.indc = -20;
@@ -174,7 +175,7 @@ class Hero {
         this.clr = "green";
       }
     }
-    
+
 
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
