@@ -84,12 +84,12 @@ class Hero {
       //TODO ideally this would be where the idle frames go but we dont have any rn
       if(this.indc>0){
         //flips back for a second, dunno why
-        ctx.drawImage(this.moveFrames[0], this.loc.x + game.camLoc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
       } else {
         ctx.save();
         ctx.translate(this.loc.x + this.width, this.loc.y);
         ctx.scale(-1, 1);
-        ctx.drawImage(this.moveFrames[0], -game.camLoc.x, -game.camLoc.y, this.width, this.height);
+        ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.restore();
       }
@@ -102,13 +102,13 @@ class Hero {
       //! 
       if (game.clickingD) {
         ctx.save();
-        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x + game.camLoc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         ctx.restore();
       } else {
         ctx.save();
         ctx.translate(this.loc.x + this.width, this.loc.y);
         ctx.scale(-1, 1);
-        ctx.drawImage(this.moveFrames[this.grooveId], -game.camLoc.x, -game.camLoc.y, this.width, this.height);
+        ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.restore();
       }
@@ -117,21 +117,21 @@ class Hero {
     if(this.inventory.dbJump){
       ctx.beginPath();
       ctx.fillStyle = "purble";
-      ctx.arc(this.loc.x +game.camLoc.x+ this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
+      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
     }
     if(this.inventory.dbCoin){
       ctx.beginPath();
       ctx.fillStyle = "orange";
-      ctx.arc(this.loc.x +game.camLoc.x+ this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
+      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
     }
     if(this.inventory.invulnerability){
       ctx.beginPath();
       ctx.fillStyle = "#DDDDDD";
-      ctx.arc(this.loc.x +game.camLoc.x+ this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
+      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
     }
@@ -143,8 +143,9 @@ class Hero {
       this.indc = 20;
     }
     ctx.beginPath();
-    ctx.moveTo(this.loc.x + game.camLoc.x+this.width/2, this.loc.y + game.camLoc.y);
-    ctx.lineTo(this.loc.x + this.indc+game.camLoc.x+this.width/2, this.loc.y+game.camLoc.y);
+    ctx.save();
+    ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
+    ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
     ctx.strokeStyle = "orange";
     ctx.stroke();
     ctx.closePath();
@@ -255,7 +256,6 @@ class Hero {
     if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
       //console.log("is attacking")
       this.statusBlock.attackTimer--;
-      ctx.save();
       ctx.beginPath();
       if (this.posNeg) {
         ctx.moveTo(this.loc.x + 50, this.loc.y + 0); //top left
@@ -273,7 +273,6 @@ class Hero {
       ctx.fillStyle = "darkgreen";
       ctx.strokeStyle = "black";
       ctx.fill();
-      ctx.restore();
     }
     if (this.statusBlock.attackTimer <= 0) {
       this.statusBlock.attackTimer = 100;

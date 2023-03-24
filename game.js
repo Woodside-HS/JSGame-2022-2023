@@ -43,7 +43,7 @@ class Game {
     // Set the hero's status to not dead, the hero's location to the starting position, and reset the camera position
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
-    //this.camLoc.Zero();
+    this.camLoc.Zero();
     drawText(
       ctx,
       "click 'tile 1' to play ",
@@ -59,11 +59,10 @@ class Game {
   playState = () => {
     ctx.save();
     // Camera follow player
-    //this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
+    this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    console.log(this.camLoc.x);
     this.hero.run();
-    this.levels[0].run();
+    this.levels[0].run();//currently the translate isnt working, is the restore happening to early?
     ctx.restore();
   };
 
