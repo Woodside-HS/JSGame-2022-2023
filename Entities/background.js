@@ -10,14 +10,14 @@ class Background {
         this.width = canvas.width;
         
         if(this.id == 0){
-            this.parrallaxEffect = 0.5;
+            this.parrallaxEffect = 1;
         } else if(this.id == 1){
             this.parrallaxEffect = 0.75;
         } else if(this.id ==2){
-            this.parrallaxEffect = .9;
+            this.parrallaxEffect = .5;
         }
         if(this.id == 0){
-            this.height = canvas.height;
+            this.height = canvas.height*1;
         } else if(this.id == 1){
             this.height = canvas.height*.75;
         } else if(this.id ==2){
@@ -37,7 +37,8 @@ class Background {
     loop() {
         if((1-this.parrallaxEffect)*game.camLoc.x>canvas.width*(this.offset/canvas.width)){
             this.offset += canvas.width;
-        } else if(-this.parrallaxEffect*game.camLoc.x<canvas.width*(this.offset/canvas.width)){
+        } else if(1-this.parrallaxEffect*game.camLoc.x<canvas.width-canvas.width*(this.offset/canvas.width)){
+            this.offset -= canvas.width;
         }
     }
     render() {
