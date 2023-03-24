@@ -7,9 +7,11 @@ class Enemy {
     this.w = w;
     this.move = 1; // the speed of the enemy movement
     this.isdead = false;
+    this.currImage = 0;
   }
   run() {
     this.render();
+    this.animate();
     this.movePlatform();
     this.checkHero();
     this.checkAttack();
@@ -55,17 +57,34 @@ class Enemy {
     }
   }
   render() {
-    ctx.save(); //renders as simple box for now
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.w, this.loc.y);
-    ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
-    ctx.lineTo(this.loc.x, this.loc.y + this.h);
-    ctx.closePath();
-    ctx.fillStyle = "orange";
-    ctx.fill();
-    ctx.restore();
+    // ctx.save(); //renders as simple box for now
+    // ctx.beginPath();
+    // ctx.moveTo(this.loc.x, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.w, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
+    // ctx.lineTo(this.loc.x, this.loc.y + this.h);
+    // ctx.closePath();
+    // ctx.fillStyle = "orange";
+    // ctx.fill();
+    // ctx.restore();
+    ctx.drawImage(plugWalk[this.currImage], this.loc.x, this.loc.y, this.w, this.h); // draws the hero's image
+
   }
+  animate() {
+    if (tick % 5 == 0) {
+      if (this.move) {
+        this.currImage++;
+        if (this.currImage > 7) {
+          this.currImage = 0;
+        }
+      }
+      else {
+        this.currImage = 0;
+      }
+    }
+
+  }
+
 
   checkHero() {
     let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
@@ -78,8 +97,8 @@ class Enemy {
       heroLoc.y + heroH > this.loc.y &&
       heroLoc.y < this.loc.y + this.h
     ) {
-      if(!game.hero.inventory.invulnerability){
-      game.hero.statusBlock.hp--;
+      if (!game.hero.inventory.invulnerability) {
+        game.hero.statusBlock.hp--;
       }
     }
   }

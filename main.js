@@ -20,6 +20,13 @@ for (let index = 1; index < 9; index++) {
   heroIdle.push(idle);
 }
 
+var plugWalk = [];
+for (let index = 1; index < 13; index++) {
+  let idle = new Image();
+  idle.src = "resources/enemy/el" + index + ".png";
+  plugWalk.push(idle);
+}
+
 
 function init() {
   canvas = document.createElement('canvas');

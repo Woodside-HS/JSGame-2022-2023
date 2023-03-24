@@ -51,30 +51,35 @@ class Hero {
     ctx.beginPath(); //Malcom you need begin path
     //without begin path, it continues to render old boxes so it wont be cleared
     // MY BAD LMAO!
-    ctx.font = "50px serif";
-    ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
-    ctx.lineTo(this.loc.x, this.loc.y + this.height);
-    ctx.closePath();
-    ctx.fillStyle = this.clr;
-    ctx.strokeStyle = "black";
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
+    // ctx.font = "50px serif";
+    // ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
+    // ctx.moveTo(this.loc.x, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.width, this.loc.y);
+    // ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
+    // ctx.lineTo(this.loc.x, this.loc.y + this.height);
+    // ctx.closePath();
+    // ctx.fillStyle = this.clr;
+    // ctx.strokeStyle = "black";
+    // ctx.fill();
+    // ctx.beginPath();
+    // ctx.moveTo(this.loc.x, this.loc.y);
     if (game.clickingA) {
       this.indc = -20;
     }
     if (game.clickingD) {
       this.indc = 20;
     }
-    ctx.lineTo(this.loc.x + this.indc, this.loc.y);
-    ctx.strokeStyle = "orange";
-    ctx.stroke();
-    ctx.closePath();
+    // ctx.lineTo(this.loc.x + this.indc, this.loc.y);
+    // ctx.strokeStyle = "orange";
+    // ctx.stroke();
+    // ctx.closePath();
     ctx.restore();
-
+    for (let i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].run();
+      if (this.bullets[i].isDead) {
+        this.bullets.splice(i, 1);
+      }
+    }
     ctx.drawImage(heroIdle[this.currImage], this.loc.x, this.loc.y, this.width, this.height); // draws the hero's image
   }
   animate() {
@@ -179,12 +184,7 @@ class Hero {
     }
 
 
-    for (let i = 0; i < this.bullets.length; i++) {
-      this.bullets[i].run();
-      if (this.bullets[i].isDead) {
-        this.bullets.splice(i, 1);
-      }
-    }
+
   }
 
   jump() {
