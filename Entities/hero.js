@@ -37,6 +37,10 @@ class Hero {
       powerUpLength: 1000
     };
     this.indc = 0;
+    this.images = [];
+    this.loadImages();
+    this.count = 0;
+    this.tick = 0;
   }
 
   run() {
@@ -50,6 +54,14 @@ class Hero {
       this.statusBlock.onPlatform = false;
     }
   }
+
+  loadImages() {
+    for (let i = 0; i < 9; i++) {
+      this.images[i] = document.createElement("img");
+      this.images[i].src = "resources/Hero2/hwr000" + (i+1) + ".png";
+    }
+  }
+
   render() {
     ctx.save(); // draws the hero
     ctx.beginPath(); //Malcom you need begin path
@@ -57,10 +69,18 @@ class Hero {
     // MY BAD LMAO!
     ctx.font = "50px serif";
     ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
-    ctx.lineTo(this.loc.x, this.loc.y + this.height);
+    if(this.indc>0){
+      this.count++;
+      if(this.count%5 == 0)
+      this.tick++;
+      if(this.tick<8){
+      ctx.drawImage(this.images[this.tick],this.loc.x,this.loc.y,this.width,this.height);
+      } else {
+        this.tick = 0;
+      }
+    } else {
+      ctx.drawImage(this.images[0], this.loc.x,this.loc.y,this.width,this.height);
+    }
     ctx.closePath();
     ctx.fillStyle = this.clr;
     ctx.strokeStyle = "black";
@@ -236,6 +256,8 @@ class Hero {
       new Bullet(this.loc.x, this.loc.y, ctx, this.shootingDirection)
     );
   }
+
+  
 
   reSetHero() {
     //TODO im not sure we need this function but it might be usfull in the future
