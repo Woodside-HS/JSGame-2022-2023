@@ -37,6 +37,13 @@ class Hero {
       powerUpLength: 1000
     };
     this.indc = 0;
+
+    //image stuff
+    this.moveFrames = [];
+    this.groove = 0;///grove is the varibale ID that counts down to the switching of frames
+    this.grooveId = 0;//Grove Id is the current frame number.
+    this.loadImages();
+    this.timeSinceMoved = 0;
   }
 
   run() {
@@ -50,30 +57,96 @@ class Hero {
       this.statusBlock.onPlatform = false;
     }
   }
+  loadImages() {
+    for (let i = 0; i < 8; i++) {
+      //the 9 has to be hardcoded inn
+      this.moveFrames[i] = document.createElement("img");
+      this.moveFrames[i].src = "resources/Hero2/hwr000" + (i + 1) + ".png";
+    }
+  }
   render() {
-    ctx.save(); // draws the hero
-    ctx.beginPath(); //Malcom you need begin path
-    //without begin path, it continues to render old boxes so it wont be cleared
-    // MY BAD LMAO!
-    ctx.font = "50px serif";
-    ctx.fillText(this.statusBlock.hp, this.loc.x, this.loc.y - 20);
-    ctx.moveTo(this.loc.x, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y);
-    ctx.lineTo(this.loc.x + this.width, this.loc.y + this.height);
-    ctx.lineTo(this.loc.x, this.loc.y + this.height);
-    ctx.closePath();
-    ctx.fillStyle = this.clr;
-    ctx.strokeStyle = "black";
-    ctx.fill();
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x, this.loc.y);
+    //this is the code that checks if the hero is moving or not
+    if(!game.clickingA && !game.clickingD){
+      this.timeSinceMoved++;
+    }else {
+      this.timeSinceMoved = 0;
+      
+      this.groove++;
+      if (this.groove % 6 == 0) {
+        this.grooveId++;
+        if (this.grooveId >= 8) {
+          this.grooveId = 0;
+        }
+      }
+    }
+    if (this.timeSinceMoved > 5) {
+      //this only works if it has been more then 5 frames since you have stopped moving
+      //TODO ideally this would be where the idle frames go but we dont have any rn
+      if(this.indc>0){
+        //flips back for a second, dunno why
+        ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+      } else {
+        ctx.save();
+        ctx.translate(this.loc.x + this.width, this.loc.y);
+        ctx.scale(-1, 1);
+        ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.restore();
+      }
+    } else {
+      //flips the image depending on which way you are going
+      /*
+      * Note: this will swap the handedness of the character
+      * If he holds something on the right side, it will flip to the left side when going in the other direction
+      */
+      //! 
+      if (game.clickingD) {
+        ctx.save();
+        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        ctx.restore();
+      } else {
+        ctx.save();
+        ctx.translate(this.loc.x + this.width, this.loc.y);
+        ctx.scale(-1, 1);
+        ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.restore();
+      }
+    }
+    //below renderes the small circles for each of the powerups
+    if(this.inventory.dbJump){
+      ctx.beginPath();
+      ctx.fillStyle = "purple";
+      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.closePath();
+    }
+    if(this.inventory.dbCoin){
+      ctx.beginPath();
+      ctx.fillStyle = "orange";
+      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.closePath();
+    }
+    if(this.inventory.invulnerability){
+      ctx.beginPath();
+      ctx.fillStyle = "#DDDDDD";
+      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.closePath();
+    }
+    //below is the indicator, gonna keep it for now
     if (game.clickingA) {
       this.indc = -20;
     }
     if (game.clickingD) {
       this.indc = 20;
     }
-    ctx.lineTo(this.loc.x + this.indc, this.loc.y);
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
+    ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
     ctx.strokeStyle = "orange";
     ctx.stroke();
     ctx.closePath();
@@ -84,23 +157,7 @@ class Hero {
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
       this.statusBlock.isDead = true;
-      game.lvlDiedOn = gameState;
     }
-
-        if (this.statusBlock.isDead) { // if the hero is dead it brings you to the start screen (gameState1)
-            gameState = -1;
-        }
-        //!%%%%%%%%%%%%%%
-        if (game.mouseDown && !this.statusBlock.onCoolDown) { // attacking if mouse is down and the heros not on cooldown
-            this.statusBlock.isAttacking = true;
-        } else if (this.statusBlock.onCoolDown) { // runs the cooldown timer
-            //console.log("onCoolDown (cant attack)")
-            this.statusBlock.coolDownTimer--;
-        }
-        if (this.statusBlock.coolDownTimer <= 0 && this.statusBlock.onCoolDown) { // if the cooldown timer is 0 turns cooldown off
-            this.statusBlock.onCoolDown = false;
-            this.statusBlock.coolDownTimer = 100
-        }
         this.attack();
 
         //jumpboost timer/color changer
@@ -116,6 +173,30 @@ class Hero {
     //     this.clr = "green"
     // }
 
+    if (this.statusBlock.isDead) {
+      // if the hero is dead it brings you to the start screen (gameState1)
+      gameState = 0;
+      /**
+       *! i have not made this function yet!!!!!
+       *TODO im not sure we need to make this function but it might be helpfull
+       */
+      this.reSetHero();
+    }
+    //!%%%%%%%%%%%%%%
+    if (game.mouseDown && !this.statusBlock.onCoolDown) {
+      // attacking if mouse is down and the heros not on cooldown
+      this.statusBlock.isAttacking = true;
+    } else if (this.statusBlock.onCoolDown) {
+      // runs the cooldown timer
+      //console.log("onCoolDown (cant attack)")
+      this.statusBlock.coolDownTimer--;
+    }
+    if (this.statusBlock.coolDownTimer <= 0 && this.statusBlock.onCoolDown) {
+      // if the cooldown timer is 0 turns cooldown off
+      this.statusBlock.onCoolDown = false;
+      this.statusBlock.coolDownTimer = 100;
+    }
+    this.attack();
     //double jump timer
     if (this.inventory.dbJump) {
       this.clr = "purple";
@@ -148,7 +229,7 @@ class Hero {
         this.clr = "green";
       }
     }
-    
+
 
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
@@ -190,7 +271,6 @@ class Hero {
     if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
       //console.log("is attacking")
       this.statusBlock.attackTimer--;
-      ctx.save();
       ctx.beginPath();
       if (this.posNeg) {
         ctx.moveTo(this.loc.x + 50, this.loc.y + 0); //top left
@@ -208,7 +288,6 @@ class Hero {
       ctx.fillStyle = "darkgreen";
       ctx.strokeStyle = "black";
       ctx.fill();
-      ctx.restore();
     }
     if (this.statusBlock.attackTimer <= 0) {
       this.statusBlock.attackTimer = 100;
