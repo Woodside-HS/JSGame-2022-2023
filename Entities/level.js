@@ -52,8 +52,8 @@ loadPlatforms() {
     let hpPerc = (Math.PI*2)-(game.hero.statusBlock.hp/100)*Math.PI*2
     ctx.save();
     ctx.beginPath();
-    ctx.arc(canvas.width-20, 20, 10, hpPerc, Math.PI * 2);
-    ctx.arc(canvas.width-20, 20, 5, hpPerc, Math.PI * 2);
+    ctx.arc(game.camLoc.x+canvas.width-20, 20, 10, hpPerc, Math.PI * 2);
+    ctx.arc(game.camLoc.x+canvas.width-20, 20, 1, hpPerc, Math.PI * 2);
     ctx.fillStyle = "red";
     ctx.strokeStyle = "red";
     ctx.fill();
