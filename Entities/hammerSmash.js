@@ -40,7 +40,7 @@ class hammerSmash {
   render() {
     let ctx = this.ctx;
     ctx.beginPath();
-    ctx.arc(this.loc.x, this.loc.y, this.count, 0, Math.PI * 2);
+    ctx.rect(this.loc.x, this.loc.y, this.loc.x+this.count, this.loc.y+this.count, 0, Math.PI * 2);
     ctx.fillStyle = "orange";
     ctx.fill();
     ctx.closePath();

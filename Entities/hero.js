@@ -162,7 +162,7 @@ class Hero {
     }
 
     //hammer timer
-    /*if(this.inventory.hammer){
+    if(this.inventory.hammer){
       this.statusBlock.hammerCounter++;
       this.clr = "#985A00";
       if(this.statusBlock.hammerCounter > this.statusBlock.powerUpLength){
@@ -170,7 +170,7 @@ class Hero {
         this.statusBlock.hammerCounter = 0;
         this.clr = "green";
       }
-    }*/
+    }
     
 
     for (let i = 0; i < this.bullets.length; i++) {
