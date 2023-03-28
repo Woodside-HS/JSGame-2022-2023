@@ -116,7 +116,7 @@ class Hero {
     //below renderes the small circles for each of the powerups
     if(this.inventory.dbJump){
       ctx.beginPath();
-      ctx.fillStyle = "purble";
+      ctx.fillStyle = "purple";
       ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
