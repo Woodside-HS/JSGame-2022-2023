@@ -8,8 +8,8 @@ class Enemy {
     this.move = 1; // the speed of the enemy movement
     this.isdead = false;
     this.frames = [];
-    this.groove = 0;
-    this.grooveId = 0;
+    this.groove = 0;//groove is the varible that counts down to switching games
+    this.grooveId = 0;//grooveID is current frame that is being rendered
     this.loadImages();
   }
   run() {
