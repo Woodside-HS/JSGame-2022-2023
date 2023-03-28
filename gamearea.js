@@ -84,8 +84,11 @@ function GameArea() {
   this.tiles[2].addEventListener("click", function () {
     gameState = game.lvlDiedOn;
     game.hero.vel.setMagnitude(0);//makes sure that the hero is not moving
-    game.camLoc.x = 200;//resets the hero's position to start of level
-    game.camLoc.y = 200;//resets the hero's position to start
+    game.hero.loc.x = 200;//resets the hero's position to start of level
+    game.hero.loc.y = 200;//resets the hero's position to start
+    console.log(game.hero.loc.x);
+    game.camLoc.x = 0;
+    game.camLoc.y = 0;
     game.levels[0] = new Levels(1);//resets the level, more needs to be added when more levels are added
     game.levels[1] = new Levels(2);
     game.hero.reSetHero();

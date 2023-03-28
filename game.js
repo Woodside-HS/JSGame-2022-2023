@@ -56,7 +56,7 @@ class Game {
     this.camLoc.Zero();
     drawText(
       ctx,
-      "click 'tile 1' to play ",
+      "press \'respawn\', and then \'begin game\'",
       "50px serif",
       200,
       200,
