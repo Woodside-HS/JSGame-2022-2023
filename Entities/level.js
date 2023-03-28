@@ -13,7 +13,7 @@ loadPlatforms() {
           //TODO need a barrier to keep player from going left
           this.platforms[1] = new Platform(400, 500, 200, 10, "blue", false, true, 0, false, 0);//first platform
           this.platforms[2] = new Platform(700, 450, 200, 10, "blue", false, false, 0, false, 1);//second platform
-          this.platforms[3] = new Platform(1450, 200, 200, 10, "blue", true, false, 0, false, 0);//top platform with enemy
+          this.platforms[3] = new Platform(1450, 200, 200, 10, "blue", true, false, 0, false, 4);//top platform with enemy
           this.platforms[4] = new Platform(650, 250, 100, 10, "blue", false, true, 0, false, 2);//upper left platform
           this.platforms[5] = new Platform(900, 350, 200, 10, "blue", false, false, 0, true, 0);//trap platform
           this.platforms[6] = new Platform(1200, 400, 300, 10, "blue", false, false, 0, false, 3);

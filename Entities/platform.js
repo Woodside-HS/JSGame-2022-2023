@@ -84,6 +84,15 @@ class Platform {
       );
 
     }
+    else if(type == 4){
+        this.powerups[0] = new Hammer(
+            this.loc.x,
+            this.loc.y,
+            this.width,
+            5,
+            true
+        )
+    }
   }
 
     run() {

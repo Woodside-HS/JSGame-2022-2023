@@ -15,6 +15,9 @@ const keyDownActions = {
   KeyP: () => {
     game.hero.shoot();
   },
+  KeyL: () => {
+    game.hero.hammer();
+  }
 };
 
 const keyUpActions = {

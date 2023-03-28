@@ -10,6 +10,8 @@ class Hero {
     this.clr = "green";
     this.bullets = [];
     this.shootingDirection = true; //true = right, false = left
+    this.hammerSmash = [];
+    this.hammerDirection = true;
     this.inventory = {
       dbJump: false,
       dbCoin: false,
@@ -17,7 +19,8 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
-      invulnerability: false
+      invulnerability: false,
+      hammer: false
     };
     this.statusBlock = {
       hp: 100,
@@ -34,6 +37,7 @@ class Hero {
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
+      hammerCounter: 0,
       powerUpLength: 1000
     };
     this.indc = 0;
@@ -156,6 +160,17 @@ class Hero {
         this.clr = "green";
       }
     }
+
+    //hammer timer
+    /*if(this.inventory.hammer){
+      this.statusBlock.hammerCounter++;
+      this.clr = "#985A00";
+      if(this.statusBlock.hammerCounter > this.statusBlock.powerUpLength){
+        this.inventory.hammer = false;
+        this.statusBlock.hammerCounter = 0;
+        this.clr = "green";
+      }
+    }*/
     
 
     for (let i = 0; i < this.bullets.length; i++) {
@@ -235,6 +250,15 @@ class Hero {
     this.bullets.push(
       new Bullet(this.loc.x, this.loc.y, ctx, this.shootingDirection)
     );
+  }
+
+  hammer(){
+    if(this.indc < 0){
+      this.hammerDirection = true;
+    } else if (this.indc > 0){
+      this.hammerDirection = false;
+    }
+    this.hammerSmash.push(new hammerSmash(this.loc.x,this.loc.y,ctx,this.hammerDirection));
   }
 
   reSetHero() {
