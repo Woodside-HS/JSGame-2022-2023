@@ -28,7 +28,7 @@ loadPlatforms() {
           this.platforms[14] = new Platform(2400, 250, 150, 10, "blue", false, true, 0, false, 2);
           this.platforms[15] = new Platform(2700, 300, 150, 10, "blue", false, true, 0, false, 0);
           this.platforms[16] = new Platform(3000, 325, 150, 10, "blue", false, true, 0, false, 3);
-          this.platforms[17] = new Platform(3300, 350, 150, 10, "blue", false, true, 0, false, 0);
+          this.platforms[17] = new Platform(3300, 350, 150, 10, "blue", false, true, 0, false, 4);
           this.platforms[18] = new Platform(3600, 275, 150, 10, "blue", false, true, 0, false, 0);
       }
       if (this.id == 2) {

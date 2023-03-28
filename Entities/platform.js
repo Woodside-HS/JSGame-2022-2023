@@ -16,6 +16,7 @@ class Platform {
         1 = Double Jump
         2 = Double Coin
         3 = Invulnerability
+        4 = Double Length
         */
     //* YN = yes/no
     this.loc = new JSVector(x, y);
@@ -84,6 +85,16 @@ class Platform {
       );
 
     }
+    else if(type == 4){
+        this.powerups[0] = new DoubleLength(
+          this.loc.x,
+          this.loc.y,
+          this.width,
+          5,
+          true
+        );
+  
+      }
   }
 
     run() {

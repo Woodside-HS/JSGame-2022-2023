@@ -13,6 +13,7 @@ class Hero {
     this.inventory = {
       dbJump: false,
       dbCoin: false,
+      dbLength: false,
       dash: false,
       loveRay: false,
       block: false,
@@ -34,12 +35,16 @@ class Hero {
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
-      powerUpLength: 1000
+      powerUpLength: 1000,
     };
     this.indc = 0;
   }
 
   run() {
+    if(this.inventory.dbLength){
+    this.statusBlock.powerUpLength*2;
+    this.dbLength = false;
+    }
     this.render();
     this.update();
     // this.attack();
