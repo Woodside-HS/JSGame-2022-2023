@@ -69,24 +69,26 @@ function GameArea() {
   this.tiles[0].appendChild(this.tileText[0]);
   this.tileText[1] = document.createTextNode("Next Level");
   this.tiles[1].appendChild(this.tileText[1]);
-  this.tileText[2] = document.createTextNode("this button does nothing lol");
+  this.tileText[2] = document.createTextNode("Respawn");
   this.tiles[2].appendChild(this.tileText[2]);
   // "title 1" click listener
   // if clicked itll run the game!
- // this.tiles[0].addEventListener('click', function () {
-    
-  //  console.log("gameState = 1!!!") // gameState = 1 means the you are playing on level 1
-  //}, false);
+  this.tiles[0].addEventListener('click', function () {
+    gameState = 1;
+    console.log("gameState = 1!!!") // gameState = 1 means the you are playing on level 1
+  }, false);
   this.tiles[1].addEventListener("click", function () {
     gameState++;
     game.hero.vel.setMagnitude(0);
   }, false)
-  this.tiles[0].addEventListener("click", function () {
-    gameState = 1;
-    //gameState = game.lvlDiedOn;
+  this.tiles[2].addEventListener("click", function () {
+    gameState = game.lvlDiedOn;
     game.hero.vel.setMagnitude(0);//makes sure that the hero is not moving
-    game.camLoc.x = 200;//resets the hero's position to start of level
-    game.camLoc.y = 200;//resets the hero's position to start
+    game.hero.loc.x = 200;//resets the hero's position to start of level
+    game.hero.loc.y = 200;//resets the hero's position to start
+    console.log(game.hero.loc.x);
+    game.camLoc.x = 0;
+    game.camLoc.y = 0;
     game.levels[0] = new Levels(1);//resets the level, more needs to be added when more levels are added
     game.levels[1] = new Levels(2);
     game.hero.reSetHero();

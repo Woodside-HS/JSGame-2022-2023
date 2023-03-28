@@ -54,15 +54,28 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(
-      ctx,
-      "click 'tile 1' to play ",
-      "50px serif",
-      200,
-      200,
-      "green",
-      "red"
-    );
+    if(game.lvlDiedOn != 0){
+      drawText(
+        ctx,
+        "click 'tile 1' to play ",
+        "50px serif",
+        200,
+        200,
+        "green",
+        "red"
+      );
+    } else {
+      drawText(
+        ctx,
+        "click respawn and then begin game",
+        "50px serif",
+        200,
+        200,
+        "green",
+        "red"
+      );
+    }
+    
   };
 
   deadState = () => {
