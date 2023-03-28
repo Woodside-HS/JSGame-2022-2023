@@ -158,6 +158,20 @@ class Hero {
       // the hero "dies" when hp <= 0
       this.statusBlock.isDead = true;
     }
+        this.attack();
+
+        //jumpboost timer/color changer
+        // let jumpBoostTimer = 1000
+        // if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
+        //     this.inventory.jumpBoost = false; // removes the jumpboost
+        //     this.statusBlock.jumpBoostCounter = 0 // resets the timer.
+        // }
+
+    // if (this.inventory.jumpBoost) {
+    //     this.clr = "lightblue"
+    // } else if (!this.inventory.jumpBoost) {
+    //     this.clr = "green"
+    // }
 
     if (this.statusBlock.isDead) {
       // if the hero is dead it brings you to the start screen (gameState1)
@@ -294,8 +308,9 @@ class Hero {
     );
   }
 
-  reSetHero() {
-    //TODO im not sure we need this function but it might be usfull in the future
-    this.statusBlock.hp = 101;
-  }
+    reSetHero() {
+        this.statusBlock.hp = 100;
+        this.statusBlock.isDead = false;
+        stopMovement = false;//doesn't work with traps for some reason
+    }
 }

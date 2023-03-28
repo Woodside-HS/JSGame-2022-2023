@@ -6,6 +6,7 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
+    this.lvlDiedOn = 0;
 
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -27,15 +28,24 @@ class Game {
 
   update = () => {
     this.moveCam();
-      if(gameState == 0){
-        this.menuScreen();
-      }
-      else if(gameState == 1){
-        this.playState();
-      }
-      else{
-        this.endState();
-      }
+    // Use a ternary operator to call the appropriate function based on the game state
+    if(gameState == -1){
+      this.camLoc.Zero();
+      this.deadState();
+    } else if(gameState == 0){
+      this.menuScreen();
+    } else if(gameState == 1){
+      this.playState();
+    } else {
+      //if nothing else do end state
+      this.endState();
+    }
+    //ternary operators are dumb
+    // gameState == 0
+    //   ? this.menuScreen()
+    //   : gameState == 1
+    //   ? this.playState()
+    //   : this.endState();
   };
 
   // Game state 0
@@ -46,7 +56,7 @@ class Game {
     this.camLoc.Zero();
     drawText(
       ctx,
-      "click 'tile 1' to play ",
+      "press \'respawn\', and then \'begin game\'",
       "50px serif",
       200,
       200,
@@ -55,6 +65,12 @@ class Game {
     );
   };
 
+  deadState = () => {
+    ctx.clearRect(0, 0, this.dims.width, this.dims.height);
+    ctx.save();
+    drawText(ctx,"You died :(", "50px serif", 200, 200, "red", "black");
+    ctx.restore();
+  }
   // Game state 1
   playState = () => {
     ctx.save();
@@ -79,17 +95,8 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    if(this.clickingA && !hittingRight){
-      this.hero.loc.x -= 2
-     }
-     else{
-      null;
-     }
-    if(this.clickingD && !hittingLeft){
-      this.hero.loc.x += 2
-    }
-    else{
-      null;
-    }
+    //dont use hero.loc, use camLoc instead because heroloc only works on lvl 1
+    this.clickingA && !hittingRight ? (this.hero.loc.x -= 2) : null;
+    this.clickingD && !hittingLeft ? (this.hero.loc.x += 2) : null;
   };
 }
