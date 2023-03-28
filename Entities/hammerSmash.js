@@ -4,11 +4,13 @@ class hammerSmash {
     this.y = y;
     this.hammerDirection = hammerDirection;
     this.loc = new JSVector(x, y);
+    this.vel = new JSVector(10,0)
     this.ctx = ctx;
     this.life = 0;
     this.lifeSpan = 50;
     this.isDead = false;
     this.count = 0;
+    this.clrcount = 0;
   }
 
   run() {
@@ -17,8 +19,10 @@ class hammerSmash {
   }
 
   update() {
+    console.log("smash")
     this.life++;
-    this.count++;
+    this.count--;
+    this.clrconut+=2;
     if (this.life > this.lifeSpan) {
       this.isDead = true;
     }
@@ -41,7 +45,7 @@ class hammerSmash {
     let ctx = this.ctx;
     ctx.beginPath();
     ctx.rect(this.loc.x, this.loc.y, this.loc.x+this.count, this.loc.y+this.count, 0, Math.PI * 2);
-    ctx.fillStyle = "orange";
+    ctx.fillStyle = "rgb(255," + this.clrcount + ",0)";
     ctx.fill();
     ctx.closePath();
   }

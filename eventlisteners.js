@@ -16,6 +16,7 @@ const keyDownActions = {
     game.hero.shoot();
   },
   KeyL: () => {
+    if(game.hero.inventory.hammer)
     game.hero.hammer();
   }
 };

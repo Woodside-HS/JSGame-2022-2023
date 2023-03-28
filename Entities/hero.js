@@ -179,6 +179,13 @@ class Hero {
         this.bullets.splice(i, 1);
       }
     }
+
+    for (let i = 0; i < this.hammerSmash.length; i++) {
+      this.hammerSmash[i].run();
+      if (this.hammerSmash[i].isDead) {
+        this.hammerSmash.splice(i, 1);
+      }
+    }
   }
 
   jump() {
