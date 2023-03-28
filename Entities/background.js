@@ -37,7 +37,7 @@ class Background {
     loop() {
         if((1-this.parrallaxEffect)*game.camLoc.x>canvas.width*(this.offset/canvas.width)){
             this.offset += canvas.width;
-        } else if(1-this.parrallaxEffect*game.camLoc.x<canvas.width-canvas.width*(this.offset/canvas.width)){
+        } else if((1-this.parrallaxEffect)*game.camLoc.x<canvas.width*(this.offset/canvas.width)-canvas.width){
             this.offset -= canvas.width;
         }
     }
