@@ -61,6 +61,7 @@ class Game {
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
+    this.levels[0].runBG();//needs to run the backgroiund first for everything else to be overlayed
     this.hero.run();
     this.levels[0].run();
     ctx.restore();
