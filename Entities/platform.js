@@ -9,7 +9,8 @@ class Platform {
     coinYN,
     coinCost,
     trapYN,
-    powerUpInt
+    powerUpInt,
+    enemyInt
   ) {
     /* PowerUp Int
         0 = no Power Up
@@ -26,27 +27,33 @@ class Platform {
     this.powerups = [];
     this.traps = [];
 
-        this.coinCost = 0;
-        if (coinCost) {
-            this.coinCost = coinCost;
-            //overwrites the coinc cost assuming there is one
-        }
-        if (enemyYN) {
-            this.loadEnemies();
-        }
-        if (coinYN) {
-            this.loadCoins();
-        }
-        if (trapYN) {
-            this.loadTrap();
-        }
+    this.coinCost = 0;
+    if (coinCost) {
+      this.coinCost = coinCost;
+      //overwrites the coinc cost assuming there is one
+    }
+    if (enemyYN && enemyInt>0) {
+      this.loadEnemies(enemyInt);
+    }
+    if (coinYN) {
+      this.loadCoins();
+    }
+    if (trapYN) {
+      this.loadTrap();
+    }
 
     if (powerUpInt > 0) {
       this.loadPowerUp(powerUpInt);
     }
   }
-  loadEnemies() {
+  loadEnemies(type) {
+    if(type == 1){
     this.enemies[0] = new Enemy(this.loc.x, this.loc.y, this.width, 30, 15);
+    } else if(type == 2){
+      this.enemies[0] = new Enemy2(this.loc.x,this.loc.y,this.width,30,15);
+    } else if(type == 3){
+      this.enemies[0] = new Enemy3(this.loc.x,this.loc.y,this.width,60,30);
+    }
   }
   loadCoins() {
     this.powerups[0] = new Coin(this.loc.x, this.loc.y, this.width, 5, false);

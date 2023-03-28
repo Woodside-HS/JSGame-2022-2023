@@ -9,7 +9,7 @@ class Hero {
     this.grav = new JSVector(0, 0.2); //gravity for when falling
     this.clr = "green";
     this.bullets = [];
-    this.shootingDirection = true; //true = right, false = left
+    this.shootingDirection = false; //true = right, false = left
     this.inventory = {
       dbJump: false,
       dbCoin: false,
