@@ -12,17 +12,31 @@ class Background {
         if(this.id == 0){
             this.parrallaxEffect = 1;
         } else if(this.id == 1){
-            this.parrallaxEffect = 0.75;
+            this.parrallaxEffect = 1;
         } else if(this.id ==2){
+            this.parrallaxEffect = .875;
+        } else if(this.id ==3){
+            this.parrallaxEffect = .75;
+        } else if(this.id ==4){
+            this.parrallaxEffect = .625;
+        } else if(this.id ==5){
             this.parrallaxEffect = .5;
-        }
+        } 
+        
+
         if(this.id == 0){
             this.height = canvas.height*1;
         } else if(this.id == 1){
-            this.height = canvas.height*.75;
+            this.height = canvas.height*1;
         } else if(this.id ==2){
+            this.height = canvas.height*.875;
+        } else if(this.id ==3){
+            this.height = canvas.height*.75;
+        } else if(this.id ==4){
+            this.height = canvas.height*.625;
+        } else if(this.id ==5){
             this.height = canvas.height*.5;
-        }
+        } 
         
     }
     loadImages() {
@@ -47,9 +61,14 @@ class Background {
         ctx.save();
         ctx.translate(game.camLoc.x*this.parrallaxEffect, 0);
         //ctx.drawImage(this.img, this.loc.x+2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
-        ctx.drawImage(this.img, this.loc.x+canvas.width+this.offset, canvas.height-this.height,this.width, this.height);
-        ctx.drawImage(this.img, this.loc.x+this.offset, canvas.height-this.height,this.width, this.height);
-        ctx.drawImage(this.img, this.loc.x-canvas.width+this.offset, canvas.height-this.height,this.width, this.height);
+        ctx.drawImage(this.img, this.loc.x+canvas.width+this.offset, canvas.height-this.height,this.width, this.height); 
+        ctx.drawImage(this.img, this.loc.x+canvas.width+this.offset/2, canvas.height-this.height,this.width, this.height);
+        ctx.drawImage(this.img, this.loc.x+canvas.width, canvas.height-this.height,this.width, this.height);
+        ctx.drawImage(this.img, this.loc.x+canvas.width/2, canvas.height-this.height,this.width, this.height);
+        ctx.drawImage(this.img, this.loc.x, canvas.height-this.height,this.width, this.height);
+        ctx.drawImage(this.img, this.loc.x-canvas.width/2, canvas.height-this.height,this.width, this.height);
+        // ctx.drawImage(this.img, this.loc.x-canvas.width, canvas.height-this.height,this.width, this.height);
+        // ctx.drawImage(this.img, this.loc.x-canvas.width-this.offset/2, canvas.height-this.height,this.width, this.height);
         //ctx.drawImage(this.img, this.loc.x-2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
         ctx.restore();
     }

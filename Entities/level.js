@@ -13,6 +13,12 @@ loadPlatforms() {
           this.backgrounds[0] = new Background(0);
           this.backgrounds[1] = new Background(1);
           this.backgrounds[2] = new Background(2);
+          this.backgrounds[3] = new Background(3);
+          this.backgrounds[4] = new Background(4);
+          this.backgrounds[5] = new Background(5);
+          this.backgrounds[6] = new Background(6);
+          this.backgrounds[7] = new Background(7);
+          
           //first level
           this.platforms[0] = new Platform(-100, 600, 12000, 20, "brown", false, false, 0, 0);//ground platform
           //TODO need a barrier to keep player from going left
