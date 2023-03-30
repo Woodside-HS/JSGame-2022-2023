@@ -74,19 +74,22 @@ function GameArea() {
   // "title 1" click listener
   // if clicked itll run the game!
   this.tiles[0].addEventListener('click', function () {
-    gameState = 1;
-    console.log("gameState = 1!!!") // gameState = 1 means the you are playing on level 1
+    if(gameState != null){
+      gameState = game.lvlDiedOn;
+    } else {
+      gameState = 1;
+    }
+    console.log("gameState = " + gameState) // gameState = 1 means the you are playing on level 1
   }, false);
   this.tiles[1].addEventListener("click", function () {
     gameState++;
     game.hero.vel.setMagnitude(0);
   }, false)
   this.tiles[2].addEventListener("click", function () {
-    gameState = game.lvlDiedOn;
+    gameState = 0;//resets the game to the main menu
     game.hero.vel.setMagnitude(0);//makes sure that the hero is not moving
     game.hero.loc.x = 200;//resets the hero's position to start of level
     game.hero.loc.y = 200;//resets the hero's position to start
-    console.log(game.hero.loc.x);
     game.camLoc.x = 0;
     game.camLoc.y = 0;
     game.levels[0] = new Levels(1);//resets the level, more needs to be added when more levels are added

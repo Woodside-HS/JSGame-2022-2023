@@ -175,11 +175,7 @@ class Hero {
 
     if (this.statusBlock.isDead) {
       // if the hero is dead it brings you to the start screen (gameState1)
-      gameState = 0;
-      /**
-       *! i have not made this function yet!!!!!
-       *TODO im not sure we need to make this function but it might be helpfull
-       */
+      gameState = -1;
       this.reSetHero();
     }
     //!%%%%%%%%%%%%%%

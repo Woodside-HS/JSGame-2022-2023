@@ -6,7 +6,7 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
-    this.lvlDiedOn = 0;
+    this.lvlDiedOn = null;
 
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -40,12 +40,6 @@ class Game {
       //if nothing else do end state
       this.endState();
     }
-    //ternary operators are dumb
-    // gameState == 0
-    //   ? this.menuScreen()
-    //   : gameState == 1
-    //   ? this.playState()
-    //   : this.endState();
   };
 
   // Game state 0
@@ -64,7 +58,7 @@ class Game {
         "green",
         "red"
       );
-    } else {
+    } else if(game.gameState >=0){
       drawText(
         ctx,
         "click respawn and then begin game",
