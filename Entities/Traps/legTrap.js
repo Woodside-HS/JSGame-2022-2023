@@ -18,11 +18,20 @@ class LegTrap {
     this.leftAngle = 0;
     this.rightAngle = 0;
   }
+  inPlay(){
+    if(gameState == -1){
+      return false;
+    }
+    return true;
+  } 
+
   run() {
+    if(this.inPlay()){
     this.render();
     this.update();
     // this.checkHero();
   }
+}
   render() {
     ctx.save();
     ctx.beginPath();
