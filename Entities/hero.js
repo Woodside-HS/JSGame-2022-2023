@@ -157,22 +157,9 @@ class Hero {
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
       this.statusBlock.isDead = true;
+      game.lvlDiedOn = gameState;
     }
         this.attack();
-
-        //jumpboost timer/color changer
-        // let jumpBoostTimer = 1000
-        // if (this.inventory.jumpBoost && this.statusBlock.jumpBoostCounter++ >= jumpBoostTimer) {
-        //     this.inventory.jumpBoost = false; // removes the jumpboost
-        //     this.statusBlock.jumpBoostCounter = 0 // resets the timer.
-        // }
-
-    // if (this.inventory.jumpBoost) {
-    //     this.clr = "lightblue"
-    // } else if (!this.inventory.jumpBoost) {
-    //     this.clr = "green"
-    // }
-
     if (this.statusBlock.isDead) {
       // if the hero is dead it brings you to the start screen (gameState1)
       gameState = -1;

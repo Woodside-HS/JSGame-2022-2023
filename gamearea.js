@@ -74,7 +74,7 @@ function GameArea() {
   // "title 1" click listener
   // if clicked itll run the game!
   this.tiles[0].addEventListener('click', function () {
-    if(gameState != null){
+    if(game.lvlDiedOn >=0){
       gameState = game.lvlDiedOn;
     } else {
       gameState = 1;
@@ -82,7 +82,11 @@ function GameArea() {
     console.log("gameState = " + gameState) // gameState = 1 means the you are playing on level 1
   }, false);
   this.tiles[1].addEventListener("click", function () {
-    gameState++;
+    if(gameState == 0){
+      gameState = 2;
+    } else {
+      gameState++;
+    }
     game.hero.vel.setMagnitude(0);
   }, false)
   this.tiles[2].addEventListener("click", function () {

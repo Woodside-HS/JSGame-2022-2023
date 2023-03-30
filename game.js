@@ -6,7 +6,7 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
-    this.lvlDiedOn = null;
+    this.lvlDiedOn = -1;
 
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -51,7 +51,7 @@ class Game {
     if(game.lvlDiedOn != 0){
       drawText(
         ctx,
-        "click 'tile 1' to play ",
+        "click 'begin game' to play ",
         "50px serif",
         200,
         200,
@@ -73,9 +73,9 @@ class Game {
   };
 
   deadState = () => {
-    ctx.clearRect(0, 0, this.dims.width, this.dims.height);
     ctx.save();
-    drawText(ctx,"You died :(", "50px serif", 200, 200, "red", "black");
+    drawText(ctx,"You died :( press respawn", "50px serif", 200, 200, "red", "black");
+    drawText(ctx," then press \'begin game\'", "50px serif", 200, 250, "red", "black");
     ctx.restore();
   }
   // Game state 1
