@@ -136,7 +136,7 @@ class Platform {
         }
     }
     render() {
-        ctx.drawImage(this.img,this.loc.x,this.loc.y-19,this.width,50);
+        ctx.drawImage(this.img,this.loc.x,this.loc.y-19,this.width, this.height);
         // ctx.beginPath();
         // ctx.moveTo(this.loc.x, this.loc.y); //top left
         // ctx.lineTo(this.loc.x + this.width, this.loc.y); //top right
