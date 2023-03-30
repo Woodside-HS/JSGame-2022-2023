@@ -9,11 +9,22 @@ class Coin {
     this.collected = false;
     this.coinClr = "yellow";
   }
+
+  inPlay(){
+    if(gameState == -1){
+      return false;
+    }
+    return true;
+  } 
+
   run() {
+    if(this.inPlay()){
     this.bounceCoin();
     this.render();
     this.checkHero();
+    }
   }
+  
   bounceCoin() {
     //so the coin will move up and down gently
     this.bounce += this.bounceAmount;
