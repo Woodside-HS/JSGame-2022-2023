@@ -36,6 +36,9 @@ class Game {
       else{
         this.endState();
       }
+      if(this.level[0] /*how do you check to see if this is in play?*/ && this.hero.loc>3650){ //if character is beyond the last platform
+        this;
+      }
   };
 
   // Game state 0
