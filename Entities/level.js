@@ -39,24 +39,24 @@ loadPlatforms() {
       if (this.id == 2) {
           //level 2
           this.platforms[0] = new Platform(0, 600, 1000, 10, "pink", true, true, 0, true, false);
-          this.platforms[1] = new Platform(30, 500, 20, 100, "orange", false, false, 1, false, false);
-          this.platforms[2] = new Platform(600, 450, 200, 20, "blue", true, false, 0, false, 1);//second platform
-          this.platforms[3] = new Platform(1450, 200, 200, 20, "blue", true, false, 0, false, 0);//top platform with enemy
-          this.platforms[4] = new Platform(650, 250, 100, 20, "blue", false, true, 0, false, 2);//upper left platform
-          this.platforms[5] = new Platform(900, 350, 200, 20, "blue", false, false, 0, true, 0);//trap platform
-          this.platforms[6] = new Platform(1200, 400, 300, 20, "blue", false, false, 0, false, 3);
-          this.platforms[7] = new Platform(1100, 500, 150, 20, "blue", false, false, 0, false, 0);
-          this.platforms[8] = new Platform(1150, 150, 150, 20, "blue", true, true, 0, false, 0);
-          this.platforms[9] = new Platform(1700, 150, 200, 20, "blue", false, true, 0, true, 0);
-          this.platforms[10] = new Platform(1650, 450, 150, 20, "blue", false, false, 0, true, 0);
-          this.platforms[11] = new Platform(1700, 275, 150, 20, "blue", false, true, 0, false, 0);
-          this.platforms[12] = new Platform(1900, 325, 150, 20, "blue", false, true, 0, false, 1);
-          this.platforms[13] = new Platform(2100, 350, 150, 20, "blue", false, true, 0, false, 0);
-          this.platforms[14] = new Platform(2400, 250, 150, 20, "blue", false, true, 0, false, 2);
-          this.platforms[15] = new Platform(2700, 300, 150, 20, "blue", false, true, 0, false, 0);
-          this.platforms[16] = new Platform(3000, 325, 150, 20, "blue", false, true, 0, false, 3);
-          this.platforms[17] = new Platform(3300, 350, 150, 20, "blue", false, true, 0, false, 0);
-          this.platforms[18] = new Platform(3600, 275, 150, 20, "blue", false, true, 0, false, 0);
+          this.platforms[1] = new Platform(400, 500, 20, 100, "orange", false, false, 1, false, false);
+          this.platforms[2] = new Platform(650, 450, 200, 20, "blue", true, false, 0, false, 1);//second platform
+          this.platforms[3] = new Platform(900, 200, 200, 20, "blue", true, false, 0, false, 0);//top platform with enemy
+          this.platforms[4] = new Platform(1100, 250, 100, 20, "blue", false, true, 0, false, 2);//upper left platform
+          this.platforms[5] = new Platform(1450, 350, 200, 20, "blue", false, false, 0, true, 0);//trap platform
+          this.platforms[6] = new Platform(1600, 400, 300, 20, "blue", false, false, 0, false, 3);
+          this.platforms[7] = new Platform(1700, 500, 150, 20, "blue", false, false, 0, false, 0);
+          this.platforms[8] = new Platform(1775, 150, 150, 20, "blue", true, true, 0, false, 0);
+          this.platforms[9] = new Platform(1875, 150, 200, 20, "blue", false, true, 0, true, 0);
+          this.platforms[10] = new Platform(1100, 450, 150, 20, "blue", false, false, 0, true, 0);
+          this.platforms[11] = new Platform(1150, 275, 150, 20, "blue", false, true, 0, false, 0);
+          this.platforms[12] = new Platform(1200, 325, 150, 20, "blue", false, true, 0, false, 1);
+          this.platforms[13] = new Platform(1500, 350, 150, 20, "blue", false, true, 0, false, 0);
+          this.platforms[14] = new Platform(1750, 250, 150, 20, "blue", false, true, 0, false, 2);
+          this.platforms[15] = new Platform(1875, 300, 150, 20, "blue", false, true, 0, false, 0);
+          this.platforms[16] = new Platform(2100, 325, 150, 20, "blue", false, true, 0, false, 3);
+          this.platforms[17] = new Platform(2300, 350, 150, 20, "blue", false, true, 0, false, 0);
+          this.platforms[18] = new Platform(2450, 275, 150, 20, "blue", false, true, 0, false, 0);
       }
   }
     
