@@ -79,13 +79,13 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    if(this.clickingA && !hittingRight){
+    if(this.clickingA && !hittingRight && this.hero.loc.x >200){
       this.hero.loc.x -= 2
      }
      else{
       null;
      }
-    if(this.clickingD && !hittingLeft){
+    if(this.clickingD && !hittingLeft && this.hero.loc.x < 3750){
       this.hero.loc.x += 2
     }
     else{
