@@ -1,4 +1,8 @@
+//Main goal is the refactor level class
 class Levels {
+  //? blue comments are new additions
+  //?1st thing, we want to make lvl a superclass, which will be extedended by each of the individual levels
+  //?2nd thing, we want the platforms to be rendered within the individual levels rather than the broader level class
   constructor(id) {
     this.id = id;
     this.platforms = [];
@@ -6,8 +10,18 @@ class Levels {
     this.backgrounds = [];
     this.loadPlatforms();
   }
-loadPlatforms() {
+//New superclass function
+endLevel(){
+  //?Would reset hero loc, and health
+  //?increase game state, get game ready to move on to the next level
+}
+  //?platforms, backgrounds, enemies, powerups etc will be hardcoded into each of the level subclasses
+
+//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% - old code below
+loadPlatforms() { //should be independent to the levels
       //this function hard codes all of the platforms in by hand
+      //? in the new code, we will have a different file
+      //? this file will be dedicated to level storage and will only have like 7 
       if (this.id == 1) {
           //backgrounds of first level
           this.backgrounds[0] = new Background(0);

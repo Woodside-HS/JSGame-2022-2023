@@ -1,7 +1,7 @@
 class Game {
   constructor() {
     // Initiate a new GameArea
-    this.ga = new GameArea();
+    this.ga = new GameArea();``
     this.levels = [];
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
@@ -26,6 +26,11 @@ class Game {
   }
 
   update = () => {
+    //game state controls where everything is 
+    //game state -1 is dead
+    //game state 0 is main menu
+    //game state 1 is level 1, etc
+    //game state 7 will be the final boss
     this.moveCam();
       if(gameState == 0){
         this.menuScreen();
@@ -39,7 +44,7 @@ class Game {
   };
 
   // Game state 0
-  menuScreen = () => {
+  menuScreen = () => { 
     // Set the hero's status to not dead, the hero's location to the starting position, and reset the camera position
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
