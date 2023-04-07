@@ -20,8 +20,14 @@ endLevel(){
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% - old code below
 loadPlatforms() { //should be independent to the levels
       //this function hard codes all of the platforms in by hand
-      //? in the new code, we will have a different file
-      //? this file will be dedicated to level storage and will only have like 7 
+      /* 
+        ? in the new code, we will have a different file  
+        ? this file will be dedicated to level storage and will only have like 7 functions
+        ? each function will just be loading the platforms in, like seen below 
+        ? it will just clean up the level subclasses
+       */
+
+        
       if (this.id == 1) {
           //backgrounds of first level
           this.backgrounds[0] = new Background(0);
