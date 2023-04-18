@@ -88,18 +88,18 @@ class Platform {
   }
   loadImages(){
     this.img = document.createElement("img");
-    this.img.src = "resources/Platform/platfrom.png";
+    this.img.src = "resources/Platform/platfrom.png"; //?currently limited to just first level
   }
 
     run() {
-        if (game.hero.statusBlock.coins >= this.coinCost) {
+      //  if (game.hero.statusBlock.coins >= this.coinCost) { //TODO: Look at this and see if it is extreneous in the future
             this.render();
             this.checkHero();
             this.runEntities();
             this.sideCollision();
-        } else {
-            this.coinLess();
-        }
+     //   } else {
+       //     this.coinLess();
+       // }
     }
     coinLess() {
         ctx.fillText(
@@ -135,7 +135,7 @@ class Platform {
             }
         }
     }
-    render() {
+    render() { 
         ctx.drawImage(this.img,this.loc.x,this.loc.y-19,this.width,50);
         // ctx.beginPath();
         // ctx.moveTo(this.loc.x, this.loc.y); //top left
@@ -174,7 +174,7 @@ class Platform {
         }
         return false;
     }
-    sideCollision() {
+    sideCollision() { //! What is this? Why is different than checkHero()?
         //does not work vertically for now
         if (game.hero.loc.x + game.hero.width < this.loc.x) {
             //the hero is to the left of the platform

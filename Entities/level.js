@@ -28,7 +28,7 @@ class Level {
       ? it will just clean up the level subclasses
      */
     if (this.id = 1) {
-      this.platforms = game.storage.loadLevel1();
+      this.platforms = game.storage.loadLevel1;
       this.backgrounds = loadBackground1();
     }
 

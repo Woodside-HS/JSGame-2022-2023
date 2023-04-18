@@ -1,5 +1,7 @@
 class levelStorage {
-
+  constructor(){
+    let loadLevel1 = loadLevel1();
+  }
     loadLevel1 = function(){
       let platforms = [];
       //first level
