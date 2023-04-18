@@ -1,7 +1,8 @@
 class Game {
   constructor() {
     // Initiate a new GameArea
-    this.ga = new GameArea();``
+    this.storage = new levelStorage();
+    this.ga = new GameArea();
     this.levels = [];
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
@@ -21,8 +22,7 @@ class Game {
       height: 600,
     };
 
-    this.levels[0] = new Levels(1);
-    this.levels[1] = new Levels(2);
+    this.levels[0] = new Level(); //initial level
   }
 
   update = () => {
@@ -34,13 +34,22 @@ class Game {
     this.moveCam();
       if(gameState == 0){
         this.menuScreen();
+      } else if(gameState == 1){
+        this.playState(gameState);
+      } else if (gameState == 2){
+        this.playState(gameState);
+      } else if (gameState == 3){
+        this.playState(gameState);
+      } else if (gameState == 4){
+        this.playState(gameState);
+      } else if (gameState == 5){
+        this.playState(gameState);
+      } else if (gameState == 6){
+        this.playState(gameState);
       }
-      else if(gameState == 1){
-        this.playState();
-      }
-      else{
-        this.endState();
-      }
+      // else{
+      //   this.endState();
+      // }
   };
 
   // Game state 0
@@ -61,18 +70,18 @@ class Game {
   };
 
   // Game state 1
-  playState = () => {
+  playState = (i) => { //parameter = level (level 1 input is 1)
     ctx.save();
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.levels[0].runBG();//needs to run the backgroiund first for everything else to be overlayed
+    this.levels[i-1].runBG();//needs to run the backgroiund first for everything else to be overlayed
     this.hero.run();
-    this.levels[0].run();
+    this.levels[i-1].run();
     ctx.restore();
   };
 
-  endState = () => {
+  endState = () => { //death
     ctx.save();
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
     this.hero.loc.x = this.camLoc.x + 200;
