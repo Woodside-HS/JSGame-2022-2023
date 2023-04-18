@@ -11,7 +11,6 @@ class Game {
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
     );
-
     // Set the dimensions of the game area
     this.dims = {
       top: 0,
