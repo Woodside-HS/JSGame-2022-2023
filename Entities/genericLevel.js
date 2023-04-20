@@ -76,8 +76,8 @@ class Level {
         this.platforms.forEach(platform => {
             let halfNhalf = Math.random() * 100;
             if (halfNhalf < 50) {
-                console.log("hi")
                 platform.coin = new Coin(platform.x, platform.y, 20, 20);
+                console.log('platform.coin: ', platform.coin);
             }
         });
     }
