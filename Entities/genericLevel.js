@@ -15,6 +15,8 @@ class Level {
         this.enemies = [];
         this.platformImages = [];
         this.id = id;
+        this.enemy1Images = [];
+        this.enemy2Images = [];
     }
     
     run(){
@@ -54,12 +56,27 @@ class Level {
         //     this.backgroundImages[i].src = "resources/Background/background" + this.id + ".png";
         // }
     }
+    loadEnemy1Images(){
+        // template function
+        // for(let i = 0; i < 8; i++){
+        //     this.enemy1Images[i] = document.createElement("img");
+        //     this.enemy1Images[i].src  = "resources/enemy/el"+i+".png";
+        // }
+    }
+    loadEnemy2Images(){
+        // template function
+        // for(let i = 0; i < 8; i++){
+        //     this.enemy2Images[i] = document.createElement("img");
+        //     this.enemy2Images[i].src  = "resources/enemy/el"+i+".png";
+        // }
+    }
     
 
     loadCoins() {
         this.platforms.forEach(platform => {
             let halfNhalf = Math.random() * 100;
             if (halfNhalf < 50) {
+                console.log("hi")
                 platform.coin = new Coin(platform.x, platform.y, 20, 20);
             }
         });
