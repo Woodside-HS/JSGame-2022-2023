@@ -9,6 +9,7 @@ Stuff to add
 class Level {
     constructor(id) {
         this.platforms = [];
+        this.backgrounds = [];
         this.resources = [];
         this.coins = [];
         this.enemies = [];
@@ -48,7 +49,10 @@ class Level {
         // */
     }
     loadBackgrounds(){
-        
+        // for(let i = 0; i < 3; i++){
+        //     this.backgroundImages[i] = document.createElement("img");
+        //     this.backgroundImages[i].src = "resources/Background/background" + this.id + ".png";
+        // }
     }
     
 
