@@ -1,0 +1,70 @@
+:root {
+  --border-width: 3px;
+  --border-color: #1a1a1a;
+
+  --background-color: #151515;
+  --foreground-color: white;
+  --secondary-color: #444;
+  --third-color: #343434;
+  --fourth-color: #2a2a2a;
+
+  --button-color: #1a1a1a;
+  --button-hover-color: #2a2a2a;
+  --button-active-color: #363636;
+
+  --header-height: 35px;
+}
+
+body {
+  background-color: #013135;
+  margin: 0;
+}
+
+#wrapperDiv {
+  height: 800px;
+  width: 900px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.tile {
+  float: left;
+  padding: 20px;
+  width: 45px;
+  height: 35px;
+  margin-left: 80px;
+  margin-top: 10px;
+  background-color: #d5dee0;
+  border-radius: 100%;
+  border: solid black 2px;
+  background: linear-gradient(to right,
+      #ff0000,
+      #f85b00,
+      #f08200,
+      #e8a120,
+      #e1bc49,
+      #dbc950,
+      #d4d65b,
+      #cbe268,
+      #b7e958,
+      #9bf04c,
+      #72f846,
+      #00ff47);
+}
+
+#coin-count {
+  position: absolute;
+  float: left;
+  top: 10px;
+  right: 10px;
+  background-color: gold;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
