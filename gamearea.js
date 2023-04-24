@@ -69,7 +69,7 @@ function GameArea() {
   this.tiles[0].addEventListener(
     "click",
     function () {
-      gameState = 1;
+    gameState = 3; //! TEMPORARY: FOR MY BRANCH ONLY SHOULD BE 1
       console.log("gameState = 1!!!"); // gameState = 1 means the you are playing on level 1
       game.hero.loc.x = 200;
       game.hero.loc.y = 200;
