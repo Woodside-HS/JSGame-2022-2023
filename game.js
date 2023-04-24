@@ -21,8 +21,8 @@ class Game {
       height: 600,
     };
 
-    this.levels[0] = new Levels(1);
-    this.levels[1] = new Levels(2);
+    this.levels[0] = new level1(1);
+    this.levels[2] = new level3(3);
   }
 
   update = () => {
@@ -30,8 +30,8 @@ class Game {
       if(gameState == 0){
         this.menuScreen();
       }
-      else if(gameState == 1){
-        this.playState();
+      else if(gameState >= 1){ //gameState is equal to the level
+        this.playState(gameState);
       }
       else{
         this.endState();
@@ -44,26 +44,18 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(
-      ctx,
-      "click 'tile 1' to play ",
-      "50px serif",
-      200,
-      200,
-      "green",
-      "red"
+    drawText(ctx,"click 'tile 1' to play ","50px serif",200,200,"green","red"
     );
   };
 
   // Game state 1
-  playState = () => {
+  playState = (a) => {
     ctx.save();
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.levels[0].runBG();//needs to run the backgroiund first for everything else to be overlayed
     this.hero.run();
-    this.levels[0].run();
+    this.levels[a-1].run();
     ctx.restore();
   };
 
