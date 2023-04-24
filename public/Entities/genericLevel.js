@@ -9,7 +9,7 @@ Stuff to add
 class Level {
     constructor(id) {
         this.platforms = [];
-        this.backgrounds = [];
+        this.background;
         this.resources = [];
         this.coins = [];
         this.enemies = [];
@@ -50,11 +50,17 @@ class Level {
         }
         // */
     }
-    loadBackgrounds(){
-        // for(let i = 0; i < 3; i++){
-        //     this.backgroundImages[i] = document.createElement("img");
-        //     this.backgroundImages[i].src = "resources/Background/background" + this.id + ".png";
-        // }
+    loadBackgrounds(num){
+        let backgrounds = [];
+        for(let i = 0; i < num; i++){
+            backgrounds[i] = document.createElement("img");
+            let path = "Images/Level" + this.id +"/Lvl" + this.id + "Background/bg" + (i+1)+".png";
+            //the images need to be set in order from furthest back to furthest forward
+            console.log(path);
+            backgrounds[i].src = path;
+        }
+        this.background = new genericBackground(backgrounds);
+        
     }
     loadEnemy1Images(){
         // template function
