@@ -30,7 +30,7 @@ class Game {
       if(gameState == 0){
         this.menuScreen();
       }
-      else if(gameState > 1){ //gameState is equal to the level
+      else if(gameState >= 1){ //gameState is equal to the level
         this.playState(gameState);
       }
       else{
