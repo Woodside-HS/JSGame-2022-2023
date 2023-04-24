@@ -6,8 +6,9 @@ class level1 extends Level{
         this.loadCoins();
     }
     loadPlatforms() {
-        this.platforms[0] = new level1platform(250,550,100);
+        this.platforms[0] = new level1platform(300,550,100);
         this.platforms[1] = new level1platform(0,650,6000);//! big ground platform
+        this.platforms[2] = new level1platform(500,450,100);
         //need the specific platform class to get started on loading platforms   
     }
     loadResources(pArray1, pArray2) {
@@ -36,7 +37,7 @@ class level1 extends Level{
          for(let i = 0; i < 3; i++){
              this.backgrounds[i] = document.createElement("img");
              let path = "Images/Level" + this.id +"/Lvl" + this.id + "Background/bg" + (i+1)+".png";
-             console.log(path);
+             //console.log(path);
              this.backgrounds[i].src = path;
          }
     }
@@ -60,7 +61,7 @@ class level1 extends Level{
         this.platforms.forEach(platform => {
             let halfNhalf = Math.random() * 100;
             if (halfNhalf < 50) {
-                platform.coin = new Coin(platform.x, platform.y, 20, 20);
+                platform.coin = new Coin(platform.loc.x, platform.loc.y, 20, 20);
                 console.log('platform.coin: ', platform.coin);
             }
         });
