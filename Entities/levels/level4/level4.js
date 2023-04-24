@@ -1,6 +1,6 @@
 class level4 extends Level{
-    constructor(){
-        super();   
+    constructor(id){
+        super(id);   
         this.walls = [];
         this.loadPlatforms();
         this.loadCoins();
