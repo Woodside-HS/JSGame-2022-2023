@@ -1,8 +1,9 @@
 class level1 extends Level{
-    constructor(){
-        super();   
+    constructor(id){
+        super(id);   
         this.loadPlatforms();
         this.loadCoins();
+        this.loadBackgrounds(3);
     }
     loadPlatforms() {
         this.platforms[0] = new level1platform(150,400,100);
