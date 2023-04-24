@@ -22,6 +22,7 @@ class Game {
     };
 
     this.levels[0] = new level1(1);
+    this.levels[3] = new level4(4);
   }
 
   update = () => {
@@ -54,7 +55,7 @@ class Game {
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
     this.hero.run();
-    this.levels[0].run();
+    this.levels[3].run();
     ctx.restore();
   };
 
