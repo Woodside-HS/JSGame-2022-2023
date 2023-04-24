@@ -1,7 +1,8 @@
-class Wall{
-    constructor(x,y,height){
+class Wall extends Platform{
+    constructor(x,y,w){
+        super(x,y,w);
         this.loc = new JSVector(x,y)
-        this.height = height;
+        this.height = w;
     }
     run(){
         this.update();

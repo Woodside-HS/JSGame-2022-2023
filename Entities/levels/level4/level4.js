@@ -5,16 +5,11 @@ class level4 extends Level{
         this.loadPlatforms();
         this.loadCoins();
         this.loadWalls();
-        this.runWalls();
-        
-        
+            for(let i = 0;i<this.walls.length;i++){
+                this.walls[i].run();
+            } 
     }
 
-    runWalls(){
-        for(let i = 0;i<this.walls.length;i++){
-            this.walls[i].run();
-        }
-    }
     loadPlatforms() {
         this.platforms[0] = new level4platform(150,670,300);
         this.platforms[1] = new level4platform(550,670,100);
@@ -32,6 +27,8 @@ class level4 extends Level{
     loadWalls(){
         this.walls[0] = new Wall(100,200,100);
     }
+
+    
 
 
 }
