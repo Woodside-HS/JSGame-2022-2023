@@ -18,30 +18,30 @@ class Level {
         this.enemy1Images = [];
         this.enemy2Images = [];
     }
-    
-    run(){
+
+    run() {
         this.update();
         this.render();
     }
 
     loadPlatforms() {
-        
+
     }
 
     loadResources(pArray1, pArray2) {
         //pArray1 is the array of platforms with powerup 1 
         //pArray2 is the array of platforms with powerup 2
         //which powerup goes into which platform is hardcoded
-        
+
     }
-    
-    loadEnemies(pArray1, pArray2) { 
+
+    loadEnemies(pArray1, pArray2) {
         //pArray1 is the array of platforms with enemy 1 
         //pArray2 is the array of platforms with enemy 2
         //hardcoding which type of enemies
     }
 
-    loadPlatformImages(){
+    loadPlatformImages() {
         // template function 
         /*
         for(let i = 0; i < platforms.length; i++){
@@ -50,33 +50,33 @@ class Level {
         }
         // */
     }
-    loadBackgrounds(){
+    loadBackgrounds() {
         // for(let i = 0; i < 3; i++){
         //     this.backgroundImages[i] = document.createElement("img");
         //     this.backgroundImages[i].src = "resources/Background/background" + this.id + ".png";
         // }
     }
-    loadEnemy1Images(){
+    loadEnemy1Images() {
         // template function
         // for(let i = 0; i < 8; i++){
         //     this.enemy1Images[i] = document.createElement("img");
         //     this.enemy1Images[i].src  = "resources/enemy/el"+i+".png";
         // }
     }
-    loadEnemy2Images(){
+    loadEnemy2Images() {
         // template function
         // for(let i = 0; i < 8; i++){
         //     this.enemy2Images[i] = document.createElement("img");
         //     this.enemy2Images[i].src  = "resources/enemy/el"+i+".png";
         // }
     }
-    
+
 
     loadCoins() {
         this.platforms.forEach(platform => {
             let halfNhalf = Math.random() * 100;
             if (halfNhalf < 50) {
-                platform.coin = new Coin(platform.x, platform.y, 20, 20);
+                platform.coin = new Coin(platform.loc.x, platform.loc.y, 20, 20);
                 console.log('platform.coin: ', platform.coin);
             }
         });
@@ -85,7 +85,7 @@ class Level {
     update() {
         // template function
     }
-    
+
     render() {
         this.platforms.forEach(platform => { //goes through array of platforms and runs them
             platform.run();

@@ -22,19 +22,24 @@ class Game {
     };
 
     this.levels[0] = new level1(1);
+    this.levels[4] = new level5(5);
   }
 
   update = () => {
+    gameState = 5
     this.moveCam();
-      if(gameState == 0){
-        this.menuScreen();
-      }
-      else if(gameState == 1){
-        this.playState();
-      }
-      else{
-        this.endState();
-      }
+    if (gameState == 0) {
+      this.menuScreen();
+    }
+    else if (gameState == 1) {
+      this.playState();
+    }
+    else if (gameState == 5) {
+      this.lvl5()
+    }
+    else {
+      this.endState();
+    }
   };
 
   // Game state 0
@@ -43,7 +48,7 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(ctx,"click 'tile 1' to play ","50px serif",200,200,"green","red"
+    drawText(ctx, "click 'tile 1' to play ", "50px serif", 200, 200, "green", "red"
     );
   };
 
@@ -58,6 +63,16 @@ class Game {
     ctx.restore();
   };
 
+  lvl5 = () => {
+    ctx.save();
+    // Camera follow player
+    this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
+    ctx.translate(-this.camLoc.x, -this.camLoc.y);
+    this.hero.run();
+    this.levels[4].run();
+    ctx.restore();
+  }
+
   endState = () => {
     ctx.save();
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
@@ -70,16 +85,16 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    if(this.clickingA && !hittingRight){
+    if (this.clickingA && !hittingRight) {
       this.hero.loc.x -= 2
-     }
-     else{
+    }
+    else {
       null;
-     }
-    if(this.clickingD && !hittingLeft){
+    }
+    if (this.clickingD && !hittingLeft) {
       this.hero.loc.x += 2
     }
-    else{
+    else {
       null;
     }
   };
