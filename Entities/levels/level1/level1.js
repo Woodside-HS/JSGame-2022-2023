@@ -6,7 +6,7 @@ class level1 extends Level{
         this.loadBackgrounds(3);
     }
     loadPlatforms() {
-        this.platforms[0] = new level1platform(150,400,100);
+        this.platforms[0] = new level1platform(150,400,10000);
         //need the specific platform class to get started on loading platforms
         
     }
