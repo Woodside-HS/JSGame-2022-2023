@@ -23,6 +23,7 @@ class Game {
 
     this.levels[0] = new level1(1);
     this.levels[4] = new level5(5);
+    this.levels[2] = new level3(3);
   }
 
   update = () => {
@@ -31,8 +32,8 @@ class Game {
     if (gameState == 0) {
       this.menuScreen();
     }
-    else if (gameState == 1) {
-      this.playState();
+    else if (gameState >= 1) { //gameState is equal to the level
+      this.playState(gameState);
     }
     else if (gameState == 5) {
       this.lvl5()
@@ -53,13 +54,15 @@ class Game {
   };
 
   // Game state 1
-  playState = () => {
+  playState = (a) => {
     ctx.save();
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
+    this.levels[0].background.run();//since there is only one background object, then only need to run this once
+    //need to run background before everything else
     this.hero.run();
-    this.levels[0].run();
+    this.levels[a - 1].run();
     ctx.restore();
   };
 
