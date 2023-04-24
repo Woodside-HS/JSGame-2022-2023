@@ -10,7 +10,9 @@ class level3 extends Level{
         this.platforms[2] = new Level3Platform(400,400, 25);
         this.platforms[3] = new Level3Platform(475,380, 25);
         this.platforms[4] = new Level3Platform(550, 350, 150);
-        this.platforms[5] = new Level3Platform(150,400,100);
+        //TODO: Code Location of every platform after this reminder. 
+        //TODO: Adjust all locations so it flows as a level
+        this.platforms[5] = new Level3Platform(150,400,100); 
         this.platforms[6] = new Level3Platform(150,400,100);
         this.platforms[7] = new Level3Platform(150,400,100);
         this.platforms[8] = new Level3Platform(150,400,100);
