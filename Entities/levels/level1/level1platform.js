@@ -1,7 +1,9 @@
 class level1platform extends Platform {
-    constructor(x,y,w){
+    constructor(x,y,w,hasDog){
         super(x,y,w);
-        this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,15,15);
+        if(hasDog){
+            this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,15,15);
+        }
         //this.img;
         //TODO get image in
     }
@@ -11,10 +13,10 @@ class level1platform extends Platform {
         this.checkHero();
     }
     update() {
-        if(!this.enemy.isDead){
+        if(this.enemy && !this.enemy.isDead){
             this.enemy.run();
         }
-        if(this.enemy.isDead){
+        if(this.enemy && this.enemy.isDead){
             console.log("enemy dead");
         }
     }

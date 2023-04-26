@@ -27,7 +27,6 @@ class lvl1Enemy2 {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y);
         if (this.loc.distanceSquared(heroLoc) < this.sightSq) {
             this.sees = true;
-            console.log("seen enemy");
         }
         if (this.sees) {
             this.move = 0;
@@ -35,9 +34,9 @@ class lvl1Enemy2 {
                 //if enemy is within the platform, checks for player direction
                 if (heroLoc.x < this.loc.x) {
                     //if hero is to the left, moves left
-                    this.move = -.4;
+                    this.move = -1.75;
                 } else {
-                    this.move = .4;
+                    this.move = 1.75;
                 }
             }
             this.loc.x += this.move;
@@ -45,10 +44,10 @@ class lvl1Enemy2 {
             this.loc.x += this.move;
             if (this.loc.x > this.pLoc.x + this.pWidth - 45) {
                 //hits the other side and bounces
-                this.move = -.25;
+                this.move = -1.25;
             }
             if (this.loc.x < this.pLoc.x) {
-                this.move = .25;
+                this.move = 1.25;
             }
         }
         this.sees = false;
