@@ -23,11 +23,11 @@ class Game {
 
     this.levels[0] = new level1(1);
     this.levels[4] = new level5(5);
-    this.levels[2] = new level3(3);
+    // this.levels[2] = new level3(3);
   }
 
   update = () => {
-    gameState = 5
+    // gameState = 5
     this.moveCam();
     if (gameState == 0) {
       this.menuScreen();
@@ -36,6 +36,7 @@ class Game {
       this.playState(gameState);
     }
     else if (gameState == 5) {
+      // console.log("gameState is 5")
       this.lvl5()
     }
     else {

@@ -7,9 +7,11 @@ class level5platform extends Platform {
         }
     }
     run() {
-        this.update;
+        this.update();
         this.render();
         this.checkHero();
+        this.sideCollisions();
+
     }
     update() {
     }
@@ -23,5 +25,10 @@ class level5platform extends Platform {
         ctx.closePath();
         ctx.fillStyle = this.clr;
         ctx.fill();
+        console.log("plat is here")
     }
+    checkHero() {
+        super.checkHero()
+    }
+
 }

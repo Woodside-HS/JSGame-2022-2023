@@ -24,9 +24,9 @@ class Level {
         this.render();
     }
 
-    loadPlatforms() {
+    // loadPlatforms() {
 
-    }
+    // }
 
     loadResources(pArray1, pArray2) {
         //pArray1 is the array of platforms with powerup 1 
