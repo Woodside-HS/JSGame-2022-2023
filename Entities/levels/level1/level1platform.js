@@ -1,13 +1,20 @@
 class level1platform extends Platform {
     constructor(x,y,w){
         super(x,y,w);
+        this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,5,5);
+        //this.img;
+        //TODO get image in
     }
     run(){
-        this.update;
+        this.update();
         this.render();
         this.checkHero();
     }
     update() {
+        if(!this.enemy.isDead){
+            this.enemy.run();
+        }
+        
     }
 
     render() {
