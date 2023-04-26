@@ -4,4 +4,12 @@ class Berries{
 
     }
 
+    run(){
+
+    }
+
+    checkHero(){
+        
+    }
+
 }

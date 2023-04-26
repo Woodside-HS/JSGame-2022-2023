@@ -14,5 +14,9 @@ class Bear{
     idle(){
         
     }
+    
+    befriended(){
+        
+    }
 
 }
