@@ -11,7 +11,7 @@ class lvl1Enemy2 {
         this.move = .25; // the speed of the enemy movement
         this.isdead = false;
         this.sees = false;
-        this.sightSq = 10000;//100 pixesl
+        this.sightSq = 2500;//50 pixesl
         //this.loadImages();
     }
     loadImages() {
@@ -27,10 +27,11 @@ class lvl1Enemy2 {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y);
         if (this.loc.distanceSquared(heroLoc) < this.sightSq) {
             this.sees = true;
+            console.log("seen enemy");
         }
         if (this.sees) {
             this.move = 0;
-            if (this.loc.x < this.pLoc.x && this.loc.x > this.pLoc.x + this.pWidth - 45) {
+            if (this.loc.x > this.pLoc.x && this.loc.x < this.pLoc.x + this.pWidth - 45) {
                 //if enemy is within the platform, checks for player direction
                 if (heroLoc.x < this.loc.x) {
                     //if hero is to the left, moves left
