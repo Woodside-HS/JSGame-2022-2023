@@ -15,7 +15,7 @@ class level4 extends Level{
         this.platforms[6] = new level4platform(1450,670,100,true);
         this.platforms[7] = new level4platform(1650,670,100,true);
         this.platforms[8] = new level4platform(1850,670,100,true);
-        this.platforms[9] = new level4platform(1850,670,100,false);
+        this.platforms[9] = new level4platform(300,600,150,false);
 
         
     }
