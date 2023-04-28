@@ -42,15 +42,12 @@ class Background {
         }
     }
     render() {
-        let yOffset = (canvas.width)-this.height;
         //draws 3 images to make loop smoother
         ctx.save();
         ctx.translate(game.camLoc.x*this.parrallaxEffect, 0);
-        //ctx.drawImage(this.img, this.loc.x+2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
         ctx.drawImage(this.img, this.loc.x+canvas.width+this.offset, canvas.height-this.height,this.width, this.height);
         ctx.drawImage(this.img, this.loc.x+this.offset, canvas.height-this.height,this.width, this.height);
         ctx.drawImage(this.img, this.loc.x-canvas.width+this.offset, canvas.height-this.height,this.width, this.height);
-        //ctx.drawImage(this.img, this.loc.x-2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
         ctx.restore();
     }
 }
