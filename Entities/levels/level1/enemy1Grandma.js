@@ -6,7 +6,7 @@ class lvl1Enemy1{
         this.rB = rightBound;
         this.w = 30;//width
         this.h = 30;//height
-        this.vel = new JSVector(0,0);//will remain static until hero is seen
+        this.vel = new JSVector(1,0);//will remain static until hero is seen
         this.acc = new JSVector(0,0);//will get a acceleration towards the player and swap to the attack mode
         this.sightSquared = seeDistance*seeDistance;//how far the grandpa will be able to detect the hero from
         this.attack = false;
@@ -33,6 +33,7 @@ class lvl1Enemy1{
         } else {
             this.acc = new JSVector(0,0);//resets acceleration to zero
             this.render();
+            this.slow();//specially dedicated to slowing the hero down
         }
     }
     update(){
@@ -104,6 +105,23 @@ class lvl1Enemy1{
         this.acc = JSVector.subGetNew(game.hero.loc,this.loc);
         this.acc.setMagnitude(0.05);//makes sure to set the magnitude to something very small
         this.acc.y=0;
-        console.log(this.acc);
+        //console.log(this.acc);
+    }
+    slow(){
+        if(this.vel.getMagnitude()>0){
+            //velocity is greater then zero
+            this.vel.setMagnitude(this.vel.getMagnitude()-0.05)
+            if(this.vel.getMagnitude()>0.9 &&this.vel.getMagnitude()<1.1){
+                //if velocity is close enough, then keeps it constant
+                this.vel.setMagnitude(1);
+            }
+        } else if (this.vel.getMagnitude()<0){
+            //velocity is less than zero
+            this.vel.setMagnitude(this.vel.getMagnitude()+0.05)
+            if(this.vel.getMagnitude()>-1.1 &&this.vel.getMagnitude()<-0.9){
+                //if velocity is small enough, just stops it 
+                this.vel.setMagnitude(-1);
+            }
+        }
     }
 }
