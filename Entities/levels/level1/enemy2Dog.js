@@ -9,7 +9,7 @@ class lvl1Enemy2 {
         this.h = enemyHeight;
         this.w = enemyWidth;
         this.move = .25; // the speed of the enemy movement
-        this.isdead = false;
+        this.isDead = false;
         this.sees = false;
         this.sightSq = 2500;//50 pixesl
         //this.loadImages();
@@ -83,12 +83,14 @@ class lvl1Enemy2 {
             if (this.loc.x > game.hero.loc.x && this.loc.x < game.hero.loc.x + 80 && game.hero.posNeg) {
                 //enemy is within attack bounds
                 if (this.loc.y > game.hero.loc.y && this.loc.y < game.hero.loc.y + game.hero.height) {
-                    this.isdead = true;
+                    //console.log("died");
+                    this.isDead = true;
                 }
             } else if (this.loc.x < game.hero.loc.x && this.loc.x > game.hero.loc.x - 40) {
                 //enemy is within attack bounds
                 if (this.loc.y > game.hero.loc.y && this.loc.y < game.hero.loc.y + game.hero.height) {
-                    this.isdead = true;
+                    //console.log("died");
+                    this.isDead = true;
                 }
             }
         }

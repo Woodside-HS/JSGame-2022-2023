@@ -13,11 +13,11 @@ class level1platform extends Platform {
         this.checkHero();
     }
     update() {
-        if(this.enemy && !this.enemy.isDead){
-            this.enemy.run();
-        }
-        if(this.enemy && this.enemy.isDead){
-            console.log("enemy dead");
+        if(this.enemy){
+            //have to use nested if statemnets because some platforms dont have enemies
+            if(!this.enemy.isDead){
+                this.enemy.run();
+            }
         }
     }
 
