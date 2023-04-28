@@ -5,6 +5,8 @@ things we need
 class Level3Platform extends Platform {
     constructor(x, y, w) {
         super(x, y, w);
+        //this.platformID
+        //this.isDead 
     }
 
     run() {
@@ -34,6 +36,10 @@ class Level3Platform extends Platform {
     }
 
     sideCollisions(){
+    }
+
+    platformDeath(){
+        //! Potential consideration with the splicing out of the platform. Could give platforms a death functions
     }
 
 

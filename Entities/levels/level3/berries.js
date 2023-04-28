@@ -9,6 +9,10 @@ class Berries{
     }
 
     checkHero(){
+
+    }
+
+    render(){
         
     }
 
