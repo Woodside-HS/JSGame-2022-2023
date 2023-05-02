@@ -1,22 +1,28 @@
 class level5platform extends Platform {
     constructor(x, y, w, ynZ) {
         super(x, y, w);
+        // this.enemy = []
         this.ynZ = ynZ; // yes/no Zombie (is or isnt a zombie)
         if (this.ynZ == true) {
-            this.loadZombie()
+            this.enemy = new zombie(x, y)
+            // this.loadZombie()
             // console.log(this.ynZ)
         }
     }
     run() {
-        this.update;
+        this.update()
         this.render();
         this.checkHero();
     }
     update() {
+        if (this.enemy) {
+            this.enemy.run()
+        }
     }
     loadZombie() {
-        // console.log(this.levels)
-        this.enemies[0] = new zombies()
+
+        // console.log(this.enemy)
+        // this.enemy[0] = new zombie(this.loc.x, this.loc.y)
     }
     render() {
         ctx.beginPath();
