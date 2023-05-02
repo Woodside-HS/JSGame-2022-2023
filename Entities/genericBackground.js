@@ -15,12 +15,17 @@ class genericBackground {
     calcPerc(id){
         //short for calculate percentage
         let perc = id/this.imgs.length;
-        return (this.imgs.length*perc)/this.imgs.length;
+        if(id ==0){
+            //makes sure that the furtherest back actually moves
+            return (this.imgs.length*.05)/this.imgs.length;
+        } else {
+            return (this.imgs.length*perc)/this.imgs.length;
+        }
+        
     }
     run(){
         for(let i = 0; i < this.imgs.length; i++){
             //runs thru each of the images
-            //console.log(this.calcPerc(i));
             this.render(i);
             this.loop(i);
         }
@@ -30,12 +35,13 @@ class genericBackground {
         //id is which image is being rendered 
         ctx.save();
         ctx.translate(game.camLoc.x*(1-perc), 0);
-        //ctx.drawImage(this.img, this.loc.x+2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
-        //ctx.drawImage(this.img, 0, 0, canvas.width, canvas.height);
-        ctx.drawImage(this.imgs[id], this.loc.x+canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height);
-        ctx.drawImage(this.imgs[id], this.loc.x+this.offset[id],                this.height*perc,  this.width,  this.height);
-        ctx.drawImage(this.imgs[id], this.loc.x-canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height);
-        //ctx.drawImage(this.img, this.loc.x-2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
+        if(id==0){
+            perc = 0;
+            //fixing small error overlooked earlier
+        }
+        ctx.drawImage(this.imgs[id], this.loc.x+canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height-this.height*perc);
+        ctx.drawImage(this.imgs[id], this.loc.x+this.offset[id],                this.height*perc,  this.width,  this.height-this.height*perc);
+        ctx.drawImage(this.imgs[id], this.loc.x-canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height-this.height*perc);
         ctx.restore();
     }
     loop(id){
