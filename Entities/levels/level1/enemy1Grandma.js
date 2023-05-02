@@ -5,7 +5,7 @@ class lvl1Enemy1 {
         this.lB = leftBound;
         this.rB = rightBound;
         this.w = 30;//width
-        this.h = 30;//height
+        this.h = 40;//height
         this.vel = new JSVector(1, 0);//will remain static until hero is seen
         this.acc = new JSVector(0, 0);//will get a acceleration towards the player and swap to the attack mode
         this.sightSquared = seeDistance * seeDistance;//how far the grandpa will be able to detect the hero from
@@ -56,9 +56,8 @@ class lvl1Enemy1 {
         // console.log("rednering enemy 1 to  " + this.loc.x + this.loc.y);
         this.swap++;
         //console.log(this.swap);
-        if (this.swap > 5) {
+        if (this.swap > (12-this.vel.getMagnitude()*5)) {
             this.swap = 0;
-            console.log("frame: " + this.frameId);
             this.frameId++;
             if (this.frameId > 5) {
                 this.frameId = 0;
@@ -66,8 +65,10 @@ class lvl1Enemy1 {
         }
         if (this.vel.x >= 0) {
             ctx.save();//this code flips the character if the character is facing right
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.drawImage(this.moveImgs[this.frameId], this.loc.x+this.w, this.loc.y-this.h, -this.w, this.h);
+            //ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.translate(this.loc.x,this.loc.y);
+            ctx.scale(-1,1);
+            ctx.drawImage(this.moveImgs[this.frameId], -this.w, -this.h, this.w, this.h);
             ctx.restore();
         } else {
             ctx.drawImage(this.moveImgs[this.frameId], this.loc.x, this.loc.y-this.h, this.w, this.h);
