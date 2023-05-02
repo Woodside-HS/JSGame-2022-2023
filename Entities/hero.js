@@ -45,7 +45,6 @@ class Hero {
     this.timeSinceMoved = 0;
     this.frameNum = 0;
     this.changeFrame = 0;
-    this.moveFrames = [];
     this.heroMove = [];
     this.heroJump = [];
     this.heroThrow = [];
@@ -65,10 +64,14 @@ class Hero {
     }
   }
   loadImages() {
-    for (let i = 1; i <= 16; i++) {
+    for (let i = 0; i < 16; i++) {
       //the 9 has to be hardcoded inn
-      this.moveFrames[i] = document.createElement("img");
-      this.moveFrames[i].src = "Images/Hero/HeroMove/hero" + (i) + ".png";
+      this.heroMove[i] = document.createElement("img");
+      this.heroMove[i].src = "Images/Hero/HeroMove/hero" + (i+1) + ".png";
+    }
+    for(let i = 0;i<15;i++){
+      this.heroJump[i] = document.createElement("img");
+      this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i+1) + ".png";
     }
   }
   render() {
@@ -76,23 +79,37 @@ class Hero {
     if(!game.clickingA && !game.clickingD){
       this.timeSinceMoved++;
     }
+    if(this.timeSinceMoved>5){
+      this.isMoving =false;
+    }
     switch (true){
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
         console.log("renderding Attack");
+        break;
       case this.statusBlock.isThrowing:
         console.log("throwing");
+        break;
       case this.statusBlock.isJumping:
         console.log("jumping");
+        break;
       case this.statusBlock.isFalling:
         console.log("falling");
+        break;
       case this.statusBlock.isMoving:
-        console.log("moving");
+        if(this.frameNum>this.heroMove.length){
+          this.frameNum =0;
+        }
+        if(this.changeFrame >= (60/16)){
+          this.changeFrame =0;
+          this.frameNum++;
+        }
+        console.log("movin" + this.frameNum)
+        ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         break;
         default:
           //the "else" condition
-          console.log("idle");//currently only can face left
-          ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+          ctx.drawImage(this.heroMove[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
     }    
     
     
