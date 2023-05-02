@@ -66,10 +66,8 @@ class lvl1Enemy1 {
         }
         if (this.vel.x >= 0) {
             ctx.save();//this code flips the character if the character is facing right
-            ctx.translate(this.loc.x + this.w, this.loc.y);
-            ctx.scale(-1, 1);
             ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.drawImage(this.moveImgs[this.frameId], this.loc.x, this.loc.y-this.h, this.w, this.h);
+            ctx.drawImage(this.moveImgs[this.frameId], this.loc.x+this.w, this.loc.y-this.h, -this.w, this.h);
             ctx.restore();
         } else {
             ctx.drawImage(this.moveImgs[this.frameId], this.loc.x, this.loc.y-this.h, this.w, this.h);
