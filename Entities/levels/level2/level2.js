@@ -28,20 +28,20 @@ class Level {
         
     }
 
-    loadResources(pArray1, pArray2) {
+    loadResources(pArray1, pArray2) {//same powerups
         //pArray1 is the array of platforms with powerup 1 
         //pArray2 is the array of platforms with powerup 2
         //which powerup goes into which platform is hardcoded
         
     }
     
-    loadEnemies(pArray1, pArray2) { 
+    loadEnemies(pArray1, pArray2) { //Trash enemies
         //pArray1 is the array of platforms with enemy 1 
         //pArray2 is the array of platforms with enemy 2
         //hardcoding which type of enemies
     }
 
-    loadPlatformImages(){
+    loadPlatformImages(){//Scaffolding platforms
         // template function 
         /*
         for(let i = 0; i < platforms.length; i++){
