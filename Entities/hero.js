@@ -27,6 +27,9 @@ class Hero {
       onPlatform: false,
       jumpCount: 0,
       isAttacking: false,
+      isThrowing: false,
+      isFalling: false,
+      isJumping: false,
       onCoolDown: false,
       coolDownTimer: 100, // the length of the attack cooldown
       attackTimer: 50, // the length/amount of time that the hero attacks for
@@ -39,11 +42,15 @@ class Hero {
     this.indc = 0;
 
     //image stuff
-    this.moveFrames = [];
-    this.groove = 0;///grove is the varibale ID that counts down to the switching of frames
-    this.grooveId = 0;//Grove Id is the current frame number.
-    this.loadImages();
     this.timeSinceMoved = 0;
+    this.frameNum = 0;
+    this.changeFrame = 0;
+    this.moveFrames = [];
+    this.heroMove = [];
+    this.heroJump = [];
+    this.heroThrow = [];
+    this.heroIdle = [];
+    this.loadImages();
   }
 
   run() {
@@ -58,100 +65,127 @@ class Hero {
     }
   }
   loadImages() {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 1; i <= 16; i++) {
       //the 9 has to be hardcoded inn
       this.moveFrames[i] = document.createElement("img");
-      this.moveFrames[i].src = "resources/Hero2/hwr000" + (i + 1) + ".png";
+      this.moveFrames[i].src = "Images/Hero/HeroMove/hero" + (i) + ".png";
     }
   }
   render() {
-    //this is the code that checks if the hero is moving or not
+    //this is the code that checks if the hero is moving or not, is used to determine if hero should be idle
     if(!game.clickingA && !game.clickingD){
       this.timeSinceMoved++;
-    }else {
-      this.timeSinceMoved = 0;
-      
-      this.groove++;
-      if (this.groove % 6 == 0) {
-        this.grooveId++;
-        if (this.grooveId >= 8) {
-          this.grooveId = 0;
-        }
-      }
     }
-    if (this.timeSinceMoved > 5) {
-      //this only works if it has been more then 5 frames since you have stopped moving
-      //TODO ideally this would be where the idle frames go but we dont have any rn
-      if(this.indc>0){
-        //flips back for a second, dunno why
-        ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-      } else {
-        ctx.save();
-        ctx.translate(this.loc.x + this.width, this.loc.y);
-        ctx.scale(-1, 1);
-        ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
-        //!comment transform
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.restore();
-      }
-    } else {
-      //flips the image depending on which way you are going
-      /*
-      * Note: this will swap the handedness of the character
-      * If he holds something on the right side, it will flip to the left side when going in the other direction
-      */
-      //! 
-      if (game.clickingD) {
-        ctx.save();
-        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-        ctx.restore();
-      } else {
-        ctx.save();
-        ctx.translate(this.loc.x + this.width, this.loc.y);
-        ctx.scale(-1, 1);
-        ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.restore();
-      }
-    }
-    //below renderes the small circles for each of the powerups
-    if(this.inventory.dbJump){
-      ctx.beginPath();
-      ctx.fillStyle = "purple";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-    if(this.inventory.dbCoin){
-      ctx.beginPath();
-      ctx.fillStyle = "orange";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-    if(this.inventory.invulnerability){
-      ctx.beginPath();
-      ctx.fillStyle = "#DDDDDD";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
+    switch (true){
+      //checks if any of the following values are true, if so runs them
+      case this.statusBlock.isAttacking:
+        console.log("renderding Attack");
+      case this.statusBlock.isThrowing:
+        console.log("throwing");
+      case this.statusBlock.isJumping:
+        console.log("jumping");
+      case this.statusBlock.isFalling:
+        console.log("falling");
+      case this.statusBlock.isMoving:
+        console.log("moving");
+        break;
+        default:
+          //the "else" condition
+          console.log("idle");//currently only can face left
+          ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+    }    
+    
+    
+    
+    
+    
+    
+    
+    
+    // else {
+    //   this.timeSinceMoved = 0;
+    //   this.groove++;
+    //   if (this.groove % 6 == 0) {
+    //     this.grooveId++;
+    //     if (this.grooveId >= this.moveFrames.length) {
+    //       this.grooveId = 0;
+    //     }
+    //   }
+    // }
+    // if (this.timeSinceMoved > 5) {
+    //   //this only works if it has been more then 5 frames since you have stopped moving
+    //   //TODO ideally this would be where the idle frames go but we dont have any rn
+    //   if(this.indc>0){
+    //     //flips back for a second, dunno why
+    //     ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+    //   } else {
+    //     ctx.save();
+    //     ctx.translate(this.loc.x + this.width, this.loc.y);
+    //     ctx.scale(-1, 1);
+    //     ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
+    //     //!comment transform
+    //     ctx.setTransform(1, 0, 0, 1, 0, 0);
+    //     ctx.restore();
+    //   }
+    // } else {
+    //   //flips the image depending on which way you are going
+    //   /*
+    //   * Note: this will swap the handedness of the character
+    //   * If he holds something on the right side, it will flip to the left side when going in the other direction
+    //   */
+    //   //! 
+    //   if (game.clickingD) {
+    //     ctx.save();
+    //     ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+    //     ctx.restore();
+    //   } else {
+    //     ctx.save();
+    //     ctx.translate(this.loc.x + this.width, this.loc.y);
+    //     ctx.scale(-1, 1);
+    //     ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
+    //     ctx.setTransform(1, 0, 0, 1, 0, 0);
+    //     ctx.restore();
+    //   }
+    // }
+    // //below renderes the small circles for each of the powerups
+    // if(this.inventory.dbJump){
+    //   ctx.beginPath();
+    //   ctx.fillStyle = "purple";
+    //   ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
+    //   ctx.fill();
+    //   ctx.closePath();
+    // }
+    // if(this.inventory.dbCoin){
+    //   ctx.beginPath();
+    //   ctx.fillStyle = "orange";
+    //   ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
+    //   ctx.fill();
+    //   ctx.closePath();
+    // }
+    // if(this.inventory.invulnerability){
+    //   ctx.beginPath();
+    //   ctx.fillStyle = "#DDDDDD";
+    //   ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
+    //   ctx.fill();
+    //   ctx.closePath();
+    // }
     //below is the indicator, gonna keep it for now
-    if (game.clickingA) {
-      this.indc = -20;
-    }
-    if (game.clickingD) {
-      this.indc = 20;
-    }
+    //former indicator, no longer needed
+    // if (game.clickingA) {
+    //   this.indc = -20;
+    // }
+    // if (game.clickingD) {
+    //   this.indc = 20;
+    // }
 
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
-    ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
-    ctx.strokeStyle = "orange";
-    ctx.stroke();
-    ctx.closePath();
-    ctx.restore();
+    // ctx.save();
+    // ctx.beginPath();
+    // ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
+    // ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
+    // ctx.strokeStyle = "orange";
+    // ctx.stroke();
+    // ctx.closePath();
+    // ctx.restore();
   }
   update() {
     //! %%%%%%%%%%%%%%%
