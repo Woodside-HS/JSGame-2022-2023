@@ -9,7 +9,7 @@ class Hero {
     this.grav = new JSVector(0, 0.2); //gravity for when falling
     this.clr = "green";
     this.bullets = [];
-    this.shootingDirection = true; //true = right, false = left
+    this.shootingDirection = false; //true = right, false = left
     this.inventory = {
       dbJump: false,
       dbCoin: false,
@@ -90,6 +90,7 @@ class Hero {
         ctx.translate(this.loc.x + this.width, this.loc.y);
         ctx.scale(-1, 1);
         ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
+        //!comment transform
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.restore();
       }
@@ -215,7 +216,6 @@ class Hero {
         this.clr = "green";
       }
     }
-
 
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
