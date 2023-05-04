@@ -135,7 +135,7 @@ class Hero {
         //! END OF THROWING
       case this.statusBlock.isJumping:
         this.changeFrame++;
-        console.log("jumping"+ this.frameNum);
+        //console.log("jumping"+ this.frameNum);
         if(this.changeFrame >=4){
           this.changeFrame = 0;
           this.frameNum++;
@@ -154,10 +154,21 @@ class Hero {
         } else {
           ctx.drawImage(this.heroJump[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         }
-        console.log("jumping");
+        //console.log("jumping");
         break;
         //! END OF JUMPING
       case this.statusBlock.isFalling:
+        if (game.clickingD) {
+          ctx.drawImage(this.heroJump[13], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroJump[13], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroJump[13], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
         console.log("falling");
         break;
         //! END OF FALLING
