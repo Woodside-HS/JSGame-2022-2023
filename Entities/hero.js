@@ -67,28 +67,28 @@ class Hero {
     for (let i = 0; i < 16; i++) {
       //the 9 has to be hardcoded inn
       this.heroMove[i] = document.createElement("img");
-      this.heroMove[i].src = "Images/Hero/HeroMove/hero" + (i+1) + ".png";
+      this.heroMove[i].src = "Images/Hero/HeroMove/hero" + (i + 1) + ".png";
     }
-    for(let i = 0;i<15;i++){
+    for (let i = 0; i < 15; i++) {
       this.heroJump[i] = document.createElement("img");
-      this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i+1) + ".png";
+      this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
     }
   }
   render() {
     //this is the code that checks if the hero is moving or not, is used to determine if hero should be idle
-    if(!game.clickingA && !game.clickingD){
+    if (!game.clickingA && !game.clickingD) {
       this.timeSinceMoved++;
     } else {
-      this.timeSinceMoved=0;
+      this.timeSinceMoved = 0;
     }
-    if(this.timeSinceMoved>5){
-      this.statusBlock.isMoving =false;
+    if (this.timeSinceMoved > 5) {
+      this.statusBlock.isMoving = false;
     } else {
       this.statusBlock.isMoving = true;
     }
 
 
-    switch (true){
+    switch (true) {
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
         console.log("renderding Attack");
@@ -104,122 +104,32 @@ class Hero {
         break;
       case this.statusBlock.isMoving:
         this.changeFrame++;
-        if(this.frameNum>=this.heroMove.length-1){
+        if (this.frameNum >= this.heroMove.length - 1) {
           this.frameNum = 1;
         }
-        if(this.changeFrame >= 3){//changes the current imge after certain number of frames passes
+        if (this.changeFrame >= 3) {//changes the current imge after certain number of frames passes
           this.changeFrame = 0;
           this.frameNum++;
         }
-        //console.log("movin" + this.frameNum)
         //swaps the hero's location when moving in another direction
         if (game.clickingD) {
-               ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-             } else {
-               ctx.save();
-               ctx.translate(this.loc.x + this.width, this.loc.y);
-               ctx.scale(-1, 1);
-               ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-               ctx.setTransform(1, 0, 0, 1, 0, 0);
-               ctx.restore();
-             }
+          ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroMove[this.frameNum], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
         break;
-        default:
-          //the "else" condition
-          ctx.drawImage(this.heroMove[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-    }    
-    
-    
-    
-    
-    
-    
-    
-    
-    // else {
-    //   this.timeSinceMoved = 0;
-    //   this.groove++;
-    //   if (this.groove % 6 == 0) {
-    //     this.grooveId++;
-    //     if (this.grooveId >= this.moveFrames.length) {
-    //       this.grooveId = 0;
-    //     }
-    //   }
-    // }
-    // if (this.timeSinceMoved > 5) {
-    //   //this only works if it has been more then 5 frames since you have stopped moving
-    //   //TODO ideally this would be where the idle frames go but we dont have any rn
-    //   if(this.indc>0){
-    //     //flips back for a second, dunno why
-    //     ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-    //   } else {
-    //     ctx.save();
-    //     ctx.translate(this.loc.x + this.width, this.loc.y);
-    //     ctx.scale(-1, 1);
-    //     ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
-    //     //!comment transform
-    //     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    //     ctx.restore();
-    //   }
-    // } else {
-    //   //flips the image depending on which way you are going
-    //   /*
-    //   * Note: this will swap the handedness of the character
-    //   * If he holds something on the right side, it will flip to the left side when going in the other direction
-    //   */
-    //   //! 
-    //   if (game.clickingD) {
-    //     ctx.save();
-    //     ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-    //     ctx.restore();
-    //   } else {
-    //     ctx.save();
-    //     ctx.translate(this.loc.x + this.width, this.loc.y);
-    //     ctx.scale(-1, 1);
-    //     ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
-    //     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    //     ctx.restore();
-    //   }
-    // }
-    // //below renderes the small circles for each of the powerups
-    // if(this.inventory.dbJump){
-    //   ctx.beginPath();
-    //   ctx.fillStyle = "purple";
-    //   ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
-    //   ctx.fill();
-    //   ctx.closePath();
-    // }
-    // if(this.inventory.dbCoin){
-    //   ctx.beginPath();
-    //   ctx.fillStyle = "orange";
-    //   ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
-    //   ctx.fill();
-    //   ctx.closePath();
-    // }
-    // if(this.inventory.invulnerability){
-    //   ctx.beginPath();
-    //   ctx.fillStyle = "#DDDDDD";
-    //   ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
-    //   ctx.fill();
-    //   ctx.closePath();
-    // }
-    //below is the indicator, gonna keep it for now
-    //former indicator, no longer needed
-    // if (game.clickingA) {
-    //   this.indc = -20;
-    // }
-    // if (game.clickingD) {
-    //   this.indc = 20;
-    // }
-
-    // ctx.save();
-    // ctx.beginPath();
-    // ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
-    // ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
-    // ctx.strokeStyle = "orange";
-    // ctx.stroke();
-    // ctx.closePath();
-    // ctx.restore();
+      default:
+        //the "else" condition
+        //TODO currently only looks right when idle, easy to fix but dont want to spend the effort
+        ctx.drawImage(this.heroJump[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+    }
+    //TODO need a way to display powerups, maybe topleft of screen
   }
   update() {
     //! %%%%%%%%%%%%%%%
