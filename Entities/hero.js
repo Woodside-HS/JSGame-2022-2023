@@ -78,10 +78,16 @@ class Hero {
     //this is the code that checks if the hero is moving or not, is used to determine if hero should be idle
     if(!game.clickingA && !game.clickingD){
       this.timeSinceMoved++;
+    } else {
+      this.timeSinceMoved=0;
     }
     if(this.timeSinceMoved>5){
-      this.isMoving =false;
+      this.statusBlock.isMoving =false;
+    } else {
+      this.statusBlock.isMoving = true;
     }
+
+
     switch (true){
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
@@ -97,15 +103,26 @@ class Hero {
         console.log("falling");
         break;
       case this.statusBlock.isMoving:
-        if(this.frameNum>this.heroMove.length){
-          this.frameNum =0;
+        this.changeFrame++;
+        if(this.frameNum>=this.heroMove.length-1){
+          this.frameNum = 1;
         }
-        if(this.changeFrame >= (60/16)){
-          this.changeFrame =0;
+        if(this.changeFrame >= 3){//changes the current imge after certain number of frames passes
+          this.changeFrame = 0;
           this.frameNum++;
         }
-        console.log("movin" + this.frameNum)
-        ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        //console.log("movin" + this.frameNum)
+        //swaps the hero's location when moving in another direction
+        if (game.clickingD) {
+               ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+             } else {
+               ctx.save();
+               ctx.translate(this.loc.x + this.width, this.loc.y);
+               ctx.scale(-1, 1);
+               ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+               ctx.setTransform(1, 0, 0, 1, 0, 0);
+               ctx.restore();
+             }
         break;
         default:
           //the "else" condition
