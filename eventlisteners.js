@@ -56,10 +56,6 @@ window.addEventListener(
   "mousedown",
   function (event) {
     game.mouseDown = true;
-    // game.hero.attack();
-    cursor = new JSVector(event.offsetX, event.offsetY);
-    game.hero.cursorLoc.x = cursor.x + game.camLoc.x;
-    game.hero.cursorLoc.y = cursor.y + game.camLoc.y;
   },
   false
 );
