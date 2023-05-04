@@ -1,5 +1,6 @@
 class Hero {
   constructor(x, y) {
+    this.showHitbox = false;
     this.loc = new JSVector(x, y); //ideally loc would only be a y value for how far up the screen they are
     this.vel = new JSVector(0, 0);
     this.posNeg = true; //related to attacking
