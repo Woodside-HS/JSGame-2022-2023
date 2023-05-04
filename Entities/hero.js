@@ -120,9 +120,9 @@ class Hero {
         if (this.frameNum >=13) {
           this.statusBlock.isShooting = false;
         }
-        if (game.clickingD) {
+        if (game.clickingD || !this.posNeg) {
           ctx.drawImage(this.heroThrow[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-        } else if (game.clickingA) {
+        } else if (game.clickingA || this.posNeg) {
           ctx.save();//this code flips the character if the character is facing right
           ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
           ctx.scale(-1, 1);
@@ -143,9 +143,9 @@ class Hero {
         if (this.frameNum >=14) {
           this.statusBlock.isJumping = false;
         }
-        if (game.clickingD) {
+        if (game.clickingD|| !this.posNeg) {
           ctx.drawImage(this.heroJump[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-        } else if (game.clickingA) {
+        } else if (game.clickingA|| this.posNeg) {
           ctx.save();//this code flips the character if the character is facing right
           ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
           ctx.scale(-1, 1);
@@ -158,9 +158,9 @@ class Hero {
         break;
         //! END OF JUMPING
       case this.statusBlock.isFalling:
-        if (game.clickingD) {
+        if (game.clickingD|| !this.posNeg) {
           ctx.drawImage(this.heroJump[13], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-        } else if (game.clickingA) {
+        } else if (game.clickingA|| this.posNeg) {
           ctx.save();//this code flips the character if the character is facing right
           ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
           ctx.scale(-1, 1);
