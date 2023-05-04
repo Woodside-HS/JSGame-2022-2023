@@ -44,6 +44,7 @@ class Hero {
     this.timeSinceMoved = 0;
     this.frameNum = 0;
     this.changeFrame = 0;
+    this.heroFall=[];
     this.heroMove = [];
     this.heroJump = [];
     this.heroThrow = [];
@@ -75,6 +76,10 @@ class Hero {
     for (let i = 0; i <15;i++) {
       this.heroJump[i] = document.createElement("img");
       this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
+    }
+    for(let i = 0; i<6;i++){
+      this.heroFall[i] = document.createElement("img");
+      this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";
     }
   }
   checkFace(){
@@ -158,18 +163,28 @@ class Hero {
         break;
         //! END OF JUMPING
       case this.statusBlock.isFalling:
+        this.changeFrame++;
+        console.log("falling"+ this.frameNum);
+        if(this.changeFrame >=4){
+          this.changeFrame = 0;
+          this.frameNum++;
+        }
+        if (this.frameNum >=5) {
+          this.frameNum = 0;
+        }
         if (game.clickingD|| !this.posNeg) {
-          ctx.drawImage(this.heroJump[13], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+          ctx.drawImage(this.heroFall[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         } else if (game.clickingA|| this.posNeg) {
           ctx.save();//this code flips the character if the character is facing right
           ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
           ctx.scale(-1, 1);
-          ctx.drawImage(this.heroJump[13], -this.width, 0, this.width, this.height);
+          ctx.drawImage(this.heroFall[this.frameNum], -this.width, 0, this.width, this.height);
           ctx.restore();
         } else {
-          ctx.drawImage(this.heroJump[13], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+          ctx.drawImage(this.heroFall[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         }
-        console.log("falling");
+
+        
         break;
         //! END OF FALLING
       case this.statusBlock.isMoving:
