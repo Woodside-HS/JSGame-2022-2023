@@ -4,7 +4,7 @@ class level5platform extends Platform {
         // this.enemy = []
         this.ynZ = ynZ; // yes/no Zombie (is or isnt a zombie)
         if (this.ynZ == true) {
-            this.enemy = new zombie(x, y)
+            this.enemy = new zombie(x, y, 20, 20, w)
             // this.loadZombie()
             // console.log(this.ynZ)
         }
@@ -19,12 +19,15 @@ class level5platform extends Platform {
             this.enemy.run()
         }
     }
-    loadZombie() {
-
-        // console.log(this.enemy)
-        // this.enemy[0] = new zombie(this.loc.x, this.loc.y)
+    updateZombie() {
+        for (let i = 0; i < this.enemy.length; i++) {
+            if (this.enemy[i].isDead) {
+                this.enemy.splice(i, 1)
+            }
+        }
     }
     render() {
+        ctx.save()
         ctx.beginPath();
         ctx.moveTo(this.loc.x, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y);
@@ -33,6 +36,7 @@ class level5platform extends Platform {
         ctx.closePath();
         ctx.fillStyle = this.clr;
         ctx.fill();
+        ctx.restore()
     }
 
 }
