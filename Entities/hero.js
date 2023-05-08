@@ -66,11 +66,11 @@ class Hero {
   }
   render() {
     //this is the code that checks if the hero is moving or not
-    if(!game.clickingA && !game.clickingD){
+    if (!game.clickingA && !game.clickingD) {
       this.timeSinceMoved++;
-    }else {
+    } else {
       this.timeSinceMoved = 0;
-      
+
       this.groove++;
       if (this.groove % 6 == 0) {
         this.grooveId++;
@@ -82,9 +82,9 @@ class Hero {
     if (this.timeSinceMoved > 5) {
       //this only works if it has been more then 5 frames since you have stopped moving
       //TODO ideally this would be where the idle frames go but we dont have any rn
-      if(this.indc>0){
+      if (this.indc > 0) {
         //flips back for a second, dunno why
-        ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y, this.width, this.height);
       } else {
         ctx.save();
         ctx.translate(this.loc.x + this.width, this.loc.y);
@@ -102,7 +102,7 @@ class Hero {
       //! 
       if (game.clickingD) {
         ctx.save();
-        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y, this.width, this.height);
         ctx.restore();
       } else {
         ctx.save();
@@ -114,24 +114,24 @@ class Hero {
       }
     }
     //below renderes the small circles for each of the powerups
-    if(this.inventory.dbJump){
+    if (this.inventory.dbJump) {
       ctx.beginPath();
       ctx.fillStyle = "purple";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
+      ctx.arc(this.loc.x + this.width - 5, this.loc.y + game.camLoc.y, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
     }
-    if(this.inventory.dbCoin){
+    if (this.inventory.dbCoin) {
       ctx.beginPath();
       ctx.fillStyle = "orange";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
+      ctx.arc(this.loc.x + this.width - 5, this.loc.y + game.camLoc.y + 10, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
     }
-    if(this.inventory.invulnerability){
+    if (this.inventory.invulnerability) {
       ctx.beginPath();
       ctx.fillStyle = "#DDDDDD";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
+      ctx.arc(this.loc.x + this.width - 5, this.loc.y + game.camLoc.y + 20, 5, 0, 2 * Math.PI);
       ctx.fill();
       ctx.closePath();
     }
@@ -145,8 +145,8 @@ class Hero {
 
     ctx.save();
     ctx.beginPath();
-    ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
-    ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
+    ctx.moveTo(this.loc.x + this.width / 2, this.loc.y);
+    ctx.lineTo(this.loc.x + this.indc + this.width / 2, this.loc.y);
     ctx.strokeStyle = "orange";
     ctx.stroke();
     ctx.closePath();
@@ -156,7 +156,7 @@ class Hero {
     //! %%%%%%%%%%%%%%%
     if (this.statusBlock.hp <= 0 || this.loc.y > canvas.height) {
       // the hero "dies" when hp <= 0
-      this.statusBlock.isDead = true;
+      //this.statusBlock.isDead = true;
     }
 
     if (this.statusBlock.isDead) {
