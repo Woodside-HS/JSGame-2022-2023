@@ -1,6 +1,5 @@
 class Hero {
   constructor(x, y) {
-    this.showHitbox = false;
     this.loc = new JSVector(x, y); //ideally loc would only be a y value for how far up the screen they are
     this.vel = new JSVector(0, 0);
     this.posNeg = true; //related to attacking
@@ -110,6 +109,13 @@ class Hero {
     }
   }
   render() {
+    if (showHitBox) { // renders the hitbox of the hero
+      ctx.save()
+      ctx.translate(this.loc.x, this.loc.y + game.camLoc.y)
+      ctx.rect(0, 0, this.width, this.height)
+      ctx.fill()
+      ctx.restore()
+    }
     switch (true) {
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
@@ -227,6 +233,9 @@ class Hero {
         }
 
     }
+
+
+
     //TODO need a way to display powerups, maybe topleft of screen
   }
   update() {
