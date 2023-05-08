@@ -3,6 +3,7 @@ class level4 extends Level{
         super(id);   
         this.loadPlatforms();
         this.loadCoins();
+        this.loadEnemies();
     }
 
     loadPlatforms() {
@@ -11,12 +12,14 @@ class level4 extends Level{
         this.platforms[2] = new level4platform(750,620,100,true);
         this.platforms[3] = new level4platform(950,620,100,true);
         this.platforms[4] = new level4platform(1050,500,100,true);
-        this.platforms[5] = new level4platform(1250,500,100,true);
-        this.platforms[6] = new level4platform(1450,670,100,true);
-        this.platforms[7] = new level4platform(1650,670,100,true);
-        this.platforms[8] = new level4platform(1850,670,100,true);
-        this.platforms[9] = new level4platform(300,600,150,false);
+        this.platforms[5] = new level4platform(1250,500,100,false);
+        this.platforms[6] = new level4platform(1050,620,120,false);
 
-        
+    }
+
+    loadEnemies(){
+    }
+    
+    loadCoins(){
     }
 }

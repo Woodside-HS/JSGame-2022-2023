@@ -19,12 +19,12 @@ class level4platform extends Platform {
     render() {
         if(!this.isFloor){
             ctx.beginPath();
-            ctx.moveTo(this.loc.x,this.loc.y);
-            ctx.lineTo(this.loc.x+10,this.loc.y);
+            ctx.moveTo(this.loc.x,this.loc.y+10);
+            ctx.lineTo(this.loc.x+10,this.loc.y+10);
             ctx.lineTo(this.loc.x+10,this.loc.y-this.width);
             ctx.lineTo(this.loc.x,this.loc.y-this.width);
             ctx.closePath();
-            ctx.fillStyle = "red";
+            ctx.fillStyle = "purple";
             ctx.fill();
         } else {
 
@@ -46,9 +46,9 @@ class level4platform extends Platform {
             let heroW = game.hero.width; // the heros width
                 if (
                 //checks if the heros location is overlaping with the platform
-                heroLoc.x + heroW > this.loc.x+5 &&
+                heroLoc.x + heroW > this.loc.x &&
                 heroLoc.x < this.loc.x + 10 &&
-                heroLoc.y + heroH > this.loc.y - this.width-3 &&
+                heroLoc.y + heroH > this.loc.y - this.width &&
                 heroLoc.y < this.loc.y
             ) {
                 console.log("collision")
@@ -68,8 +68,8 @@ class level4platform extends Platform {
         let heroW = game.hero.width; // the heros width
         if (
             //checks if the heros location is overlaping with the platform
-            heroLoc.x + heroW > this.loc.x &&
-            heroLoc.x < this.loc.x + this.width &&
+            heroLoc.x + heroW > this.loc.x+15 &&
+            heroLoc.x < this.loc.x + this.width-15 &&
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.height
         ) {
