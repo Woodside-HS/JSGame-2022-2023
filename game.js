@@ -6,10 +6,12 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
+    this.characterPosition = new JSVector(0, 0);
 
-    [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
+    [this.gamePaused, this.clickingA, this.clickingD, this.clickingSpace, this.mouseDown].fill(
       false
     );
+    this.flight = true;
 
     // Set the dimensions of the game area
     this.dims = {
@@ -54,18 +56,7 @@ class Game {
   // Game state 1
   playState = (a) => {
     ctx.save();
-    // Camera follow player
-    this.followYAxis = true;
-    this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
-    if (this.followYAxis) {
-      this.camLoc.y = lerp(this.camLoc.y, this.hero.loc.y - (canvas.height / 2), 0.05);
-    }
-    ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    //this.levels[0].background.run();//since there is only one background object, then only need to run this once
-    //need to run background before everything else
-    //this.levels[a-1].run();
     this.levels[5].run();
-    this.hero.run();
     ctx.restore();
   };
 

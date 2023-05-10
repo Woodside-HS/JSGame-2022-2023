@@ -3,8 +3,8 @@ class LevelGen {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
 
-        this.canvas.width = window.innerWidth * 4; // Increase grid size
-        this.canvas.height = window.innerHeight * 4;
+        this.canvas.width = window.innerWidth * 8; // Increase grid size
+        this.canvas.height = window.innerHeight * 8;
 
         this.heroSize = heroSize;
         this.size = Math.floor(heroSize / 4);
@@ -21,12 +21,13 @@ class LevelGen {
 
         this.edgeCells = [];
 
+        this.progress = 0;
+
         this.groundtexture.addEventListener('load', () => {
             // Call the level generation functions
             this.generateRandomRooms();
             this.drawSquares();
         });
-
     }
 
     drawSquares() {
@@ -60,8 +61,6 @@ class LevelGen {
 
             // Check if the cell is an edge
             if (this.isEdge(i)) {
-                ctx.fillStyle = 'white';
-                ctx.fillRect(x, y, size, size);
                 this.edgeCells.push({ x, y });
             }
 
@@ -138,9 +137,40 @@ class LevelGen {
                 }
             }
             this.fillRoomWithCircle(room);
+
+            // Generate and draw platforms in the room
+            const platforms = this.generatePlatforms(room);
+            platforms.forEach(platform => {
+                for (let y = platform.y; y < platform.y + platform.height; y++) {
+                    for (let x = platform.x; x < platform.x + platform.width; x++) {
+                        const index = y * cols + x;
+                        squares[index] = false;
+                    }
+                }
+            });
         });
 
         this.connectRooms(rooms);
+    }
+
+    generatePlatforms(room) {
+        const platformCount = 3;
+        const platformMinWidth = 3;
+        const platformMaxWidth = 10;
+        const platformMinHeight = 1;
+        const platformMaxHeight = 3;
+        const platforms = [];
+
+        for (let i = 0; i < platformCount; i++) {
+            const width = Math.floor(Math.random() * (platformMaxWidth - platformMinWidth + 1)) + platformMinWidth;
+            const height = Math.floor(Math.random() * (platformMaxHeight - platformMinHeight + 1)) + platformMinHeight;
+            const x = Math.floor(Math.random() * (room.width - width)) + room.x;
+            const y = Math.floor(Math.random() * (room.height - height)) + room.y;
+            const platform = { x, y, width, height };
+            platforms.push(platform);
+        }
+
+        return platforms;
     }
 
     fillRoomWithCircle(room) {
