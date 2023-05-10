@@ -234,7 +234,6 @@ class Hero {
       // the hero "dies" when hp <= 0
       this.statusBlock.isDead = true;
     }
-
     if (this.statusBlock.isDead) {
       // if the hero is dead it brings you to the start screen (gameState1)
       gameState = 0;
@@ -246,7 +245,6 @@ class Hero {
     }
     //!%%%%%%%%%%%%%%
     if (game.mouseDown && !this.statusBlock.onCoolDown) {
-      // attacking if mouse is down and the heros not on cooldown
       this.statusBlock.isAttacking = true;
     } else if (this.statusBlock.onCoolDown) {
       // runs the cooldown timer
@@ -258,6 +256,8 @@ class Hero {
       this.statusBlock.coolDownTimer = 100;
     }
     this.attack();
+
+    //!%%%%%%%%%%%%%%%%%%% powerups below
     //double jump timer
     if (this.inventory.dbJump) {
       this.clr = "purple";

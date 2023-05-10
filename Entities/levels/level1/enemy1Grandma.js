@@ -2,6 +2,7 @@
 class lvl1Enemy1 {
     constructor(x, y, leftBound, rightBound, seeDistance) {
         this.loc = new JSVector(x, y);
+        this.hp = 100;
         this.lB = leftBound;
         this.rB = rightBound;
         this.w = 30;//width
@@ -22,12 +23,13 @@ class lvl1Enemy1 {
             this.moveImgs[i - 1] = document.createElement("img");
             this.moveImgs[i - 1].src = "Images/Level1/Lvl1Enemies/Lvl1Enemy1/oldman" + i + ".png"
         }
-        console.log(this.moveImgs);
+        //console.log(this.moveImgs);
     }
     run() {
-        this.update();
+        //dont want to overwrite the superclass run function
+        if(this.hp>0){
+            this.update();
         this.seeHero();
-        this.render();
         this.fenceRender();
         if (this.attack) {
             this.attackRender();
@@ -37,11 +39,13 @@ class lvl1Enemy1 {
             this.render();
             this.slow();//specially dedicated to slowing the hero down
         }
+        }
+        
     }
     update() {
         this.vel.add(this.acc);
         if (this.loc.x + this.w > this.rB || this.loc.x < this.lB) {
-            this.vel.x *= -1
+            this.vel.x *= -1;
         }
         //limits max velocity to 3
         if (this.vel.x > 3) {
@@ -78,13 +82,15 @@ class lvl1Enemy1 {
     }
     attackRender() {
         // console.log("attack enemy to enemy 1 to  " + this.loc.x + this.loc.y);
+        this.render();//will eventually get a system set up for an attack animation
         ctx.beginPath();
         ctx.moveTo(this.loc.x, this.loc.y);
         ctx.lineTo(this.loc.x + this.w, this.loc.y);
         ctx.lineTo(this.loc.x + this.w, this.loc.y - this.h);
         ctx.lineTo(this.loc.x, this.loc.y - this.h);
         ctx.closePath();
-        ctx.fillStyle = "yellow";
+        ctx.fillStyle = "#FF5F4933";
+        ctx.fill();
         //ctx.fill();
     }
     fenceRender() {
@@ -119,8 +125,14 @@ class lvl1Enemy1 {
     attackHero() {
         this.acc = JSVector.subGetNew(game.hero.loc, this.loc);
         this.acc.setMagnitude(0.05);//makes sure to set the magnitude to something very small
-        this.acc.y = 0;
-        //console.log(this.acc);
+        this.acc.y = 0;//moves the grandpa towards the hero
+
+        //this part actually hurts the player
+        let dist = this.loc.distanceSquared(game.hero.loc);
+        if(dist < 225){
+            //if the player is within 15 pix then drains 1 health a frame, need to get a secondary set of frames
+            game.hero.statusBlock.hp--;
+        }
     }
     slow() {
         if (this.vel.getMagnitude() > 0) {
