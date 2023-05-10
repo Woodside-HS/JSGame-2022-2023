@@ -26,7 +26,6 @@ class genericBackground {
     run(){
         for(let i = 0; i < this.imgs.length; i++){
             //runs thru each of the images
-            //console.log(this.calcPerc(i));
             this.render(i);
             this.loop(i);
         }
@@ -46,7 +45,6 @@ class genericBackground {
         ctx.drawImage(this.imgs[id], this.loc.x+canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height-this.height*perc);
         ctx.drawImage(this.imgs[id], this.loc.x+this.offset[id],                this.height*perc,  this.width,  this.height-this.height*perc);
         ctx.drawImage(this.imgs[id], this.loc.x-canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height-this.height*perc);
-        //ctx.drawImage(this.img, this.loc.x-2*canvas.width+this.offset, this.loc.y,canvas.width, canvas.height);
         ctx.restore();
     }
     loop(id){
