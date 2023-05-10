@@ -2,13 +2,14 @@ class zombie {
     constructor(x, y, h, w, pw) {
         this.w = w;
         this.h = h
-        this.platformWidth = pw
+        this.platformWidth = pw;
         this.platformLoc = new JSVector(x, y);
         this.loc = new JSVector(x, y - this.h); // sets the zombie on the top of platform its sitting on.
         this.isDead = false;
         this.hp = 100;
-        this.movingL = false;
-        this.movingR = true
+        this.movingL = true;
+        this.movingR = false
+        this.movingSpeed = 0.5
     }
     run() {
         this.render();
@@ -27,9 +28,21 @@ class zombie {
     update() {
     }
     checkHero() {
-
     }
     moveZombie() {
+        if (this.movingL && !this.movingR) { // moving the zombie Left
+            this.loc.x -= this.movingSpeed
+        } else if (this.movingR && !this.movingL) { // moves the zombie Right
+            this.loc.x += this.movingSpeed
+        }
 
+        if (this.loc.x + this.w >= this.platformLoc.x + this.platformWidth) {
+            this.movingR = false;
+            this.movingL = true;
+        }
+        if (this.loc.x <= this.platformLoc.x) {
+            this.movingL = false;
+            this.movingR = true;
+        }
     }
 }

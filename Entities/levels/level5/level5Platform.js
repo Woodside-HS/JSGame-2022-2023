@@ -4,7 +4,7 @@ class level5platform extends Platform {
         // this.enemy = []
         this.ynZ = ynZ; // yes/no Zombie (is or isnt a zombie)
         if (this.ynZ == true) {
-            this.enemy = new zombie(x, y, 20, 20, w)
+            this.enemy = new zombie(x, y, 20, 20, this.width)
             // this.loadZombie()
             // console.log(this.ynZ)
         }
