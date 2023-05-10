@@ -22,20 +22,24 @@ class Game {
     };
 
     this.levels[0] = new level1(1);
-    this.levels[2] = new level3(3); //Spencer's Level
+    // this.levels[1] = new level2(2)
+    // this.levels[2] = new level3(3); //Spencer's Level
+    // this.levels[3] = new level4(4);
+    this.levels[4] = new level5(5);
+
   }
 
   update = () => {
     this.moveCam();
-      if(gameState == 0){
-        this.menuScreen();
-      }
-      else if(gameState >= 1){ //gameState is equal to the level
-        this.playState(gameState);
-      }
-      else{
-        this.endState();
-      }
+    if (gameState == 0) {
+      this.menuScreen();
+    }
+    else if (gameState >= 1) { //gameState is equal to the level
+      this.playState(gameState);
+    }
+    else {
+      this.endState();
+    }
   };
 
   // Game state 0
@@ -44,7 +48,7 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(ctx,"click 'tile 1' to play ","50px serif",200,200,"green","red"
+    drawText(ctx, "click 'tile 1' to play ", "50px serif", 200, 200, "green", "red"
     );
   };
 
@@ -57,7 +61,7 @@ class Game {
     this.levels[0].background.run();//since there is only one background object, then only need to run this once
     //need to run background before everything else
     this.hero.run();
-    this.levels[a-1].run();
+    this.levels[a - 1].run();
     ctx.restore();
   };
 
@@ -73,16 +77,16 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    if(this.clickingA && !hittingRight){
+    if (this.clickingA && !hittingRight) {
       this.hero.loc.x -= 2
-     }
-     else{
+    }
+    else {
       null;
-     }
-    if(this.clickingD && !hittingLeft){
+    }
+    if (this.clickingD && !hittingLeft) {
       this.hero.loc.x += 2
     }
-    else{
+    else {
       null;
     }
   };
