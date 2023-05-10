@@ -2,14 +2,13 @@ class Hero {
   constructor(x, y) {
     this.loc = new JSVector(x, y); //ideally loc would only be a y value for how far up the screen they are
     this.vel = new JSVector(0, 0);
-    this.cursorLoc = new JSVector(0, 0); //location of the cursor aids in attacking
     this.posNeg = true; //related to attacking
     this.height = 50;
     this.width = 50;
     this.grav = new JSVector(0, 0.2); //gravity for when falling
     this.clr = "green";
     this.bullets = [];
-    this.shootingDirection = true; //true = right, false = left
+    this.shootingDirection = false; //true = right, false = left
     this.inventory = {
       dbJump: false,
       dbCoin: false,
@@ -27,6 +26,9 @@ class Hero {
       onPlatform: false,
       jumpCount: 0,
       isAttacking: false,
+      isThrowing: false,
+      isFalling: false,
+      isJumping: false,
       onCoolDown: false,
       coolDownTimer: 100, // the length of the attack cooldown
       attackTimer: 50, // the length/amount of time that the hero attacks for
@@ -39,17 +41,21 @@ class Hero {
     this.indc = 0;
 
     //image stuff
-    this.moveFrames = [];
-    this.groove = 0;///grove is the varibale ID that counts down to the switching of frames
-    this.grooveId = 0;//Grove Id is the current frame number.
-    this.loadImages();
     this.timeSinceMoved = 0;
+    this.frameNum = 0;
+    this.changeFrame = 0;
+    this.heroFall = [];
+    this.heroMove = [];
+    this.heroJump = [];
+    this.heroThrow = [];
+    this.heroIdle = [];
+    this.loadImages();
   }
 
   run() {
+    this.checkFace();
     this.render();
     this.update();
-    // this.attack();
     this.vel.add(this.grav);
     this.loc.add(this.vel);
 
@@ -58,99 +64,169 @@ class Hero {
     }
   }
   loadImages() {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 16; i++) {
       //the 9 has to be hardcoded inn
-      this.moveFrames[i] = document.createElement("img");
-      this.moveFrames[i].src = "resources/Hero2/hwr000" + (i + 1) + ".png";
+      this.heroMove[i] = document.createElement("img");
+      this.heroMove[i].src = "Images/Hero/HeroMove/hero" + (i + 1) + ".png";
+    }
+    for (let i = 0; i < 14; i++) {
+      this.heroThrow[i] = document.createElement("img");
+      this.heroThrow[i].src = "Images/Hero/HeroThrow/hero" + (i + 1) + ".png";
+    }
+    for (let i = 0; i < 15; i++) {
+      this.heroJump[i] = document.createElement("img");
+      this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
+    }
+    for (let i = 0; i < 6; i++) {
+      this.heroFall[i] = document.createElement("img");
+      this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";
+    }
+  }
+  checkFace() {
+    //this is the code that checks if the hero is moving or not, is used to determine if hero should be idle
+    if (!game.clickingA && !game.clickingD) {
+      this.timeSinceMoved++;
+    } else {
+      this.timeSinceMoved = 0;
+    }
+    if (this.timeSinceMoved > 5) {
+      this.statusBlock.isMoving = false;
+    } else {
+      this.statusBlock.isMoving = true;
+    }
+    //checks which side the hero was last facing, for attacking and throwing
+    if (game.clickingA) {
+      this.posNeg = true;
+    } else if (game.clickingD) {
+      this.posNeg = false;
+    }
+    if (this.vel.y > 0) {
+      this.statusBlock.isFalling = true;
+      this.statusBlock.isJumping = false;//cuts the jump anim early
+      //console.log("falling");
+    } else {
+      this.statusBlock.isFalling = false;
     }
   }
   render() {
-    //this is the code that checks if the hero is moving or not
-    if(!game.clickingA && !game.clickingD){
-      this.timeSinceMoved++;
-    }else {
-      this.timeSinceMoved = 0;
-      
-      this.groove++;
-      if (this.groove % 6 == 0) {
-        this.grooveId++;
-        if (this.grooveId >= 8) {
-          this.grooveId = 0;
+    switch (true) {
+      //checks if any of the following values are true, if so runs them
+      case this.statusBlock.isAttacking:
+        console.log("renderding Attack");
+        break;
+      //! END OF ATTACKING
+      case this.statusBlock.isShooting:
+        this.changeFrame++;
+        console.log("throwing" + this.frameNum);
+        if (this.changeFrame >= 2) {
+          this.changeFrame = 0;
+          this.frameNum++;
         }
-      }
-    }
-    if (this.timeSinceMoved > 5) {
-      //this only works if it has been more then 5 frames since you have stopped moving
-      //TODO ideally this would be where the idle frames go but we dont have any rn
-      if(this.indc>0){
-        //flips back for a second, dunno why
-        ctx.drawImage(this.moveFrames[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-      } else {
-        ctx.save();
-        ctx.translate(this.loc.x + this.width, this.loc.y);
-        ctx.scale(-1, 1);
-        ctx.drawImage(this.moveFrames[0], 0, 0, this.width, this.height);
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.restore();
-      }
-    } else {
-      //flips the image depending on which way you are going
-      /*
-      * Note: this will swap the handedness of the character
-      * If he holds something on the right side, it will flip to the left side when going in the other direction
-      */
-      //! 
-      if (game.clickingD) {
-        ctx.save();
-        ctx.drawImage(this.moveFrames[this.grooveId], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-        ctx.restore();
-      } else {
-        ctx.save();
-        ctx.translate(this.loc.x + this.width, this.loc.y);
-        ctx.scale(-1, 1);
-        ctx.drawImage(this.moveFrames[this.grooveId], 0, 0, this.width, this.height);
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.restore();
-      }
-    }
-    //below renderes the small circles for each of the powerups
-    if(this.inventory.dbJump){
-      ctx.beginPath();
-      ctx.fillStyle = "purple";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y, 5, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-    if(this.inventory.dbCoin){
-      ctx.beginPath();
-      ctx.fillStyle = "orange";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+10, 5, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-    if(this.inventory.invulnerability){
-      ctx.beginPath();
-      ctx.fillStyle = "#DDDDDD";
-      ctx.arc(this.loc.x + this.width-5, this.loc.y+game.camLoc.y+20, 5, 0, 2 * Math.PI);
-      ctx.fill();
-      ctx.closePath();
-    }
-    //below is the indicator, gonna keep it for now
-    if (game.clickingA) {
-      this.indc = -20;
-    }
-    if (game.clickingD) {
-      this.indc = 20;
-    }
+        if (this.frameNum >= 13) {
+          this.statusBlock.isShooting = false;
+        }
+        if (game.clickingD || !this.posNeg) {
+          ctx.drawImage(this.heroThrow[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA || this.posNeg) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroThrow[this.frameNum], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroThrow[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
+        break;
+      //! END OF THROWING
+      case this.statusBlock.isJumping:
+        this.changeFrame++;
+        //console.log("jumping"+ this.frameNum);
+        if (this.changeFrame >= 4) {
+          this.changeFrame = 0;
+          this.frameNum++;
+        }
+        if (this.frameNum >= 14) {
+          this.statusBlock.isJumping = false;
+        }
+        if (game.clickingD || !this.posNeg) {
+          ctx.drawImage(this.heroJump[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA || this.posNeg) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroJump[this.frameNum], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroJump[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
+        //console.log("jumping");
+        break;
+      //! END OF JUMPING
+      case this.statusBlock.isFalling:
+        this.changeFrame++;
+        // console.log("falling"+ this.frameNum);
+        if (this.changeFrame >= 4) {
+          this.changeFrame = 0;
+          this.frameNum++;
+        }
+        if (this.frameNum >= 5) {
+          this.frameNum = 0;
+        }
+        if (game.clickingD || !this.posNeg) {
+          ctx.drawImage(this.heroFall[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA || this.posNeg) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroFall[this.frameNum], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroFall[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
 
-    ctx.save();
-    ctx.beginPath();
-    ctx.moveTo(this.loc.x +this.width/2, this.loc.y + game.camLoc.y);
-    ctx.lineTo(this.loc.x + this.indc+this.width/2, this.loc.y+game.camLoc.y);
-    ctx.strokeStyle = "orange";
-    ctx.stroke();
-    ctx.closePath();
-    ctx.restore();
+
+        break;
+      //! END OF FALLING
+      case this.statusBlock.isMoving:
+        this.changeFrame++;
+        if (this.frameNum >= this.heroMove.length - 1) {
+          this.frameNum = 1;
+        }
+        if (this.changeFrame >= 3) {//changes the current imge after certain number of frames passes
+          this.changeFrame = 0;
+          this.frameNum++;
+        }
+        //swaps the hero's location when moving in another direction
+        if (game.clickingD) {
+          ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroMove[this.frameNum], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroMove[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
+        break;
+      //! END OF MOVING
+      default:
+        //the "else" condition
+
+        //I give up
+        if (this.posNeg && this.timeSinceMoved >= 6) {
+          //checks if hero is facing right 
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroJump[0], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else if (!this.posNeg && this.timeSinceMoved >= 1) {
+          ctx.drawImage(this.heroJump[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
+
+    }
+    //TODO need a way to display powerups, maybe topleft of screen
   }
   update() {
     //! %%%%%%%%%%%%%%%
@@ -174,7 +250,6 @@ class Hero {
       this.statusBlock.isAttacking = true;
     } else if (this.statusBlock.onCoolDown) {
       // runs the cooldown timer
-      //console.log("onCoolDown (cant attack)")
       this.statusBlock.coolDownTimer--;
     }
     if (this.statusBlock.coolDownTimer <= 0 && this.statusBlock.onCoolDown) {
@@ -193,7 +268,6 @@ class Hero {
         this.clr = "green";
       }
     }
-
     //double coin timer
     if (this.inventory.dbCoin) {
       this.statusBlock.dbCoinCounter++;
@@ -204,7 +278,6 @@ class Hero {
         this.clr = "green";
       }
     }
-
     //invulnerability timer
     if (this.inventory.invulnerability) {
       this.statusBlock.invulnerabilityCounter++;
@@ -215,8 +288,6 @@ class Hero {
         this.clr = "green";
       }
     }
-
-
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
       if (this.bullets[i].isDead) {
@@ -226,6 +297,9 @@ class Hero {
   }
 
   jump() {
+    this.statusBlock.isJumping = true;
+    this.changeFrame = 0;//TODO need somewhere to reset changeFrame and Frame Num everytime we swap to a dif animation but this is Temp
+    this.frameNum = 1;
     if (!this.statusBlock.onPlatform && !this.inventory.dbJump) {
       // this checks if you are on a platform and if you have double jump
       return;
@@ -236,7 +310,6 @@ class Hero {
     } else {
       jumpLimit = 1;
     }
-
     //! change this later! I set it to a large number just for testing
     //we might not need a jumplimit but its good to have for now
     //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
@@ -249,16 +322,10 @@ class Hero {
     }
   }
   attack() {
-    this.posNeg = true; //right side
-    if (this.cursorLoc.x < this.loc.x) {
-      this.posNeg = false; //left side
-    }
-
     if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
-      //console.log("is attacking")
       this.statusBlock.attackTimer--;
       ctx.beginPath();
-      if (this.posNeg) {
+      if (!this.posNeg) {
         ctx.moveTo(this.loc.x + 50, this.loc.y + 0); //top left
         ctx.lineTo(this.loc.x + 80, this.loc.y + 0); //top right
         ctx.lineTo(this.loc.x + 80, this.loc.y + this.height); //bottom right
@@ -269,7 +336,6 @@ class Hero {
         ctx.lineTo(this.loc.x + 0, this.loc.y + this.height); //bottom right
         ctx.lineTo(this.loc.x - 30, this.loc.y + this.height); //bottom left
       }
-
       ctx.closePath();
       ctx.fillStyle = "darkgreen";
       ctx.strokeStyle = "black";
@@ -283,15 +349,15 @@ class Hero {
   }
 
   shoot() {
-    if (this.indc < 0) {
+    if (this.posNeg) {
       this.shootingDirection = true;
-    } else if (this.indc > 0) {
+    } else if (!this.posNeg) {
       this.shootingDirection = false;
     }
-
-    this.bullets.push(
-      new Bullet(this.loc.x, this.loc.y, ctx, this.shootingDirection)
-    );
+    this.bullets.push(new Bullet(this.loc.x, this.loc.y - (this.height / 2), ctx, this.shootingDirection));
+    this.statusBlock.isShooting = true;
+    this.changeFrame = 0;//TODO need somewhere to reset changeFrame and Frame Num everytime we swap to a dif animation but this is Temp
+    this.frameNum = 1;
   }
 
   reSetHero() {

@@ -27,13 +27,15 @@ class Bullet {
     this.loc.add(this.vel);
 
     for (let i = 0; i < game.levels[0].platforms.length; i++) {
-      for (let j = 0; j < game.levels[0].platforms[i].enemies.length; j++) {
-        this.distance = game.levels[0].platforms[i].enemies[j].loc.distance(
-          this.loc
-        );
-        if (this.distance < 10) {
-          game.levels[0].platforms[i].enemies.splice(j, 1);
-          this.isDead = true;
+      if(game.levels[0].platforms[i].enemies){
+        for (let j = 0; j < game.levels[0].platforms[i].enemies.length; j++) {
+          this.distance = game.levels[0].platforms[i].enemies[j].loc.distance(
+            this.loc
+          );
+          if (this.distance < 10) {
+            game.levels[0].platforms[i].enemies.splice(j, 1);
+            this.isDead = true;
+          }
         }
       }
     }
