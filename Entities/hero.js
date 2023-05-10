@@ -112,12 +112,12 @@ class Hero {
     switch (true) {
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
-        console.log("renderding Attack");
+        //console.log("renderding Attack");
         break;
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
         this.changeFrame++;
-        console.log("throwing" + this.frameNum);
+        //console.log("throwing" + this.frameNum);
         if (this.changeFrame >= 2) {
           this.changeFrame = 0;
           this.frameNum++;
@@ -326,11 +326,13 @@ class Hero {
       this.statusBlock.attackTimer--;
       ctx.beginPath();
       if (!this.posNeg) {
+        //right of hero
         ctx.moveTo(this.loc.x + 50, this.loc.y + 0); //top left
         ctx.lineTo(this.loc.x + 80, this.loc.y + 0); //top right
         ctx.lineTo(this.loc.x + 80, this.loc.y + this.height); //bottom right
         ctx.lineTo(this.loc.x + 50, this.loc.y + this.height); //bottom left
       } else {
+        //left of hero
         ctx.moveTo(this.loc.x - 30, this.loc.y + 0); //top left
         ctx.lineTo(this.loc.x + 0, this.loc.y + 0); //top right
         ctx.lineTo(this.loc.x + 0, this.loc.y + this.height); //bottom right

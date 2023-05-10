@@ -27,21 +27,49 @@ class lvl1Enemy1 {
     }
     run() {
         //dont want to overwrite the superclass run function
-        if(this.hp>0){
+        this.checkHurt();
+        if (this.hp > 0) {
             this.update();
-        this.seeHero();
-        this.fenceRender();
-        if (this.attack) {
-            this.attackRender();
-            this.attackHero();
-        } else {
-            this.acc = new JSVector(0, 0);//resets acceleration to zero
-            this.render();
-            this.slow();//specially dedicated to slowing the hero down
+            this.seeHero();
+            this.fenceRender();
+            if (this.attack) {
+                this.attackRender();
+                this.attackHero();
+            } else {
+                this.acc = new JSVector(0, 0);//resets acceleration to zero
+                this.render();
+                this.slow();//specially dedicated to slowing the hero down
+            }
         }
-        }
-        
     }
+    checkHurt() {
+        if(game.hero.statusBlock.isAttacking){
+            console.log("df;ljgw;ortgqretagnjtrq");
+            if(game.hero.posNeg){
+                //if hero is attacking to the right
+                if(
+                    this.loc.x>game.hero.loc.x+50 && //left boundary of hero attack
+                    this.loc.x<game.hero.loc.x+80 && //right boundary of hero attack
+                    this.loc.y>game.hero.loc.y && //below top of hero
+                    this.loc.y<game.hero.loc.y+game.hero.height //above bottom of hero
+                ){
+                    this.hp--;
+                    console.log(this.hp);
+                }//end of loc if statemnet
+            } else {//Positive and negative if statement
+                //hero is to the right
+                if(this.loc.x>game.hero.loc.x+50 && //left boundary of hero attack
+                this.loc.x<game.hero.loc.x+80 && //right boundary of hero attack
+                this.loc.y>game.hero.loc.y && //below top of hero
+                this.loc.y<game.hero.loc.y+game.hero.height //above bottom of hero
+                ){
+                    this.hp--;
+                    console.log(this.hp);
+                }//end of loc  if statement
+                }//Pos/neg if statement
+            }//is attacking if statement
+        }//check hurt
+    
     update() {
         this.vel.add(this.acc);
         if (this.loc.x + this.w > this.rB || this.loc.x < this.lB) {
@@ -60,7 +88,7 @@ class lvl1Enemy1 {
         // console.log("rednering enemy 1 to  " + this.loc.x + this.loc.y);
         this.swap++;
         //console.log(this.swap);
-        if (this.swap > (12-this.vel.getMagnitude()*5)) {
+        if (this.swap > (12 - this.vel.getMagnitude() * 5)) {
             this.swap = 0;
             this.frameId++;
             if (this.frameId > 5) {
@@ -70,12 +98,12 @@ class lvl1Enemy1 {
         if (this.vel.x >= 0) {
             ctx.save();//this code flips the character if the character is facing right
             //ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.translate(this.loc.x,this.loc.y);
-            ctx.scale(-1,1);
+            ctx.translate(this.loc.x, this.loc.y);
+            ctx.scale(-1, 1);
             ctx.drawImage(this.moveImgs[this.frameId], -this.w, -this.h, this.w, this.h);
             ctx.restore();
         } else {
-            ctx.drawImage(this.moveImgs[this.frameId], this.loc.x, this.loc.y-this.h, this.w, this.h);
+            ctx.drawImage(this.moveImgs[this.frameId], this.loc.x, this.loc.y - this.h, this.w, this.h);
         }
 
 
@@ -129,7 +157,7 @@ class lvl1Enemy1 {
 
         //this part actually hurts the player
         let dist = this.loc.distanceSquared(game.hero.loc);
-        if(dist < 225){
+        if (dist < 225) {
             //if the player is within 15 pix then drains 1 health a frame, need to get a secondary set of frames
             game.hero.statusBlock.hp--;
         }
