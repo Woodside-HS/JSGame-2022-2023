@@ -44,6 +44,7 @@ class Hero {
     this.timeSinceMoved = 0;
     this.frameNum = 0;
     this.changeFrame = 0;
+    this.heroPunch = [];
     this.heroFall = [];
     this.heroMove = [];
     this.heroJump = [];
@@ -81,6 +82,10 @@ class Hero {
       this.heroFall[i] = document.createElement("img");
       this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";
     }
+    for (let i = 0; i < 12; i++) {
+      this.heroPunch[i] = document.createElement("img");
+      this.heroPunch[i].src = "Images/Hero/HeroPunch/hero" + (i + 1) + ".png";
+    }
   }
   checkFace() {
     //this is the code that checks if the hero is moving or not, is used to determine if hero should be idle
@@ -112,11 +117,33 @@ class Hero {
     switch (true) {
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
-        console.log("renderding Attack");
+        //console.log(this.statusBlock.isAttacking)
+        this.changeFrame++;
+        //console.log(this.changeFrame)
+        console.log("Attacking" + this.frameNum);
+        if (this.changeFrame >= 5) {
+          this.changeFrame = 0;
+          this.frameNum++;
+        }
+        if (this.frameNum >= 11) {
+          this.statusBlock.isAttacking = false;
+        }
+        if (game.clickingD || !this.posNeg) {
+          ctx.drawImage(this.heroPunch[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        } else if (game.clickingA || this.posNeg) {
+          ctx.save();//this code flips the character if the character is facing right
+          ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
+          ctx.scale(-1, 1);
+          ctx.drawImage(this.heroPunch[this.frameNum], -this.width, 0, this.width, this.height);
+          ctx.restore();
+        } else {
+          ctx.drawImage(this.heroPunch[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+        }
         break;
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
         this.changeFrame++;
+        console.log(this.changeFrame)
         console.log("throwing" + this.frameNum);
         if (this.changeFrame >= 2) {
           this.changeFrame = 0;
@@ -322,7 +349,10 @@ class Hero {
     }
   }
   attack() {
-    if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
+    if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) { 
+      if(this.frameNum >10){
+        this.frameNum = 0;
+      }
       this.statusBlock.attackTimer--;
       ctx.beginPath();
       if (!this.posNeg) {
