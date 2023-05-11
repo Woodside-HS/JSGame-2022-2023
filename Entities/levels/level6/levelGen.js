@@ -3,14 +3,15 @@ class LevelGen {
         this.canvas = document.createElement('canvas');
         this.ctx = this.canvas.getContext('2d');
 
-        this.canvas.width = window.innerWidth * 8; // Increase grid size
-        this.canvas.height = window.innerHeight * 8;
+        this.canvas.width = 1920 * 4; // Increase grid size
+        this.canvas.height = 1080 * 4;
 
         this.heroSize = heroSize;
         this.size = Math.floor(heroSize / 4);
         this.rows = Math.floor(this.canvas.height / this.size);
         this.cols = Math.floor(this.canvas.width / this.size);
-        this.squares = new Array(this.rows * this.cols).fill(false);
+        this.squares = new Array(this.rows * this.cols).fill().map(() => ({ isSolid: false, hasFossil: false }));
+
 
         this.room1 = { x: 20, y: 20, width: 30, height: 30 };
         this.room2 = { x: 20, y: this.rows - 50, width: 30, height: 30 };
@@ -23,11 +24,67 @@ class LevelGen {
 
         this.progress = 0;
 
+        this.fossils = [];
+        for (let i = 0; i <= 6; i++) {
+            let img = new Image();
+            img.src = `Images/Level6/fossil/F2080-${i}.png`;
+            this.fossils.push(img);
+        }
+
         this.groundtexture.addEventListener('load', () => {
             // Call the level generation functions
             this.generateRandomRooms();
             this.drawSquares();
+            this.placeFossils();
         });
+    }
+
+    placeFossils() {
+        let squares = this.squares;
+        let ctx = this.ctx;
+        let size = this.size;
+        let cols = this.cols;
+        let rows = this.rows;
+
+        for (let i = 0; i < squares.length; i++) {
+            // Skip squares that are not edges or already have a fossil
+            if (squares[i].isSolid && !squares[i].isEdge) {
+                continue;
+            }
+
+            if (Math.random() < 0.01) { // 1% chance to place a fossil
+                const x = (i % cols) * size;
+                const y = Math.floor(i / cols) * size;
+
+                // Choose a random fossil image
+                let fossilImg = this.fossils[Math.floor(Math.random() * this.fossils.length)];
+
+                // Set random opacity
+                ctx.globalAlpha = Math.random();
+
+                // Save the current context
+                ctx.save();
+
+                // Translate to the middle of the image
+                ctx.translate(x + size * 0.5, y + size * 0.5);
+
+                // Rotate the context
+                ctx.rotate(Math.random() * 2 * Math.PI);
+
+                // Draw the fossil image with random size
+                let randSize = (Math.random() * 2);
+                ctx.drawImage(fossilImg, -size * randSize / 2, -size * randSize / 2, size * randSize, size * randSize);
+
+                // Restore the context to its original state
+                ctx.restore();
+
+                // Reset the globalAlpha
+                ctx.globalAlpha = 1.0;
+
+                // Mark this square as having a fossil
+                squares[i].hasFossil = true;
+            }
+        }
     }
 
     drawSquares() {
@@ -45,27 +102,49 @@ class LevelGen {
         ctx.fillStyle = 'black';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+        // Create the noise map
+        let noiseMap = new Array(rows);
+        for (let i = 0; i < rows; i++) {
+            noiseMap[i] = new Array(cols);
+        }
+        let scale = 5;
+        for (let y = 0; y < rows; y++) {
+            for (let x = 0; x < cols; x++) {
+                let noiseVal = p5.prototype.noise(x / scale, y / scale);
+                noiseMap[y][x] = noiseVal;
+            }
+        }
+
         for (let i = 0; i < squares.length; i++) {
             const x = (i % cols) * size;
             const y = Math.floor(i / cols) * size;
 
+            // Set the opacity based on the noise map
+            ctx.globalAlpha = 1 - noiseMap[Math.floor(y / size)][Math.floor(x / size)];
+            let limit = 0.6;
+            if (ctx.globalAlpha < limit) {
+                ctx.globalAlpha = limit;
+            }
             // draw image
-            if (!squares[i]) {
+            if (!squares[i].isSolid) {
                 ctx.drawImage(groundtexture, x, y, size, size);
             } else {
-                // draw a darker versino of the image
+                // draw a darker version of the image
                 ctx.drawImage(groundtexture, x, y, size, size);
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+                ctx.fillStyle = 'rgba(0, 0, 0, 1)';
                 ctx.fillRect(x, y, size, size);
             }
+
+            // Reset the globalAlpha
+            ctx.globalAlpha = 1.0;
 
             // Check if the cell is an edge
             if (this.isEdge(i)) {
                 this.edgeCells.push({ x, y });
             }
-
         }
     }
+
 
     isEdge(index) {
         const x = index % this.cols;
@@ -86,7 +165,7 @@ class LevelGen {
             if (i < 0 || i >= this.squares.length) {
                 return false;
             }
-            return !this.squares[index] && this.squares[i];
+            return !this.squares[index].isSolid && this.squares[i].isSolid;
         });
 
         return isEdge;
@@ -133,7 +212,7 @@ class LevelGen {
             for (let y = room.y; y < room.y + room.height; y++) {
                 for (let x = room.x; x < room.x + room.width; x++) {
                     const index = y * cols + x;
-                    squares[index] = false;
+                    squares[index].isSolid = false;
                 }
             }
             this.fillRoomWithCircle(room);
@@ -144,7 +223,7 @@ class LevelGen {
                 for (let y = platform.y; y < platform.y + platform.height; y++) {
                     for (let x = platform.x; x < platform.x + platform.width; x++) {
                         const index = y * cols + x;
-                        squares[index] = false;
+                        squares[index].isSolid = false;
                     }
                 }
             });
@@ -158,7 +237,7 @@ class LevelGen {
         const platformMinWidth = 3;
         const platformMaxWidth = 10;
         const platformMinHeight = 1;
-        const platformMaxHeight = 3;
+        const platformMaxHeight = 1;
         const platforms = [];
 
         for (let i = 0; i < platformCount; i++) {
@@ -190,7 +269,7 @@ class LevelGen {
                 const index = y * cols + x;
                 const point = { x, y };
                 if (this.isPointInPolygon(point, circlePoints)) {
-                    squares[index] = true;
+                    squares[index].isSolid = true;
                 }
             }
         }
@@ -266,7 +345,7 @@ class LevelGen {
                         for (let q = yMin; q <= yMax; q++) {
                             const index = (q + Math.round(offset)) * cols + (p + Math.round(offset));
                             if (Math.abs(p - x) <= t && Math.abs(q - y) <= t) {
-                                squares[index] = true;
+                                squares[index].isSolid = true;
                             }
                         }
                     }
