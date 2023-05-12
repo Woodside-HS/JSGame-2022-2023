@@ -25,7 +25,7 @@ class zombie {
     render() {
         ctx.save()
         ctx.translate(this.loc.x, this.loc.y);
-        ctx.rect(0, 0, this.h, this.w)
+        ctx.rect(0, 0, this.w, this.h)
         if (this.lookingR) {
             ctx.moveTo(0, -10)
             ctx.lineTo(100, -10);
@@ -48,12 +48,29 @@ class zombie {
             if (game.hero.loc.x > this.loc.x) {
                 this.lookingR = true;
                 this.lookingL = false;
+                this.runAttack();
             } else {
                 this.lookingL = true;
                 this.lookingR = false;
+                this.runAttack();
             }
         }
 
+    }
+    runAttack() {
+        this.punchLocL = new JSVector(this.loc.x - 20, this.loc.y)
+        this.punchLocR = new JSVector(this.loc.x + 20, this.loc.y)
+        ctx.save()
+        if (this.lookingL) {
+            ctx.translate(this.punchLocL.x, this.punchLocL.y);
+        } else {
+            ctx.translate(this.punchLocR.x, this.punchLocR.y);
+        }
+
+        ctx.rect(0, 0, this.w, this.h)
+        ctx.stroke()
+        ctx.fill()
+        ctx.restore()
     }
     update() {
     }
