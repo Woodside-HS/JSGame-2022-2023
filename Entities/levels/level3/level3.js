@@ -12,28 +12,28 @@ class level3 extends Level{
         this.platforms[4] = new Level3Platform(550, 350, 150);
         //TODO: Code Location of every platform after this reminder. 
         //TODO: Adjust all locations so it flows as a level
-        this.platforms[5] = new Level3Platform(150,400,100); 
-        this.platforms[6] = new Level3Platform(150,400,100);
-        this.platforms[7] = new Level3Platform(150,400,100);
-        this.platforms[8] = new Level3Platform(150,400,100);
-        this.platforms[9] = new Level3Platform(150,400,100);
-        this.platforms[10] = new Level3Platform(150,400,100);
-        this.platforms[11] = new Level3Platform(150,400,100);
-        this.platforms[12] = new Level3Platform(150,400,100);
-        this.platforms[13] = new Level3Platform(150,400,100);
-        this.platforms[14] = new Level3Platform(150,400,100);
-        this.platforms[15] = new Level3Platform(150,400,100);
-        this.platforms[16] = new Level3Platform(150,400,100);
-        this.platforms[17] = new Level3Platform(150,400,100);
-        this.platforms[18] = new Level3Platform(150,400,100);
-        this.platforms[19] = new Level3Platform(150,400,100);
-        this.platforms[20] = new Level3Platform(150,400,100);
-        this.platforms[21] = new Level3Platform(150,400,100);
-        this.platforms[22] = new Level3Platform(150,400,100);
-        this.platforms[23] = new Level3Platform(150,400,100);
-        this.platforms[24] = new Level3Platform(150,400,100);
-        this.platforms[25] = new Level3Platform(150,400,100);
-        this.platforms[26] = new Level3Platform(150,400,100);
+        this.platforms[5] = new Level3Platform(120,550,700); 
+        // this.platforms[6] = new Level3Platform(150,400,100);
+        // this.platforms[7] = new Level3Platform(150,400,100);
+        // this.platforms[8] = new Level3Platform(150,400,100);
+        // this.platforms[9] = new Level3Platform(150,400,100);
+        // this.platforms[10] = new Level3Platform(150,400,100);
+        // this.platforms[11] = new Level3Platform(150,400,100);
+        // this.platforms[12] = new Level3Platform(150,400,100);
+        // this.platforms[13] = new Level3Platform(150,400,100);
+        // this.platforms[14] = new Level3Platform(150,400,100);
+        // this.platforms[15] = new Level3Platform(150,400,100);
+        // this.platforms[16] = new Level3Platform(150,400,100);
+        // this.platforms[17] = new Level3Platform(150,400,100);
+        // this.platforms[18] = new Level3Platform(150,400,100);
+        // this.platforms[19] = new Level3Platform(150,400,100);
+        // this.platforms[20] = new Level3Platform(150,400,100);
+        // this.platforms[21] = new Level3Platform(150,400,100);
+        // this.platforms[22] = new Level3Platform(150,400,100);
+        // this.platforms[23] = new Level3Platform(150,400,100);
+        // this.platforms[24] = new Level3Platform(150,400,100);
+        // this.platforms[25] = new Level3Platform(150,400,100);
+        // this.platforms[26] = new Level3Platform(150,400,100);
 
 
         
