@@ -1,10 +1,19 @@
 class level1platform extends Platform {
     constructor(x,y,w,hasDog){
         super(x,y,w);
+        this.height = 50;
         if(hasDog){
             this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,15,15);
         }
-        //this.img;
+        let rand = Math.random();
+        if(rand >-.5){
+            this.img = document.createElement("img");
+            this.img.src = "Images/Level1/Lvl1Platform/plat1.png"
+        } else {
+            this.img = document.createElement("img");
+            this.img.src = "Images/Level1/Lvl1Platform/plat2.png"
+        }
+        //this.img =
         //TODO get image in
     }
     run(){
@@ -22,13 +31,6 @@ class level1platform extends Platform {
     }
 
     render() {
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x,this.loc.y);
-        ctx.lineTo(this.loc.x+this.width,this.loc.y);
-        ctx.lineTo(this.loc.x+this.width,this.loc.y+10);
-        ctx.lineTo(this.loc.x,this.loc.y+10);
-        ctx.closePath();
-        ctx.fillStyle = "red";
-        ctx.fill();
+        ctx.drawImage(this.img, this.loc.x,this.loc.y,this.width,50);
     }
 }

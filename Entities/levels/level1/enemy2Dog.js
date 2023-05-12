@@ -12,16 +12,56 @@ class lvl1Enemy2 {
         this.isDead = false;
         this.sees = false;
         this.sightSq = 2500;//50 pixesl
+        this.charge = 0;
+        this.isAttacking = false;
+        this.waveDir = new JSVector(0,0);
+        this.projectile;
         //this.loadImages();
     }
     loadImages() {
 
     }
     run() {
-        this.render();
+        if(this.projectile){
+            if(!this.projectile.false){
+                this.projectile.run();
+            }
+        }
+        if(!this.isAttacking){
+            this.render();
         this.update();
         this.checkAttack();
         this.checkHero();
+        } else {
+            this.charge++;
+            this.checkAttack();
+            if(this.charge >=100){
+                this.attack();
+            } else {
+                this.chargeRender();
+            }
+        }
+    }
+    attack(){
+        //resets the attack
+        let lR = false;//for Left/Right facing
+        if(this.waveDir.x > 0){
+            lR = true;
+        }
+        this.isAttacking = false;
+        this.charge = 0;
+        console.log("dog attack");
+        this.projectile = new lvl1Projec(this.loc.x,this.loc.y,lR);
+    }
+    chargeRender(){
+        ctx.beginPath();
+        ctx.moveTo(this.loc.x, this.loc.y);
+        ctx.lineTo(this.loc.x + this.w, this.loc.y);
+        ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
+        ctx.lineTo(this.loc.x, this.loc.y + this.h);
+        ctx.closePath();
+        ctx.fillStyle = "red";
+        ctx.fill();
     }
     update() {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y);
@@ -67,14 +107,15 @@ class lvl1Enemy2 {
         let heroH = game.hero.height; // the heros height
         let heroW = game.hero.width; // the heros width
         if (
-            //checks if the heros location is overlaping with the coin/thing
             heroLoc.x + heroW > this.loc.x &&
             heroLoc.x < this.loc.x + this.w &&
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.h
         ) {
             if (!game.hero.inventory.invulnerability) {
-                game.hero.statusBlock.hp--;
+                //if hero is within certain area;
+                this.waveDir = JSVector.subGetNew(this.loc,game.hero.loc);
+                this.isAttacking = true;
             }
         }
     }
