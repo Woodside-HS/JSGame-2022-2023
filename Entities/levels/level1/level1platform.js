@@ -3,7 +3,7 @@ class level1platform extends Platform {
         super(x,y,w);
         this.height = 50;
         if(hasDog){
-            this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,15,15);
+            this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,25,25);
         }
         let rand = Math.random();
         if(rand >-.5){

@@ -11,7 +11,7 @@ class lvl1Enemy2 {
         this.move = .25; // the speed of the enemy movement
         this.isDead = false;
         this.sees = false;
-        this.sightSq = 2500;//50 pixesl
+        this.sightSq = 100*100;//100 pixesl
         this.charge = 0;
         this.isAttacking = false;
         this.waveDir = new JSVector(0,0);
@@ -50,7 +50,7 @@ class lvl1Enemy2 {
         }
         this.isAttacking = false;
         this.charge = 0;
-        console.log("dog attack");
+        //console.log("dog attack");
         this.projectile = new lvl1Projec(this.loc.x,this.loc.y,lR);
     }
     chargeRender(){
@@ -64,19 +64,20 @@ class lvl1Enemy2 {
         ctx.fill();
     }
     update() {
-        let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y);
-        if (this.loc.distanceSquared(heroLoc) < this.sightSq) {
+        //let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y);
+        let hLoc = new JSVector(game.hero.loc.x+(game.hero.width/2), game.hero.loc.y+(game.hero.height/2));//gets the ceneter of the hero
+        if (this.loc.distanceSquared(hLoc) < this.sightSq) {
             this.sees = true;
         }
         if (this.sees) {
             this.move = 0;
             if (this.loc.x > this.pLoc.x && this.loc.x < this.pLoc.x + this.pWidth - 45) {
                 //if enemy is within the platform, checks for player direction
-                if (heroLoc.x < this.loc.x) {
+                if (hLoc.x < this.loc.x) {
                     //if hero is to the left, moves left
-                    this.move = -1.75;
+                    this.move = -.75;
                 } else {
-                    this.move = 1.75;
+                    this.move = .75;
                 }
             }
             this.loc.x += this.move;
