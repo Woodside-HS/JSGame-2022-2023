@@ -111,8 +111,8 @@ class Hero {
   render() {
     if (showHitBox) { // renders the hitbox of the hero
       ctx.save()
-      ctx.translate(this.loc.x, this.loc.y + game.camLoc.y)
-      ctx.rect(0, 0, this.width, this.height)
+      ctx.translate(this.loc.x+10, this.loc.y + game.camLoc.y)
+      ctx.rect(0, 0, this.width-20, this.height)
       ctx.fill()
       ctx.restore()
     }
