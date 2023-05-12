@@ -18,15 +18,10 @@ class lvl1Projec {
     }
     checkHero(){
         let hLoc = new JSVector(game.hero.loc.x+(game.hero.width/2), game.hero.loc.y+(game.hero.height/2));//gets the ceneter of the hero
-        //ctx.arc(hLoc.x, hLoc.y,.1,0,Math.PI*2);
-        //ctx.fillStyle = "red";
-        //ctx.fill();
         let dist = this.loc.distanceSquared(hLoc);
-        //console.log(dist);
         if(dist<(this.rad*this.rad)){
             game.hero.vel.y = -5;
             game.hero.loc.y -=10;
-            console.log("projectile hit enemy");
         }
     }
     update(){
