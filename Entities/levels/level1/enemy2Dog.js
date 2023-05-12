@@ -35,7 +35,7 @@ class lvl1Enemy2 {
         } else {
             this.charge++;
             this.checkAttack();
-            if(this.charge >=100){
+            if(this.charge >=25){
                 this.attack();
             } else {
                 this.chargeRender();

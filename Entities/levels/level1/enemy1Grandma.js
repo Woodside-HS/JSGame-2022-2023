@@ -44,7 +44,7 @@ class lvl1Enemy1 {
     }
     checkHurt() {
         if(game.hero.statusBlock.isAttacking){
-            console.log("df;ljgw;ortgqretagnjtrq");
+            //console.log("df;ljgw;ortgqretagnjtrq");
             if(game.hero.posNeg){
                 //if hero is attacking to the right
                 if(

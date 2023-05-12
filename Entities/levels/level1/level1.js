@@ -14,7 +14,7 @@ class level1 extends Level{
         //need the specific platform class to get started on loading platforms
     }
     loadFreeEnemies(){
-        this.enemies[0] = new lvl1Enemy1(100,650,50,500,200);
+        this.enemies[0] = new lvl1Enemy1(25,650,0,150,200);
     }
 
 
