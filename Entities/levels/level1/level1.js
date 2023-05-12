@@ -3,7 +3,7 @@ class level1 extends Level{
         super(id);   
         this.loadPlatforms();
         this.loadCoins();
-        this.loadBackgrounds(3);
+        this.loadBackgrounds(5);
         this.loadFreeEnemies();
     }
     loadPlatforms() {
