@@ -28,9 +28,9 @@ class Platform {
         let heroW = game.hero.width; // the heros width
         if (
             //checks if the heros location is overlaping with the platform
-            heroLoc.x + heroW > this.loc.x &&
-            heroLoc.x < this.loc.x + this.width &&
-            heroLoc.y + heroH > this.loc.y &&
+            heroLoc.x + heroW - 20> this.loc.x &&
+            heroLoc.x + 10  < this.loc.x + this.width &&
+            heroLoc.y + heroH> this.loc.y &&
             heroLoc.y < this.loc.y + this.height
         ) {
             // console.log("touching platform");
