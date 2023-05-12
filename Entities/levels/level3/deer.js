@@ -9,6 +9,7 @@ class Deer{
     }
 
     run(){ 
+        this.render();
         /*if(){ if the deer meets conditions to begin eating
             eatPlatform();
         }
@@ -20,7 +21,13 @@ class Deer{
         //TODO: Set off boolean in associated platform so that it "dies"
     }
 
-    render(){
+    render(){ 
+        //! begin to closePath = temporary
+        ctx.beginPath();
+        ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.fillStyle = "brown";
+        ctx.fill();
         //? Will always be eating if it is on screen so run through eating cycle
 
     }
