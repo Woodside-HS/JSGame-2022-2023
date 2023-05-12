@@ -39,9 +39,9 @@ class genericBackground {
             perc = 0;
             //fixing small error overlooked earlier
         }
-        ctx.drawImage(this.imgs[id], this.loc.x+canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height-this.height*perc);
-        ctx.drawImage(this.imgs[id], this.loc.x+this.offset[id],                this.height*perc,  this.width,  this.height-this.height*perc);
-        ctx.drawImage(this.imgs[id], this.loc.x-canvas.width+this.offset[id],   this.height*perc,  this.width,  this.height-this.height*perc);
+        ctx.drawImage(this.imgs[id], this.loc.x+canvas.width+this.offset[id],   0,  this.width,  this.height);
+        ctx.drawImage(this.imgs[id], this.loc.x+this.offset[id],                0,  this.width,  this.height);
+        ctx.drawImage(this.imgs[id], this.loc.x-canvas.width+this.offset[id],   0,  this.width,  this.height);
         ctx.restore();
     }
     loop(id){
