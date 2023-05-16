@@ -14,7 +14,7 @@ class level3 extends Level{
         this.platforms[5] = new Level3Platform(770,300,100);
         this.platforms[6] = new Level3Platform(950,325,50); 
         this.platforms[7] = new Level3Platform(1050,350,50);
-        this.platforms[8] = new Level3Platform(1150,360,20);
+        this.platforms[8] = new Level3Platform(1150,360,20); //!expand space between platforms
         this.platforms[9] = new Level3Platform(1220,370,20);
         this.platforms[10] = new Level3Platform(1290,380,20);
         this.platforms[11] = new Level3Platform(1360,390,20);
