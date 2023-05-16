@@ -16,7 +16,8 @@ class Berries{
 
     checkHero(){
         if(this.loc.distance(hero.loc)<=20){ //hard coded, check later w/image added
-            level3.craze += this.crazeFactor; //bears will check against craze factor
+            game.levels[2].craze += this.crazeFactor; //bears will check against craze factor
+            game.hero.statusBlock.coins++; //berries function as coins despite their negative side effect
             this.collected = true;
         }
     }

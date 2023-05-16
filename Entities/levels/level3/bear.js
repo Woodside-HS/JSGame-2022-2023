@@ -8,10 +8,12 @@ class Bear{
     } 
 
     attack(){
+        //!Speed dependent on level3.craze
 
     }
 
     idle(){
+        //! when not attacking
         
     }
     

@@ -9,11 +9,11 @@ class Level3Platform extends Platform {
     }
 
     run() {
-        this.update();
-        this.render();
         if(!this.isDead){
-        this.checkHero();
-        this.sideCollisions();
+            this.update();
+            this.render();
+            this.checkHero();
+            this.sideCollisions();
         }
     }
 
