@@ -26,7 +26,7 @@ class DoubleCoins extends Coin {
         heroLoc.y < this.loc.y + this.size
       ) {
         this.collected = true;
-        //TODO: INCREASE HORIZONTAL SPEED HERE. Boolean in Hero
+        //TODO: INCREASE HORIZONTAL SPEED HERE. Boolean in Hero?
         //? Include Immunity from Enemies (like invulnerability power up)
       }
     }
