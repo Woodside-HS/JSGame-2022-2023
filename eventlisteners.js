@@ -10,7 +10,14 @@ const keyDownActions = {
     game.mouseDown = true;
   },
   Space: () => {
-    if (!stopMovement) game.hero.jump();
+    if (!stopMovement) {
+      if (!game.flight) {
+        game.hero.jump();
+      }
+      else {
+        game.clickingSpace = true;
+      }
+    }
   },
   KeyP: () => {
     game.hero.shoot();
@@ -28,6 +35,11 @@ const keyUpActions = {
   KeyF: () => {
     game.mouseDown = false;
   },
+  Space: () => {
+    if (game.flight) {
+      game.clickingSpace = false;
+    }
+  }
 };
 
 window.addEventListener(

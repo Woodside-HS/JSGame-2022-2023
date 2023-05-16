@@ -11,6 +11,8 @@ class Game {
       false
     );
 
+    this.flight = true;
+
     // Set the dimensions of the game area
     this.dims = {
       top: 0,
@@ -23,19 +25,22 @@ class Game {
 
     this.levels[0] = new level1(1);
     this.levels[2] = new level3(3); //Spencer's Level
+    this.levels[5] = new level6(6); //Hell Level
+
+    this.followYAxis = false;
   }
 
   update = () => {
     this.moveCam();
-      if(gameState == 0){
-        this.menuScreen();
-      }
-      else if(gameState >= 1){ //gameState is equal to the level
-        this.playState(gameState);
-      }
-      else{
-        this.endState();
-      }
+    if (gameState == 0) {
+      this.menuScreen();
+    }
+    else if (gameState >= 1) { //gameState is equal to the level
+      this.playState(gameState);
+    }
+    else {
+      this.endState();
+    }
   };
 
   // Game state 0
@@ -44,21 +49,26 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(ctx,"click 'tile 1' to play ","50px serif",200,200,"green","red"
+    drawText(ctx, "click 'tile 1' to play ", "50px serif", 200, 200, "green", "red"
     );
   };
 
   // Game state 1
   playState = (a) => {
+    // ctx.save();
+    // // Camera follow player
+    // this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
+    // ctx.translate(-this.camLoc.x, -this.camLoc.y);
+    // this.levels[0].background.run();//since there is only one background object, then only need to run this once
+    // //need to run background before everything else
+    // this.hero.run();
+    // this.levels[a-1].run();
+    // ctx.restore();
+
     ctx.save();
-    // Camera follow player
-    this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
-    ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.levels[0].background.run();//since there is only one background object, then only need to run this once
-    //need to run background before everything else
-    this.hero.run();
-    this.levels[a-1].run();
+    this.levels[5].run();
     ctx.restore();
+
   };
 
   endState = () => {
@@ -73,16 +83,16 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    if(this.clickingA && !hittingRight){
+    if (this.clickingA && !hittingRight) {
       this.hero.loc.x -= 2
-     }
-     else{
+    }
+    else {
       null;
-     }
-    if(this.clickingD && !hittingLeft){
+    }
+    if (this.clickingD && !hittingLeft) {
       this.hero.loc.x += 2
     }
-    else{
+    else {
       null;
     }
   };
