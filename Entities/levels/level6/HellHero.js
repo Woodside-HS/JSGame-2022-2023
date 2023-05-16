@@ -14,18 +14,20 @@ class HellHero {
     }
 
     update() {
-
         this.vel.y += this.gravity;
 
         if (this.vel.y > 15) {
             this.vel.y = 15;
         }
+
         if (game.clickingA) {
             this.vel.x = -this.moveSpeed;
         } else if (game.clickingD) {
             this.vel.x = this.moveSpeed;
         } else {
-            this.vel.x = 0;
+            // Apply friction to smoothly stop horizontal movement.
+            const friction = 0.9;  // You can adjust this value for desired smoothness.
+            this.vel.x *= friction;
         }
 
         if (game.clickingSpace) {
@@ -45,8 +47,8 @@ class HellHero {
         this.camLoc.x = lerp(this.camLoc.x, this.pos.x - (canvas.width / 2) + this.size.x / 2, 0.05);
         this.camLoc.y = lerp(this.camLoc.y, this.pos.y - (canvas.height / 2) + this.size.y / 2, 0.05);
         ctx.translate(-this.camLoc.x, -this.camLoc.y);
-
     }
+
 
     stopHorizontalMovement() {
         this.vel.x = 0;

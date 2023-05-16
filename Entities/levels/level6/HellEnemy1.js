@@ -1,7 +1,8 @@
-class HellEnemy1 {
+class Crawler {
     constructor(x, y, size) {
         this.pos = new JSVector(x, y);
         this.vel = new JSVector(0, 0);
+        this.size = size;
     }
 
     update() {
@@ -13,7 +14,7 @@ class HellEnemy1 {
         // render the enemy as a circle
         ctx.fillStyle = 'red';
         ctx.beginPath();
-        ctx.arc(this.pos.x, this.pos.y, 20, 0, Math.PI * 2);
+        ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.closePath();
     }

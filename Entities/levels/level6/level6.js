@@ -1,9 +1,21 @@
 class level6 {
     constructor() {
         this.size = 100;
-        this.levelGen = new LevelGen(this.size);
-        this.isLoaded = false;
-        this.character = new HellHero(0, 0, 30, 50);
+        LevelGen.create(this.size).then(levelGen => {
+            this.levelGen = levelGen;
+            this.isLoaded = false;
+            this.character = new HellHero(0, 0, 30, 50);
+            this.enemies = [];
+            this.spawnEnemies(this.levelGen.emptyCells);
+        });
+    }
+
+    async loadLevel() {
+        return new Promise((resolve) => {
+            this.levelGen.load(() => {
+                resolve();
+            });
+        });
     }
 
     checkEdgeCollisions() {
@@ -53,6 +65,17 @@ class level6 {
         }
     }
 
+    spawnEnemies(cells) {
+        // iterate through eveyr cell
+        cells.forEach(cell => {
+            // 1% chance of spawning enemy
+            if (Math.random() < 0.0075) {
+                const enemy = new Crawler(cell.x, cell.y, 5);
+                this.enemies.push(enemy);
+            }
+        });
+    }
+
 
     run() {
         if (!this.isLoaded) {
@@ -64,5 +87,8 @@ class level6 {
         game.characterPosition = this.character.pos;
         ctx.drawImage(this.levelGen.canvas, 0, 0, this.levelGen.canvas.width, this.levelGen.canvas.height);
         this.character.draw();
+        this.enemies.forEach(enemy => {
+            enemy.run();
+        });
     }
 }

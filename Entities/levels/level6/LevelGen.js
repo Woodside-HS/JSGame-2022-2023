@@ -21,6 +21,7 @@ class LevelGen {
         this.groundtexture.src = "https://i.imgur.com/hGjaTaH.png";
 
         this.edgeCells = [];
+        this.emptyCells = [];
 
         this.progress = 0;
 
@@ -31,12 +32,24 @@ class LevelGen {
             this.fossils.push(img);
         }
 
-        this.groundtexture.addEventListener('load', () => {
-            // Call the level generation functions
-            this.generateRandomRooms();
-            this.drawSquares();
-            this.placeFossils();
+    }
+
+    static async create(heroSize) {
+        let instance = new LevelGen(heroSize);
+
+        // Wrap the loading in a promise
+        await new Promise((resolve, reject) => {
+            instance.groundtexture.addEventListener('load', resolve);
+            instance.groundtexture.addEventListener('error', reject);
         });
+
+        // Now we know the image has loaded
+        instance.generateRandomRooms();
+        instance.drawSquares();
+        instance.placeFossils();
+
+        // Finally, return the instance
+        return instance;
     }
 
     placeFossils() {
@@ -133,6 +146,7 @@ class LevelGen {
                 ctx.drawImage(groundtexture, x, y, size, size);
                 ctx.fillStyle = 'rgba(0, 0, 0, 1)';
                 ctx.fillRect(x, y, size, size);
+                this.emptyCells.push({ x, y });
             }
 
             // Reset the globalAlpha
