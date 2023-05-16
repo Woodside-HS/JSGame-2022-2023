@@ -16,7 +16,8 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
-      invulnerability: false
+      invulnerability: false,
+      key: false
     };
     this.statusBlock = {
       hp: 100,
@@ -77,6 +78,11 @@ class Hero {
       this.heroJump[i] = document.createElement("img");
       this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
     }
+    for (let i = 0; i < 6; i++) {
+      this.heroFall[i] = document.createElement("img");
+      this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";
+    }
+
     for (let i = 0; i < 6; i++) {
       this.heroFall[i] = document.createElement("img");
       this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";

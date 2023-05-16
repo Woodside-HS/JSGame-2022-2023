@@ -11,6 +11,7 @@ class level4platform extends Platform {
             this.checkHeroWall();
         }
         this.render(); 
+    
     }
     update() {
 
@@ -51,7 +52,6 @@ class level4platform extends Platform {
                 heroLoc.y + heroH > this.loc.y - this.width &&
                 heroLoc.y < this.loc.y
             ) {
-                console.log("collision")
                 if(game.clickingD)
                 game.hero.loc.x = this.loc.x-50;
                 if(game.clickingA)

@@ -17,6 +17,7 @@ class Level {
         this.id = id;
         this.enemy1Images = [];
         this.enemy2Images = [];
+        this.doors = [];
     }
     
     run(){
@@ -104,6 +105,9 @@ class Level {
         });
         this.coins.forEach(coin => {
             coin.run();
+        });
+        this.doors.forEach(door => {
+            door.run();
         });
     }
 }

@@ -1,4 +1,4 @@
-class Zombie{
+class Clown{
     constructor(x, y, platformWidth, h, w) {
       this.loc = new JSVector(x, y - h); //enemies location, does change
       this.pLoc = new JSVector(x, y); //platforms location, should not change
@@ -10,7 +10,7 @@ class Zombie{
       this.frames = [];
       this.groove = 0;//groove is the varible that counts down to switching games
       this.grooveId = 0;//grooveID is current frame that is being rendered
-      this.loadImages();
+      //this.loadImages();
     }
     run() {
       this.render();
@@ -18,13 +18,13 @@ class Zombie{
       this.checkHero();
       this.checkAttack();
     }
-    loadImages(){
+    /*loadImages(){
       for(let i= 0; i<=12;i++){
         //the 12 has to be hardcoded inn
         this.frames[i] = document.createElement("img");
         this.frames[i].src  = "resources/enemy/el"+i+".png";
       }
-    }
+    }*/
     checkAttack() {
       if (game.hero.statusBlock.isAttacking) {
         //currently only works if enemy is on right side of hero
@@ -66,7 +66,7 @@ class Zombie{
       }
     }
     render() {
-      this.groove++;
+      /*this.groove++;
       if(this.groove%5 == 0){
         this.grooveId++;
         if(this.grooveId == 13){
@@ -82,18 +82,18 @@ class Zombie{
         ctx.drawImage(this.frames[this.grooveId], 0, 0, 45, 35);
         ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.restore();
-      }
+      }*/
       
-      // ctx.save(); //renders as simple box for now
-      // ctx.beginPath();
-      // ctx.moveTo(this.loc.x, this.loc.y);
-      // ctx.lineTo(this.loc.x + this.w, this.loc.y);
-      // ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
-      // ctx.lineTo(this.loc.x, this.loc.y + this.h);
-      // ctx.closePath();
-      // ctx.fillStyle = "orange";
-      // ctx.fill();
-      // ctx.restore();
+      ctx.save(); //renders as simple box for now
+      ctx.beginPath();
+      ctx.moveTo(this.loc.x, this.loc.y);
+      ctx.lineTo(this.loc.x + this.w, this.loc.y);
+      ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
+      ctx.lineTo(this.loc.x, this.loc.y + this.h);
+      ctx.closePath();
+      ctx.fillStyle = "red";
+      ctx.fill();
+      ctx.restore();
     }
   
     checkHero() {
