@@ -15,19 +15,25 @@ class HellHero {
 
     update() {
         this.vel.y += this.gravity;
-
         if (this.vel.y > 15) {
             this.vel.y = 15;
         }
 
+        const acceleration = 0.5;  // You can adjust this value for desired acceleration.
+        const maxSpeed = this.moveSpeed;
+        const friction = 0.9;  // You can adjust this value for desired smoothness.
+
         if (game.clickingA) {
-            this.vel.x = -this.moveSpeed;
+            this.vel.x = Math.max(this.vel.x - acceleration, -maxSpeed);
         } else if (game.clickingD) {
-            this.vel.x = this.moveSpeed;
+            this.vel.x = Math.min(this.vel.x + acceleration, maxSpeed);
         } else {
             // Apply friction to smoothly stop horizontal movement.
-            const friction = 0.9;  // You can adjust this value for desired smoothness.
             this.vel.x *= friction;
+        }
+
+        if (Math.abs(this.vel.x) < 0.01) {
+            this.vel.x = 0;
         }
 
         if (game.clickingSpace) {
@@ -48,6 +54,7 @@ class HellHero {
         this.camLoc.y = lerp(this.camLoc.y, this.pos.y - (canvas.height / 2) + this.size.y / 2, 0.05);
         ctx.translate(-this.camLoc.x, -this.camLoc.y);
     }
+
 
 
     stopHorizontalMovement() {
