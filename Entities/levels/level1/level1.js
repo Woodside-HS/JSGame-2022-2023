@@ -13,6 +13,7 @@ class level1 extends Level{
         this.platforms[2] = new level1platform(400,550,150, true);
         this.platforms[3] = new level1platform(600,675,150, false);
         this.platforms[4] = new level1platform(650,550,150,false);
+        this.platforms[5] = new level1platform(750,600,15000,false)
     }
     loadFreeEnemies(){
         this.enemies[0] = new lvl1Enemy1(25,650,0,150,200);
