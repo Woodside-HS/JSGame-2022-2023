@@ -6,7 +6,7 @@ class Platform {
     constructor(x, y, w) {
         this.loc = new JSVector(x, y);
         this.width = w;
-        this.height = w / 3;
+        this.height = 10;
         this.coin = null;
         this.resource = null;
         this.enemy = null;
@@ -39,10 +39,6 @@ class Platform {
                 game.hero.statusBlock.jumpCount = 0;
                 game.hero.vel.y = 0;
                 game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
-            } else {
-                // makes it so you cant go through the bottom of the platform
-                game.hero.vel.y = 0;
-                game.hero.loc.y = this.loc.y + this.height; // sets the hero the bottom of the platform so it wont go past
             }
             game.hero.statusBlock.onPlatform = true;
             return true;

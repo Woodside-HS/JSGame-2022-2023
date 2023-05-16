@@ -8,9 +8,16 @@ class level5 extends Level {
     }
     loadPlatforms() {
         // console.log("lvl5 is here")
-        this.platforms[0] = new level5platform(0, 400, 10000, false);
-        this.platforms[1] = new level5platform(150, 300, 100, false);
-        this.platforms[2] = new level5platform(400, 300, 100, true)
+        this.platforms[0] = new level5platform(0, 600, 10000, false);
+        this.platforms[1] = new level5platform(150, 500, 100, false);
+        this.platforms[2] = new level5platform(300, 400, 300, true)
+        this.platforms[3] = new level5platform(700, 300, 100, false)
+        this.platforms[4] = new level5platform(400, 200, 100, false)
+        this.platforms[5] = new level5platform(400, 300, 100, false)
+        this.platforms[6] = new level5platform(400, 300, 100, false)
+
+
+
         //need the specific platform class to get started on loading platforms
     }
 
