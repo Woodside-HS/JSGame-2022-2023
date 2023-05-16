@@ -28,10 +28,10 @@ class Platform {
         let heroW = game.hero.width; // the heros width
         if (
             //checks if the heros location is overlaping with the platform
-            heroLoc.x + heroW > this.loc.x &&//hero is within left boundry
-            heroLoc.x < this.loc.x + this.width &&//hero is within right boundry
-            heroLoc.y + heroH > this.loc.y &&//hero head is above platform -- I feel like this is artificially heightening the hero
-            heroLoc.y + heroH < this.loc.y + this.height//hero is below platform
+            heroLoc.x + heroW - 20> this.loc.x &&
+            heroLoc.x + 10  < this.loc.x + this.width &&
+            heroLoc.y + heroH > this.loc.y &&
+            heroLoc.y + 2*heroH/3 < this.loc.y + this.height/2
         ) {
             // console.log("touching platform");
             if (game.hero.vel.y > 0) {
