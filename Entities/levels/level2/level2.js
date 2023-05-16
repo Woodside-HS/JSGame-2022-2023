@@ -6,7 +6,7 @@ Stuff to add
 * Run function(runs all entities)
 * Render function()
 */
-class Level {
+class level2 {
     constructor(id) {
         this.platforms = [];
         this.background;
@@ -25,7 +25,8 @@ class Level {
     }
 
     loadPlatforms() {
-        
+        this.platforms[0] = new Platform(200, 400, 200);
+
     }
 
     loadResources(pArray1, pArray2) {//same powerups
@@ -94,7 +95,7 @@ class Level {
     
     render() {
         this.platforms.forEach(platform => { //goes through array of platforms and runs them
-            platform.run();
+            platforms.run();
         });
         this.resources.forEach(resource => {
             resource.run();

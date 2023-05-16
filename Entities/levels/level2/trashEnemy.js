@@ -1,10 +1,10 @@
-class zombie {
+class TrashEnemy {
     constructor(x, y, h, w, pw) {
         this.w = w;
         this.h = h
         this.platformWidth = pw;
         this.platformLoc = new JSVector(x, y);
-        this.loc = new JSVector(x, y - this.h); // sets the zombie on the top of platform its sitting on.
+        this.loc = new JSVector(x, y - this.h); 
         this.isDead = false;
         this.hp = 100;
         this.movingL = true;
@@ -29,7 +29,7 @@ class zombie {
     }
     checkHero() {
     }
-    moveZombie() {
+    moveTrashEnemy() {
         if (this.movingL && !this.movingR) { // moving the zombie Left
             this.loc.x -= this.movingSpeed
         } else if (this.movingR && !this.movingL) { // moves the zombie Right
