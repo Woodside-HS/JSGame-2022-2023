@@ -11,10 +11,11 @@ class lvl1Enemy2 {
         this.move = .25; // the speed of the enemy movement
         this.isDead = false;
         this.sees = false;
-        this.sightSq = 100*100;//100 pixesl
+        this.sightSq = 100 * 100;//100 pixesl
         this.charge = 0;
+        this.cooldown = 100;
         this.isAttacking = false;
-        this.waveDir = new JSVector(0,0);
+        this.waveDir = new JSVector(0, 0);
         this.projectile;
         //this.loadImages();
     }
@@ -22,38 +23,41 @@ class lvl1Enemy2 {
 
     }
     run() {
-        if(this.projectile){
-            if(!this.projectile.false){
+        this.cooldown++;
+        if (this.projectile) {
+            if (!this.projectile.false) {
                 this.projectile.run();
             }
         }
-        if(!this.isAttacking){
+        if (!this.isAttacking) {
             this.render();
-        this.update();
-        this.checkAttack();
-        this.checkHero();
+            this.update();
+            this.checkAttack();
+            this.checkHero();
         } else {
             this.charge++;
             this.checkAttack();
-            if(this.charge >=25){
+            if (this.charge >= 25 && this.cooldown >=100) {
                 this.attack();
             } else {
                 this.chargeRender();
             }
         }
     }
-    attack(){
-        //resets the attack
-        let lR = false;//for Left/Right facing
-        if(this.waveDir.x > 0){
-            lR = true;
-        }
-        this.isAttacking = false;
-        this.charge = 0;
-        //console.log("dog attack");
-        this.projectile = new lvl1Projec(this.loc.x,this.loc.y,lR);
+    attack() {
+            //resets the attack
+            let lR = false;//for Left/Right facing
+            if (this.waveDir.x > 0) {
+                lR = true;
+            }
+            this.isAttacking = false;
+            this.charge = 0;
+            //console.log("dog attack");
+            this.projectile = new lvl1Projec(this.loc.x, this.loc.y, lR);
+            this.cooldown =0;
+        
     }
-    chargeRender(){
+    chargeRender() {
         ctx.beginPath();
         ctx.moveTo(this.loc.x, this.loc.y);
         ctx.lineTo(this.loc.x + this.w, this.loc.y);
@@ -65,7 +69,7 @@ class lvl1Enemy2 {
     }
     update() {
         //let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y);
-        let hLoc = new JSVector(game.hero.loc.x+(game.hero.width/2), game.hero.loc.y+(game.hero.height/2));//gets the ceneter of the hero
+        let hLoc = new JSVector(game.hero.loc.x + (game.hero.width / 2), game.hero.loc.y + (game.hero.height / 2));//gets the ceneter of the hero
         if (this.loc.distanceSquared(hLoc) < this.sightSq) {
             this.sees = true;
         }
@@ -115,7 +119,7 @@ class lvl1Enemy2 {
         ) {
             if (!game.hero.inventory.invulnerability) {
                 //if hero is within certain area;
-                this.waveDir = JSVector.subGetNew(this.loc,game.hero.loc);
+                this.waveDir = JSVector.subGetNew(this.loc, game.hero.loc);
                 this.isAttacking = true;
             }
         }
