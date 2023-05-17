@@ -4,9 +4,8 @@ class Crawler {
         this.vel = new JSVector(0, 0);
         this.size = size;
         this.levelGen = levelGen; // Access to levelGen for edgeCells
-        this.speed = 1; // Define a speed for the crawler
-        this.legAngles = [0, Math.PI, Math.PI / 4, (3 * Math.PI) / 4]; // Angles for spider legs
-        this.legLength = size * 2; // Length of spider legs
+        this.speed = 0.5; // Define a slower speed for the fog
+        this.color = 'rgba(192,192,192,0.5)'; // Define a fog color
     }
 
     findNearestWall() {
@@ -27,51 +26,6 @@ class Crawler {
         return nearestWall;
     }
 
-    checkEdgeCollisions() {
-        const nearestWall = this.findNearestWall();
-        if (nearestWall) {
-            const cellSize = this.levelGen.size;
-
-            const cellLeft = nearestWall.x;
-            const cellRight = nearestWall.x + cellSize;
-            const cellTop = nearestWall.y;
-            const cellBottom = nearestWall.y + cellSize;
-
-            const crawlerLeft = this.pos.x;
-            const crawlerRight = this.pos.x + this.size;
-            const crawlerTop = this.pos.y;
-            const crawlerBottom = this.pos.y + this.size;
-
-            const isColliding =
-                crawlerLeft < cellRight &&
-                crawlerRight > cellLeft &&
-                crawlerTop < cellBottom &&
-                crawlerBottom > cellTop;
-
-            if (isColliding) {
-                // Collision resolution
-                const overlapX = Math.min(crawlerRight - cellLeft, cellRight - crawlerLeft);
-                const overlapY = Math.min(crawlerBottom - cellTop, cellBottom - crawlerTop);
-
-                if (overlapX < overlapY) {
-                    if (this.pos.x < nearestWall.x) {
-                        this.pos.x -= overlapX;
-                    } else {
-                        this.pos.x += overlapX;
-                    }
-                    this.vel.x = 0;
-                } else {
-                    if (this.pos.y < nearestWall.y) {
-                        this.pos.y -= overlapY;
-                    } else {
-                        this.pos.y += overlapY;
-                    }
-                    this.vel.y = 0;
-                }
-            }
-        }
-    }
-
     update() {
         const nearestWall = this.findNearestWall();
 
@@ -89,33 +43,16 @@ class Crawler {
     }
 
     render() {
-        // Render the spider body
-        ctx.fillStyle = 'red';
+        // Render the fog entity
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.closePath();
-
-        // Render the spider legs
-        ctx.strokeStyle = 'black';
-        ctx.lineWidth = 2;
-        for (let angle of this.legAngles) {
-            const legEndX = this.pos.x + Math.cos(angle) * this.legLength;
-            const legEndY = this.pos.y + Math.sin(angle) * this.legLength;
-
-            ctx.beginPath();
-            ctx.moveTo(this.pos.x, this.pos.y);
-            ctx.lineTo(legEndX, legEndY);
-            ctx.stroke();
-            ctx.closePath();
-        }
     }
 
     run() {
         this.update();
-        this.checkEdgeCollisions();
         this.render();
     }
-
-
 }
