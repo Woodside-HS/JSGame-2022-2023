@@ -89,6 +89,15 @@ class zombie {
 
     }
     update() {
+        if (game.hero.statusBlock.isShooting) {
+            for (let i = 0; i < game.hero.bullets.length; i++) {
+                if (game.hero.bullets[i].checkBullet(this.loc, this.w, this.h)) {
+                    this.isDead = true;
+                    game.hero.bullets[i].isDead = true;
+                }
+            }
+        }
+
     }
 
     checkHeroPos() { // return left if the hero is left of the enemy and right if rights

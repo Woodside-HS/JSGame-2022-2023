@@ -117,7 +117,7 @@ class Hero {
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
         this.changeFrame++;
-        console.log("throwing" + this.frameNum);
+        // console.log("throwing" + this.frameNum);
         if (this.changeFrame >= 2) {
           this.changeFrame = 0;
           this.frameNum++;

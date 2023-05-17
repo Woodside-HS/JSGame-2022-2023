@@ -4,7 +4,7 @@ class level5platform extends Platform {
         // this.enemy = []
         this.ynZ = ynZ; // yes/no Zombie (is or isnt a zombie)
         if (this.ynZ == true) {
-            this.enemy = new zombie(x, y, 30, 20, this.width)
+            this.enemy = new zombie(x, y, 35, 20, this.width)
             // this.loadZombie()
             // console.log(this.ynZ)
         }
@@ -13,6 +13,7 @@ class level5platform extends Platform {
         this.update()
         this.render();
         this.checkHero();
+        this.updateZombie();
     }
     update() {
         if (this.enemy) {
@@ -20,10 +21,8 @@ class level5platform extends Platform {
         }
     }
     updateZombie() {
-        for (let i = 0; i < this.enemy.length; i++) {
-            if (this.enemy[i].isDead) {
-                this.enemy.splice(i, 1)
-            }
+        if (this.enemy != null && this.enemy.isDead) {
+            this.enemy = null // deletes the enemy if dead
         }
     }
     render() {
