@@ -14,6 +14,7 @@ class zombie {
         this.lookingL = false;
         this.lookingR = false
         this.attackTimer = 0;
+        this.hitHero = false;
     }
     run() {
         this.render();
@@ -40,19 +41,27 @@ class zombie {
     }
     attackHero() {
         if (this.isAtacking) {
-            if (this.attackTimer++ >= 100) {
-                this.isAtacking = false;
-                this.movingL = true;
-                this.attackTimer = 0;
-            }
-            if (game.hero.loc.x > this.loc.x) {
+
+            if (this.checkHeroPos() == "right") {
                 this.lookingR = true;
                 this.lookingL = false;
                 this.runAttack();
-            } else {
+            } else if (this.checkHeroPos() == "left") {
                 this.lookingL = true;
                 this.lookingR = false;
                 this.runAttack();
+            }
+
+            if (this.attackTimer++ >= 100) {
+                this.isAtacking = false;
+                this.hitHero = false
+
+                if (this.checkHeroPos() == "left") {
+                    this.movingL = true;
+                } else if (this.checkHeroPos() == "right") {
+                    this.movingR = true;
+                }
+                this.attackTimer = 0;
             }
         }
 
@@ -71,8 +80,23 @@ class zombie {
         ctx.stroke()
         ctx.fill()
         ctx.restore()
+
+        if (!this.hitHero) { // checks if the zombie has already hit the hero in this attack cycle
+            game.hero.statusBlock.hp -= 25
+            console.log("a zombie hit the hero for 25 hp \n the hero now has: " + game.hero.statusBlock.hp)
+            this.hitHero = true
+        }
+
     }
     update() {
+    }
+
+    checkHeroPos() { // return left if the hero is left of the enemy and right if rights
+        if (game.hero.loc.x > this.loc.x) {
+            return "right"
+        } else {
+            return "left"
+        }
     }
     checkHero() {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
@@ -102,14 +126,20 @@ class zombie {
         if (this.loc.x + this.w >= this.platformLoc.x + this.platformWidth) {
             this.movingR = false;
             this.movingL = true;
-            this.lookingL = true;
-            this.lookingR = false;
+
         }
         if (this.loc.x <= this.platformLoc.x) {
             this.movingL = false;
             this.movingR = true;
+        }
+
+
+        if (this.movingR) {
             this.lookingR = true;
             this.lookingL = false;
+        } else if (this.movingL) {
+            this.lookingL = true;
+            this.lookingR = false;
         }
     }
 }
