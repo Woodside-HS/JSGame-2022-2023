@@ -11,6 +11,10 @@ class HellHero {
         this.floatForce = -1;
         this.camLoc = new JSVector();
         this.particles = [];
+        this.camShakeIntensity = 0;
+        this.camShakeDecay = 0.9;
+        this.shakeCooldown = 0;
+        this.lastVelY = 0;
     }
 
     update() {
@@ -49,13 +53,29 @@ class HellHero {
             }
         }
 
+        if (this.lastVelY < 0 || game.clickingSpace) {
+            this.camShakeIntensity += Math.abs(this.lastVelY * 0.1);  // Increase shake based on vertical speed
+            this.camShakeIntensity += 0.05;  // Constant light shake
+            this.camShakeIntensity *= this.camShakeDecay;  // Reduce shake intensity over time
+        }
+
         this.pos.add(this.vel);
         this.camLoc.x = lerp(this.camLoc.x, this.pos.x - (canvas.width / 2) + this.size.x / 2, 0.05);
         this.camLoc.y = lerp(this.camLoc.y, this.pos.y - (canvas.height / 2) + this.size.y / 2, 0.05);
-        ctx.translate(-this.camLoc.x, -this.camLoc.y);
+
+        // Add camera shake.
+        if ((this.lastVelY < 0 || game.clickingSpace) && this.shakeCooldown <= 0) {
+            let shakeX = (Math.random() - 0.5) * this.camShakeIntensity;
+            let shakeY = (Math.random() - 0.5) * this.camShakeIntensity;
+            ctx.translate(-this.camLoc.x + shakeX, -this.camLoc.y + shakeY);
+            this.shakeCooldown = 5;  // Adjust this value to control the frequency
+        } else {
+            this.shakeCooldown -= 1;
+            ctx.translate(-this.camLoc.x, -this.camLoc.y);
+        }
+
+        this.lastVelY = this.vel.y;
     }
-
-
 
     stopHorizontalMovement() {
         this.vel.x = 0;
