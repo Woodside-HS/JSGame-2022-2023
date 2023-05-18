@@ -6,15 +6,13 @@ class level1platform extends Platform {
             this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,25,25);
         }
         let rand = Math.random();
-        if(rand >-.5){
+        if(rand >=.5){
             this.img = document.createElement("img");
             this.img.src = "Images/Level1/Lvl1Platform/plat1.png"
         } else {
             this.img = document.createElement("img");
             this.img.src = "Images/Level1/Lvl1Platform/plat2.png"
         }
-        //this.img =
-        //TODO get image in
     }
     run(){
         this.update();

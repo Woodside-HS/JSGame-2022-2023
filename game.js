@@ -54,7 +54,7 @@ class Game {
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.levels[0].background.run();//since there is only one background object, then only need to run this once
+    this.levels[a-1].background.run();//since there is only one background object, then only need to run this once
     //need to run background before everything else
     this.hero.run();
     this.levels[a-1].run();
