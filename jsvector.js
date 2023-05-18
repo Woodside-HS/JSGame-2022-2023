@@ -66,17 +66,32 @@ JSVector.subGetNew = function (v1, v2) {
 };
 
 // Multiply this vector by a scalar
-JSVector.prototype.multiply = function (scalar) {
-  this.x *= scalar;
-  this.y *= scalar;
+JSVector.prototype.multiply = function (value) {
+  if (value instanceof JSVector) {
+    this.x *= value.x;
+    this.y *= value.y;
+  } else {
+    this.x *= value;
+    this.y *= value;
+  }
+  return this;
+};
+// Divide this vector by a scalar
+JSVector.prototype.divide = function (value) {
+  if (value instanceof JSVector) {
+    if (value.x !== 0) this.x /= value.x;
+    if (value.y !== 0) this.y /= value.y;
+  } else {
+    if (value !== 0) {
+      this.x /= value;
+      this.y /= value;
+    }
+  }
   return this;
 };
 
-// Divide this vector by a scalar
-JSVector.prototype.divide = function (scalar) {
-  this.x /= scalar;
-  this.y /= scalar;
-  return this;
+JSVector.fromAngle = function (angle, magnitude = 1) {
+  return new JSVector(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
 };
 
 // Normalize this vector so that it has a magnitude of 1

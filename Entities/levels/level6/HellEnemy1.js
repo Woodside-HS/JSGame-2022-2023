@@ -1,58 +1,75 @@
-class Crawler {
-    constructor(x, y, size, levelGen) {
-        this.pos = new JSVector(x, y);
-        this.vel = new JSVector(0, 0);
-        this.size = size;
-        this.levelGen = levelGen; // Access to levelGen for edgeCells
-        this.speed = 0.5; // Define a slower speed for the fog
-        this.color = 'rgba(192,192,192,0.5)'; // Define a fog color
+class Boid {
+  constructor(x, y, speed, angle) {
+    this.position = new JSVector(x, y);
+    this.velocity = JSVector.fromAngle(angle, speed);
+    this.maxSpeed = speed;
+    this.maxForce = 0.05;
+    this.viewRadius = 50;
+  }
+
+  update(flock) {
+    const { alignment, cohesion, separation } = this.calculateFlockForces(flock);
+
+    // Weight these forces. Feel free to experiment with different weightings
+    this.applyForce(alignment.multiply(1));
+    this.applyForce(cohesion.multiply(1));
+    this.applyForce(separation.multiply(1.5));
+
+    this.position.add(this.velocity);
+    this.velocity.limit(this.maxSpeed);
+  }
+
+  calculateFlockForces(flock) {
+    const alignment = new JSVector(0, 0);
+    const cohesion = new JSVector(0, 0);
+    const separation = new JSVector(0, 0);
+    let count = 0;
+
+    for (let boid of flock.boids) {
+      const distance = this.position.distance(boid.position);
+
+      if (distance > 0 && distance < this.viewRadius) {
+        alignment.add(boid.velocity);
+        cohesion.add(boid.position);
+        const diff = JSVector.subGetNew(this.position, boid.position).normalize().divide(distance);
+        separation.add(diff);
+        count++;
+      }
     }
 
-    findNearestWall() {
-        let nearestWall = null;
-        let nearestDist = Infinity;
-
-        for (let cell of this.levelGen.edgeCells) {
-            const dx = this.pos.x - (cell.x + this.levelGen.size / 2);
-            const dy = this.pos.y - (cell.y + this.levelGen.size / 2);
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < nearestDist) {
-                nearestWall = cell;
-                nearestDist = distance;
-            }
-        }
-
-        return nearestWall;
+    if (count > 0) {
+      alignment.divide(count).normalize().multiply(this.maxSpeed).sub(this.velocity).limit(this.maxForce);
+      cohesion.divide(count).sub(this.position).normalize().multiply(this.maxSpeed).sub(this.velocity).limit(this.maxForce);
+      separation.divide(count).normalize().multiply(this.maxSpeed).sub(this.velocity).limit(this.maxForce);
     }
 
-    update() {
-        const nearestWall = this.findNearestWall();
+    return { alignment, cohesion, separation };
+  }
 
-        if (nearestWall) {
-            const dx = (nearestWall.x + this.levelGen.size / 2) - this.pos.x;
-            const dy = (nearestWall.y + this.levelGen.size / 2) - this.pos.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
+  applyForce(force) {
+    this.velocity.add(force);
+  }
 
-            // Set velocity towards the nearest wall
-            this.vel.x = this.speed * dx / distance;
-            this.vel.y = this.speed * dy / distance;
-        }
+  render() {
+    ctx.beginPath();
+    ctx.arc(this.position.x, this.position.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
 
-        this.pos.add(this.vel);
+class Flock {
+  constructor() {
+    this.boids = [];
+  }
+
+  addBoid(boid) {
+    this.boids.push(boid);
+  }
+
+  run() {
+    for (let boid of this.boids) {
+      boid.update(this);
+      boid.render();
     }
-
-    render() {
-        // Render the fog entity
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.pos.x, this.pos.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.closePath();
-    }
-
-    run() {
-        this.update();
-        this.render();
-    }
+  }
 }
