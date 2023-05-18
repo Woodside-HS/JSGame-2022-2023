@@ -111,8 +111,8 @@ class Hero {
   render() {
     if (showHitBox) { // renders the hitbox of the hero
       ctx.save()
-      ctx.translate(this.loc.x+10, this.loc.y + game.camLoc.y)
-      ctx.rect(0, 0, this.width-20, this.height)
+      ctx.translate(this.loc.x + 10, this.loc.y + game.camLoc.y)
+      ctx.rect(0, 0, this.width - 20, this.height)
       ctx.fill()
       ctx.restore()
     }
@@ -323,12 +323,20 @@ class Hero {
     //! change this later! I set it to a large number just for testing
     //we might not need a jumplimit but its good to have for now
     //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
-    if (this.statusBlock.jumpCount < jumpLimit) {
+    if (this.statusBlock.jumpCount < jumpLimit && !this.inventory.jumpBoost) {
       // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
       this.vel.y = 0; // stops the hero
       this.vel.y -= 8; // pushes the hero up
       this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
       this.statusBlock.jumpCount++;
+
+    }
+    if (this.statusBlock.jumpCount < jumpLimit && this.inventory.jumpBoost) {
+      this.vel.y = 0; // stops the hero
+      this.vel.y -= 10; // pushes the hero up
+      this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
+      this.statusBlock.jumpCount++;
+
     }
   }
   attack() {

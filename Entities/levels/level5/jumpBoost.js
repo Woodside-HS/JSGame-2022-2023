@@ -49,8 +49,8 @@ class JumpBoost {
                 game.hero.statusBlock.coins++;
             }
             // console.log(game.hero.statusBlock.coins);
-            game.hero.inventory.JumpBoost = true
-            console.log(game.hero.inventory.JumpBoost)
+            game.hero.inventory.jumpBoost = true
+            // console.log(game.hero.inventory.JumpBoost)
             this.collected = true;
             displayCoinCount(); //displays the coin count
         }
