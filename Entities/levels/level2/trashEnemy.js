@@ -4,18 +4,18 @@ class TrashEnemy {
         this.h = h
         this.platformWidth = pw;
         this.platformLoc = new JSVector(x, y);
-        this.loc = new JSVector(x, y - this.h); 
+        this.loc = new JSVector(x, y - this.h);
         this.isDead = false;
         this.hp = 100;
         this.movingL = true;
         this.movingR = false
-        this.movingSpeed = 0.5
+        this.movingSpeed = 0.5;
     }
     run() {
         this.render();
         this.update();
         this.checkHero()
-        this.moveZombie()
+        this.moveTrashEnemy()
     }
     render() {
         ctx.save()

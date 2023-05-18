@@ -1,10 +1,20 @@
 class level2platform extends Platform {
     constructor(x, y, w, enemy) {
         super(x, y, w);
-        this.enemy = enemy;
+        this.hasEnemy = enemy;
+        if (this.hasEnemy) {
+            const enemyHeight = 50;  // You should adjust this value
+            const enemyWidth = 50;  // You should adjust this value
+            this.enemy = new TrashEnemy(x, y, enemyHeight, enemyWidth, w);
+        } else {
+            this.enemy = null;
+        }
     }
     run() {
-        this.update;
+        if (this.enemy) {
+            this.enemy.run();
+        }
+        this.update();
         this.render();
         this.checkHero();
     }
