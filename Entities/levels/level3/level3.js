@@ -5,6 +5,7 @@ class level3 extends Level{
         this.loadBackgrounds(3);
         this.loadCoins();
         this.craze = 0;
+        this.loadResources([12],[])
     }
     loadPlatforms() {
         this.platforms[0] = new Level3Platform(150,400,100);
@@ -15,11 +16,11 @@ class level3 extends Level{
         this.platforms[5] = new Level3Platform(770,300,100);
         this.platforms[6] = new Level3Platform(950,325,50); 
         this.platforms[7] = new Level3Platform(1050,350,50);
-        this.platforms[8] = new Level3Platform(1150,360,20); //!expand space between platforms
-        this.platforms[9] = new Level3Platform(1240,370,20);
-        this.platforms[10] = new Level3Platform(1330,380,20);
-        this.platforms[11] = new Level3Platform(1420,390,20);
-        this.platforms[12] = new Level3Platform(1510,350,100);
+        this.platforms[8] = new Level3Platform(1250,360,20); //!expand space between platforms
+        this.platforms[9] = new Level3Platform(1340,370,20);
+        this.platforms[10] = new Level3Platform(1430,380,20);
+        this.platforms[11] = new Level3Platform(1520,390,20);
+        this.platforms[12] = new Level3Platform(1610,350,100);
         // this.platforms[13] = new Level3Platform(150,400,100); //!continue
         // this.platforms[14] = new Level3Platform(150,400,100);
         // this.platforms[15] = new Level3Platform(150,400,100);
@@ -40,7 +41,10 @@ class level3 extends Level{
     }
 
     loadResources(pArray1, pArray2) {
-        //pArray1 is the array of platforms with powerup 1 
+        for(let i = 0; i<pArray1.length; i++){
+            this.resources[i] = new Berries(this.platforms[pArray1[i]].loc.x, this.platforms[pArray1[i]].loc.y);
+        }
+
         //pArray2 is the array of platforms with powerup 2
         //which powerup goes into which platform is hardcoded
         
@@ -61,13 +65,6 @@ class level3 extends Level{
         }
         */
     }
-    // loadBackgrounds(){ //!WHy is this not working?
-    //     // let backgrounds = []; 
-    //     // for(let i = 1; i <=3; i++){
-    //     //     backgrounds[i-1] = document.createElement("img");
-    //     //     backgrounds[i-1].src = "Images/Level3/Lvl3Background/bg" + this.id + ".png";
-    //     // }
-    //     // this.background = new genericBackground(backgrounds);
     // }
     loadEnemy1Images(){
         // template function
