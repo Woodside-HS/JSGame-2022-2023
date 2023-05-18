@@ -3,6 +3,8 @@ class Berries{
         this.crazeFactor = 0.1; //Berries make bears go... crazy
         this.loc = new JSVector(x, y);
         this.collected = false;
+        this.img = document.createElement("img");
+        this.img.src = "Images/Level3/berries.png";
 
     }
 
@@ -23,7 +25,7 @@ class Berries{
     }
 
     render(){
-        //!need image
+        ctx.drawImage(this.img, this.loc.x, this.loc.y);
         
     }
 
