@@ -31,6 +31,6 @@ class level1platform extends Platform {
     }
 
     render() {
-        ctx.drawImage(this.img, this.loc.x,this.loc.y,this.width,50);
+        ctx.drawImage(this.img, this.loc.x,this.loc.y-25,this.width,50);
     }
 }
