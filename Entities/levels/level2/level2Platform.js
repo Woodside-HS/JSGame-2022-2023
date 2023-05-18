@@ -1,6 +1,7 @@
 class level2platform extends Platform {
-    constructor(x, y, w) {
+    constructor(x, y, w, enemy) {
         super(x, y, w);
+        this.enemy = enemy;
     }
     run() {
         this.update;
