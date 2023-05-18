@@ -61,14 +61,14 @@ class level3 extends Level{
         }
         */
     }
-    loadBackgrounds(){ //!WHy is this not working?
-        // let backgrounds = []; 
-        // for(let i = 1; i <=3; i++){
-        //     backgrounds[i-1] = document.createElement("img");
-        //     backgrounds[i-1].src = "Images/Level3/Lvl3Background/bg" + this.id + ".png";
-        // }
-        // this.background = new genericBackground(backgrounds);
-    }
+    // loadBackgrounds(){ //!WHy is this not working?
+    //     // let backgrounds = []; 
+    //     // for(let i = 1; i <=3; i++){
+    //     //     backgrounds[i-1] = document.createElement("img");
+    //     //     backgrounds[i-1].src = "Images/Level3/Lvl3Background/bg" + this.id + ".png";
+    //     // }
+    //     // this.background = new genericBackground(backgrounds);
+    // }
     loadEnemy1Images(){
         // template function
         // for(let i = 0; i < 8; i++){
