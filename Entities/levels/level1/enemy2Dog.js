@@ -3,7 +3,7 @@
 class lvl1Enemy2 {
     constructor(x, y, platformWidth, enemyWidth, enemyHeight) {
         //x and y are the platforms location, w is the width
-        this.loc = new JSVector(x, y - enemyHeight); //enemies location, does change
+        this.loc = new JSVector(x, y - enemyHeight-5); //enemies location, does change
         this.pLoc = new JSVector(x, y); //platforms location, should not change
         this.pWidth = platformWidth;
         this.h = enemyHeight;
@@ -11,7 +11,7 @@ class lvl1Enemy2 {
         this.move = .25; // the speed of the enemy movement
         this.isDead = false;
         this.sees = false;
-        this.sightSq = 100 * 100;//100 pixesl
+        this.sightSq = 500 * 500;//500 pixesl
         this.charge = 0;
         this.cooldown = 100;
         this.isAttacking = false;
@@ -46,14 +46,10 @@ class lvl1Enemy2 {
     }
     attack() {
             //resets the attack
-            let lR = false;//for Left/Right facing
-            if (this.waveDir.x > 0) {
-                lR = true;
-            }
             this.isAttacking = false;
             this.charge = 0;
-            //console.log("dog attack");
-            this.projectile = new lvl1Projec(this.loc.x, this.loc.y, lR);
+            let dir = this.waveDir.copy();
+            this.projectile = new lvl1Projec(this.loc.x, this.loc.y, dir);
             this.cooldown =0;
         
     }
