@@ -3,7 +3,9 @@ var game, canvas, ctx, gameState;
 var stopMovement = false;
 var hittingRight, hittingLeft; // variables to keep the hero from moving through the platform
 var lastFrameTime = 0;
-var targetFPS = 60;
+var targetFPS = 75;
+var fps;
+
 
 window.onload = init; // After the window has been loaded, go to init
 
@@ -34,9 +36,19 @@ function animate(currentTime) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     debugUpdate();
     game.update();
+
+    // Calculate FPS and display it
+    fps = calculateFPS(delta);
+    displayFPS(fps);
   }
 
   requestAnimationFrame(animate);
+}
+
+
+function calculateFPS(delta) {
+  fps = 1000 / delta; // FPS = 1 / frameTime (frameTime in seconds)
+  return fps.toFixed(2); // Use toFixed to round and keep only two decimal places
 }
 
 function debugUpdate() {
@@ -66,4 +78,12 @@ function debugUpdate() {
 function displayCoinCount() {
   const coinCountElement = document.getElementById("coin-count");
   coinCountElement.innerHTML = game.hero.statusBlock.coins.toString();
+}
+
+function displayFPS(fps) {
+  ctx.fillStyle = 'white';
+  ctx.font = '20px Arial';
+  ctx.textAlign = 'right';
+  ctx.textBaseline = 'top';
+  ctx.fillText('FPS: ' + fps, canvas.width - 10, 10);
 }

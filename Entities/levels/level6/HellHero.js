@@ -15,6 +15,8 @@ class HellHero {
         this.camShakeDecay = 0.9;
         this.shakeCooldown = 0;
         this.lastVelY = 0;
+        this.jetpackFuel = 100;
+        this.jetpackLastUsed = Date.now();
     }
 
     update() {
@@ -46,11 +48,15 @@ class HellHero {
             this.floating = false;
         }
 
-        if (this.floating) {
+        if (this.floating && this.jetpackFuel > 0) {
             this.vel.y += this.floatForce;
             if (this.vel.y < -7) {
                 this.vel.y = -7;
             }
+            this.jetpackFuel = Math.max(0, this.jetpackFuel - 0.25);
+            this.jetpackLastUsed = Date.now();
+        } else {
+            this.regenerateJetpackFuel();
         }
 
         if (this.lastVelY < 0 || game.clickingSpace) {
@@ -77,6 +83,13 @@ class HellHero {
         this.lastVelY = this.vel.y;
     }
 
+    regenerateJetpackFuel() {
+        if (Date.now() - this.jetpackLastUsed > 5000) {
+            this.jetpackFuel = Math.min(100, this.jetpackFuel + 1);
+        }
+    }
+
+
     stopHorizontalMovement() {
         this.vel.x = 0;
     }
@@ -84,7 +97,7 @@ class HellHero {
     draw() {
         ctx.fillStyle = 'red';
         ctx.fillRect(this.pos.x, this.pos.y, this.size.x, this.size.y);
-        if (this.floating) {
+        if (this.floating && this.jetpackFuel > 0) {
             this.createParticles();
         }
         this.updateParticles();

@@ -152,8 +152,36 @@ class level6 {
     this.character.draw();
     this.checkEdgeCollisions();
     this.checkParticleCollisions();
+    this.drawUI();
     this.enemies.forEach((enemy) => {
       enemy.run();
     });
   }
+
+  drawUI() {
+    this.drawJetPackFuel(20, 20);
+  }
+
+  drawJetPackFuel(offx, offy) {
+    let barWidth = 200;
+    let barHeight = 20;
+    let x = this.character.camLoc.x + offx;
+    let y = this.character.camLoc.y + offy;
+    let fuelRatio = this.character.jetpackFuel / 100;
+    //drak grey
+    ctx.fillStyle = 'rgb(50,50,50)';
+    ctx.fillRect(x, y, barWidth, barHeight);
+    // fill style more red if lower but orange if lighter
+    let redComponent = Math.floor(255 * (1 - fuelRatio));
+    let greenComponent = Math.floor(165 * fuelRatio);
+
+    ctx.fillStyle = `rgb(${redComponent}, ${greenComponent}, 0)`;
+
+    ctx.fillRect(x, y, barWidth * fuelRatio, barHeight);
+    ctx.strokeStyle = 'black';
+    ctx.strokeRect(x, y, barWidth, barHeight);
+  }
+
+
+
 }
