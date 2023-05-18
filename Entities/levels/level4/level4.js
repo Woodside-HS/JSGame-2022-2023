@@ -3,9 +3,9 @@ class level4 extends Level{
         super(id);   
         this.loadPlatforms();
         this.loadCoins();
-        this.loadEnemies();
         this.loadResources();
         this.loadDoors();
+        this.loadEnemies();
     }
 
     loadPlatforms() {
@@ -23,14 +23,16 @@ class level4 extends Level{
         this.platforms[11] = new level4platform(1550,400,100,true);
         this.platforms[12] = new level4platform(2050,400,100,true);
         this.platforms[13] = new level4platform(1370,270,100,true);
-        this.platforms[14] = new level4platform(1170,270,100,true);
+        this.platforms[14] = new level4platform(1170,220,100,true);
         this.platforms[15] = new level4platform(2250,300,100,true);
 
     }
 
     loadEnemies(){
-        this.enemies[0] = new Clown(150,670,300,50,20)
-        this.enemies[1] = new Ghost(150,670,300,50,20)
+        this.enemies[0] = new Ghost(150,500,300,50,20)
+        this.enemies[1] = new Ghost(650,500,300,50,20)
+        this.enemies[2] = new Ghost(1050,500,300,50,20)
+        this.enemies[3] = new Clown(150,670,300,50,20)
     }
 
     loadDoors(){
@@ -41,6 +43,6 @@ class level4 extends Level{
     
     loadResources(){
         this.resources[0] = new Key(1100, 590, 10, 10, 0); 
-        this.resources[1] = new Key(1220, 250, 10, 10, 0); 
+        this.resources[1] = new Key(1220, 200, 10, 10, 0); 
     }
 }
