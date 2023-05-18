@@ -109,6 +109,13 @@ class Hero {
     }
   }
   render() {
+    if (showHitBox) { // renders the hitbox of the hero
+      ctx.save()
+      ctx.translate(this.loc.x+10, this.loc.y + game.camLoc.y)
+      ctx.rect(0, 0, this.width-20, this.height)
+      ctx.fill()
+      ctx.restore()
+    }
     switch (true) {
       //checks if any of the following values are true, if so runs them
       case this.statusBlock.isAttacking:
@@ -226,6 +233,9 @@ class Hero {
         }
 
     }
+
+
+
     //TODO need a way to display powerups, maybe topleft of screen
   }
   update() {

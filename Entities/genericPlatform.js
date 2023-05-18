@@ -29,10 +29,10 @@ class Platform {
         let middleOfHero = heroLoc.x + (heroW / 2); // the middle of the hero
         if (
             //checks if the heros location is overlaping with the platform
-            heroLoc.x + heroW > this.loc.x &&
-            heroLoc.x < this.loc.x + this.width &&
+            heroLoc.x + heroW - 20 > this.loc.x &&
+            heroLoc.x + 10 < this.loc.x + this.width &&
             heroLoc.y + heroH > this.loc.y &&
-            heroLoc.y < this.loc.y + this.height &&
+            heroLoc.y + 2 * heroH / 3 < this.loc.y + this.height / 2 &&
             middleOfHero < this.loc.x + this.width && // checks if the middle of the hero is past the corner of the platform
             middleOfHero > this.loc.x // checks if the middle of the hero is past the corner of the platform
         ) {
