@@ -102,6 +102,12 @@ JSVector.prototype.normalize = function () {
   return this;
 };
 
+JSVector.prototype.neg = function () {
+  this.x = -this.x;
+  this.y = -this.y;
+  return this;
+};
+
 // Limit the magnitude of this vector
 JSVector.prototype.limit = function (lim) {
   let mag = this.getMagnitude();

@@ -69,6 +69,33 @@ class LevelGen {
         return instance;
     }
 
+    getNeighbors(cell) {
+        let neighbors = [];
+        let x = cell.x;
+        let y = cell.y;
+
+        // convert x and y to grid coordinates
+        x = Math.floor(x / this.size);
+        y = Math.floor(y / this.size);
+
+
+        if (x > 0) {
+            neighbors.push(this.array2D[y][x - 1]);
+        }
+        if (x < this.cols - 1) {
+            neighbors.push(this.array2D[y][x + 1]);
+        }
+        if (y > 0) {
+            neighbors.push(this.array2D[y - 1][x]);
+        }
+        if (y < this.rows - 1) {
+            neighbors.push(this.array2D[y + 1][x]);
+        }
+
+        return neighbors;
+    }
+
+
     convertTo2DArray() {
         let array2D = [];
         for (let i = 0; i < this.rows; i++) {
@@ -129,23 +156,23 @@ class LevelGen {
         }
     }
 
-    calculateOcclusion(x, y, size) {
+    calculateOcclusion(x, y) {
         let occlusion = 0;
+        // Check surrounding squares, if they are open increase occlusion
         for (let dx = -1; dx <= 1; dx++) {
             for (let dy = -1; dy <= 1; dy++) {
                 let checkX = x + dx;
                 let checkY = y + dy;
                 // Boundary check
                 if (checkX >= 0 && checkX < this.cols && checkY >= 0 && checkY < this.rows) {
-                    if (this.squares[checkY * this.cols + checkX].isSolid) {
+                    if (!this.squares[checkY * this.cols + checkX].isSolid) {
                         occlusion++;
                     }
                 }
             }
         }
-        return occlusion / 9.0;
+        return occlusion / 9.0; // Normalize (max 9 squares can cause occlusion)
     }
-
 
     drawSquares() {
         let ctx = this.ctx;
@@ -201,23 +228,22 @@ class LevelGen {
             } else {
                 // draw a darker version of the image
                 ctx.drawImage(groundtexture, x, y, size, size);
-                ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                ctx.fillStyle = "rgba(0, 0, 0, 0.75)";
                 ctx.fillRect(x, y, size, size);
 
                 debugCtx.fillStyle = "rgba(0, 0, 0, 1)";
                 debugCtx.fillRect(x, y, size, size);
 
                 this.emptyCells.push({ x, y });
+
+                let occlusion = this.calculateOcclusion(i % cols, Math.floor(i / cols));
+                ctx.fillStyle = `rgba(0, 0, 0, ${occlusion})`;
+                ctx.fillRect(x, y, size, size);
             }
 
-            let occlusion = this.calculateOcclusion(i % cols, Math.floor(i / cols), size);
-            ctx.fillStyle = `rgba(0, 0, 0, ${occlusion})`;
-            ctx.fillRect(x, y, size, size);
 
             // Reset the globalAlpha
             ctx.globalAlpha = 1.0;
-
-
 
             // Check if the cell is an edge
             if (this.isEdge(i)) {

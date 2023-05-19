@@ -122,7 +122,28 @@ class level6 {
     }
   }
 
-  spawnEnemies(cells) { }
+  spawnEnemies(cells) {
+    const numClusters = getRandomInt(30, 50);
+
+    for (let i = 0; i < numClusters; i++) {
+      console.log("hi")
+      const clusterSize = getRandomInt(2, 7);
+      // look for a cell with at a solid cell under it
+      let foundCell = null;
+      while (foundCell == null) {
+        // choose a random cell from cells
+        const cell = cells[Math.floor(Math.random() * cells.length)];
+        let x = Math.floor(cell.x / this.levelGen.size);
+        let y = Math.floor(cell.y / this.levelGen.size);
+        if (!this.levelGen.array2D[y + 1][x].isSolid) {
+          foundCell = cell;
+        }
+      }
+
+      // once found a cell with a solid cell under it, spawn a cluster of spikes
+      this.enemies.push(new SpikeCluster(foundCell.x, foundCell.y, clusterSize, this.levelGen.size));
+    }
+  }
 
   checkParticleCollisions() {
     const edgeCells = this.levelGen.edgeCells;

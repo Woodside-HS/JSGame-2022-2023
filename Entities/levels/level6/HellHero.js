@@ -88,14 +88,6 @@ class HellHero {
                         this.retractGrapple();
                     }
                 }
-            } else {
-                // The grappling hook is hooked, so we pull the player towards it.
-                const directionToHook = JSVector.subGetNew(this.grapplingHook.pos, this.pos);
-                const distanceToHook = directionToHook.getMagnitude();
-                directionToHook.normalize();
-
-                const grappleForce = 0.2; // Adjust this value to increase or decrease the force applied to the player
-                this.vel.add(directionToHook.multiply(grappleForce));
             }
         }
     }
