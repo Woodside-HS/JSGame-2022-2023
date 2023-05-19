@@ -6,7 +6,6 @@ var lastFrameTime = 0;
 var targetFPS = 75;
 var fps;
 
-
 window.onload = init; // After the window has been loaded, go to init
 
 var debugView = false;
@@ -45,7 +44,6 @@ function animate(currentTime) {
   requestAnimationFrame(animate);
 }
 
-
 function calculateFPS(delta) {
   fps = 1000 / delta; // FPS = 1 / frameTime (frameTime in seconds)
   return fps.toFixed(2); // Use toFixed to round and keep only two decimal places
@@ -81,9 +79,9 @@ function displayCoinCount() {
 }
 
 function displayFPS(fps) {
-  ctx.fillStyle = 'white';
-  ctx.font = '20px Arial';
-  ctx.textAlign = 'right';
-  ctx.textBaseline = 'top';
-  ctx.fillText('FPS: ' + fps, canvas.width - 10, 10);
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "top";
+  ctx.fillText("FPS: " + fps, canvas.width - 10, 10);
 }

@@ -15,8 +15,20 @@ class level6 {
       }
 
       setInterval(this.spawnParticles.bind(this), 1);
-    });
 
+      canvas.addEventListener("mousedown", (e) => {
+        const mousePos = new JSVector(e.offsetX, e.offsetY);
+        const mousePosWorld = JSVector.addGetNew(mousePos, this.character.camLoc);
+        const mousePosGrid = new JSVector(Math.floor(mousePosWorld.x / this.levelGen.size), Math.floor(mousePosWorld.y / this.levelGen.size));
+        const block = this.levelGen.array2D[mousePosGrid.y][mousePosGrid.x];
+
+        this.character.deployGrapple(block);
+      });
+
+      canvas.addEventListener("mouseup", (e) => {
+        this.character.retractGrapple();
+      });
+    });
   }
 
   async loadLevel() {
@@ -108,9 +120,7 @@ class level6 {
     }
   }
 
-  spawnEnemies(cells) {
-
-  }
+  spawnEnemies(cells) {}
 
   checkParticleCollisions() {
     const edgeCells = this.levelGen.edgeCells;
@@ -193,7 +203,7 @@ class level6 {
   }
 
   updateParticles() {
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = "#000";
     for (let i = this.particles.length - 1; i >= 0; i--) {
       const particle = this.particles[i];
       particle.update();
@@ -220,7 +230,7 @@ class level6 {
     let y = this.character.camLoc.y + offy;
     let healthRatio = this.character.health / 100;
     //drak grey
-    ctx.fillStyle = 'rgb(50,50,50)';
+    ctx.fillStyle = "rgb(50,50,50)";
     ctx.fillRect(x + displacement, y, barWidth, barHeight);
     // fill style more red if lower but orange if lighter
     let redComponent = Math.floor(255 * (1 - healthRatio));
@@ -228,7 +238,7 @@ class level6 {
     ctx.fillStyle = `rgb(${redComponent}, ${greenComponent}, 0)`;
 
     ctx.fillRect(x + displacement, y, barWidth * healthRatio, barHeight);
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = "black";
     ctx.strokeRect(x + displacement, y, barWidth, barHeight);
   }
 
@@ -240,7 +250,7 @@ class level6 {
     let y = this.character.camLoc.y + offy;
     let fuelRatio = this.character.jetpackFuel / 100;
     //drak grey
-    ctx.fillStyle = 'rgb(50,50,50)';
+    ctx.fillStyle = "rgb(50,50,50)";
     ctx.fillRect(x + displacement, y, barWidth, barHeight);
     // fill style more red if lower but orange if lighter
     let redComponent = Math.floor(255 * (1 - fuelRatio));
@@ -248,14 +258,11 @@ class level6 {
     ctx.fillStyle = `rgb(${redComponent}, 100 , ${greenComponent})`;
 
     ctx.fillRect(x + displacement, y, barWidth * fuelRatio, barHeight);
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = "black";
     ctx.strokeRect(x + displacement, y, barWidth, barHeight);
 
     // draw jetpack image on top of the bar to the left of it
     //let jetpackImg = this.levelGen.jetPacktexture;
     //ctx.drawImage(jetpackImg, x - 15, y - 15, 50 / 2, 50 / 2);
   }
-
-
-
 }
