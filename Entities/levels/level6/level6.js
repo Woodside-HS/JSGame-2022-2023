@@ -110,17 +110,19 @@ class level6 {
         }
 
         // Draw a debug line to the cell.
-        ctx.strokeStyle = "green";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(character.pos.x + character.size.x / 2, character.pos.y + character.size.y / 2);
-        ctx.lineTo(cell.x + cellSize / 2, cell.y + cellSize / 2);
-        ctx.stroke();
+        if (game.debugView) {
+          ctx.strokeStyle = "green";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(character.pos.x + character.size.x / 2, character.pos.y + character.size.y / 2);
+          ctx.lineTo(cell.x + cellSize / 2, cell.y + cellSize / 2);
+          ctx.stroke();
+        }
       }
     }
   }
 
-  spawnEnemies(cells) {}
+  spawnEnemies(cells) { }
 
   checkParticleCollisions() {
     const edgeCells = this.levelGen.edgeCells;
@@ -191,7 +193,12 @@ class level6 {
     }
     this.character.update();
     game.characterPosition = this.character.pos;
-    ctx.drawImage(this.levelGen.canvas, 0, 0, this.levelGen.canvas.width, this.levelGen.canvas.height);
+    if (!game.debugView) {
+      ctx.drawImage(this.levelGen.canvas, 0, 0, this.levelGen.canvas.width, this.levelGen.canvas.height);
+    } else {
+      ctx.drawImage(this.levelGen.debugCanvas, 0, 0, this.levelGen.canvas.width, this.levelGen.canvas.height);
+    }
+
     this.character.draw();
     this.checkEdgeCollisions();
     this.checkParticleCollisions();

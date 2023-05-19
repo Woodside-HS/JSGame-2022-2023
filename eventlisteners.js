@@ -81,6 +81,13 @@ window.addEventListener(
 );
 
 
+window.addEventListener("keydown", function (event) {
+  if (event.code === "KeyN") {
+    game.debugView = !game.debugView;
+  }
+});
+
+
 function debugViewCheckBoxClicked() {
   // Optimized debug view checkbox clicked using ternary functions
   const { checked } = document.getElementById("DebugViewCheckBox");
