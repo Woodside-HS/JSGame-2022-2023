@@ -1,7 +1,8 @@
 class HellHero {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, levelGen) {
         this.pos = new JSVector(x, y);
         this.vel = new JSVector(0, 0);
+        this.levelGen = levelGen;
         this.aspectRatio = 64 / 128;
         this.size = new JSVector(width, width * this.aspectRatio);
         this.isOnGround = false;
@@ -17,6 +18,42 @@ class HellHero {
         this.lastVelY = 0;
         this.jetpackFuel = 100;
         this.jetpackLastUsed = Date.now();
+        this.health = 100;
+        this.powerUp = {
+            jetPack: false,
+            speedBoost: false,
+            healBoost: false,
+            shield: false,
+            dash: false,
+            potions: [],
+        }
+
+        this.grapplingHook = {
+            active: false,
+            pos: new JSVector(),
+            vel: new JSVector(),
+            length: 0,
+            angle: 0,
+            angleVel: 0,
+        }
+
+        // mouse down & mouse up listener
+        canvas.addEventListener('mousedown', (e) => {
+            // find the block that i clicked
+            const mousePos = new JSVector(e.offsetX, e.offsetY);
+            const mousePosWorld = JSVector.addGetNew(mousePos, this.camLoc);
+            const mousePosGrid = new JSVector(Math.floor(mousePosWorld.x / this.size.x), Math.floor(mousePosWorld.y / this.size.y));
+            //console log first 30 blocks in this.LevelGen.squares
+            const block = this.levelGen.getBlock(mousePosGrid.x, mousePosGrid.y);
+
+            console.log('Mouse Pos:', mousePos);
+            console.log('World Pos:', mousePosWorld);
+            console.log('Grid Pos:', mousePosGrid);
+            console.log('Block:', block);
+        });
+
+        canvas.addEventListener('mouseup', (e) => {
+        });
     }
 
     update() {

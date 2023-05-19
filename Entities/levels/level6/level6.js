@@ -4,10 +4,19 @@ class level6 {
     LevelGen.create(this.size).then((levelGen) => {
       this.levelGen = levelGen;
       this.isLoaded = false;
-      this.character = new HellHero(0, 0, 30, 50);
+      this.character = new HellHero(0, 0, 30, 50, this.levelGen);
       this.enemies = [];
       this.spawnEnemies(this.levelGen.emptyCells);
+      this.particles = [];
+
+      const numParticles = 200;
+      for (let i = 0; i < numParticles; i++) {
+        this.spawnParticle();
+      }
+
+      setInterval(this.spawnParticles.bind(this), 1);
     });
+
   }
 
   async loadLevel() {
@@ -16,6 +25,26 @@ class level6 {
         resolve();
       });
     });
+  }
+
+  spawnParticle() {
+    const emptyCells = this.levelGen.emptyCells;
+    const cellSize = this.levelGen.size;
+    const cell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+    const x = cell.x + Math.random() * cellSize;
+    const y = cell.y + Math.random() * cellSize;
+    const age = getRandom(50, 1000);
+
+    const particle = new Particle(x, y);
+    particle.age = age;
+    this.particles.push(particle);
+  }
+
+  spawnParticles() {
+    const numParticles = 1;
+    for (let i = 0; i < numParticles; i++) {
+      this.spawnParticle();
+    }
   }
 
   checkEdgeCollisions() {
@@ -80,28 +109,7 @@ class level6 {
   }
 
   spawnEnemies(cells) {
-    const numFlocks = 5; // The number of flocks to spawn
-    const minBoids = 10; // Minimum number of boids per flock
-    const maxBoids = 20; // Maximum number of boids per flock
 
-    for (let i = 0; i < numFlocks; i++) {
-      const flock = new Flock();
-      const cell = cells[Math.floor(Math.random() * cells.length)]; // Select a random cell
-
-      const spawnX = cell.x + this.levelGen.size / 2;
-      const spawnY = cell.y + this.levelGen.size / 2;
-
-      const numBoids = Math.floor(Math.random() * (maxBoids - minBoids) + minBoids);
-
-      for (let j = 0; j < numBoids; j++) {
-        const speed = Math.random() * 2 + 1;
-        const angle = Math.random() * Math.PI * 2;
-        const boid = new Boid(spawnX, spawnY, speed, angle);
-        flock.addBoid(boid);
-      }
-
-      this.enemies.push(flock);
-    }
   }
 
   checkParticleCollisions() {
@@ -130,13 +138,38 @@ class level6 {
         const isColliding = particleLeft < cellRight && particleRight > cellLeft && particleTop < cellBottom && particleBottom > cellTop;
 
         if (isColliding) {
-          // Simple bounce by reversing the velocity
           particle.vel.y *= getRandom(-0.5, -0.75);
         }
       }
 
       if (particle.size < 0.1) {
         particles.splice(i, 1);
+      }
+    }
+
+    const envParticles = this.particles;
+
+    for (let i = envParticles.length - 1; i >= 0; i--) {
+      let particle = envParticles[i];
+
+      // Check collision with edge cells
+      for (let cell of edgeCells) {
+        const cellLeft = cell.x;
+        const cellRight = cell.x + cellSize;
+        const cellTop = cell.y;
+        const cellBottom = cell.y + cellSize;
+
+        const particleLeft = particle.pos.x;
+        const particleRight = particle.pos.x + particle.size;
+        const particleTop = particle.pos.y;
+        const particleBottom = particle.pos.y + particle.size;
+
+        const isColliding = particleLeft < cellRight && particleRight > cellLeft && particleTop < cellBottom && particleBottom > cellTop;
+
+        if (isColliding) {
+          particle.vel.y *= getRandom(-0.6, -0.75);
+          particle.vel.x *= getRandom(-0.6, -0.75);
+        }
       }
     }
   }
@@ -156,30 +189,71 @@ class level6 {
     this.enemies.forEach((enemy) => {
       enemy.run();
     });
+    this.updateParticles();
+  }
+
+  updateParticles() {
+    ctx.fillStyle = '#000';
+    for (let i = this.particles.length - 1; i >= 0; i--) {
+      const particle = this.particles[i];
+      particle.update();
+
+      if (particle.size <= 0) {
+        this.particles.splice(i, 1);
+        continue;
+      }
+
+      particle.draw(ctx);
+    }
   }
 
   drawUI() {
-    this.drawJetPackFuel(20, 20);
+    this.drawJetPackFuel(20, 40);
+    this.drawHealth(20, 20);
+  }
+
+  drawHealth(offx, offy) {
+    let barWidth = 100;
+    let barHeight = 10;
+    let displacement = 0;
+    let x = this.character.camLoc.x + offx;
+    let y = this.character.camLoc.y + offy;
+    let healthRatio = this.character.health / 100;
+    //drak grey
+    ctx.fillStyle = 'rgb(50,50,50)';
+    ctx.fillRect(x + displacement, y, barWidth, barHeight);
+    // fill style more red if lower but orange if lighter
+    let redComponent = Math.floor(255 * (1 - healthRatio));
+    let greenComponent = Math.floor(165 * healthRatio);
+    ctx.fillStyle = `rgb(${redComponent}, ${greenComponent}, 0)`;
+
+    ctx.fillRect(x + displacement, y, barWidth * healthRatio, barHeight);
+    ctx.strokeStyle = 'black';
+    ctx.strokeRect(x + displacement, y, barWidth, barHeight);
   }
 
   drawJetPackFuel(offx, offy) {
-    let barWidth = 200;
-    let barHeight = 20;
+    let barWidth = 100;
+    let barHeight = 10;
+    let displacement = 0;
     let x = this.character.camLoc.x + offx;
     let y = this.character.camLoc.y + offy;
     let fuelRatio = this.character.jetpackFuel / 100;
     //drak grey
     ctx.fillStyle = 'rgb(50,50,50)';
-    ctx.fillRect(x, y, barWidth, barHeight);
+    ctx.fillRect(x + displacement, y, barWidth, barHeight);
     // fill style more red if lower but orange if lighter
     let redComponent = Math.floor(255 * (1 - fuelRatio));
     let greenComponent = Math.floor(165 * fuelRatio);
+    ctx.fillStyle = `rgb(${redComponent}, 100 , ${greenComponent})`;
 
-    ctx.fillStyle = `rgb(${redComponent}, ${greenComponent}, 0)`;
-
-    ctx.fillRect(x, y, barWidth * fuelRatio, barHeight);
+    ctx.fillRect(x + displacement, y, barWidth * fuelRatio, barHeight);
     ctx.strokeStyle = 'black';
-    ctx.strokeRect(x, y, barWidth, barHeight);
+    ctx.strokeRect(x + displacement, y, barWidth, barHeight);
+
+    // draw jetpack image on top of the bar to the left of it
+    //let jetpackImg = this.levelGen.jetPacktexture;
+    //ctx.drawImage(jetpackImg, x - 15, y - 15, 50 / 2, 50 / 2);
   }
 
 

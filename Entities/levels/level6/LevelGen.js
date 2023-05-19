@@ -18,7 +18,9 @@ class LevelGen {
         this.room3 = { x: this.cols - 80, y: 30, width: 70, height: 70 };
 
         this.groundtexture = new Image();
+        this.jetPacktexture = new Image();
         this.groundtexture.src = "https://i.imgur.com/hGjaTaH.png";
+        this.jetPacktexture.src = "Images/Level6/JetPack.png";
 
         this.edgeCells = [];
         this.emptyCells = [];
@@ -32,18 +34,25 @@ class LevelGen {
             this.fossils.push(img);
         }
 
+
     }
 
     static async create(heroSize) {
         let instance = new LevelGen(heroSize);
 
         // Wrap the loading in a promise
-        await new Promise((resolve, reject) => {
+        const groundTexturePromise = new Promise((resolve, reject) => {
             instance.groundtexture.addEventListener('load', resolve);
             instance.groundtexture.addEventListener('error', reject);
         });
 
-        // Now we know the image has loaded
+        const jetPackTexturePromise = new Promise((resolve, reject) => {
+            instance.jetPacktexture.addEventListener('load', resolve);
+            instance.jetPacktexture.addEventListener('error', reject);
+        });
+
+        // Now we know the images have loaded
+        await Promise.all([groundTexturePromise, jetPackTexturePromise]);
         instance.generateRandomRooms();
         instance.drawSquares();
         instance.placeFossils();
@@ -51,6 +60,14 @@ class LevelGen {
         // Finally, return the instance
         return instance;
     }
+
+    getBlock(x, y) {
+        const index = y * this.cols + x;
+        return this.squares[index];
+    }
+
+
+
 
     placeFossils() {
         let squares = this.squares;

@@ -80,6 +80,7 @@ window.addEventListener(
   false
 );
 
+
 function debugViewCheckBoxClicked() {
   // Optimized debug view checkbox clicked using ternary functions
   const { checked } = document.getElementById("DebugViewCheckBox");
@@ -107,3 +108,4 @@ function createDebugDOM() {
     debugDiv.appendChild(element);
   });
 }
+

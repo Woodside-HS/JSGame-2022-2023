@@ -16,6 +16,12 @@ function getRandomColorRGB() {
   return `rgb(${red}, ${green}, ${blue})`;
 }
 
+// Get random bool
+function randomBool() {
+  return Math.random() >= 0.5;
+}
+
+
 // Lerp function
 function lerp(a, b, t) {
   return a + (b - a) * t;
