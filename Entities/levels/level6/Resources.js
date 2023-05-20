@@ -1,17 +1,19 @@
 class ResourceManager {
-  constructor(player, resources) {
+  constructor(player, levelGen, resources) {
     this.player = player;
+    this.levelGen = levelGen;
     this.resources = resources;
+    this.maxCapacity = 30;
   }
 
   spawnResource() {
-    // make sure resources are not max capacity
-    // get random cell that is out side of player view
+    if (this.resources.length >= this.maxCapacity) {
+      return;
+    }
 
-    // randomly choose a resource type
-    let resourceType = Math.random() < 0.5 ? HealthPack : ShieldPack;
+    let randomCell = this.levelGen.emptyCells[Math.floor(Math.random() * this.levelGen.emptyCells.length)];
 
-    let resource = new resourceType();
+    let resource = new HealthKit(randomCell, this);
 
     this.resources.push(resource);
   }
@@ -19,34 +21,46 @@ class ResourceManager {
   run() {
     this.spawnResource();
     this.resources.forEach((resource) => {
-      resource.run();
+      resource.run(this.player);
     });
   }
 }
 
 class Resource {
-  constructor(imageSrc) {
+  constructor(imageSrc, resourceManager) {
     this.image = new Image();
     this.image.src = imageSrc;
+    this.resourceManager = resourceManager;
+    this.size = 20;
   }
 
-  update() {
-    // breathing effect by oscillate position on x and y axis with perlin noise
+  update(player) {
+    if (player.pos.x < this.pos.x + this.size && player.pos.x + player.size.x > this.pos.x && player.pos.y < this.pos.y + this.size && player.pos.y + player.size.y > this.pos.y) {
+      player.increaseHealth(10);
+
+      let index = this.resourceManager.resources.indexOf(this);
+      if (index > -1) {
+        this.resourceManager.resources.splice(index, 1);
+      }
+
+      this.resourceManager.spawnResource();
+    }
   }
 
-  render(context) {
-    context.drawImage(this.image, this.x, this.y);
+  render() {
+    ctx.drawImage(this.image, this.pos.x, this.pos.y, this.size, this.size);
   }
 
-  run(context) {
-    this.update();
-    this.render(context);
+  run(player) {
+    this.update(player);
+    this.render();
   }
 }
 
-class HealthPack extends Resource {
-  constructor() {
-    super("path/to/healthpack/image.png");
+class HealthKit extends Resource {
+  constructor(cell, resourceManager) {
+    super("Images/Level6/healthKit.png", resourceManager);
+    this.pos = new JSVector(cell.x, cell.y);
   }
 }
 

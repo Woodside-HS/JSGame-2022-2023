@@ -46,14 +46,46 @@ class HellHero {
       angle: 0,
       angleVel: 0,
     };
+
+    this.healthAnimation = {
+      active: false,
+      size: 0,
+      opacity: 1,
+      color: "rgba(0, 255, 0,",
+    };
+  }
+
+  getCurrentCell() {
+    return this.getCellAt(this.pos.x, this.pos.y);
   }
 
   looseHealth(amount) {
     if (!this.invinsible) {
       this.health -= amount;
-      this.shakeScreen(amount);
+      this.shakeScreen(amount * 2);
       this.invinsible = true;
       this.invinsibleLastUsed = Date.now();
+    }
+  }
+
+  increaseHealth(amount) {
+    this.shakeScreen(amount * 2);
+    this.health += amount;
+    this.health = Math.min(this.health, 100);
+    this.healthAnimation.active = true;
+    this.healthAnimation.size = 50;
+    this.healthAnimation.opacity = 1;
+  }
+
+  updateHealthAnimation() {
+    if (this.healthAnimation.active) {
+      this.healthAnimation.size *= 0.9;
+      this.healthAnimation.opacity *= 0.9;
+      if (this.healthAnimation.size < 1 || this.healthAnimation.opacity < 0.1) {
+        this.healthAnimation.active = false;
+        this.healthAnimation.size = 0;
+        this.healthAnimation.opacity = 1;
+      }
     }
   }
 
@@ -155,6 +187,7 @@ class HellHero {
     this.handleFloatingAndJetpack();
     this.handleGrapple();
     this.handleInvisiblity();
+    this.updateHealthAnimation();
 
     this.updatePositionAndCamera();
     this.applyCameraShake();
@@ -239,6 +272,13 @@ class HellHero {
       this.drawParticles();
     } else {
       this.drawDebugParticles();
+    }
+
+    if (this.healthAnimation.active) {
+      ctx.beginPath();
+      ctx.arc(this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2, this.healthAnimation.size, 0, 2 * Math.PI, false);
+      ctx.fillStyle = this.healthAnimation.color + this.healthAnimation.opacity + ")";
+      ctx.fill();
     }
 
     this.drawGrapple();

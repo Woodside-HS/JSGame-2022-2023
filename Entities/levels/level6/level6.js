@@ -9,6 +9,13 @@ class level6 {
       this.resources = [];
       this.spawnEnemies(this.levelGen.emptyCells);
       this.particles = [];
+      this.resourceManager = new ResourceManager(this.character, this.levelGen, this.resources);
+
+      // background sound
+      this.backgroundMusic = new Audio("Images/Level6/backgroundmusic.mp3");
+      this.backgroundMusic.loop = true;
+      this.backgroundMusic.volume = 0.5;
+      this.backgroundMusic.play();
 
       const numParticles = 200;
       for (let i = 0; i < numParticles; i++) {
@@ -227,6 +234,7 @@ class level6 {
     this.enemies.forEach((enemy) => {
       enemy.run(this.character);
     });
+    this.resourceManager.run();
     this.updateParticles();
     this.character.draw();
     this.checkEdgeCollisions();
