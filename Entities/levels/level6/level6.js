@@ -6,6 +6,7 @@ class level6 {
       this.isLoaded = false;
       this.character = new HellHero(0, 0, 30, 50, this.levelGen);
       this.enemies = [];
+      this.resources = [];
       this.spawnEnemies(this.levelGen.emptyCells);
       this.particles = [];
 
@@ -64,7 +65,7 @@ class level6 {
     const edgeCells = this.levelGen.edgeCells;
     const cellSize = this.levelGen.size;
 
-    const collisionCheckRadius = 2 * Math.max(character.size.x, character.size.y);
+    const collisionCheckRadius = 100;
 
     for (let cell of edgeCells) {
       // Calculate the distance from the character to the cell.
@@ -123,10 +124,13 @@ class level6 {
   }
 
   spawnEnemies(cells) {
+    this.spawnSpikes(cells);
+  }
+
+  spawnSpikes(cells) {
     const numClusters = getRandomInt(30, 50);
 
     for (let i = 0; i < numClusters; i++) {
-      console.log("hi")
       const clusterSize = getRandomInt(2, 7);
       // look for a cell with at a solid cell under it
       let foundCell = null;
@@ -141,7 +145,7 @@ class level6 {
       }
 
       // once found a cell with a solid cell under it, spawn a cluster of spikes
-      this.enemies.push(new SpikeCluster(foundCell.x, foundCell.y, clusterSize, this.levelGen.size));
+      this.enemies.push(new SpikeCluster(foundCell.x, foundCell.y, clusterSize, this.levelGen.size, this.character, this.particles));
     }
   }
 
