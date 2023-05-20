@@ -12,9 +12,10 @@ class Spike {
     }
 
     draw() {
-        ctx.fillStyle = "red";
+        //DARK RED
+        ctx.fillStyle = "rgba(100, 0, 0, 1)";
         ctx.strokeStyle = "black";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
 
         ctx.beginPath();
         ctx.moveTo(this.position.x, this.position.y + this.cellSize - this.size);
@@ -26,9 +27,18 @@ class Spike {
         ctx.stroke();
     }
 
+    checkCollision(player) {
+        if (this.isActive) {
+            if (player.pos.y + player.size.y > this.pos.y && player.pos.y < this.pos.y + this.cellSize) {
+                if (player.pos.x + player.size.x > this.pos.x - this.size / 2 && player.pos.x < this.pos.x + this.size / 2) {
+                    player.die();
+                }
+            }
+        }
+    }
 
-    run() {
-        this.update();
+    run(player) {
+        this.checkCollision(player);
         this.draw();
     }
 }
@@ -45,7 +55,8 @@ class SpikeCluster {
 
     generateSpikes() {
         for (let i = 0; i < this.amt; i++) {
-            this.spikes.push(new Spike(this.x + i * getRandomInt(-5, 5), this.y, getRandomInt(5, 20), this.cellSize));
+            let size = getRandomInt(5, 20)
+            this.spikes.push(new Spike(this.x + size + getRandomInt(-size / 2, size / 2), this.y, size, this.cellSize));
         }
     }
 

@@ -220,14 +220,14 @@ class level6 {
       ctx.drawImage(this.levelGen.debugCanvas, 0, 0, this.levelGen.canvas.width, this.levelGen.canvas.height);
     }
 
+    this.enemies.forEach((enemy) => {
+      enemy.run(this.character);
+    });
+    this.updateParticles();
     this.character.draw();
     this.checkEdgeCollisions();
     this.checkParticleCollisions();
     this.drawUI();
-    this.enemies.forEach((enemy) => {
-      enemy.run();
-    });
-    this.updateParticles();
   }
 
   updateParticles() {

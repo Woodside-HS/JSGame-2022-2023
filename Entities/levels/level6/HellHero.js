@@ -5,7 +5,7 @@ class HellHero {
         this.vel = new JSVector(0, 0);
         this.levelGen = levelGen;
         this.aspectRatio = 64 / 128;
-        this.size = new JSVector(width, width * this.aspectRatio);
+        this.size = new JSVector(width, width);
         this.isOnGround = false;
         this.gravity = 0.5;
         this.moveSpeed = 5;
