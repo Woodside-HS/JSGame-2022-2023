@@ -17,9 +17,12 @@ class HellHero {
     this.camShakeDecay = 0.97;
     this.shakeCooldown = 0;
     this.lastVelY = 0;
-    this.jetpackFuel = 100;
+    this.jetpackCapacity = 150;
+    this.jetpackFuel = this.jetpackCapacity;
     this.jetpackLastUsed = Date.now();
     this.health = 100;
+    this.maxShield = 100;
+    this.shield = this.maxShield;
     this.invinsible = false;
     this.invinsibleLastUsed = Date.now();
     this.invinsibleDuration = 5000;
@@ -29,7 +32,6 @@ class HellHero {
       jetPack: false,
       speedBoost: false,
       healBoost: false,
-      shield: false,
       dash: false,
       potions: [],
     };
@@ -59,12 +61,25 @@ class HellHero {
     return this.getCellAt(this.pos.x, this.pos.y);
   }
 
-  looseHealth(amount) {
-    if (!this.invinsible) {
-      this.health -= amount;
-      this.shakeScreen(amount * 2);
-      this.invinsible = true;
-      this.invinsibleLastUsed = Date.now();
+  looseHealth(amount, ignoreShield) {
+    if (this.shield > 0 && !ignoreShield) {
+      if (!this.invinsible) {
+        this.shield -= amount * 1.35;
+        if (this.shield < 0) {
+          this.health += this.shield;
+          this.shield = 0;
+        }
+        this.shakeScreen(amount * 2);
+        this.invinsible = true;
+        this.invinsibleLastUsed = Date.now();
+      }
+    } else {
+      if (!this.invinsible) {
+        this.health -= amount;
+        this.shakeScreen(amount * 2);
+        this.invinsible = true;
+        this.invinsibleLastUsed = Date.now();
+      }
     }
   }
 
@@ -253,7 +268,7 @@ class HellHero {
 
   regenerateJetpackFuel() {
     if (Date.now() - this.jetpackLastUsed > 5000) {
-      this.jetpackFuel = Math.min(100, this.jetpackFuel + 1);
+      this.jetpackFuel = Math.min(this.jetpackCapacity, this.jetpackFuel + 1);
     }
   }
 

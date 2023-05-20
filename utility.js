@@ -26,6 +26,12 @@ function lerp(a, b, t) {
   return a + (b - a) * t;
 }
 
+function newImage(src) {
+  var tmp = new Image();
+  tmp.src = src;
+  return tmp;
+}
+
 // Get random number between min and max
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

@@ -6,10 +6,10 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
+    this.store = new Store();
+    this.inStore = false;
 
-    [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
-      false
-    );
+    [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(false);
 
     this.flight = true;
 
@@ -36,11 +36,10 @@ class Game {
     this.moveCam();
     if (gameState == 0) {
       this.menuScreen();
-    }
-    else if (gameState >= 1) { //gameState is equal to the level
+    } else if (gameState >= 1) {
+      //gameState is equal to the level
       this.playState(gameState);
-    }
-    else {
+    } else {
       this.endState();
     }
   };
@@ -51,8 +50,7 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(ctx, "click 'tile 1' to play ", "50px serif", 200, 200, "green", "red"
-    );
+    drawText(ctx, "click 'tile 1' to play ", "50px serif", 200, 200, "green", "red");
   };
 
   // Game state 1
@@ -68,9 +66,12 @@ class Game {
     // ctx.restore();
 
     ctx.save();
-    this.levels[5].run();
+    if (!this.inStore) {
+      this.levels[5].run();
+    } else {
+      this.store.run();
+    }
     ctx.restore();
-
   };
 
   endState = () => {
@@ -86,15 +87,13 @@ class Game {
   moveCam = () => {
     // Susbtitude Event handlers
     if (this.clickingA && !hittingRight) {
-      this.hero.loc.x -= 2
-    }
-    else {
+      this.hero.loc.x -= 2;
+    } else {
       null;
     }
     if (this.clickingD && !hittingLeft) {
-      this.hero.loc.x += 2
-    }
-    else {
+      this.hero.loc.x += 2;
+    } else {
       null;
     }
   };

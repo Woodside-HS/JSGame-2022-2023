@@ -5,12 +5,19 @@ class level6 {
       this.levelGen = levelGen;
       this.isLoaded = false;
       this.character = new HellHero(0, 0, 30, 50, this.levelGen);
-      this.enemies = [];
+      this.enemies = {
+        spikes: [],
+        ghosts: [],
+      };
       this.resources = [];
       this.spawnEnemies(this.levelGen.emptyCells);
       this.particles = [];
       this.resourceManager = new ResourceManager(this.character, this.levelGen, this.resources);
 
+      this.icons = {
+        health: newImage("Images/Level6/healthicon.png"),
+        shield: newImage("Images/Level6/shieldicon.png"),
+      };
       // background sound
       this.backgroundMusic = new Audio("Images/Level6/backgroundmusic.mp3");
       this.backgroundMusic.loop = true;
@@ -45,6 +52,11 @@ class level6 {
         resolve();
       });
     });
+  }
+
+  enterShop() {
+    this.inStore = true;
+    console.log("entering store");
   }
 
   spawnParticle() {
@@ -132,6 +144,7 @@ class level6 {
 
   spawnEnemies(cells) {
     this.spawnSpikes(cells);
+    this.spawnGhosts();
   }
 
   spawnSpikes(cells) {
@@ -152,7 +165,59 @@ class level6 {
       }
 
       // once found a cell with a solid cell under it, spawn a cluster of spikes
-      this.enemies.push(new SpikeCluster(foundCell.x, foundCell.y, clusterSize, this.levelGen.size, this.character, this.particles));
+      this.enemies.spikes.push(new SpikeCluster(foundCell.x, foundCell.y, clusterSize, this.levelGen.size, this.character, this.particles));
+    }
+  }
+
+  spawnGhosts() {
+    const numGhosts = getRandomInt(25, 40);
+
+    for (let i = 0; i < numGhosts; i++) {
+      let randomCell = this.levelGen.emptyCells[Math.floor(Math.random() * this.levelGen.emptyCells.length)];
+
+      this.enemies.ghosts.push(new Ghost(randomCell.x, randomCell.y, this.levelGen.size, this.character));
+    }
+  }
+
+  checkCollision(object) {
+    const edgeCells = this.levelGen.edgeCells;
+    const cellSize = this.levelGen.size;
+
+    for (let cell of edgeCells) {
+      const cellLeft = cell.x;
+      const cellRight = cell.x + cellSize;
+      const cellTop = cell.y;
+      const cellBottom = cell.y + cellSize;
+
+      const objectLeft = object.pos.x;
+      const objectRight = object.pos.x + object.size.x;
+      const objectTop = object.pos.y;
+      const objectBottom = object.pos.y + object.size.y;
+
+      const isColliding = objectLeft < cellRight && objectRight > cellLeft && objectTop < cellBottom && objectBottom > cellTop;
+
+      if (isColliding) {
+        // Collision resolution
+        const overlapX = Math.min(objectRight - cellLeft, cellRight - objectLeft);
+        const overlapY = Math.min(objectBottom - cellTop, cellBottom - objectTop);
+
+        if (overlapX < overlapY) {
+          if (object.pos.x < cell.x) {
+            object.pos.x -= overlapX;
+          } else {
+            object.pos.x += overlapX;
+          }
+          object.vel.x *= -1;
+        } else {
+          if (object.pos.y < cell.y) {
+            object.pos.y -= overlapY;
+            object.isOnGround = true;
+          } else {
+            object.pos.y += overlapY;
+          }
+          object.vel.y *= -1;
+        }
+      }
     }
   }
 
@@ -231,9 +296,15 @@ class level6 {
       ctx.drawImage(this.levelGen.debugCanvas, 0, 0, this.levelGen.canvas.width, this.levelGen.canvas.height);
     }
 
-    this.enemies.forEach((enemy) => {
-      enemy.run(this.character);
+    this.enemies.spikes.forEach((spike) => {
+      spike.run();
     });
+
+    this.enemies.ghosts.forEach((ghost) => {
+      ghost.run();
+      this.checkCollision(ghost);
+    });
+
     this.resourceManager.run();
     this.updateParticles();
     this.character.draw();
@@ -258,8 +329,9 @@ class level6 {
   }
 
   drawUI() {
-    this.drawJetPackFuel(20, 40);
     this.drawHealth(20, 20);
+    this.drawShield(20, 40);
+    this.drawJetPackFuel(20, 60);
   }
 
   drawHealth(offx, offy) {
@@ -280,6 +352,30 @@ class level6 {
     ctx.fillRect(x + displacement, y, barWidth * healthRatio, barHeight);
     ctx.strokeStyle = "black";
     ctx.strokeRect(x + displacement, y, barWidth, barHeight);
+
+    let imgSize = 20;
+    ctx.drawImage(this.icons.health, x - imgSize / 2, y - imgSize / 4, imgSize, imgSize);
+  }
+
+  drawShield(offx, offy) {
+    let barWidth = 100;
+    let barHeight = 10;
+    let displacement = 0;
+    let x = this.character.camLoc.x + offx;
+    let y = this.character.camLoc.y + offy;
+    let shield = this.character.shield / this.character.maxShield;
+    //drak grey
+    ctx.fillStyle = "rgb(50,50,50)";
+    ctx.fillRect(x + displacement, y, barWidth, barHeight);
+    // fill style turqoise
+    ctx.fillStyle = "rgb(0, 255, 255)";
+
+    ctx.fillRect(x + displacement, y, barWidth * shield, barHeight);
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(x + displacement, y, barWidth, barHeight);
+
+    let imgSize = 20;
+    ctx.drawImage(this.icons.shield, x - imgSize / 2, y - imgSize / 4, imgSize, imgSize);
   }
 
   drawJetPackFuel(offx, offy) {
@@ -288,14 +384,16 @@ class level6 {
     let displacement = 0;
     let x = this.character.camLoc.x + offx;
     let y = this.character.camLoc.y + offy;
-    let fuelRatio = this.character.jetpackFuel / 100;
-    //drak grey
+    let fuelRatio = this.character.jetpackFuel / this.character.jetpackCapacity;
+
+    //dark grey
     ctx.fillStyle = "rgb(50,50,50)";
     ctx.fillRect(x + displacement, y, barWidth, barHeight);
-    // fill style more red if lower but orange if lighter
-    let redComponent = Math.floor(255 * (1 - fuelRatio));
-    let greenComponent = Math.floor(165 * fuelRatio);
-    ctx.fillStyle = `rgb(${redComponent}, 100 , ${greenComponent})`;
+
+    // Fill style more red if lower but orange if lighter
+    let redComponent = 255; // red stays constant
+    let greenComponent = Math.floor(165 * fuelRatio); // green decreases with fuelRatio
+    ctx.fillStyle = `rgb(${redComponent}, ${greenComponent} , 0)`;
 
     ctx.fillRect(x + displacement, y, barWidth * fuelRatio, barHeight);
     ctx.strokeStyle = "black";

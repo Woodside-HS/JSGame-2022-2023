@@ -20,14 +20,14 @@ class Spike {
     if (this.isActive) {
       if (player.pos.y + player.size.y > this.position.y && player.pos.y < this.position.y + this.cellSize) {
         if (player.pos.x + player.size.x > this.position.x - this.size / 2 && player.pos.x < this.position.x + this.size / 2) {
-          player.looseHealth(10);
+          player.looseHealth(10, false);
         }
       }
     }
   }
 
-  run(player) {
-    this.checkCollision(player);
+  run() {
+    this.checkCollision();
     this.draw();
   }
 }
