@@ -13,7 +13,18 @@ class ResourceManager {
 
     let randomCell = this.levelGen.emptyCells[Math.floor(Math.random() * this.levelGen.emptyCells.length)];
 
-    let resource = new HealthKit(randomCell, this);
+    let resource;
+    switch (Math.floor(Math.random() * 3)) {
+      case 0:
+        resource = new HealthKit(randomCell, this);
+        break;
+      case 1:
+        resource = new ShieldPack(randomCell, this);
+        break;
+      case 2:
+        resource = new ManaPack(randomCell, this);
+        break;
+    }
 
     this.resources.push(resource);
   }
@@ -27,16 +38,27 @@ class ResourceManager {
 }
 
 class Resource {
-  constructor(imageSrc, resourceManager) {
+  constructor(imageSrc, resourceManager, type) {
     this.image = new Image();
     this.image.src = imageSrc;
     this.resourceManager = resourceManager;
     this.size = 20;
+    this.type = type;
   }
 
   update(player) {
     if (player.pos.x < this.pos.x + this.size && player.pos.x + player.size.x > this.pos.x && player.pos.y < this.pos.y + this.size && player.pos.y + player.size.y > this.pos.y) {
-      player.increaseHealth(10);
+      switch (this.type) {
+        case "health":
+          player.increaseHealth(10);
+          break;
+        case "shield":
+          player.increaseShield(10);
+          break;
+        case "mana":
+          player.increaseMana(1);
+          break;
+      }
 
       let index = this.resourceManager.resources.indexOf(this);
       if (index > -1) {
@@ -59,13 +81,21 @@ class Resource {
 
 class HealthKit extends Resource {
   constructor(cell, resourceManager) {
-    super("Images/Level6/healthKit.png", resourceManager);
+    super("Images/Level6/healthKit.png", resourceManager, "health");
     this.pos = new JSVector(cell.x, cell.y);
   }
 }
 
 class ShieldPack extends Resource {
-  constructor() {
-    super("path/to/other/resource/image.png");
+  constructor(cell, resourceManager) {
+    super("Images/Level6/shieldKit.png", resourceManager, "shield");
+    this.pos = new JSVector(cell.x, cell.y);
+  }
+}
+
+class ManaPack extends Resource {
+  constructor(cell, resourceManager) {
+    super("Images/Level6/mana.png", resourceManager, "mana");
+    this.pos = new JSVector(cell.x, cell.y);
   }
 }

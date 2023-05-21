@@ -6,25 +6,35 @@ class HellHero {
     this.levelGen = levelGen;
     this.aspectRatio = 64 / 128;
     this.size = new JSVector(width / 2, width / 2);
+
     this.isOnGround = false;
     this.gravity = 0.5;
     this.floating = false;
     this.floatForce = -1;
-    this.camLoc = new JSVector();
+
     this.particles = [];
+    this.camLoc = new JSVector();
     this.camShakeIntensity = 0;
     this.camShakeDecay = 0.97;
     this.shakeCooldown = 0;
     this.lastVelY = 0;
+
     this.jetpackCapacity = 150;
     this.jetpackFuel = this.jetpackCapacity;
     this.jetpackLastUsed = Date.now();
+
+    this.damage = 50;
+    this.maxDamage = 150;
+    this.strengthPotionLastUsed = Date.now();
+    this.strengthPotionDuration = 4000;
 
     this.invinsible = false;
     this.invinsibleLastUsed = Date.now();
     this.invinsibleDuration = 5000;
     this.clr = "rgba(255, 0, 0, 1)";
     this.camShakeIntensityHealth = 0;
+    this.camShakeIntensityShield = 0;
+    this.camShakeIntensityMana = 0;
     this.camShakeIntensityJetpack = 0;
 
     this.powerUp = {
@@ -42,7 +52,7 @@ class HellHero {
       },
     };
 
-    this.baseSpeed = 10;
+    this.baseSpeed = 4;
     this.maxSpeed = 10;
     this.moveSpeed = this.baseSpeed;
 
@@ -58,25 +68,28 @@ class HellHero {
     this.maxHealthMore = 200;
     this.health = this.maxHealth;
 
-    this.grapplingHook = {
-      active: false,
-      goal: null,
-      hooked: false,
-      hookedTo: null,
-      pos: new JSVector(),
-      vel: new JSVector(),
-      speed: 30,
-      length: 0,
-      angle: 0,
-      angleVel: 0,
-    };
-
     this.healthAnimation = {
       active: false,
       size: 0,
       opacity: 1,
       color: "rgba(0, 255, 0,",
     };
+
+    this.shieldAnimation = {
+      active: false,
+      size: 0,
+      opacity: 1,
+      color: "rgba( 51, 223, 255,",
+    };
+
+    this.manaAnimation = {
+      active: false,
+      size: 0,
+      opacity: 1,
+      color: "rgba( 118, 0, 188,",
+    };
+
+    this.mana = 0;
   }
 
   getCurrentCell() {
@@ -114,6 +127,23 @@ class HellHero {
     this.healthAnimation.opacity = 1;
   }
 
+  increaseShield(amount) {
+    this.shakeScreen(amount * 2, "shield");
+    this.shield += amount;
+    this.shield = Math.min(this.shield, this.maxShield);
+    this.shieldAnimation.active = true;
+    this.shieldAnimation.size = 50;
+    this.shieldAnimation.opacity = 1;
+  }
+
+  increaseMana(amount) {
+    this.shakeScreen(amount * 2, "mana");
+    this.mana += amount;
+    this.manaAnimation.active = true;
+    this.manaAnimation.size = 50;
+    this.manaAnimation.opacity = 1;
+  }
+
   updateHealthAnimation() {
     if (this.healthAnimation.active) {
       this.healthAnimation.size *= 0.9;
@@ -122,6 +152,30 @@ class HellHero {
         this.healthAnimation.active = false;
         this.healthAnimation.size = 0;
         this.healthAnimation.opacity = 1;
+      }
+    }
+  }
+
+  updateShieldAnimation() {
+    if (this.shieldAnimation.active) {
+      this.shieldAnimation.size *= 0.9;
+      this.shieldAnimation.opacity *= 0.9;
+      if (this.shieldAnimation.size < 1 || this.shieldAnimation.opacity < 0.1) {
+        this.shieldAnimation.active = false;
+        this.shieldAnimation.size = 0;
+        this.shieldAnimation.opacity = 1;
+      }
+    }
+  }
+
+  updateManaAnimation() {
+    if (this.manaAnimation.active) {
+      this.manaAnimation.size *= 0.9;
+      this.manaAnimation.opacity *= 0.9;
+      if (this.manaAnimation.size < 1 || this.manaAnimation.opacity < 0.1) {
+        this.manaAnimation.active = false;
+        this.manaAnimation.size = 0;
+        this.manaAnimation.opacity = 1;
       }
     }
   }
@@ -157,6 +211,10 @@ class HellHero {
   shakeScreen(amount, cause) {
     if (cause === "health") {
       this.camShakeIntensityHealth = amount;
+    } else if (cause === "shield") {
+      this.camShakeIntensityShield = amount;
+    } else if (cause === "mana") {
+      this.camShakeIntensityMana = amount;
     } else if (cause === "jetpack") {
       this.camShakeIntensityJetpack = amount;
     }
@@ -169,66 +227,15 @@ class HellHero {
     return this.levelGen.array2D[cellY][cellX];
   }
 
-  deployGrapple(goal) {
-    console.log("deployed grapple");
-    this.grapplingHook.active = true;
-    this.grapplingHook.goal = new JSVector(goal.x + this.levelGen.size / 2, goal.y + this.levelGen.size / 2);
-    this.grapplingHook.pos = this.pos.copy();
-    this.grapplingHook.vel = JSVector.subGetNew(this.grapplingHook.goal, this.pos);
-    this.grapplingHook.vel.setMagnitude(this.grapplingHook.speed);
-  }
-
-  retractGrapple() {
-    console.log("retracted grapple");
-    this.grapplingHook.active = false;
-    this.grapplingHook.goal = null;
-    this.grapplingHook.pos = new JSVector();
-    this.grapplingHook.vel = new JSVector();
-    this.grapplingHook.hooked = false;
-    this.grapplingHook.hookedTo = null;
-    this.grapplingHook.length = 0;
-    this.grapplingHook.angle = 0;
-    this.grapplingHook.angleVel = 0;
-  }
-
-  handleGrapple() {
-    if (this.grapplingHook.active) {
-      if (!this.grapplingHook.hooked) {
-        this.grapplingHook.pos.add(this.grapplingHook.vel);
-        const cellOver = this.getCellAt(this.grapplingHook.pos.x, this.grapplingHook.pos.y);
-        if (!cellOver.isSolid) {
-          // reassign the goal to the new cell position
-          this.grapplingHook.goal = new JSVector(cellOver.x + this.levelGen.size / 2, cellOver.y + this.levelGen.size / 2);
-        }
-        if (this.grapplingHook.pos.distance(this.grapplingHook.goal) < this.grapplingHook.speed) {
-          this.grapplingHook.hooked = true;
-          this.grapplingHook.pos = new JSVector(this.grapplingHook.goal.x, this.grapplingHook.goal.y);
-          if (cellOver.isSolid) {
-            this.retractGrapple();
-          }
-        }
-      }
-    }
-  }
-
-  drawGrapple() {
-    if (this.grapplingHook.active) {
-      ctx.beginPath();
-      ctx.moveTo(this.pos.x, this.pos.y);
-      ctx.lineTo(this.grapplingHook.pos.x, this.grapplingHook.pos.y);
-      ctx.strokeStyle = "white";
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    }
-  }
-
   update() {
     this.applyGravity();
     this.applyHorizontalMovement();
     this.handleFloatingAndJetpack();
-    this.handleGrapple();
     this.handleInvisiblity();
     this.updateHealthAnimation();
+    this.updateShieldAnimation();
+    this.updateManaAnimation();
+    this.handlePotions();
 
     this.updatePositionAndCamera();
     this.applyCameraShake();
@@ -277,7 +284,7 @@ class HellHero {
   }
 
   applyCameraShake() {
-    const totalShakeIntensity = this.camShakeIntensityHealth + this.camShakeIntensityJetpack;
+    const totalShakeIntensity = this.camShakeIntensityHealth + this.camShakeIntensityShield + this.camShakeIntensityMana + this.camShakeIntensityJetpack;
 
     if (this.shakeCooldown <= 0) {
       const shakeX = (Math.random() - 0.5) * totalShakeIntensity;
@@ -290,10 +297,18 @@ class HellHero {
     }
 
     this.camShakeIntensityHealth *= this.camShakeDecay;
+    this.camShakeIntensityShield *= this.camShakeDecay;
+    this.camShakeIntensityMana *= this.camShakeDecay;
     this.camShakeIntensityJetpack *= this.camShakeDecay;
 
     if (this.camShakeIntensityHealth < 0.1) {
       this.camShakeIntensityHealth = 0;
+    }
+    if (this.camShakeIntensityShield < 0.1) {
+      this.camShakeIntensityShield = 0;
+    }
+    if (this.camShakeIntensityMana < 0.1) {
+      this.camShakeIntensityMana = 0;
     }
     if (this.camShakeIntensityJetpack < 0.1) {
       this.camShakeIntensityJetpack = 0;
@@ -321,16 +336,41 @@ class HellHero {
       this.drawParticles();
     } else {
       this.drawDebugParticles();
+      this.drawDebugView();
     }
 
+    this.drawAnimations();
+  }
+
+  drawAnimations() {
     if (this.healthAnimation.active) {
       ctx.beginPath();
       ctx.arc(this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2, this.healthAnimation.size, 0, 2 * Math.PI, false);
       ctx.fillStyle = this.healthAnimation.color + this.healthAnimation.opacity + ")";
       ctx.fill();
     }
+    if (this.shieldAnimation.active) {
+      ctx.beginPath();
+      ctx.arc(this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2, this.shieldAnimation.size, 0, 2 * Math.PI, false);
+      ctx.fillStyle = this.shieldAnimation.color + this.shieldAnimation.opacity + ")";
+      ctx.fill();
+    }
 
-    this.drawGrapple();
+    if (this.manaAnimation.active) {
+      ctx.beginPath();
+      ctx.arc(this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2, this.manaAnimation.size, 0, 2 * Math.PI, false);
+      ctx.fillStyle = this.manaAnimation.color + this.manaAnimation.opacity + ")";
+      ctx.fill();
+    }
+  }
+
+  drawDebugView() {
+    ctx.strokeStyle = "blue";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2); // From the center of the player
+    ctx.lineTo(this.pos.x + this.size.x / 2 + this.vel.x * 10, this.pos.y + this.size.y / 2 + this.vel.y * 10); // In the direction of the velocity
+    ctx.stroke();
   }
 
   createParticles() {
@@ -395,5 +435,36 @@ class HellHero {
       }
     }
     return colorStops[colorStops.length - 1].color;
+  }
+
+  healthPotion() {
+    this.health += 50;
+    this.health = Math.min(this.health, this.maxHealth);
+  }
+
+  shieldPotion() {
+    this.shield += 50;
+    this.shield = Math.min(this.shield, this.maxShield);
+  }
+
+  strengthPotion() {
+    this.damage *= 3;
+    this.damage = Math.min(this.damage, this.maxDamage);
+    this.strengthPotionLastUsed = Date.now();
+  }
+
+  invincibilityPotion() {
+    this.invinsible = true;
+    this.invinsibleLastUsed = Date.now();
+  }
+
+  handlePotions() {
+    if (Date.now() - this.strengthPotionLastUsed > this.strengthPotionDuration) {
+      this.damage = 50;
+    }
+
+    if (Date.now() - this.invinsibleLastUsed > this.invinsibleDuration) {
+      this.invinsible = false;
+    }
   }
 }

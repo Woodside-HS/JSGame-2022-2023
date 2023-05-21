@@ -1,5 +1,6 @@
 class Store {
   constructor() {
+    this.player = null;
     this.images = {
       background: newImage("Images/Level6/storeBG.png"),
       potions: {
@@ -18,31 +19,43 @@ class Store {
 
     this.potionSize = 50;
     this.buttons = {
-      health: new Button(this.images.potions.health, "Instant Health", { x: canvas.width / 2 + 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.healthButtonClicked),
-      shield: new Button(this.images.potions.shield, "Instant Shield", { x: canvas.width / 2 + 75 + 75 + 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.shieldButtonClicked),
-      strength: new Button(this.images.potions.strength, "Boost Strength", { x: canvas.width / 2 - 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.strengthButtonClicked),
-      invinsibility: new Button(this.images.potions.invinsibility, "Temp Invincibility", { x: canvas.width / 2 - 75 - 75 - 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.invinsibilityButtonClicked),
-      reach: new Button(this.images.abilities.reach, "Increased Reach", { x: canvas.width / 2 + 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.reachButtonClicked),
-      regen: new Button(this.images.abilities.regen, "Increased Health", { x: canvas.width / 2 + 75 + 75 + 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.regenButtonClicked),
-      fortify: new Button(this.images.abilities.fortify, "Increased Shield", { x: canvas.width / 2 - 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.fortifyButtonClicked),
-      speed: new Button(this.images.abilities.speed, "Increased Speed", { x: canvas.width / 2 - 75 - 75 - 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.speedButtonClicked),
+      health: new Button(this.images.potions.health, "Instant Health", "10", { x: canvas.width / 2 + 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.healthButtonClicked.bind(this)),
+      shield: new Button(this.images.potions.shield, "Instant Shield", "10", { x: canvas.width / 2 + 75 + 75 + 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.shieldButtonClicked.bind(this)),
+      strength: new Button(this.images.potions.strength, "Boost Strength", "15", { x: canvas.width / 2 - 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.strengthButtonClicked.bind(this)),
+      invinsibility: new Button(this.images.potions.invinsibility, "Temp Invincibility", "15", { x: canvas.width / 2 - 75 - 75 - 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.invinsibilityButtonClicked.bind(this)),
+      reach: new Button(this.images.abilities.reach, "Increased Reach", "30", { x: canvas.width / 2 + 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.reachButtonClicked),
+      regen: new Button(this.images.abilities.regen, "Increased Health", "100", { x: canvas.width / 2 + 75 + 75 + 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.regenButtonClicked),
+      fortify: new Button(this.images.abilities.fortify, "Increased Shield", "10", { x: canvas.width / 2 - 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.fortifyButtonClicked),
+      speed: new Button(this.images.abilities.speed, "Increased Speed", "60", { x: canvas.width / 2 - 75 - 75 - 75, y: canvas.height / 2 + 75 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.speedButtonClicked),
     };
   }
 
+  assignPlayer(player) {
+    this.player = player;
+  }
+
   healthButtonClicked() {
-    console.log("health button clicked");
+    if (this.player) {
+      this.player.powerUp.temp.health++;
+    }
   }
 
   shieldButtonClicked() {
-    console.log("shield button clicked");
+    if (this.player) {
+      this.player.powerUp.temp.shield++;
+    }
   }
 
   strengthButtonClicked() {
-    console.log("strength button clicked");
+    if (this.player) {
+      this.player.powerUp.temp.strength++;
+    }
   }
 
   invinsibilityButtonClicked() {
-    console.log("invinsibility button clicked");
+    if (this.player) {
+      this.player.powerUp.temp.invincibility++;
+    }
   }
 
   reachButtonClicked() {
@@ -95,9 +108,10 @@ class Store {
 }
 
 class Button {
-  constructor(img, title, pos, size, action) {
+  constructor(img, title, cost, pos, size, action) {
     this.img = img;
     this.title = title;
+    this.cost = cost;
     this.pos = pos;
     this.sizeDefault = size;
     this.sizeHover = { w: size.w * 1.1, h: size.h * 1.1 };
@@ -110,6 +124,7 @@ class Button {
   }
 
   init() {
+    console.log("init");
     canvas.addEventListener("click", (e) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -149,6 +164,14 @@ class Button {
     ctx.strokeText(this.title, xPos + this.size.w / 2, yPos + this.size.h + 10);
     ctx.fillStyle = "white";
     ctx.fillText(this.title, xPos + this.size.w / 2, yPos + this.size.h + 10);
+
+    ctx.font = "20px 'CompassPro'";
+    ctx.textAlign = "center";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
+    ctx.strokeText("[" + this.cost + " Mana]", xPos + this.size.w / 2, yPos - 20);
+    ctx.fillStyle = "white";
+    ctx.fillText("[" + this.cost + " Mana]", xPos + this.size.w / 2, yPos - 20);
   }
 
   update() {

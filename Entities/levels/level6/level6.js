@@ -5,6 +5,7 @@ class level6 {
       this.levelGen = levelGen;
       this.isLoaded = false;
       this.character = new HellHero(0, 0, 30, 50, this.levelGen);
+      game.store.assignPlayer(this.character);
       this.enemies = {
         spikes: [],
         ghosts: [],
@@ -31,17 +32,29 @@ class level6 {
 
       setInterval(this.spawnParticles.bind(this), 1);
 
-      canvas.addEventListener("mousedown", (e) => {
-        const mousePos = new JSVector(e.offsetX, e.offsetY);
-        const mousePosWorld = JSVector.addGetNew(mousePos, this.character.camLoc);
-        const mousePosGrid = new JSVector(Math.floor(mousePosWorld.x / this.levelGen.size), Math.floor(mousePosWorld.y / this.levelGen.size));
-        const block = this.levelGen.array2D[mousePosGrid.y][mousePosGrid.x];
-
-        this.character.deployGrapple(block);
-      });
-
-      canvas.addEventListener("mouseup", (e) => {
-        this.character.retractGrapple();
+      // set bind for u, i, o , and p
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "u") {
+          if (this.character.powerUp.temp.health > 0) {
+            this.character.powerUp.temp.health--;
+            this.character.healthPotion();
+          }
+        } else if (e.key == "i") {
+          if (this.character.powerUp.temp.health > 0) {
+            this.character.powerUp.temp.shield--;
+            this.character.shieldPotion();
+          }
+        } else if (e.key == "o") {
+          if (this.character.powerUp.temp.health > 0) {
+            this.character.powerUp.temp.strength--;
+            this.character.strengthPotion();
+          }
+        } else if (e.key == "p") {
+          if (this.character.powerUp.temp.health > 0) {
+            this.character.powerUp.temp.invincibility--;
+            this.character.invincibilityPotion();
+          }
+        }
       });
     });
   }
@@ -397,6 +410,22 @@ class level6 {
     ctx.fillText(this.character.powerUp.temp.strength, x + imgSize / 2 + imgSize * 1.85, y);
     ctx.strokeText(this.character.powerUp.temp.invincibility, x + imgSize / 2 + imgSize * 1.85, y - imgSize / 0.65);
     ctx.fillText(this.character.powerUp.temp.invincibility, x + imgSize / 2 + imgSize * 1.85, y - imgSize / 0.65);
+
+    // draw the keybinds
+    ctx.font = "14px 'CompassPro'";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "black";
+
+    ctx.strokeText("[u]", x - imgSize / 2 - 10, y);
+    ctx.fillText("[u]", x - imgSize / 2 - 10, y);
+    ctx.strokeText("[i]", x - imgSize / 2 - 10, y - imgSize / 0.65);
+    ctx.fillText("[i]", x - imgSize / 2 - 10, y - imgSize / 0.65);
+    ctx.strokeText("[o]", x + imgSize / 0.75 - 10, y);
+    ctx.fillText("[o]", x + imgSize / 0.75 - 10, y);
+    ctx.strokeText("[p]", x + imgSize / 0.75 - 10, y - imgSize / 0.65);
+    ctx.fillText("[p]", x + imgSize / 0.75 - 10, y - imgSize / 0.65);
   }
 
   drawHealth(offx, offy) {
