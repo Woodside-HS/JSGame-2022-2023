@@ -329,14 +329,79 @@ class level6 {
   }
 
   drawUI() {
-    this.drawHealth(20, 20);
-    this.drawShield(20, 40);
-    this.drawJetPackFuel(20, 60);
+    this.drawJetPackFuel(20, canvas.height - 50);
+    this.drawHealth(20, canvas.height - 30);
+    this.drawShield(20, canvas.height - 60);
+    this.drawPotions(45, canvas.height - 100);
+  }
+
+  drawPotions(offx, offy) {
+    let size = 25;
+    let x = this.character.camLoc.x + offx + size / 2;
+    let y = this.character.camLoc.y + offy;
+
+    // Draw dark circle behind each potion
+    let imgSize = size * 1.3;
+    let circleRadius = imgSize / 2 + 5;
+
+    ctx.fillStyle = "rgb(50,50,50)";
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 3;
+
+    // Draw and fill the circle with a black border
+    ctx.beginPath();
+    ctx.arc(x, y, circleRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    // Draw and fill the second circle with a black border
+    ctx.beginPath();
+    ctx.arc(x, y - imgSize / 0.65, circleRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    // Draw and fill the third circle with a black border
+    ctx.beginPath();
+    ctx.arc(x + imgSize / 0.55, y, circleRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    // Draw and fill the fourth circle with a black border
+    ctx.beginPath();
+    ctx.arc(x + imgSize / 0.55, y - imgSize / 0.65, circleRadius, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    // Draw potion images
+    ctx.drawImage(game.store.images.potions.health, x - imgSize / 2, y - imgSize / 2, imgSize, imgSize);
+    ctx.drawImage(game.store.images.potions.shield, x - imgSize / 2, y - imgSize / 0.5, imgSize, imgSize);
+    ctx.drawImage(game.store.images.potions.strength, x + imgSize / 0.75, y - imgSize / 2, imgSize, imgSize);
+    ctx.drawImage(game.store.images.potions.invinsibility, x + imgSize / 0.75, y - imgSize / 0.5, imgSize, imgSize);
+
+    // Display the amount of potions
+    ctx.font = "18px 'CompassPro'";
+    ctx.textAlign = "right";
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "black";
+
+    ctx.strokeText(this.character.powerUp.temp.health, x + imgSize / 2, y);
+    ctx.fillText(this.character.powerUp.temp.health, x + imgSize / 2, y);
+    ctx.strokeText(this.character.powerUp.temp.shield, x + imgSize / 2, y - imgSize / 0.65);
+    ctx.fillText(this.character.powerUp.temp.shield, x + imgSize / 2, y - imgSize / 0.65);
+    ctx.strokeText(this.character.powerUp.temp.strength, x + imgSize / 2 + imgSize * 1.85, y);
+    ctx.fillText(this.character.powerUp.temp.strength, x + imgSize / 2 + imgSize * 1.85, y);
+    ctx.strokeText(this.character.powerUp.temp.invincibility, x + imgSize / 2 + imgSize * 1.85, y - imgSize / 0.65);
+    ctx.fillText(this.character.powerUp.temp.invincibility, x + imgSize / 2 + imgSize * 1.85, y - imgSize / 0.65);
   }
 
   drawHealth(offx, offy) {
-    let barWidth = 100;
-    let barHeight = 10;
+    let barWidth = 150;
+    let barHeight = 15;
     let displacement = 0;
     let x = this.character.camLoc.x + offx;
     let y = this.character.camLoc.y + offy;
@@ -353,13 +418,13 @@ class level6 {
     ctx.strokeStyle = "black";
     ctx.strokeRect(x + displacement, y, barWidth, barHeight);
 
-    let imgSize = 20;
+    let imgSize = barHeight * 2;
     ctx.drawImage(this.icons.health, x - imgSize / 2, y - imgSize / 4, imgSize, imgSize);
   }
 
   drawShield(offx, offy) {
-    let barWidth = 100;
-    let barHeight = 10;
+    let barWidth = 150;
+    let barHeight = 15;
     let displacement = 0;
     let x = this.character.camLoc.x + offx;
     let y = this.character.camLoc.y + offy;
@@ -374,13 +439,13 @@ class level6 {
     ctx.strokeStyle = "black";
     ctx.strokeRect(x + displacement, y, barWidth, barHeight);
 
-    let imgSize = 20;
+    let imgSize = barHeight * 2;
     ctx.drawImage(this.icons.shield, x - imgSize / 2, y - imgSize / 4, imgSize, imgSize);
   }
 
   drawJetPackFuel(offx, offy) {
-    let barWidth = 100;
-    let barHeight = 10;
+    let barWidth = 150;
+    let barHeight = 20;
     let displacement = 0;
     let x = this.character.camLoc.x + offx;
     let y = this.character.camLoc.y + offy;

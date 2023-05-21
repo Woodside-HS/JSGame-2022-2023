@@ -24,6 +24,7 @@ class LevelGen {
     this.room1 = { x: 20, y: 20, width: 30, height: 30 };
     this.room2 = { x: 20, y: this.rows - 70, width: 40, height: 40 };
     this.room3 = { x: this.cols - 80, y: 30, width: 70, height: 70 };
+    this.room4 = { x: this.cols - 80, y: this.rows - 70, width: 40, height: 40 };
 
     this.groundtexture = new Image();
     this.jetPacktexture = new Image();
@@ -300,7 +301,7 @@ class LevelGen {
     let tries = 0;
 
     // add 6 mandatory rooms
-    const mandatoryRooms = [this.room1, this.room2, this.room3];
+    const mandatoryRooms = [this.room1, this.room2, this.room3, this.room4];
     rooms.push(...mandatoryRooms);
 
     while (rooms.length < roomCount && tries < 100) {

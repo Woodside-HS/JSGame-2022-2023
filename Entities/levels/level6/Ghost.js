@@ -33,7 +33,7 @@ class Ghost {
     let enemyBottom = this.pos.y + this.size.y;
 
     if (playerRight > enemyLeft && playerLeft < enemyRight && playerBottom > enemyTop && playerTop < enemyBottom) {
-      player.looseHealth(25, false);
+      player.looseHealth(10, false);
     }
   }
 

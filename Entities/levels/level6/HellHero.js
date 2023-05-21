@@ -8,7 +8,6 @@ class HellHero {
     this.size = new JSVector(width / 2, width / 2);
     this.isOnGround = false;
     this.gravity = 0.5;
-    this.moveSpeed = 5;
     this.floating = false;
     this.floatForce = -1;
     this.camLoc = new JSVector();
@@ -20,21 +19,44 @@ class HellHero {
     this.jetpackCapacity = 150;
     this.jetpackFuel = this.jetpackCapacity;
     this.jetpackLastUsed = Date.now();
-    this.health = 100;
-    this.maxShield = 100;
-    this.shield = this.maxShield;
+
     this.invinsible = false;
     this.invinsibleLastUsed = Date.now();
     this.invinsibleDuration = 5000;
     this.clr = "rgba(255, 0, 0, 1)";
+    this.camShakeIntensityHealth = 0;
+    this.camShakeIntensityJetpack = 0;
 
     this.powerUp = {
-      jetPack: false,
-      speedBoost: false,
-      healBoost: false,
-      dash: false,
-      potions: [],
+      perm: {
+        speed: false,
+        shield: false,
+        reach: false,
+        health: false,
+      },
+      temp: {
+        invincibility: 0,
+        strength: 0,
+        health: 0,
+        shield: 0,
+      },
     };
+
+    this.baseSpeed = 10;
+    this.maxSpeed = 10;
+    this.moveSpeed = this.baseSpeed;
+
+    this.maxShield = 100;
+    this.maxShieldMore = 200;
+    this.shield = this.maxShield;
+
+    this.baseReach = 50;
+    this.maxReach = 200;
+    this.reach = this.baseReach;
+
+    this.maxHealth = 100;
+    this.maxHealthMore = 200;
+    this.health = this.maxHealth;
 
     this.grapplingHook = {
       active: false,
@@ -69,14 +91,14 @@ class HellHero {
           this.health += this.shield;
           this.shield = 0;
         }
-        this.shakeScreen(amount * 2);
+        this.shakeScreen(amount * 2, "health");
         this.invinsible = true;
         this.invinsibleLastUsed = Date.now();
       }
     } else {
       if (!this.invinsible) {
         this.health -= amount;
-        this.shakeScreen(amount * 2);
+        this.shakeScreen(amount * 2, "health");
         this.invinsible = true;
         this.invinsibleLastUsed = Date.now();
       }
@@ -84,9 +106,9 @@ class HellHero {
   }
 
   increaseHealth(amount) {
-    this.shakeScreen(amount * 2);
+    this.shakeScreen(amount * 2, "health");
     this.health += amount;
-    this.health = Math.min(this.health, 100);
+    this.health = Math.min(this.health, this.maxHealth);
     this.healthAnimation.active = true;
     this.healthAnimation.size = 50;
     this.healthAnimation.opacity = 1;
@@ -132,8 +154,12 @@ class HellHero {
     }
   }
 
-  shakeScreen(amount) {
-    this.camShakeIntensity = amount;
+  shakeScreen(amount, cause) {
+    if (cause === "health") {
+      this.camShakeIntensityHealth = amount;
+    } else if (cause === "jetpack") {
+      this.camShakeIntensityJetpack = amount;
+    }
   }
 
   getCellAt(x, y) {
@@ -238,7 +264,7 @@ class HellHero {
       this.vel.y = Math.max(this.vel.y, -7);
       this.jetpackFuel = Math.max(0, this.jetpackFuel - 0.25);
       this.jetpackLastUsed = Date.now();
-      this.shakeScreen(this.vel.y);
+      this.shakeScreen(this.vel.y, "jetpack");
     } else {
       this.regenerateJetpackFuel();
     }
@@ -251,18 +277,26 @@ class HellHero {
   }
 
   applyCameraShake() {
+    const totalShakeIntensity = this.camShakeIntensityHealth + this.camShakeIntensityJetpack;
+
     if (this.shakeCooldown <= 0) {
-      const shakeX = (Math.random() - 0.5) * this.camShakeIntensity;
-      const shakeY = (Math.random() - 0.5) * this.camShakeIntensity;
+      const shakeX = (Math.random() - 0.5) * totalShakeIntensity;
+      const shakeY = (Math.random() - 0.5) * totalShakeIntensity;
       ctx.translate(-this.camLoc.x + shakeX, -this.camLoc.y + shakeY);
       this.shakeCooldown = 5;
     } else {
       this.shakeCooldown -= 1;
       ctx.translate(-this.camLoc.x, -this.camLoc.y);
     }
-    this.camShakeIntensity *= this.camShakeDecay;
-    if (this.camShakeIntensity < 0.1) {
-      this.camShakeIntensity = 0;
+
+    this.camShakeIntensityHealth *= this.camShakeDecay;
+    this.camShakeIntensityJetpack *= this.camShakeDecay;
+
+    if (this.camShakeIntensityHealth < 0.1) {
+      this.camShakeIntensityHealth = 0;
+    }
+    if (this.camShakeIntensityJetpack < 0.1) {
+      this.camShakeIntensityJetpack = 0;
     }
   }
 
