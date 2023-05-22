@@ -6,6 +6,7 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
+    this.speed = 2;
 
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -74,13 +75,13 @@ class Game {
   moveCam = () => {
     // Susbtitude Event handlers
     if(this.clickingA && !hittingRight){
-      this.hero.loc.x -= 2
+      this.hero.loc.x -= this.speed;
      }
      else{
       null;
      }
     if(this.clickingD && !hittingLeft){
-      this.hero.loc.x += 2
+      this.hero.loc.x += this.speed;
     }
     else{
       null;
