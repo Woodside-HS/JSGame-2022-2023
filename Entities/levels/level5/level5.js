@@ -12,7 +12,7 @@ class level5 extends Level {
         this.platforms[1] = new level5platform(150, 500, 100, false);
         this.platforms[2] = new level5platform(300, 400, 300, true)
         this.platforms[3] = new level5platform(400, 150, 100, false)
-        this.platforms[4] = new level5platform(850, 300, 100, false)
+        this.platforms[4] = new level5platform(800, 300, 100, false)
 
 
 
@@ -27,6 +27,7 @@ class level5 extends Level {
 
         this.resources[0] = new JumpBoost(400, 350, 10);
         this.resources[1] = new GhostOrb(450, 125, 10)
+        this.resources[2] = new Spike(300, 500, 10, 15);
     }
 
     loadEnemies(pArray1, pArray2) {

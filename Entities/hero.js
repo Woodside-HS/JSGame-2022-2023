@@ -18,6 +18,7 @@ class Hero {
       jumpBoost: false,
       invulnerability: false,
       ghostMode: false,
+      hasSpike: false,
     };
     this.statusBlock = {
       hp: 100,
@@ -35,6 +36,8 @@ class Hero {
       attackTimer: 50, // the length/amount of time that the hero attacks for
       jumpBoostCounter: 0,
       jumpBoostLength: 100,
+      ghostModeCounter: 0,
+      ghostModeLength: 500,
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
@@ -120,8 +123,11 @@ class Hero {
     }
     switch (true) {
       //checks if any of the following values are true, if so runs them
-      case this.statusBlock.isAttacking:
+      case (this.statusBlock.isAttacking && !this.inventory.hasSpike):
         console.log("renderding Attack");
+        break;
+      case (this.statusBlock.isAttacking && this.inventory.hasSpike):
+        console.log(`rendering attack with a spike`)
         break;
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
@@ -302,7 +308,6 @@ class Hero {
     }
 
     //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& jumpBoost timer
-    console.log(this.statusBlock.jumpBoostCounter)
     if (
       this.inventory.jumpBoost &&
       this.statusBlock.jumpBoostCounter++ >= this.statusBlock.jumpBoostLength
@@ -317,8 +322,20 @@ class Hero {
 
     //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ghostMode 
     if (this.inventory.ghostMode && this.statusBlock.isFalling) {
-      this.grav.y = 0.1
+      this.grav.y = 0.01
+    } else {
+      this.grav.y = 0.2
     }
+
+
+    if (
+      this.inventory.ghostMode &&
+      this.statusBlock.ghostModeCounter++ >= this.statusBlock.ghostModeLength
+    ) {
+      this.statusBlock.ghostModeCounter = 0;
+      this.inventory.ghostMode = false;
+    }
+
 
     //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of ghostMode
     for (let i = 0; i < this.bullets.length; i++) {

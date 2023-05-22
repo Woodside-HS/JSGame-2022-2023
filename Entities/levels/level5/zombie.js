@@ -15,6 +15,7 @@ class zombie {
         this.lookingR = false
         this.attackTimer = 0;
         this.hitHero = false;
+        this.damage = 25 // the damege that the zombie does
     }
     run() {
         this.render();
@@ -22,6 +23,7 @@ class zombie {
         this.checkHero()
         this.moveZombie()
         this.attackHero();
+        this.checkIfGettingAttacked()
     }
     render() {
         ctx.save()
@@ -82,23 +84,30 @@ class zombie {
         ctx.restore()
 
         if (!this.hitHero) { // checks if the zombie has already hit the hero in this attack cycle
-            game.hero.statusBlock.hp -= 25
+            game.hero.statusBlock.hp -= this.damage
             console.log("a zombie hit the hero for 25 hp \n the hero now has: " + game.hero.statusBlock.hp)
             this.hitHero = true
         }
 
     }
     update() {
+        if (this.hp <= 0) {
+            this.isDead = true
+        }
         if (game.hero.statusBlock.isShooting) {
             for (let i = 0; i < game.hero.bullets.length; i++) {
                 if (game.hero.bullets[i].checkBullet(this.loc, this.w, this.h)) {
-                    this.isDead = true;
+                    this.hp -= 25
                     game.hero.bullets[i].isDead = true;
                 }
             }
         }
 
+
+
     }
+
+
 
     checkHeroPos() { // return left if the hero is left of the enemy and right if rights
         if (game.hero.loc.x > this.loc.x) {
@@ -149,6 +158,21 @@ class zombie {
         } else if (this.movingL) {
             this.lookingL = true;
             this.lookingR = false;
+        }
+    }
+
+    checkIfGettingAttacked() {
+        let heroLoc = game.hero.loc
+        if (this.posNeg) {
+            let heroAttackHitBox = new {
+                x: heroLoc.x,
+                y: heroLoc.y,
+                w: 80,
+                h: 50,
+            };
+        }
+
+        if (heroAttackHitBox.x < this.loc.x) {
         }
     }
 }
