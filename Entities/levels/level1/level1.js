@@ -43,12 +43,17 @@ class level1 extends Level{
         this.platforms[28] = new level1platform(3950,450,150,false);
         this.platforms[29] = new level1platform(3875,700,150,false);
         this.platforms[30] = new level1platform(4200,600,150,false);
+
+        //temp platform for end testing
+        this.platforms[31] = new level1platform(4400,600,500,false);//will want custom landing pad in future
+        this.platforms[32] = new lvl1BusStop(4800,500);
     }
     loadFreeEnemies(){
         this.enemies[0] = new lvl1Enemy1(25,650,0,150,200);
     }
 
     loadResources() {
+        //resources work not, just have to get them placed in
         this.resources[0] = new lvl1Resource1(400,400);
         this.resources[1] = new lvl1Resource2(600,400);
     }

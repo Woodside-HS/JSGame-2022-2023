@@ -2,7 +2,8 @@ class lvl1Resource2{
     //will be a bus token, have like 15 tokens, will only need like 12 to end the game
     constructor(x,y){
         this.loc = new JSVector(x,y);
-        this.img;
+        this.img = document.createElement("img");
+        this.img.src = "Images/Level1/Lvl1Resource/lvl1BusTicket.png"
         this.collected = false;
     }
     run(){
@@ -13,7 +14,7 @@ class lvl1Resource2{
         }
     }
     checkHero(){
-        let sightSq = 25*25;
+        let sightSq = 45*45;//ive manually increaased the grab range for these
         let dist = this.loc.distanceSquared(game.hero.loc);
         if(dist<sightSq){
             this.collected = true;
@@ -23,13 +24,14 @@ class lvl1Resource2{
     }
     render(){
         //will be a token that kinda floats
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x+5,this.loc.y+5);
-        ctx.lineTo(this.loc.x-5,this.loc.y+5);
-        ctx.lineTo(this.loc.x-5,this.loc.y-5);
-        ctx.lineTo(this.loc.x+5,this.loc.y-5);
-        ctx.closePath();
-        ctx.fillStyle = "pink";
-        ctx.fill();
+        ctx.drawImage(this.img,this.loc.x-10,this.loc.y-10,20,20);
+        // ctx.beginPath();
+        // ctx.moveTo(this.loc.x+5,this.loc.y+5);
+        // ctx.lineTo(this.loc.x-5,this.loc.y+5);
+        // ctx.lineTo(this.loc.x-5,this.loc.y-5);
+        // ctx.lineTo(this.loc.x+5,this.loc.y-5);
+        // ctx.closePath();
+        // ctx.fillStyle = "pink";
+        // ctx.fill();
     }
 }

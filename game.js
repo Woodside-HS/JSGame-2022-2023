@@ -6,6 +6,7 @@ class Game {
     this.start = new JSVector(200, 200);
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
+    this.unique = 0;
 
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -37,6 +38,7 @@ class Game {
         this.endState();
       }
       document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
+      document.getElementById("resource-count").innerHTML = this.unique;//adds a counter for the unique resource of each level;
   };
 
   // Game state 0
