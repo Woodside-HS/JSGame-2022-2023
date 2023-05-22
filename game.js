@@ -38,6 +38,7 @@ class Game {
       else{
         this.endState();
       }
+      document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
   };
 
   // Game state 0
