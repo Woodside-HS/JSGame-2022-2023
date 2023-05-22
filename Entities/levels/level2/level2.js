@@ -1,4 +1,5 @@
 class level2 extends Level {
+    console.log("level2");
     constructor(id) {
         super(id);
         this.loadPlatforms();
