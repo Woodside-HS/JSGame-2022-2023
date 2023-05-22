@@ -28,18 +28,27 @@ function init() {
 function animate(currentTime) {
   var delta = currentTime - lastFrameTime;
 
-  // Limit the frame rate to the target FPS
-  if (delta > 1000 / targetFPS) {
-    lastFrameTime = currentTime;
+  // // Limit the frame rate to the target FPS
+  // if (delta > 1000 / targetFPS) {
+  //   lastFrameTime = currentTime;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    debugUpdate();
-    game.update();
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   debugUpdate();
+  //   game.update();
 
-    // Calculate FPS and display it
-    fps = calculateFPS(delta);
-    displayFPS(fps);
-  }
+  //   // Calculate FPS and display it
+  //   fps = calculateFPS(delta);
+  //   displayFPS(fps);
+  // }
+
+
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  debugUpdate();
+  game.update();
+  fps = calculateFPS(delta);
+  displayFPS(fps);
+  lastFrameTime = currentTime;
 
   requestAnimationFrame(animate);
 }

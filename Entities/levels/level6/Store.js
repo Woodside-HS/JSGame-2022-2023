@@ -76,7 +76,7 @@ class Store {
   invinsibilityButtonClicked() {
     if (this.player) {
       if (this.player.mana >= this.costs.invinsibility) {
-        this.player.powerUp.temp.invinsibility++;
+        this.player.powerUp.temp.invincibility++;
         this.player.mana -= this.costs.invinsibility;
       }
     }
