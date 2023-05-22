@@ -97,7 +97,7 @@ class Store {
     console.log("speed button clicked");
   }
 
-  update() {}
+  update() { }
 
   draw() {
     this.drawBackground();
@@ -112,7 +112,22 @@ class Store {
     this.drawProducts();
   }
 
-  drawCoins() {}
+  drawCoins() {
+    let x = 50;
+    let y = 50;
+    let imgSize = 25;
+
+    //ctx.drawImage(this.icons.mana, x - imgSize / 2, y - 5, imgSize, imgSize);
+
+    ctx.font = "18px 'CompassPro'";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "black";
+
+    //ctx.strokeText(this.character.mana, x + imgSize / 2 + 5, y - 2);
+    //ctx.fillText(this.character.mana, x + imgSize / 2 + 5, y - 2);
+  }
 
   drawProducts() {
     for (let button in this.buttons) {
@@ -193,9 +208,7 @@ class Button {
     const yPos = this.pos.y - this.size.h / 2;
 
     let imageToDraw = this.isHovering ? this.imgHover : this.img;
-    //let imgWidth = this.isHovering ? this.sizeHover.w : this.size.w;
-    //let imgHeight = this.isHovering ? this.sizeHover.h : this.size.h;
-    ctx.drawImage(imageToDraw, xPos, yPos, imgWidth, imgHeight);
+    ctx.drawImage(imageToDraw, xPos, yPos, this.size.w, this.size.h);
 
     ctx.font = "18px 'CompassPro'";
     ctx.textAlign = "center";
