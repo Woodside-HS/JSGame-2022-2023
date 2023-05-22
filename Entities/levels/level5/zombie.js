@@ -10,12 +10,15 @@ class zombie {
         this.movingL = true;
         this.movingR = false
         this.movingSpeed = 0.5
-        this.attacking = false;
+        this.isAtacking = false;
         this.lookingL = false;
         this.lookingR = false
         this.attackTimer = 0;
         this.hitHero = false;
-        this.damage = 25 // the damege that the zombie does
+        this.zombieDmg = 50 // the damege that the zombie does
+        this.spearDmg = 50 // the damage that the spear does
+        this.fistDmg = 25 // the damege that the fist does
+        this.bulletDmg = 10 // the damege that the bullet does
     }
     run() {
         this.render();
@@ -97,7 +100,7 @@ class zombie {
         if (game.hero.statusBlock.isShooting) {
             for (let i = 0; i < game.hero.bullets.length; i++) {
                 if (game.hero.bullets[i].checkBullet(this.loc, this.w, this.h)) {
-                    this.hp -= 25
+                    this.hp -= this.bulletDmg
                     game.hero.bullets[i].isDead = true;
                 }
             }
@@ -160,17 +163,36 @@ class zombie {
             this.lookingR = false;
         }
     }
+    stopMoving() {
+        this.movingL = false;
+        this.movingR = false;
+    }
 
     checkIfGettingAttacked() {
         let heroAttackHitBox;
+        // if (!game.hero.statusBlock.isAttacking) {
+        //     return
+        // }
+
         if (game.hero.posNeg) {
-            heroAttackHitBox = game.hero.attackHitBoxR
-        } else {
             heroAttackHitBox = game.hero.attackHitBoxL
+        } else {
+            heroAttackHitBox = game.hero.attackHitBoxR
         }
 
-        if (heroAttackHitBox.x < this.loc.x) {
-            console.log(`herw`)
+        if (
+            this.loc.x > heroAttackHitBox.x &&
+            this.loc.x < heroAttackHitBox.x + heroAttackHitBox.w &&
+            this.loc.y > heroAttackHitBox.y &&
+            this.loc.y < heroAttackHitBox.y + heroAttackHitBox.h
+        ) { // if the hero hits the zombie 
+            this.isAtacking = false;
+            this.stopMoving()
+            if (game.hero.inventory.hasSpear) {
+                this.hp -= this.fistDmg
+            } else {
+                this.hp -= this.spearDmg
+            }
         }
     }
 }

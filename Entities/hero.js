@@ -32,7 +32,7 @@ class Hero {
       jumpBoost: false,
       invulnerability: false,
       ghostMode: false,
-      hasSpike: false,
+      hasSpear: false,
     };
     this.statusBlock = {
       hp: 100,
@@ -137,10 +137,10 @@ class Hero {
     }
     switch (true) {
       //checks if any of the following values are true, if so runs them
-      case (this.statusBlock.isAttacking && !this.inventory.hasSpike):
+      case (this.statusBlock.isAttacking && !this.inventory.hasSpearman):
         console.log("renderding Attack");
         break;
-      case (this.statusBlock.isAttacking && this.inventory.hasSpike):
+      case (this.statusBlock.isAttacking && this.inventory.hasSpear):
         console.log(`rendering attack with a spike`)
         break;
       //! END OF ATTACKING
@@ -358,6 +358,21 @@ class Hero {
         this.bullets.splice(i, 1);
       }
     }
+
+    // ########this is to refresh the location of the attack hitbox
+    this.attackHitBoxL = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: -20,
+      h: this.height,
+    }
+    this.attackHitBoxR = {
+      x: this.loc.x + this.width,
+      y: this.loc.y,
+      w: 20,
+      h: this.height,
+    }
+    // ########
   }
 
   jump() {
@@ -395,24 +410,11 @@ class Hero {
   }
   attack() {
 
-    this.attackHitBoxL = {
-      x: this.loc.x,
-      y: this.loc.y,
-      w: -30,
-      h: this.height,
-    }
-    this.attackHitBoxR = {
-      x: this.loc.x,
-      y: this.loc.y,
-      w: 30,
-      h: this.height,
-    }
-
     if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
       this.statusBlock.attackTimer--;
       ctx.beginPath();
       if (!this.posNeg) {
-        ctx.rect(this.attackHitBoxR.x + this.width, this.attackHitBoxR.y, this.attackHitBoxR.w, this.attackHitBoxR.h)
+        ctx.rect(this.attackHitBoxR.x, this.attackHitBoxR.y, this.attackHitBoxR.w, this.attackHitBoxR.h)
       } else {
         ctx.rect(this.attackHitBoxL.x, this.attackHitBoxL.y, this.attackHitBoxL.w, this.attackHitBoxL.h)
       }

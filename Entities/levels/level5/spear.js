@@ -1,4 +1,4 @@
-class Spike {
+class Spear {
     constructor(x, y, w, h) {
         this.loc = new JSVector(x, y);
         this.w = w
