@@ -1,5 +1,6 @@
 // class Bear{
 //     constructor(){
+//            this.docile = false
 
 //     }
 

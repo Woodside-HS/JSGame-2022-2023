@@ -5,7 +5,7 @@ class level3 extends Level{
         this.loadBackgrounds(3);
         this.loadCoins();
         this.craze = 0;
-        this.loadResources([4],[5])
+        this.loadResources([4],[5],[6])
     }
     loadPlatforms() {
         this.platforms[0] = new Level3Platform(150,400,100);
@@ -40,12 +40,18 @@ class level3 extends Level{
         
     }
 
-    loadResources(pArray1, pArray2) {
+    loadResources(pArray1, pArray2, pArray3) {
+        let temp;
         for(let i = 0; i<pArray1.length; i++){
             this.resources[i] = new Berries(this.platforms[pArray1[i]].loc.x, this.platforms[pArray1[i]].loc.y);
         }
         for(let j = 0; j<pArray2.length; j++){
-            this.resources.push(new IncreasedSpeed(this.platforms[pArray2[j]].loc.x, this.platforms[pArray2[j]].loc.y, this.platforms[pArray2[j]].width, 12));
+            temp = new IncreasedSpeed(this.platforms[pArray2[j]].loc.x, this.platforms[pArray2[j]].loc.y, this.platforms[pArray2[j]].width, 12);
+            this.resources.push(temp);
+        }
+        for(let k = 0; k<pArray3.length; k++){
+            temp = new Befriend(this.platforms[pArray3[k]].loc.x, this.platforms[pArray3[k]].loc.y, this.platforms[pArray3[k]].width, 12);
+            this.resources.push(temp);
         }
 
         //pArray2 is the array of platforms with powerup 2
