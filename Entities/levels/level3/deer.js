@@ -16,7 +16,8 @@ class Deer{
     }
 
     eatPlatform(){
-        //TODO: decreases platform health; Change some visual element of the platform with every x decrease of platform health (use mod)
+        this.pHealth--;
+        //TODO: Change some visual element of the platform with every x decrease of platform health (use mod)
         if(this.pHealth < 0){
             this.platform.isDead = true;
         }
