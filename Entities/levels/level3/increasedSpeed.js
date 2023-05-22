@@ -11,9 +11,11 @@ class IncreasedSpeed{
     }
 
     run() {
+      if(!this.collected){
       this.bounceCoin();
       this.render();
       this.checkHero();
+      }
     }
     bounceCoin() {
       //so the coin will move up and down gently
