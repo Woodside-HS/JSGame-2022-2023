@@ -3,7 +3,7 @@ class ResourceManager {
     this.player = player;
     this.levelGen = levelGen;
     this.resources = resources;
-    this.maxCapacity = 30;
+    this.maxCapacity = 100;
   }
 
   spawnResource() {
@@ -14,14 +14,21 @@ class ResourceManager {
     let randomCell = this.levelGen.emptyCells[Math.floor(Math.random() * this.levelGen.emptyCells.length)];
 
     let resource;
-    switch (Math.floor(Math.random() * 3)) {
+    switch (Math.floor(Math.random() * 10)) {
       case 0:
+      case 1:
         resource = new HealthKit(randomCell, this);
         break;
-      case 1:
+      case 2:
+      case 3:
         resource = new ShieldPack(randomCell, this);
         break;
-      case 2:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9:
         resource = new ManaPack(randomCell, this);
         break;
     }

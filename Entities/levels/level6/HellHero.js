@@ -89,7 +89,7 @@ class HellHero {
       color: "rgba( 118, 0, 188,",
     };
 
-    this.mana = 0;
+    this.mana = 13;
   }
 
   getCurrentCell() {
@@ -467,4 +467,6 @@ class HellHero {
       this.invinsible = false;
     }
   }
+
+  handleMana() {}
 }

@@ -18,6 +18,7 @@ class level6 {
       this.icons = {
         health: newImage("Images/Level6/healthicon.png"),
         shield: newImage("Images/Level6/shieldicon.png"),
+        mana: newImage("Images/Level6/mana.png"),
       };
       // background sound
       this.backgroundMusic = new Audio("Images/Level6/backgroundmusic.mp3");
@@ -34,23 +35,23 @@ class level6 {
 
       // set bind for u, i, o , and p
       document.addEventListener("keydown", (e) => {
-        if (e.key == "u") {
+        if (e.key == "q") {
           if (this.character.powerUp.temp.health > 0) {
             this.character.powerUp.temp.health--;
             this.character.healthPotion();
           }
-        } else if (e.key == "i") {
-          if (this.character.powerUp.temp.health > 0) {
+        } else if (e.key == "e") {
+          if (this.character.powerUp.temp.shield > 0) {
             this.character.powerUp.temp.shield--;
             this.character.shieldPotion();
           }
-        } else if (e.key == "o") {
-          if (this.character.powerUp.temp.health > 0) {
+        } else if (e.key == "r") {
+          if (this.character.powerUp.temp.strength > 0) {
             this.character.powerUp.temp.strength--;
             this.character.strengthPotion();
           }
-        } else if (e.key == "p") {
-          if (this.character.powerUp.temp.health > 0) {
+        } else if (e.key == "f") {
+          if (this.character.powerUp.temp.invincibility > 0) {
             this.character.powerUp.temp.invincibility--;
             this.character.invincibilityPotion();
           }
@@ -346,6 +347,26 @@ class level6 {
     this.drawHealth(20, canvas.height - 30);
     this.drawShield(20, canvas.height - 60);
     this.drawPotions(45, canvas.height - 100);
+    this.drawMana(20, 20);
+  }
+
+  drawMana(offx, offy) {
+    // draw mana image
+    let imgSize = 25;
+    let x = this.character.camLoc.x + offx;
+    let y = this.character.camLoc.y + offy;
+
+    ctx.drawImage(this.icons.mana, x - imgSize / 2, y - 5, imgSize, imgSize);
+
+    // draw text of mana amount
+    ctx.font = "18px 'CompassPro'";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "white";
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "black";
+
+    ctx.strokeText(this.character.mana, x + imgSize / 2 + 5, y - 2);
+    ctx.fillText(this.character.mana, x + imgSize / 2 + 5, y - 2);
   }
 
   drawPotions(offx, offy) {
@@ -418,14 +439,14 @@ class level6 {
     ctx.lineWidth = 5;
     ctx.strokeStyle = "black";
 
-    ctx.strokeText("[u]", x - imgSize / 2 - 10, y);
-    ctx.fillText("[u]", x - imgSize / 2 - 10, y);
-    ctx.strokeText("[i]", x - imgSize / 2 - 10, y - imgSize / 0.65);
-    ctx.fillText("[i]", x - imgSize / 2 - 10, y - imgSize / 0.65);
-    ctx.strokeText("[o]", x + imgSize / 0.75 - 10, y);
-    ctx.fillText("[o]", x + imgSize / 0.75 - 10, y);
-    ctx.strokeText("[p]", x + imgSize / 0.75 - 10, y - imgSize / 0.65);
-    ctx.fillText("[p]", x + imgSize / 0.75 - 10, y - imgSize / 0.65);
+    ctx.strokeText("[q]", x - imgSize / 2 - 10, y);
+    ctx.fillText("[q]", x - imgSize / 2 - 10, y);
+    ctx.strokeText("[e]", x - imgSize / 2 - 10, y - imgSize / 0.65);
+    ctx.fillText("[e]", x - imgSize / 2 - 10, y - imgSize / 0.65);
+    ctx.strokeText("[r]", x + imgSize / 0.75 - 10, y);
+    ctx.fillText("[r]", x + imgSize / 0.75 - 10, y);
+    ctx.strokeText("[f]", x + imgSize / 0.75 - 10, y - imgSize / 0.65);
+    ctx.fillText("[f]", x + imgSize / 0.75 - 10, y - imgSize / 0.65);
   }
 
   drawHealth(offx, offy) {

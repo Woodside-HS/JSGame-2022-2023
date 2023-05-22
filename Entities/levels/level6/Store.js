@@ -17,6 +17,17 @@ class Store {
       },
     };
 
+    this.costs = {
+      health: 10,
+      shield: 10,
+      strength: 15,
+      invinsibility: 15,
+      reach: 30,
+      regen: 100,
+      fortify: 10,
+      speed: 60,
+    };
+
     this.potionSize = 50;
     this.buttons = {
       health: new Button(this.images.potions.health, "Instant Health", "10", { x: canvas.width / 2 + 75, y: canvas.height / 2 - 135 + this.potionSize / 2 }, { w: this.potionSize, h: this.potionSize }, this.healthButtonClicked.bind(this)),
@@ -36,25 +47,37 @@ class Store {
 
   healthButtonClicked() {
     if (this.player) {
-      this.player.powerUp.temp.health++;
+      if (this.player.mana >= this.costs.health) {
+        this.player.powerUp.temp.health++;
+        this.player.mana -= this.costs.health;
+      }
     }
   }
 
   shieldButtonClicked() {
     if (this.player) {
-      this.player.powerUp.temp.shield++;
+      if (this.player.mana >= this.costs.shield) {
+        this.player.powerUp.temp.shield++;
+        this.player.mana -= this.costs.shield;
+      }
     }
   }
 
   strengthButtonClicked() {
     if (this.player) {
-      this.player.powerUp.temp.strength++;
+      if (this.player.mana >= this.costs.strength) {
+        this.player.powerUp.temp.strength++;
+        this.player.mana -= this.costs.strength;
+      }
     }
   }
 
   invinsibilityButtonClicked() {
     if (this.player) {
-      this.player.powerUp.temp.invincibility++;
+      if (this.player.mana >= this.costs.invinsibility) {
+        this.player.powerUp.temp.invinsibility++;
+        this.player.mana -= this.costs.invinsibility;
+      }
     }
   }
 
@@ -110,6 +133,7 @@ class Store {
 class Button {
   constructor(img, title, cost, pos, size, action) {
     this.img = img;
+    this.imgHover = this.createHoverImage(img);
     this.title = title;
     this.cost = cost;
     this.pos = pos;
@@ -119,43 +143,59 @@ class Button {
     this.action = action;
     this.isClicked = false;
     this.isHovering = false;
-
+    this.isInit = false;
     this.init();
   }
 
   init() {
-    console.log("init");
-    canvas.addEventListener("click", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+    if (!this.isInit) {
+      console.log("init");
+      canvas.addEventListener("click", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      if (x >= this.pos.x - this.size.w / 2 && x <= this.pos.x + this.size.w / 2 && y >= this.pos.y - this.size.h / 2 && y <= this.pos.y + this.size.h / 2) {
-        this.isClicked = true;
-        this.action();
-      } else {
-        this.isClicked = false;
-      }
-    });
+        if (x >= this.pos.x - this.size.w / 2 && x <= this.pos.x + this.size.w / 2 && y >= this.pos.y - this.size.h / 2 && y <= this.pos.y + this.size.h / 2) {
+          this.isClicked = true;
+          this.action();
+        } else {
+          this.isClicked = false;
+        }
+      });
 
-    canvas.addEventListener("mousemove", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      if (x >= this.pos.x - this.size.w / 2 && x <= this.pos.x + this.size.w / 2 && y >= this.pos.y - this.size.h / 2 && y <= this.pos.y + this.size.h / 2) {
-        this.isHovering = true;
-      } else {
-        this.isHovering = false;
-      }
-    });
+        if (x >= this.pos.x - this.size.w / 2 && x <= this.pos.x + this.size.w / 2 && y >= this.pos.y - this.size.h / 2 && y <= this.pos.y + this.size.h / 2) {
+          this.isHovering = true;
+        } else {
+          this.isHovering = false;
+        }
+      });
+      this.isInit = true;
+    }
+  }
+
+  createHoverImage(img) {
+    let hoverImg = new Image();
+    hoverImg.src = img.src;
+
+    hoverImg.width = img.width * 1.1;
+    hoverImg.height = img.height * 1.1;
+
+    return hoverImg;
   }
 
   draw() {
     const xPos = this.pos.x - this.size.w / 2;
     const yPos = this.pos.y - this.size.h / 2;
 
-    ctx.drawImage(this.img, xPos, yPos, this.size.w, this.size.h);
+    let imageToDraw = this.isHovering ? this.imgHover : this.img;
+    //let imgWidth = this.isHovering ? this.sizeHover.w : this.size.w;
+    //let imgHeight = this.isHovering ? this.sizeHover.h : this.size.h;
+    ctx.drawImage(imageToDraw, xPos, yPos, imgWidth, imgHeight);
 
     ctx.font = "18px 'CompassPro'";
     ctx.textAlign = "center";
@@ -174,16 +214,7 @@ class Button {
     ctx.fillText("[" + this.cost + " Mana]", xPos + this.size.w / 2, yPos - 20);
   }
 
-  update() {
-    if (this.isHovering) {
-      this.size = this.sizeHover;
-    } else {
-      this.size = this.sizeDefault;
-    }
-  }
-
   run() {
-    this.update();
     this.draw();
   }
 }
