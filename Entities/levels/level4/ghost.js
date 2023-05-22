@@ -9,6 +9,7 @@ class Ghost{
     this.indc = 0;
     this.look = false;
     this.isdead = false;
+    this.speed = 1.5;
     this.frames = [];
     this.groove = 0;//groove is the varible that counts down to switching games
     this.grooveId = 0;//grooveID is current frame that is being rendered
@@ -20,6 +21,7 @@ class Ghost{
     this.checkHero();
     this.checkAttack();
     this.checkLook();
+    this.checkCrucifix();
   }
   /*loadImages(){
     for(let i= 0; i<=12;i++){
@@ -70,7 +72,7 @@ class Ghost{
       this.acc.multiply(.5);
       if(d>=200)
       this.acc.multiply(0);
-      this.vel.limit(1.5);
+      this.vel.limit(this.speed);
       this.vel.add(this.acc);
   } 
 
@@ -79,12 +81,12 @@ class Ghost{
     this.indc = 20;
     if(game.clickingA)
     this.indc = -20;
-    console.log(this.indc)
+  
     if((this.indc > 0 && this.loc.x>game.hero.loc.x) || (this.indc < 0 && this.loc.x<game.hero.loc.x)){
       this.vel.limit(0)
       this.hide = true;
     } else {
-      this.vel.limit(1.5)
+      this.vel.limit(this.speed)
       this.hide = false;
     }
   }
@@ -137,5 +139,11 @@ class Ghost{
       game.hero.statusBlock.hp--;
       }
     }
+  }
+
+  checkCrucifix(){
+    let d = game.hero.loc.distance(this.loc);
+    if(game.hero.inventory.crucifix && d < 75)
+    game.levels[3].enemies.splice(0,1);
   }
 }

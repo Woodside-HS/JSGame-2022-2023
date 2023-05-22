@@ -52,11 +52,12 @@ class level4platform extends Platform {
                 heroLoc.y + heroH > this.loc.y - this.width &&
                 heroLoc.y < this.loc.y
             ) {
+                if(!game.hero.inventory.ghostPowerUp){
                 if(game.clickingD)
                 game.hero.loc.x = this.loc.x-50;
                 if(game.clickingA)
                 game.hero.loc.x = this.loc.x+10;
-                
+                }
             }
         }
 
@@ -82,7 +83,7 @@ class level4platform extends Platform {
             } else {
                 // makes it so you cant go through the bottom of the platform
                 game.hero.vel.y = 0;
-                game.hero.loc.y = this.loc.y + this.height; // sets the hero the bottom of the platform so it wont go past
+                game.hero.loc.y = this.loc.y + (this.height); // sets the hero the bottom of the platform so it wont go past
             }
             game.hero.statusBlock.onPlatform = true;
             return true;

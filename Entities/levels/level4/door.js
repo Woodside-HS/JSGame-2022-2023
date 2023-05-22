@@ -5,7 +5,7 @@ class Door{
         this.width = 40;
         this.height = 70;
         
-        //this.doors[1] = new Door(1270,500,2)
+     
     }
 
     run(){
@@ -20,7 +20,7 @@ class Door{
         ctx.lineTo(this.loc.x+this.width,this.loc.y+this.height);
         ctx.lineTo(this.loc.x,this.loc.y+this.height);
         ctx.closePath();
-        ctx.fillStyle = "#511F00";
+        ctx.fillStyle = "red";
         ctx.fill();
 
         ctx.beginPath();
@@ -29,7 +29,7 @@ class Door{
         ctx.lineTo(this.dloc.x+this.width,this.dloc.y+this.height);
         ctx.lineTo(this.dloc.x,this.dloc.y+this.height);
         ctx.closePath();
-        ctx.fillStyle = "#511F00";
+        ctx.fillStyle = "blue";
         ctx.fill();
     }
 
@@ -42,10 +42,10 @@ class Door{
             (heroLoc.x + heroW > this.loc.x &&
             heroLoc.x < this.loc.x + this.width &&
             heroLoc.y + heroH > this.loc.y &&
-            heroLoc.y < this.loc.y + this.height) && game.hero.inventory.key
+            heroLoc.y < this.loc.y + this.height) && game.hero.inventory.keyCount>0
         ){
             game.hero.loc = doorLoc;
-            game.hero.inventory.key = false;
+            game.hero.inventory.keyCount--;
         }
     }
 }

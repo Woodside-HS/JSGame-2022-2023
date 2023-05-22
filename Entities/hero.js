@@ -16,8 +16,10 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
-      invulnerability: false,
-      key: false
+      invulnerability: true,
+      keyCount: 0,
+      crucifix: false,
+      ghostPowerUp: false
     };
     this.statusBlock = {
       hp: 100,
@@ -54,6 +56,7 @@ class Hero {
   }
 
   run() {
+    
     this.checkFace();
     this.render();
     this.update();
@@ -74,7 +77,7 @@ class Hero {
       this.heroThrow[i] = document.createElement("img");
       this.heroThrow[i].src = "Images/Hero/HeroThrow/hero" + (i + 1) + ".png";
     }
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 8; i++) {
       this.heroJump[i] = document.createElement("img");
       this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
     }
@@ -154,11 +157,11 @@ class Hero {
       case this.statusBlock.isJumping:
         this.changeFrame++;
         //console.log("jumping"+ this.frameNum);
-        if (this.changeFrame >= 4) {
+        if (this.changeFrame >= 6) {
           this.changeFrame = 0;
           this.frameNum++;
         }
-        if (this.frameNum >= 14) {
+        if (this.frameNum >= 7) {
           this.statusBlock.isJumping = false;
         }
         if (game.clickingD || !this.posNeg) {

@@ -110,6 +110,12 @@ class Clown{
       if(!game.hero.inventory.invulnerability){
       game.hero.statusBlock.hp--;
       }
+      if(game.hero.isAttacking)
+      this.isDead();
     }
+  }
+
+  isDead(){
+    game.levels[3].enemies.splice(0,1);
   }
 }

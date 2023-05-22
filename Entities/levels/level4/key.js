@@ -35,10 +35,9 @@ class Key {
         heroLoc.y + heroH > this.y &&
         heroLoc.y < this.y + this.size
       ) {
-        console.log("key collision")
         this.collected = true;
-        game.hero.inventory.key = true;
-        game.levels[3].resources.splice(0,1);
+        game.hero.inventory.keyCount++;
+        game.levels[3].resources.splice(this.id,1);
       }
     }
   }

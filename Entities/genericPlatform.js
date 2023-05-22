@@ -6,7 +6,7 @@ class Platform {
     constructor(x, y, w) {
         this.loc = new JSVector(x, y);
         this.width = w;
-        this.height = w/3;
+        this.height = 10;
         this.coin = null;
         this.resource = null;
         this.enemy = null;
