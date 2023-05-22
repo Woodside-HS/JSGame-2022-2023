@@ -46,7 +46,9 @@ class level1 extends Level{
         this.enemies[0] = new lvl1Enemy1(25,650,0,150,200);
     }
 
-
+    loadResources() {
+        this.resource[0] = new lvl1Resource1(200,200);
+    }
 
 
 }
