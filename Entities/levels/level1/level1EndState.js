@@ -7,4 +7,10 @@ class lvl1BusStop{
     run(){
         this.checkHero();
     }
+    checkHero(){
+
+    }
+    finishLevel(){
+        
+    }
 }

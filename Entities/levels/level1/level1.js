@@ -5,6 +5,8 @@ class level1 extends Level{
         this.loadCoins();
         this.loadBackgrounds(5);
         this.loadFreeEnemies();
+        this.loadResources();
+        this.tokens = 0;
     }
     loadPlatforms() {
         //enemy type 1 is loaded as a part of the platform, 4th variable
@@ -47,7 +49,8 @@ class level1 extends Level{
     }
 
     loadResources() {
-        this.resource[0] = new lvl1Resource1(200,200);
+        this.resources[0] = new lvl1Resource1(400,400);
+        this.resources[1] = new lvl1Resource2(600,400);
     }
 
 
