@@ -1,28 +1,19 @@
-class JumpBoost {
+class GhostOrb {
     constructor(x, y, size) {
-        this.loc = new JSVector(x, y)
-        this.size = size
+        this.loc = new JSVector(x, y);
+        this.size = size;
         this.bounce = 0;
         this.bounceAmount = -0.05
         this.collected = false
     }
 
     run() {
-        this.bounceJumpBoost();
+        this.bounceGhostOrb()
         this.render()
-        this.checkHero();
+        this.checkHero()
     }
 
-    render() {
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(this.loc.x, this.loc.y - this.bounce, this.size, 0, Math.PI * 2);
-        ctx.closePath(); //beginning and closing path just to be sure
-        ctx.fillStyle = "blue";
-        ctx.fill();
-        ctx.restore();
-    }
-    bounceJumpBoost() {
+    bounceGhostOrb() {
         //so the coin will move up and down gently
         this.bounce += this.bounceAmount;
         if (this.bounce >= 1) {
@@ -32,7 +23,17 @@ class JumpBoost {
             this.bounceAmount = 0.1;
         }
     }
+    render() {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.loc.x, this.loc.y - this.bounce, this.size, 0, Math.PI * 2);
+        ctx.closePath(); //beginning and closing path just to be sure
+        ctx.fillStyle = "gray";
+        ctx.fill();
+        ctx.restore();
+    }
     checkHero() {
+
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
         let heroH = game.hero.height; // the heros height
         let heroW = game.hero.width; // the heros width
@@ -43,8 +44,9 @@ class JumpBoost {
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.size
         ) {
-            game.hero.inventory.jumpBoost = true
+            game.hero.inventory.ghostMode = true
             this.collected = true;
         }
     }
+
 }

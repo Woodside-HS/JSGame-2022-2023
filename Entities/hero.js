@@ -16,7 +16,8 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
-      invulnerability: false
+      invulnerability: false,
+      ghostMode: false,
     };
     this.statusBlock = {
       hp: 100,
@@ -33,10 +34,11 @@ class Hero {
       coolDownTimer: 100, // the length of the attack cooldown
       attackTimer: 50, // the length/amount of time that the hero attacks for
       jumpBoostCounter: 0,
+      jumpBoostLength: 100,
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
-      powerUpLength: 1000
+      powerUpLength: 1000,
     };
     this.indc = 0;
 
@@ -298,6 +300,27 @@ class Hero {
         this.clr = "green";
       }
     }
+
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& jumpBoost timer
+    console.log(this.statusBlock.jumpBoostCounter)
+    if (
+      this.inventory.jumpBoost &&
+      this.statusBlock.jumpBoostCounter++ >= this.statusBlock.jumpBoostLength
+    ) {
+      console.log(`lost jumpBoost`)
+      this.statusBlock.jumpBoostCounter = 0;
+      this.inventory.jumpBoost = false;
+    }
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of jumpBoost timer
+
+
+
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ghostMode 
+    if (this.inventory.ghostMode && this.statusBlock.isFalling) {
+      this.grav.y = 0.1
+    }
+
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of ghostMode
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
       if (this.bullets[i].isDead) {

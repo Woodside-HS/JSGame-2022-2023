@@ -11,10 +11,8 @@ class level5 extends Level {
         this.platforms[0] = new level5platform(0, 600, 10000, false);
         this.platforms[1] = new level5platform(150, 500, 100, false);
         this.platforms[2] = new level5platform(300, 400, 300, true)
-        this.platforms[3] = new level5platform(700, 300, 100, false)
-        this.platforms[4] = new level5platform(400, 200, 100, false)
-        this.platforms[5] = new level5platform(400, 300, 100, false)
-        this.platforms[6] = new level5platform(400, 300, 100, false)
+        this.platforms[3] = new level5platform(400, 150, 100, false)
+        this.platforms[4] = new level5platform(850, 300, 100, false)
 
 
 
@@ -27,7 +25,8 @@ class level5 extends Level {
         //which powerup goes into which platform is hardcoded
 
 
-        this.resources[0] = new JumpBoost(400, 350, 10, 50);
+        this.resources[0] = new JumpBoost(400, 350, 10);
+        this.resources[1] = new GhostOrb(450, 125, 10)
     }
 
     loadEnemies(pArray1, pArray2) {
