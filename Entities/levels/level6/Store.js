@@ -3,6 +3,7 @@ class Store {
     this.player = null;
     this.images = {
       background: newImage("Images/Level6/storeBG.png"),
+      mana: newImage("Images/Level6/mana.png"),
       potions: {
         health: newImage("Images/Level6/Potions/Health.png"),
         shield: newImage("Images/Level6/Potions/Shield.png"),
@@ -117,7 +118,7 @@ class Store {
     let y = 50;
     let imgSize = 25;
 
-    //ctx.drawImage(this.icons.mana, x - imgSize / 2, y - 5, imgSize, imgSize);
+    ctx.drawImage(this.images.mana, x - imgSize / 2, y - 5, imgSize, imgSize);
 
     ctx.font = "18px 'CompassPro'";
     ctx.textAlign = "left";
@@ -125,8 +126,8 @@ class Store {
     ctx.lineWidth = 5;
     ctx.strokeStyle = "black";
 
-    //ctx.strokeText(this.character.mana, x + imgSize / 2 + 5, y - 2);
-    //ctx.fillText(this.character.mana, x + imgSize / 2 + 5, y - 2);
+    ctx.strokeText(this.player.mana, x + imgSize / 2 + 5, y - 2);
+    ctx.fillText(this.player.mana, x + imgSize / 2 + 5, y - 2);
   }
 
   drawProducts() {
