@@ -1,21 +1,21 @@
-class Befriend extends Coin{ //? All powerups extend Coin
-    constructor(){
+// class Befriend extends Coin{ //? All powerups extend Coin
+//     constructor(){
 
-    }
+//     }
 
-    run(){
+//     run(){
 
-    }
+//     }
 
-    checkHero(){
+//     checkHero(){
 
-    }
+//     }
 
-    bearChange(){
+//     bearChange(){
 
-    }
+//     }
 
-    render(){
+//     render(){
 
-    }
-}
+//     }
+// }

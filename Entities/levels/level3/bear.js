@@ -1,24 +1,24 @@
-class Bear{
-    constructor(){
+// class Bear{
+//     constructor(){
 
-    }
+//     }
 
-    run(){
+//     run(){
 
-    } 
+//     } 
 
-    attack(){
-        //!Speed dependent on level3.craze
+//     attack(){
+//         //!Speed dependent on level3.craze
 
-    }
+//     }
 
-    idle(){
-        //! when not attacking
+//     idle(){
+//         //! when not attacking
         
-    }
+//     }
     
-    befriended(){
+//     befriended(){
         
-    }
+//     }
 
-}
+// }
