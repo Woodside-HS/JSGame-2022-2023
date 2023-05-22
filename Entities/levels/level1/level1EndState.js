@@ -9,12 +9,16 @@ class lvl1BusStop{
         this.bus = document.createElement("img");
         this.bus.src = "Images/Level1/Lvl1End/lvl1Bus.png";
         this.busLoc = new JSVector(this.loc.x+800,this.loc.y);
-        this.confrimed = false;
+        this.confirmed = false;
     }
     run(){
-        this.checkHero();
+        if(game.hero.loc.x > 4000){
+            //cuts down on uncessary dist checks
+            this.checkHero();
+        }
         this.render();
         if(this.confirmed){
+            //console.log("confirmed conforimed");
             this.endLvl();
         }
     }
@@ -26,8 +30,8 @@ class lvl1BusStop{
             //will create popup that says you need coins
             this.txt = "You have " + game.levels[0].tokens + "/" + this.desiredAmount  + " required bus tickets";
             ctx.fillText(this.txt, this.loc.x-20,this.loc.y);
-            if(game.levels[0].tokens>=this.desiredAmount&& !this.confrimed){
-                this.confrimed = true;
+            if(game.levels[0].tokens>=this.desiredAmount&& !this.confirmed){
+                this.confirmed = true;
                 this.endLvl();
                 window.confirm("next level");
             }
@@ -39,9 +43,9 @@ class lvl1BusStop{
     endLvl(){
         ctx.drawImage(this.bus,this.busLoc.x,this.busLoc.y,600,200);
         console.log("runnign");
-        if(this.busLoc.x>=this.loc.x){
-            this.busLoc-=10;
-        } else if(this.busLoc.x<=this.loc.x){
+        if(this.busLoc.x>=game.hero.loc.x){
+            this.busLoc.x-=10;
+        } else if(this.busLoc.x<=game.hero.loc.x){
             gameState++;
 
         } 
