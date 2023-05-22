@@ -59,7 +59,7 @@ class IncreasedSpeed{
       }
       else if (this.counter > 0 && this.counter<5){
         this.counter == 0;
-        game.speed /= 2;
+        game.speed *=0.5;
         game.hero.inventory.invulnerability = false;
 
       }
