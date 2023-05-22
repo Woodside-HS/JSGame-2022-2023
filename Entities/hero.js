@@ -9,6 +9,20 @@ class Hero {
     this.clr = "green";
     this.bullets = [];
     this.shootingDirection = false; //true = right, false = left
+
+    this.attackHitBoxL = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: 30,
+      h: this.height,
+    }
+    this.attackHitBoxR = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: 30,
+      h: this.height,
+    }
+
     this.inventory = {
       dbJump: false,
       dbCoin: false,
@@ -380,19 +394,27 @@ class Hero {
     }
   }
   attack() {
+
+    this.attackHitBoxL = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: -30,
+      h: this.height,
+    }
+    this.attackHitBoxR = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: 30,
+      h: this.height,
+    }
+
     if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
       this.statusBlock.attackTimer--;
       ctx.beginPath();
       if (!this.posNeg) {
-        ctx.moveTo(this.loc.x + 50, this.loc.y + 0); //top left
-        ctx.lineTo(this.loc.x + 80, this.loc.y + 0); //top right
-        ctx.lineTo(this.loc.x + 80, this.loc.y + this.height); //bottom right
-        ctx.lineTo(this.loc.x + 50, this.loc.y + this.height); //bottom left
+        ctx.rect(this.attackHitBoxR.x + this.width, this.attackHitBoxR.y, this.attackHitBoxR.w, this.attackHitBoxR.h)
       } else {
-        ctx.moveTo(this.loc.x - 30, this.loc.y + 0); //top left
-        ctx.lineTo(this.loc.x + 0, this.loc.y + 0); //top right
-        ctx.lineTo(this.loc.x + 0, this.loc.y + this.height); //bottom right
-        ctx.lineTo(this.loc.x - 30, this.loc.y + this.height); //bottom left
+        ctx.rect(this.attackHitBoxL.x, this.attackHitBoxL.y, this.attackHitBoxL.w, this.attackHitBoxL.h)
       }
       ctx.closePath();
       ctx.fillStyle = "darkgreen";

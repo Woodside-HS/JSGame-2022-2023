@@ -162,17 +162,15 @@ class zombie {
     }
 
     checkIfGettingAttacked() {
-        let heroLoc = game.hero.loc
-        if (this.posNeg) {
-            let heroAttackHitBox = new {
-                x: heroLoc.x,
-                y: heroLoc.y,
-                w: 80,
-                h: 50,
-            };
+        let heroAttackHitBox;
+        if (game.hero.posNeg) {
+            heroAttackHitBox = game.hero.attackHitBoxR
+        } else {
+            heroAttackHitBox = game.hero.attackHitBoxL
         }
 
         if (heroAttackHitBox.x < this.loc.x) {
+            console.log(`herw`)
         }
     }
 }
