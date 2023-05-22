@@ -45,7 +45,7 @@ class level3 extends Level{
             this.resources[i] = new Berries(this.platforms[pArray1[i]].loc.x, this.platforms[pArray1[i]].loc.y);
         }
         for(let j = 0; j<pArray2.length; j++){
-            this.resources.push(new IncreasedSpeed(this.platforms[pArray2[j]].loc.x, this.platforms[pArray2[j]].loc.y, this.platforms[pArray2[j].width], 12));
+            this.resources.push(new IncreasedSpeed(this.platforms[pArray2[j]].loc.x, this.platforms[pArray2[j]].loc.y, this.platforms[pArray2[j]].width, 12));
         }
 
         //pArray2 is the array of platforms with powerup 2

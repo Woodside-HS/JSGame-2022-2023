@@ -27,6 +27,9 @@ class Game {
   }
 
   update = () => {
+    if(this.speed > 6){
+      this.speed = 6;
+    }
     this.moveCam();
       if(gameState == 0){
         this.menuScreen();
