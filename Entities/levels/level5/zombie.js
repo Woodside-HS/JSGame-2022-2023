@@ -10,7 +10,7 @@ class zombie {
         this.movingL = true;
         this.movingR = false
         this.movingSpeed = 0.5
-        this.isAtacking = false;
+        this.isAttacking = false;
         this.lookingL = false;
         this.lookingR = false
         this.attackTimer = 0;
@@ -19,11 +19,17 @@ class zombie {
         this.spearDmg = 50 // the damage that the spear does
         this.fistDmg = 25 // the damege that the fist does
         this.bulletDmg = 10 // the damege that the bullet does
+        this.gotHit = false
+        this.invincableTimer = 0
+        this.invincableLength = 200
+
     }
     run() {
         this.render();
         this.update();
-        this.checkHero()
+        if (!game.hero.statusBlock.isAttacking) {
+            this.checkHero()
+        }
         this.moveZombie()
         this.attackHero();
         this.checkIfGettingAttacked()
@@ -45,8 +51,7 @@ class zombie {
         // console.log("shoulde be here")
     }
     attackHero() {
-        if (this.isAtacking) {
-
+        if (this.isAttacking) {
             if (this.checkHeroPos() == "right") {
                 this.lookingR = true;
                 this.lookingL = false;
@@ -58,7 +63,7 @@ class zombie {
             }
 
             if (this.attackTimer++ >= 100) {
-                this.isAtacking = false;
+                this.isAttacking = false;
                 this.hitHero = false
 
                 if (this.checkHeroPos() == "left") {
@@ -72,24 +77,26 @@ class zombie {
 
     }
     runAttack() {
-        this.punchLocL = new JSVector(this.loc.x - 20, this.loc.y)
-        this.punchLocR = new JSVector(this.loc.x + 20, this.loc.y)
-        ctx.save()
-        if (this.lookingL) {
-            ctx.translate(this.punchLocL.x, this.punchLocL.y);
-        } else {
-            ctx.translate(this.punchLocR.x, this.punchLocR.y);
-        }
+        if (this.isAttacking) {
+            this.punchLocL = new JSVector(this.loc.x - 20, this.loc.y)
+            this.punchLocR = new JSVector(this.loc.x + 20, this.loc.y)
+            ctx.save()
+            if (this.lookingL) {
+                ctx.translate(this.punchLocL.x, this.punchLocL.y);
+            } else {
+                ctx.translate(this.punchLocR.x, this.punchLocR.y);
+            }
 
-        ctx.rect(0, 0, this.w, this.h)
-        ctx.stroke()
-        ctx.fill()
-        ctx.restore()
+            ctx.rect(0, 0, this.w, this.h)
+            ctx.stroke()
+            ctx.fill()
+            ctx.restore()
 
-        if (!this.hitHero) { // checks if the zombie has already hit the hero in this attack cycle
-            game.hero.statusBlock.hp -= this.damage
-            console.log("a zombie hit the hero for 25 hp \n the hero now has: " + game.hero.statusBlock.hp)
-            this.hitHero = true
+            if (!this.hitHero) { // checks if the zombie has already hit the hero in this attack cycle
+                game.hero.statusBlock.hp -= this.zombieDmg
+                console.log("a zombie hit the hero for 25 hp \n the hero now has: " + game.hero.statusBlock.hp)
+                this.hitHero = true
+            }
         }
 
     }
@@ -132,7 +139,7 @@ class zombie {
         ) {
             this.movingL = false;
             this.movingR = false;
-            this.isAtacking = true;
+            this.isAttacking = true;
             return true;
         }
         return false;
@@ -170,29 +177,44 @@ class zombie {
 
     checkIfGettingAttacked() {
         let heroAttackHitBox;
-        // if (!game.hero.statusBlock.isAttacking) {
-        //     return
-        // }
-
         if (game.hero.posNeg) {
             heroAttackHitBox = game.hero.attackHitBoxL
         } else {
             heroAttackHitBox = game.hero.attackHitBoxR
         }
 
+        // ctx.save()
+        // ctx.translate(heroAttackHitBox.x, heroAttackHitBox.y)
+        // ctx.rect(0, 0, heroAttackHitBox.w, heroAttackHitBox.h)
+        // ctx.stroke()
+        // ctx.fill()
+        // ctx.restore()
+
+
         if (
-            this.loc.x > heroAttackHitBox.x &&
+            game.hero.statusBlock.isAttacking &&
+            !this.gotHit &&
+            this.loc.x + this.w > heroAttackHitBox.x &&
             this.loc.x < heroAttackHitBox.x + heroAttackHitBox.w &&
             this.loc.y > heroAttackHitBox.y &&
             this.loc.y < heroAttackHitBox.y + heroAttackHitBox.h
         ) { // if the hero hits the zombie 
-            this.isAtacking = false;
+            this.isAttacking = false;
             this.stopMoving()
             if (game.hero.inventory.hasSpear) {
-                this.hp -= this.fistDmg
-            } else {
                 this.hp -= this.spearDmg
+            } else {
+                this.hp -= this.fistDmg
             }
+            this.gotHit = true;
+            console.log("hit a jit: " + this.hp)
+        }
+
+        if (this.gotHit && this.invincableTimer++ >= this.invincableLength) {
+            this.gotHit = false;
+            this.invincableTimer = 0;
         }
     }
+
+
 }

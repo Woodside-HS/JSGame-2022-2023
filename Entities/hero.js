@@ -361,15 +361,15 @@ class Hero {
 
     // ########this is to refresh the location of the attack hitbox
     this.attackHitBoxL = {
-      x: this.loc.x,
+      x: this.loc.x - 20,
       y: this.loc.y,
-      w: -20,
+      w: 20 + this.width,
       h: this.height,
     }
     this.attackHitBoxR = {
-      x: this.loc.x + this.width,
+      x: this.loc.x,
       y: this.loc.y,
-      w: 20,
+      w: this.width + 20,
       h: this.height,
     }
     // ########
