@@ -6,6 +6,7 @@ class Deer{
         this.pHealth = 10*this.platform.width; //sets plaform health
         this.loc = this.platform.loc.copy(); //sets loc to platform loc //! May have to adjust y later to account for platform height
         this.loc.x += deltaX; //deltaX adjusts the loc of the enemy from the default position
+        this.docile = false;
     }
 
     run(){ 
@@ -16,7 +17,9 @@ class Deer{
     }
 
     eatPlatform(){
+        if(!this.docile){
         this.pHealth--;
+        }
         //TODO: Change some visual element of the platform with every x decrease of platform health (use mod)
         if(this.pHealth < 0){
             this.platform.isDead = true;
@@ -31,6 +34,7 @@ class Deer{
         ctx.fillStyle = "brown";
         ctx.fill();
         //? Will always be eating if it is on screen so run through eating cycle
+        //TODO: Docile yields different render
 
     }
 

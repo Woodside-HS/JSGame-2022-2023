@@ -3,9 +3,10 @@ things we need
 */
 
 class Level3Platform extends Platform {
-    constructor(x, y, w) {
+    constructor(x, y, w, p) {
         super(x, y, w);
         this.isDead = false;
+        this.poisonOak = p;
     }
 
     run() {

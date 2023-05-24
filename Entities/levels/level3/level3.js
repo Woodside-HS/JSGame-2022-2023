@@ -8,19 +8,19 @@ class level3 extends Level{
         this.loadResources([4],[5],[6])
     }
     loadPlatforms() {
-        this.platforms[0] = new Level3Platform(150,400,100);
-        this.platforms[1] = new Level3Platform(300,430,75);
-        this.platforms[2] = new Level3Platform(400,400,25);
-        this.platforms[3] = new Level3Platform(475,380,25);
-        this.platforms[4] = new Level3Platform(550,350,150);
-        this.platforms[5] = new Level3Platform(770,300,100);
-        this.platforms[6] = new Level3Platform(950,325,50); 
-        this.platforms[7] = new Level3Platform(1050,350,50);
-        this.platforms[8] = new Level3Platform(1250,360,20); //!expand space between platforms
-        this.platforms[9] = new Level3Platform(1340,370,20);
-        this.platforms[10] = new Level3Platform(1430,380,20);
-        this.platforms[11] = new Level3Platform(1520,390,20);
-        this.platforms[12] = new Level3Platform(1610,350,100);
+        this.platforms[0] = new Level3Platform(150,400,100, false);
+        this.platforms[1] = new Level3Platform(300,430,75, false);
+        this.platforms[2] = new Level3Platform(400,400,25, false);
+        this.platforms[3] = new Level3Platform(475,380,25, false);
+        this.platforms[4] = new Level3Platform(550,350,150, false);
+        this.platforms[5] = new Level3Platform(770,300,100, false);
+        this.platforms[6] = new Level3Platform(950,325,50, false); 
+        this.platforms[7] = new Level3Platform(1050,350,50, false);
+        this.platforms[8] = new Level3Platform(1250,360,20, true); //!expand space between platforms
+        this.platforms[9] = new Level3Platform(1340,370,20, true);
+        this.platforms[10] = new Level3Platform(1430,380,20, false);
+        this.platforms[11] = new Level3Platform(1520,390,20, false);
+        this.platforms[12] = new Level3Platform(1610,350,100, false);
         // this.platforms[13] = new Level3Platform(150,400,100); //!continue
         // this.platforms[14] = new Level3Platform(150,400,100);
         // this.platforms[15] = new Level3Platform(150,400,100);
