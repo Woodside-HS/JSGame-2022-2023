@@ -51,7 +51,7 @@ class Hero {
       jumpBoostCounter: 0,
       jumpBoostLength: 100,
       ghostModeCounter: 0,
-      ghostModeLength: 500,
+      ghostModeLength: 300,
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,

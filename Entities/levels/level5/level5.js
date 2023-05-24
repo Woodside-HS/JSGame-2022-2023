@@ -25,7 +25,7 @@ class level5 extends Level {
         //which powerup goes into which platform is hardcoded
 
 
-        this.resources[0] = new JumpBoost(400, 350, 10);
+        this.resources[0] = new JumpBoost(550, 375, 10);
         this.resources[1] = new GhostOrb(450, 125, 10)
         this.resources[2] = new Spear(300, 500, 10, 15);
     }
