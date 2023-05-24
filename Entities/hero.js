@@ -31,7 +31,7 @@ class Hero {
       block: false,
       jumpBoost: false,
       invulnerability: false,
-      ghostMode: false,
+      batMode: false,
       hasSpear: false,
     };
     this.statusBlock = {
@@ -50,8 +50,8 @@ class Hero {
       attackTimer: 50, // the length/amount of time that the hero attacks for
       jumpBoostCounter: 0,
       jumpBoostLength: 100,
-      ghostModeCounter: 0,
-      ghostModeLength: 300,
+      batModeCounter: 0,
+      batModeLength: 300,
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
@@ -334,8 +334,8 @@ class Hero {
 
 
 
-    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& ghostMode 
-    if (this.inventory.ghostMode && this.statusBlock.isFalling) {
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& batMode 
+    if (this.inventory.batMode && this.statusBlock.isFalling) {
       this.grav.y = 0.01
     } else {
       this.grav.y = 0.2
@@ -343,15 +343,15 @@ class Hero {
 
 
     if (
-      this.inventory.ghostMode &&
-      this.statusBlock.ghostModeCounter++ >= this.statusBlock.ghostModeLength
+      this.inventory.batMode &&
+      this.statusBlock.batModeCounter++ >= this.statusBlock.batModeLength
     ) {
-      this.statusBlock.ghostModeCounter = 0;
-      this.inventory.ghostMode = false;
+      this.statusBlock.batModeCounter = 0;
+      this.inventory.batMode = false;
     }
 
 
-    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of ghostMode
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of batMode
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
       if (this.bullets[i].isDead) {

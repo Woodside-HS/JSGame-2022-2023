@@ -1,4 +1,4 @@
-class GhostOrb {
+class BatOrb {
     constructor(x, y, size) {
         this.loc = new JSVector(x, y);
         this.size = size;
@@ -8,12 +8,12 @@ class GhostOrb {
     }
 
     run() {
-        this.bounceGhostOrb()
+        this.bounceBatOrb()
         this.render()
         this.checkHero()
     }
 
-    bounceGhostOrb() {
+    bounceBatOrb() {
         //so the coin will move up and down gently
         this.bounce += this.bounceAmount;
         if (this.bounce >= 1) {
@@ -44,7 +44,7 @@ class GhostOrb {
             heroLoc.y + heroH > this.loc.y &&
             heroLoc.y < this.loc.y + this.size
         ) {
-            game.hero.inventory.ghostMode = true
+            game.hero.inventory.batMode = true
             this.collected = true;
         }
     }

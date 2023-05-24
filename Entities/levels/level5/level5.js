@@ -26,7 +26,7 @@ class level5 extends Level {
 
 
         this.resources[0] = new JumpBoost(550, 375, 10);
-        this.resources[1] = new GhostOrb(450, 125, 10)
+        this.resources[1] = new BatOrb(450, 125, 10)
         this.resources[2] = new Spear(300, 500, 10, 15);
     }
 
