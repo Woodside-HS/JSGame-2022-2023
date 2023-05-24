@@ -21,9 +21,9 @@ class Level3Platform extends Platform {
             if(this.pCounter%5){
                 this.checkHero.health--;
             }
-            game.hero.loc.y += Math.random()*6-3;
+            game.hero.loc.y += Math.random()*6-3; //this one line should be based on platform location
             this.pCounter--;
-            this.renderP();
+            this.renderP(); //render poison oak
             if(this.pCounter<2){
                 this.poisonOak = false;
             }
