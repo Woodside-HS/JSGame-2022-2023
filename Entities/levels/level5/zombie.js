@@ -207,7 +207,6 @@ class zombie {
                 this.hp -= this.fistDmg
             }
             this.gotHit = true;
-            console.log("hit a jit: " + this.hp)
         }
 
         if (this.gotHit && this.invincableTimer++ >= this.invincableLength) {
