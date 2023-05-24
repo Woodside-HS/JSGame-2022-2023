@@ -1,1 +1,0 @@
-//possibly make a property of a platform

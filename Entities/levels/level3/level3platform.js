@@ -11,17 +11,17 @@ class Level3Platform extends Platform {
     }
 
     run() {
-        if(!this.isDead){
+        if(!this.isDead && !this.poisonOak){
             this.update();
             this.renderN(); //normal render
             this.checkHero();
             this.sideCollisions();
         }
-        if(this.poisonOak){
+        else if(!this.isDead && this.poisonOak){
             if(this.pCounter%5){
                 this.checkHero.health--;
             }
-            this.hero.loc.y += Math.random()*6-3;
+            game.hero.loc.y += Math.random()*6-3;
             this.pCounter--;
             this.renderP();
             if(this.pCounter<2){
