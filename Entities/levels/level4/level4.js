@@ -6,7 +6,9 @@ class level4 extends Level{
         this.loadResources();
         this.loadDoors();
         this.loadEnemies();
+        this.runEnemies();
     }
+
 
     loadPlatforms() {
         this.platforms[0] = new level4platform(150,670,300,true);
@@ -60,7 +62,11 @@ class level4 extends Level{
         this.resources[0] = new Key(1100, 590, 10, 10, 0); 
         this.resources[2] = new Key(1220, 200, 10, 10, 2);
         this.resources[1] = new GhostPowerUp(1200,590,10,10,1)
-        
+    }
 
+    runEnemies(){
+        for(let i = this.enemies.length-1;i>0;i--){
+            this.enemies
+        }
     }
 }
