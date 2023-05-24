@@ -22,9 +22,11 @@ class zombie {
         this.gotHit = false
         this.invincableTimer = 0
         this.invincableLength = 200
+        this.zombieImgs = [];
 
     }
     run() {
+        this.loadImages()
         this.render();
         this.update();
         if (!game.hero.statusBlock.isAttacking) {
@@ -34,10 +36,19 @@ class zombie {
         this.attackHero();
         this.checkIfGettingAttacked()
     }
+
+    loadImages() {
+        for (let i = 0; i < 10; i++) {
+            this.zombieImgs[i] = document.createElement("img")
+            this.zombieImgs[i].src = `Images/Level5/zombie/zombie${i + 1}.png`
+        }
+    }
     render() {
         ctx.save()
         ctx.translate(this.loc.x, this.loc.y);
-        ctx.rect(0, 0, this.w, this.h)
+        // ctx.rect(0, 0, this.w, this.h)
+
+        ctx.drawImage(this.zombieImgs[0], 0, -0, 35, 20)
         if (this.lookingR) {
             ctx.moveTo(0, -10)
             ctx.lineTo(100, -10);
