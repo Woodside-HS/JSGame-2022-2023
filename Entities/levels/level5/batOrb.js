@@ -5,14 +5,20 @@ class BatOrb {
         this.bounce = 0;
         this.bounceAmount = -0.05
         this.collected = false
+        this.batImg = null
     }
 
+
     run() {
+        this.loadImage()
         this.bounceBatOrb()
         this.render()
         this.checkHero()
     }
-
+    loadImage() {
+        this.batImg = document.createElement('img');
+        this.batImg.src = "Images/Level5/bat/batImg1.png"
+    }
     bounceBatOrb() {
         //so the coin will move up and down gently
         this.bounce += this.bounceAmount;
@@ -26,10 +32,13 @@ class BatOrb {
     render() {
         ctx.save();
         ctx.beginPath();
+
         ctx.arc(this.loc.x, this.loc.y - this.bounce, this.size, 0, Math.PI * 2);
         ctx.closePath(); //beginning and closing path just to be sure
         ctx.fillStyle = "gray";
         ctx.fill();
+
+        ctx.drawImage(this.batImg, this.loc.x, this.loc.y, this.size, this.size)
         ctx.restore();
     }
     checkHero() {
