@@ -44,6 +44,14 @@
     onclick="debugViewCheckBoxClicked()" />
   <label for="DebugViewCheckBoxName">Debug View</label>
   <div id="debugDiv"></div>
+  <input type="checkbox" id="ShowHitBoxCheckBox" name="ShowHitBoxCheckBoxCheckName" value="checkboxValue" onclick="
+  if(showHitBox) {
+    showHitBox = false;
+  } else {
+    showHitBox = true
+  }
+  "/>
+  <label for="ShowHitBoxCheckBoxCheckName">Show HitBox</label>
   <div id="coin-count">0</div>
 </body>
 
