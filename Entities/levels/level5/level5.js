@@ -15,7 +15,9 @@ class level5 extends Level {
         this.platforms[4] = new level5platform(800, 300, 100, false)
 
 
-
+        this.platforms[5] = new level5platform(900, 400, 200, false);
+        this.platforms[6] = new level5platform(1100, 500, 300, false);
+        this.platforms[7] = new level5platform(1300, 500, 400, false);
         //need the specific platform class to get started on loading platforms
     }
 
@@ -25,7 +27,7 @@ class level5 extends Level {
         //which powerup goes into which platform is hardcoded
 
 
-        this.resources[0] = new JumpBoost(550, 375, 10);
+        this.resources[0] = new JumpBoost(300, 375, 10);
         this.resources[1] = new BatOrb(450, 125, 10)
         this.resources[2] = new Spear(300, 500, 10, 15);
     }
