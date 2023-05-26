@@ -18,14 +18,16 @@ class Level3Platform extends Platform {
             this.sideCollisions();
         }
         else if(!this.isDead && this.poisonOak){
-            if(this.pCounter%5){
-                this.checkHero.health--;
-            }
-            game.hero.loc.y += Math.random()*6-3; //this one line should be based on platform location
-            this.pCounter--;
             this.renderP(); //render poison oak
-            if(this.pCounter<2){
-                this.poisonOak = false;
+            if(this.checkHero()){ //could make more efficient down the line by putting the below lines into checkHero, but right now the goal is funcitonality
+                if(this.pCounter%5){
+                    this.checkHero.health--;
+                }
+                game.hero.loc.y += Math.random()*6-3; //this one line should be based on platform location
+                this.pCounter--;
+                if(this.pCounter<2){
+                    this.poisonOak = false;
+                }
             }
 
         }
