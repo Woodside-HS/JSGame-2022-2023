@@ -23,6 +23,8 @@ class zombie {
         this.invincableTimer = 0
         this.invincableLength = 200
         this.zombieImgs = [];
+        this.changeFrame = 0;
+        this.frameNum = 0;
 
     }
     run() {
@@ -44,17 +46,29 @@ class zombie {
         }
     }
     render() {
+
+        this.changeFrame++;
+        if (this.frameNum >= this.zombieImgs.length - 1) {
+            this.frameNum = 1;
+        }
+        if (this.changeFrame >= 10) {
+            this.changeFrame = 0;
+            this.frameNum++
+        }
+
         ctx.save()
         ctx.translate(this.loc.x, this.loc.y);
         // ctx.rect(0, 0, this.w, this.h)
         // ctx.scale(this.w, this.y)
-        ctx.drawImage(this.zombieImgs[0], 0, 0, this.w, this.h)
+        // ctx.drawImage(this.zombieImgs[this.frameNum], 0, 0, this.w, this.h)
         if (this.lookingR) {
-            ctx.moveTo(0, -10)
-            ctx.lineTo(100, -10);
+
+            ctx.scale(-1, 1)
+            ctx.drawImage(this.zombieImgs[this.frameNum], -this.w, 0, this.w, this.h)
         } else if (this.lookingL) {
-            ctx.moveTo(0, -10)
-            ctx.lineTo(-100, -10);
+
+            ctx.drawImage(this.zombieImgs[this.frameNum], 0, 0, this.w, this.h)
+
         }
         ctx.stroke()
         ctx.fill()
@@ -98,14 +112,14 @@ class zombie {
                 ctx.translate(this.punchLocR.x, this.punchLocR.y);
             }
 
-            ctx.rect(0, 0, this.w, this.h)
-            ctx.stroke()
-            ctx.fill()
+            // ctx.rect(0, 0, this.w, this.h)
+            // ctx.stroke()
+            // ctx.fill()
             ctx.restore()
 
             if (!this.hitHero) { // checks if the zombie has already hit the hero in this attack cycle
                 game.hero.statusBlock.hp -= this.zombieDmg
-                console.log("a zombie hit the hero for 25 hp \n the hero now has: " + game.hero.statusBlock.hp)
+                console.log(`a zombie hit the hero for ${this.zombieDmg} hp \n the hero now has: ${game.hero.statusBlock.hp}`)
                 this.hitHero = true
             }
         }

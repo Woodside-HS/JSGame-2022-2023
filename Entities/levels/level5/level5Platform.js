@@ -3,18 +3,20 @@ class level5platform extends Platform {
         super(x, y, w);
         // this.enemy = []
         this.ynZ = ynZ; // yes/no Zombie (is or isnt a zombie)
+        this.shortPlatformImg;
+        this.scaleFactor = 3
+        this.width = 400 / this.scaleFactor
         if (this.ynZ == true) {
-            this.enemy = new zombie(x, y, 35, 20, this.width)
+            this.enemy = new zombie(x, y, 50, 50, this.width)
             // this.loadZombie()
             // console.log(this.ynZ)
         }
-        this.shortPlatformImg;
     }
     run() {
         this.loadImages();
-        this.update()
         this.render();
         this.checkHero();
+        this.update()
         this.updateZombie();
     }
     loadImages() {
@@ -42,7 +44,7 @@ class level5platform extends Platform {
         // ctx.fillStyle = this.clr;
         // ctx.fill();
 
-        ctx.drawImage(this.shortPlatformImg, this.loc.x, this.loc.y, this.width, 10);
+        ctx.drawImage(this.shortPlatformImg, this.loc.x, this.loc.y - 75, (400) / this.scaleFactor, (298) / this.scaleFactor);
         ctx.restore()
     }
 
