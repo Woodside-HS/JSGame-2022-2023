@@ -31,13 +31,43 @@ class Game {
         this.menuScreen();
       }
       else if(gameState >= 1){ //gameState is equal to the level
+        if(this.hero.statusBlock.isDead && gameState>0){
+          this.getNewLevelInstance(gameState);
+          this.hero.statusBlock.isDead = false;
+          this.hero.loc = this.hero.originalLoc;
+        }
         this.playState(gameState);
       }
       else{
         this.endState();
       }
       document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
+      
+      
   };
+  
+  getNewLevelInstance(levelNum) {
+    switch (levelNum) {
+      case 1:
+        this.levels[0] = new level1(1);
+        break;
+      case 2:
+        this.levels[1] = new level2(2);
+        break;
+      case 3:
+        this.levels[2] = new level3(3);
+        break;
+      case 4:
+        this.levels[3] = new level4(4);
+        break;
+      case 5:
+        this.levels[4] = new level5(5);
+        break;
+      case 6:
+        this.levels[5] = new level6();
+        break;
+    }
+  }
 
   // Game state 0
   menuScreen = () => {
@@ -49,7 +79,6 @@ class Game {
     );
   };
 
-  // Game state 1
   playState = (a) => {
     ctx.save();
     // Camera follow player
