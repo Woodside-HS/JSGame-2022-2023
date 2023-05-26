@@ -31,15 +31,16 @@ class Game {
 
   update = () => {
     this.moveCam();
-    if (gameState == 0) {
-      this.menuScreen();
-    }
-    else if (gameState >= 1) { //gameState is equal to the level
-      this.playState(gameState);
-    }
-    else {
-      this.endState();
-    }
+      if(gameState == 0){
+        this.menuScreen();
+      }
+      else if(gameState >= 1){ //gameState is equal to the level
+        this.playState(gameState);
+      }
+      else{
+        this.endState();
+      }
+      document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
   };
 
   // Game state 0
