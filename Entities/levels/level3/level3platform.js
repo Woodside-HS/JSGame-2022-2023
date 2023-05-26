@@ -66,15 +66,12 @@ class Level3Platform extends Platform {
         let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
         let heroH = game.hero.height; // the heros height
         let heroW = game.hero.width; // the heros width
-        let middleOfHero = heroLoc.x + (heroW / 2)
         if (
             //checks if the heros location is overlaping with the platform
-            heroLoc.x + heroW > this.loc.x &&
-            heroLoc.x < this.loc.x + this.width &&
+            heroLoc.x + heroW - 20 > this.loc.x &&
+            heroLoc.x + 10 < this.loc.x + this.width &&
             heroLoc.y + heroH > this.loc.y &&
-            heroLoc.y < this.loc.y + this.height &&
-            middleOfHero < this.loc.x + this.width && // checks if the middle of the hero is past the corner of the platform
-            middleOfHero > this.loc.x // checks if the middle of the hero is past the corner of the platform
+            heroLoc.y + 2 * heroH / 3 < this.loc.y + this.height / 2
         ) {
             // console.log("touching platform");
             if (game.hero.vel.y > 0) {
