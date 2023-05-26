@@ -19,7 +19,9 @@ class Level3Platform extends Platform {
         }
         else if(!this.isDead && this.poisonOak){
             this.renderP(); //render poison oak
-            if(this.checkHero()){ //could make more efficient down the line by putting the below lines into checkHero, but right now the goal is funcitonality
+            let temp = this.checkHero();
+            console.log(temp);
+            if(this.checkHero()){ //so checkHero is consistent
                 if(this.pCounter%5){
                     this.checkHero.health--;
                 }
@@ -35,7 +37,7 @@ class Level3Platform extends Platform {
     }
 
     update() {
-        // template function
+       //maybe use for photos
     }
 
     renderN() {
@@ -63,6 +65,8 @@ class Level3Platform extends Platform {
 
     checkHero() {
         super.checkHero();
+        let temp = super.checkHero();
+        return temp;
     }
 
     sideCollisions(){
