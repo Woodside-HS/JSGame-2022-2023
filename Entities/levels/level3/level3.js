@@ -5,7 +5,8 @@ class level3 extends Level{
         this.loadBackgrounds(3);
         this.loadCoins();
         this.craze = 0;
-        this.loadResources([4],[5],[6])
+        this.loadResources([4],[5],[6]);
+        this.loadEnemies([1]);
     }
     loadPlatforms() {
         this.platforms[0] = new Level3Platform(150,400,100, false);
