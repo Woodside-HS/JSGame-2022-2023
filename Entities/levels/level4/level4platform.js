@@ -2,7 +2,14 @@ class level4platform extends Platform {
     constructor(x,y,w,isFloor){
         super(x,y,w);
         this.isFloor = isFloor
+        this.loadImages(); 
     }
+
+    loadImages(){
+        this.img = document.createElement("img");
+        this.img.src  = "resources/Platform/platform.png";
+      }
+
     run(){
         this.update();
         if(this.isFloor){
@@ -10,7 +17,7 @@ class level4platform extends Platform {
         } else {
             this.checkHeroWall();
         }
-        this.render(); 
+        this.render();
     
     }
     update() {
@@ -27,16 +34,16 @@ class level4platform extends Platform {
             ctx.closePath();
             ctx.fillStyle = "purple";
             ctx.fill();
-        } else {
-
-        ctx.beginPath();
+        } else {    
+        ctx.drawImage(this.img,this.loc.x,this.loc.y,this.width,20);
+        /*ctx.beginPath();
         ctx.moveTo(this.loc.x,this.loc.y);
         ctx.lineTo(this.loc.x+this.width,this.loc.y);
         ctx.lineTo(this.loc.x+this.width,this.loc.y+10);
         ctx.lineTo(this.loc.x,this.loc.y+10);
         ctx.closePath();
         ctx.fillStyle = "purple";
-        ctx.fill();
+        ctx.fill();*/
         }
     }
 

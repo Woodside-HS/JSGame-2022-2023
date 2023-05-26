@@ -1,10 +1,9 @@
 class Crucifix {
-    constructor(x, y, width, radius, id) {
+    constructor(x, y, width, radius) {
         this.x = x;
         this.y = y;
         this.bounce = 3;
         this.size = 10;
-        this.id = id;
       this.clr = "red";
     }
 
@@ -37,7 +36,7 @@ class Crucifix {
       ) {
         this.collected = true;
         game.hero.inventory.crucifix = true;
-        game.levels[3].resources.splice(this.id,1);
+        game.levels[3].resources.splice(0,1)
       }
     }
   }

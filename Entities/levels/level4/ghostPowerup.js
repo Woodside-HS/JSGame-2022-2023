@@ -1,10 +1,9 @@
 class GhostPowerUp {
-    constructor(x, y, width, radius, id) {
+    constructor(x, y, width, radius) {
         this.x = x;
         this.y = y;
         this.bounce = 3;
         this.size = 10;
-        this.id = id;
       this.clr = "white";
     }
 
@@ -35,9 +34,8 @@ class GhostPowerUp {
         heroLoc.y + heroH > this.y &&
         heroLoc.y < this.y + this.size
       ) {
-        //this.collected = true;
+        game.levels[3].resources.splice(0,1)
         game.hero.inventory.ghostPowerUp = true;
-        game.levels[3].resources.splice(this.id,1);
       }
     }
   }
