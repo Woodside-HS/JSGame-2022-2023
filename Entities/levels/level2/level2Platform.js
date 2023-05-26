@@ -10,6 +10,10 @@ class level2platform extends Platform {
             this.enemy = null;
         }
     }
+    loadImages(){
+        this.img = document.createElement("img");
+        this.img.src  = "resources/Platform/platform.png";
+    }
     run() {
         if (this.enemy) {
             this.enemy.run();
