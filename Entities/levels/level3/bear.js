@@ -1,25 +1,27 @@
-// class Bear{
-//     constructor(){
-//            this.docile = false
+class Bear{
+    constructor(){
+           this.docile = false
+           this.speed = 2;
 
-//     }
+    }
 
-//     run(){
+    run(){
 
-//     } 
+    } 
 
-//     attack(){
-//         //!Speed dependent on level3.craze
+    attack(){
+        //!Speed dependent on level3.craze
 
-//     }
+    }
 
-//     idle(){
-//         //! when not attacking
+    idle(){
+        //! when not attacking
         
-//     }
+    }
     
-//     befriended(){
+    befriended(){
+        this.docile = true;
         
-//     }
+    }
 
-// }
+}
