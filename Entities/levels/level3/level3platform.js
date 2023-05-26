@@ -20,8 +20,7 @@ class Level3Platform extends Platform {
         else if(!this.isDead && this.poisonOak){
             this.renderP(); //render poison oak
             let temp = this.checkHero();
-            console.log(temp);
-            if(this.checkHero()){ //so checkHero is consistent
+            if(temp){ //so checkHero is consistent
                 if(this.pCounter%5){
                     this.checkHero.health--;
                 }
@@ -63,10 +62,31 @@ class Level3Platform extends Platform {
 
     }
 
-    checkHero() {
-        super.checkHero();
-        let temp = super.checkHero();
-        return temp;
+    checkHero() { //copied and pasted from genericPlatform... something was weird with the booleans
+        let heroLoc = new JSVector(game.hero.loc.x, game.hero.loc.y); // the heros x & y location
+        let heroH = game.hero.height; // the heros height
+        let heroW = game.hero.width; // the heros width
+        let middleOfHero = heroLoc.x + (heroW / 2)
+        if (
+            //checks if the heros location is overlaping with the platform
+            heroLoc.x + heroW > this.loc.x &&
+            heroLoc.x < this.loc.x + this.width &&
+            heroLoc.y + heroH > this.loc.y &&
+            heroLoc.y < this.loc.y + this.height &&
+            middleOfHero < this.loc.x + this.width && // checks if the middle of the hero is past the corner of the platform
+            middleOfHero > this.loc.x // checks if the middle of the hero is past the corner of the platform
+        ) {
+            // console.log("touching platform");
+            if (game.hero.vel.y > 0) {
+                // checks if the hero is falling
+                game.hero.statusBlock.jumpCount = 0;
+                game.hero.vel.y = 0;
+                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+            }
+            game.hero.statusBlock.onPlatform = true;
+            return true;
+        }
+        return false;
     }
 
     sideCollisions(){
