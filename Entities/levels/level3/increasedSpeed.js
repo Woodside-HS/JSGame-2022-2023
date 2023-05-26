@@ -3,11 +3,13 @@ class IncreasedSpeed{
       this.clr = "pink";
       this.counter = 0;
       let location = Math.floor(Math.random() * width);
-      this.loc = new JSVector(x + location, y - 5);
+      this.loc = new JSVector(x + location, y - 30);
       this.bounce = 0;
       this.bounceAmount = -0.05;
       this.size = radius;
       this.collected = false;
+      this.img = document.createElement("img");
+      this.img.src = "Images/Level3/increasedSpeed.png";
     }
 
     run() {
@@ -29,13 +31,7 @@ class IncreasedSpeed{
     }
   
     render() {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(this.loc.x, this.loc.y - this.bounce, this.size, 0, Math.PI * 2);
-      ctx.closePath(); //beginning and closing path just to be sure
-      ctx.fillStyle = this.clr;
-      ctx.fill();
-      ctx.restore();
+      ctx.drawImage(this.img, this.loc.x, this.loc.y, 30, 30);
     }
   
     checkHero() {
