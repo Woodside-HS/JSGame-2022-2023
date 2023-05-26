@@ -47,8 +47,8 @@ class zombie {
         ctx.save()
         ctx.translate(this.loc.x, this.loc.y);
         // ctx.rect(0, 0, this.w, this.h)
-
-        ctx.drawImage(this.zombieImgs[0], 0, -0, 35, 20)
+        // ctx.scale(this.w, this.y)
+        ctx.drawImage(this.zombieImgs[0], 0, 0, this.w, this.h)
         if (this.lookingR) {
             ctx.moveTo(0, -10)
             ctx.lineTo(100, -10);
