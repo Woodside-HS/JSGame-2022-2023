@@ -9,7 +9,7 @@ class level3 extends Level{
     }
     loadPlatforms() {
         this.platforms[0] = new Level3Platform(150,400,100, false);
-        this.platforms[1] = new Level3Platform(300,430,75, false);
+        this.platforms[1] = new Level3Platform(300,430,75, true);
         this.platforms[2] = new Level3Platform(400,400,25, false);
         this.platforms[3] = new Level3Platform(475,380,25, false);
         this.platforms[4] = new Level3Platform(550,350,150, false);
