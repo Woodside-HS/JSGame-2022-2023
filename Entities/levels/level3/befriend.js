@@ -18,8 +18,8 @@ class Befriend{
         this.counter--;
       }
       else if(this.counter == 1){
-        for(let i = 0; i< level3.enemies.length; i++){
-            level3.enemies.docile = false;
+        for(let i = 0; i< game.levels[2].enemies.length; i++){
+            game.levels[2].enemies.docile = false;
            }
         this.counter--; 
       }
@@ -55,8 +55,8 @@ class Befriend{
         heroLoc.y + heroH > this.loc.y &&
         heroLoc.y < this.loc.y + this.size
       ) {
-        for(let i = 0; i< level3.enemies.length; i++){
-            level3.enemies.docile = true;
+        for(let i = 0; i< game.levels[2].enemies.length; i++){
+            game.levels[2].enemies.docile = true;
            }
         this.collected = true;
         this.counter = 200;
