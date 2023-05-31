@@ -30,11 +30,21 @@ class Bear{
     }
 
     render(){
+        if(this.docile){
         ctx.beginPath();
         ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
         ctx.closePath();
         ctx.fillStyle = "black";
         ctx.fill();
+        }
+        else{
+            ctx.beginPath();
+            ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
+            ctx.closePath();
+            ctx.fillStyle = "red";
+            ctx.fill();
+        }
     }
+
 
 }
