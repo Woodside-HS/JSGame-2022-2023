@@ -208,12 +208,7 @@ class zombie {
             heroAttackHitBox = game.hero.attackHitBoxR
         }
 
-        // ctx.save()
-        // ctx.translate(heroAttackHitBox.x, heroAttackHitBox.y)
-        // ctx.rect(0, 0, heroAttackHitBox.w, heroAttackHitBox.h)
-        // ctx.stroke()
-        // ctx.fill()
-        // ctx.restore()
+
 
 
         if (
@@ -221,7 +216,7 @@ class zombie {
             !this.gotHit &&
             this.loc.x + this.w > heroAttackHitBox.x &&
             this.loc.x < heroAttackHitBox.x + heroAttackHitBox.w &&
-            this.loc.y > heroAttackHitBox.y &&
+            this.loc.y + this.h > heroAttackHitBox.y &&
             this.loc.y < heroAttackHitBox.y + heroAttackHitBox.h
         ) { // if the hero hits the zombie 
             this.isAttacking = false;
