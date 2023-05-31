@@ -11,9 +11,11 @@ class Befriend{
       this.counter = 0;
     }
     run() {
+      if(!this.collected){
       this.bounceCoin();
       this.render();
       this.checkHero();
+      }
       if(this.counter > 1){
         this.counter--;
       }
