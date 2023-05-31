@@ -37,6 +37,10 @@ class HellHero {
     this.camShakeIntensityMana = 0;
     this.camShakeIntensityJetpack = 0;
 
+    this.flashRed = false;
+    this.flashOpacityRed = 0.25;
+    this.flashStartTime = null;
+
     this.powerUp = {
       perm: {
         speed: false,
@@ -90,10 +94,30 @@ class HellHero {
     };
 
     this.mana = 13;
+
+    this.bullets = [];
+
+    canvas.addEventListener("mousedown", (event) => {
+      let mouseX = event.offsetX - this.camLoc.x;
+      let mouseY = event.offsetY - this.camLoc.y;
+      let mousePos = new JSVector(mouseX, mouseY);
+      console.log(mousePos);
+      console.log(this.pos)
+      let dir = JSVector.subGetNew(mousePos, this.pos);
+      dir.setMagnitude(1);
+
+      this.shoot(dir);
+    });
+
   }
 
   getCurrentCell() {
     return this.getCellAt(this.pos.x, this.pos.y);
+  }
+
+  shoot(dir) {
+    let bullet = new Bullet2(this.pos.x, this.pos.y, dir);
+    this.bullets.push(bullet);
   }
 
   looseHealth(amount, ignoreShield) {
@@ -107,6 +131,13 @@ class HellHero {
         this.shakeScreen(amount * 2, "health");
         this.invinsible = true;
         this.invinsibleLastUsed = Date.now();
+        this.flashRed = true;
+        this.flashStartTime = Date.now();
+
+        setTimeout(() => {
+          this.flashRed = false;
+          this.flashOpacityRed = 0.25;
+        }, 1000);
       }
     } else {
       if (!this.invinsible) {
@@ -115,6 +146,20 @@ class HellHero {
         this.invinsible = true;
         this.invinsibleLastUsed = Date.now();
       }
+    }
+
+  }
+
+  damageScreen() {
+    if (this.flashRed) {
+      console.log("hi")
+      const elapsedTime = Date.now() - this.flashStartTime;
+      const ratio = elapsedTime / 1000;
+
+      this.flashOpacityRed = 0.25 - (0.25 * ratio);
+
+      ctx.fillStyle = `rgba(255, 0, 0, ${this.flashOpacityRed})`;
+      ctx.fillRect(this.camLoc.x, this.camLoc.y, canvas.width, canvas.height);
     }
   }
 
@@ -139,6 +184,8 @@ class HellHero {
   increaseMana(amount) {
     this.shakeScreen(amount * 2, "mana");
     this.mana += amount;
+    this.jetpackFuel += amount * 10;
+    this.jetpackFuel = Math.min(this.jetpackFuel, this.jetpackCapacity);
     this.manaAnimation.active = true;
     this.manaAnimation.size = 50;
     this.manaAnimation.opacity = 1;
@@ -340,6 +387,15 @@ class HellHero {
     }
 
     this.drawAnimations();
+    this.handleBullets();
+    this.damageScreen();
+  }
+
+  handleBullets() {
+    for (let i = 0; i < this.bullets.length; i++) {
+      this.bullets[i].run();
+    }
+
   }
 
   drawAnimations() {
@@ -355,7 +411,6 @@ class HellHero {
       ctx.fillStyle = this.shieldAnimation.color + this.shieldAnimation.opacity + ")";
       ctx.fill();
     }
-
     if (this.manaAnimation.active) {
       ctx.beginPath();
       ctx.arc(this.pos.x + this.size.x / 2, this.pos.y + this.size.y / 2, this.manaAnimation.size, 0, 2 * Math.PI, false);
@@ -374,7 +429,7 @@ class HellHero {
   }
 
   createParticles() {
-    const particleCount = 10;
+    const particleCount = 3;
     const particleSize = 3;
     const minParticleSpeed = 1;
     const maxParticleSpeed = 3;
@@ -468,5 +523,31 @@ class HellHero {
     }
   }
 
-  handleMana() {}
+  handleMana() { }
+}
+
+class Bullet2 {
+  constructor(x, y, dir) {
+    this.pos = new JSVector(x, y);
+    this.vel = new JSVector(dir.x, dir.y);
+    this.vel.setMagnitude(10);
+    this.size = 5;
+    this.damage = 10;
+    this.clr = "red";
+  }
+
+  update() {
+    this.pos.add(this.vel);
+  }
+
+  draw() {
+    ctx.fillStyle = this.clr;
+    ctx.fillRect(this.pos.x, this.pos.y, this.size, this.size);
+  }
+
+  run() {
+    this.update();
+    this.draw();
+  }
+
 }
