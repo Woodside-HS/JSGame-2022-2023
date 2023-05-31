@@ -7,13 +7,23 @@ class Deer{
         this.loc = this.platform.loc.copy(); //sets loc to platform loc //! May have to adjust y later to account for platform height
         this.loc.x += deltaX; //deltaX adjusts the loc of the enemy from the default position
         this.docile = false;
+        this.health = 50;
+        this.size = 20;
     }
 
     run(){ 
+        if(this.health>0){
         this.render();
         if(this.loc.distance(game.hero.loc) < this.eatingDistance){ //possibly edit
             this.eatPlatform();
         }
+
+        let disCheck = this.loc.distance(game.hero.loc) < 60;
+
+        if(game.hero.statusBlock.isAttacking && disCheck){
+            this.health--;
+        }
+    }
     }
 
     eatPlatform(){
@@ -37,6 +47,5 @@ class Deer{
         //TODO: Docile yields different render
 
     }
-
 
 }
