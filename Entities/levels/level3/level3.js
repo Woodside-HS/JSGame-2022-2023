@@ -1,13 +1,14 @@
 class level3 extends Level{
-    constructor(id){
+    constructor(id, levels){
         super(id);   
         this.loadPlatforms();
         this.loadBackgrounds(3);
         this.loadCoins();
         this.craze = 0;
         this.loadResources([4],[5],[6]);
-        this.loadEnemies([1]);
+        this.loadEnemies([12]);
     }
+
     loadPlatforms() {
         this.platforms[0] = new Level3Platform(150,400,100, false);
         this.platforms[1] = new Level3Platform(300,430,75, true);
@@ -61,7 +62,9 @@ class level3 extends Level{
     }
     
     loadEnemies(pArray1, pArray2) { 
-        //pArray1 is the array of platforms with enemy 1 
+        for(let i = 0; i<pArray1.length; i++){
+            this.enemies[i] = new Deer(pArray1[i], 30, this.platforms);
+        }
         //pArray2 is the array of platforms with enemy 2
         //hardcoding which type of enemies
     }

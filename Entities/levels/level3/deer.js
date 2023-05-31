@@ -1,7 +1,7 @@
 class Deer{
-    constructor(pIndex, deltaX){ //takes in the platform it will destroy
+    constructor(pIndex, deltaX, platforms){ //takes in the platform it will destroy
         this.eatingDistance = 500; //determines when the dear starts to eat
-        this.platform = game.levels[2].platforms[pIndex]; //uses index given to locate attaches platform
+        this.platform = platforms[pIndex]; //uses index given to locate attaches platform
         //this.pIndex = pIndex; //initial index of platform //! Unnecessary?
         this.pHealth = 10*this.platform.width; //sets plaform health
         this.loc = this.platform.loc.copy(); //sets loc to platform loc //! May have to adjust y later to account for platform height
@@ -11,7 +11,7 @@ class Deer{
 
     run(){ 
         this.render();
-        if(this.loc.distance(this.hero.loc) < this.eatingDistance){ //possibly edit
+        if(this.loc.distance(game.hero.loc) < this.eatingDistance){ //possibly edit
             this.eatPlatform();
         }
     }
