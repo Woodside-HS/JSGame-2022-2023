@@ -14,7 +14,7 @@ class Deer{
     run(){ 
         if(this.health>0){
         this.render();
-        if(this.loc.distance(game.hero.loc) < this.eatingDistance){ //possibly edit
+        if(this.loc.distance(game.hero.loc) < this.eatingDistance && !this.docile){ //possibly edit
             this.eatPlatform();
         }
 
@@ -27,9 +27,7 @@ class Deer{
     }
 
     eatPlatform(){
-        if(!this.docile){
         this.pHealth--;
-        }
         //TODO: Change some visual element of the platform with every x decrease of platform health (use mod)
         if(this.pHealth < 0){
             this.platform.isDead = true;

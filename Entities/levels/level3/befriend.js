@@ -58,10 +58,10 @@ class Befriend{
         heroLoc.y < this.loc.y + this.size
       ) {
         for(let i = 0; i< game.levels[2].enemies.length; i++){
-            game.levels[2].enemies.docile = true;
+            game.levels[2].enemies[i].docile = true;
            }
         this.collected = true;
-        this.counter = 200;
+        this.counter = 1000;
   
         displayCoinCount(); //displays the coin count
       }
