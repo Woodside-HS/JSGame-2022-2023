@@ -122,7 +122,6 @@ class Hero {
     if (this.vel.y > 0) {
       this.statusBlock.isFalling = true;
       this.statusBlock.isJumping = false;//cuts the jump anim early
-      //console.log("falling");
     } else {
       this.statusBlock.isFalling = false;
     }

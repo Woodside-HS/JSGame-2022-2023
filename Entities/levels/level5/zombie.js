@@ -73,7 +73,6 @@ class zombie {
         ctx.stroke()
         ctx.fill()
         ctx.restore()
-        // console.log("shoulde be here")
     }
     attackHero() {
         if (this.isAttacking) {
@@ -119,7 +118,6 @@ class zombie {
 
             if (!this.hitHero) { // checks if the zombie has already hit the hero in this attack cycle
                 game.hero.statusBlock.hp -= this.zombieDmg
-                console.log(`a zombie hit the hero for ${this.zombieDmg} hp \n the hero now has: ${game.hero.statusBlock.hp}`)
                 this.hitHero = true
             }
         }
@@ -207,10 +205,6 @@ class zombie {
         } else {
             heroAttackHitBox = game.hero.attackHitBoxR
         }
-
-
-
-
         if (
             game.hero.statusBlock.isAttacking &&
             !this.gotHit &&
