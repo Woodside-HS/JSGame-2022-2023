@@ -13,11 +13,11 @@ class level4 extends Level{
     loadPlatforms() {
         this.platforms[0] = new level4platform(150,670,100,true);
         this.platforms[19] = new level4platform(250,670,100,true);
-        this.platforms[20] = new level4platform(350,670,100,true);
+        this.platforms[20] = new level4platform(350,670,100,true,true);
         this.platforms[1] = new level4platform(550,670,100,true);
         this.platforms[2] = new level4platform(750,620,100,true);
-        this.platforms[3] = new level4platform(950,620,100,true);
-        this.platforms[4] = new level4platform(1050,500,110,true);
+        this.platforms[3] = new level4platform(950,620,120,true);
+        this.platforms[4] = new level4platform(1050,500,120,true);
         this.platforms[5] = new level4platform(1250,500,200,false);
         this.platforms[6] = new level4platform(1050,620,110,false);
         this.platforms[7] = new level4platform(1250,500,110,true);
@@ -39,11 +39,18 @@ class level4 extends Level{
         this.platforms[31] = new level4platform(2950,400,100,true);
         this.platforms[13] = new level4platform(1370,270,100,true);
         this.platforms[14] = new level4platform(1150,220,110,true);
-        this.platforms[15] = new level4platform(3150,400,100,true);
-        this.platforms[16] = new level4platform(3250,400,100,false);
+        this.platforms[15] = new level4platform(3150,400,110,true);
+        this.platforms[16] = new level4platform(3250,400,90,false);
         this.platforms[17] = new level4platform(3250,300,100,true);
         this.platforms[18] = new level4platform(3250,300,100,true);
-
+        this.platforms[32] = new level4platform(3250,300,100,true);
+        this.platforms[33] = new level4platform(3350,300,100,true);
+        this.platforms[34] = new level4platform(3450,300,100,false);
+        this.platforms[35] = new level4platform(3350,200,100,true);
+        this.platforms[36] = new level4platform(3250,200,100,true);
+        this.platforms[37] = new level4platform(3450,200,100,true);
+        this.platforms[38] = new level4platform(3550,300,100,false);
+        this.platforms[39] = new level4platform(3550,400,100,false);
     }
 
     loadEnemies(){
@@ -72,16 +79,10 @@ class level4 extends Level{
     }
     
     loadResources(){
-        this.resources[0] = new Key(150,500,10,10);
-        this.resources[1] = new Key(150,530,10,10);
-        this.resources[2] = new Key(150,560,10,10);
-        this.resources[3] = new Key(150,590,10,10);
-        this.resources[4] = new Key(150,620,10,10);
-        this.resources[5] = new Key(150,650,10,10);
-        this.resources[6] = new Key(150,680,10,10);
-        /*this.resources[0] = new Key(1100, 590, 10, 10); 
+        this.resources[0] = new Key(1100, 590, 10, 10); 
         this.resources[1] = new Key(1220, 200, 10, 10);
-        this.resources[2] = new GhostPowerUp(1200,590,10,10)
-        this.resources[3] = new Crucifix(1100,590,10,10)*/
+        this.resources[2] = new Crucifix(2200,380,10,10)
+        this.resources[3] = new GhostPowerUp(3000,220,10,10)
+
     }
 }

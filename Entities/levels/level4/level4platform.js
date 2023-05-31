@@ -1,13 +1,18 @@
 class level4platform extends Platform {
-    constructor(x,y,w,isFloor){
+    constructor(x,y,w,isFloor,isTrapFloor){
         super(x,y,w);
         this.isFloor = isFloor
+        this.isTrapFloor = isTrapFloor
+        this.platformFall = false;
         this.loadImages(); 
     }
 
     loadImages(){
         this.img = document.createElement("img");
         this.img.src  = "resources/Platform/platform.png";
+        
+        this.wallImg = document.createElement("img");
+        this.wallImg.src = "resources/Platform/wall.png";
       }
 
     run(){
@@ -21,19 +26,25 @@ class level4platform extends Platform {
     
     }
     update() {
+        if(this.isTrapFloor){
+            if(game.hero.statusBlock.onPlatform){
+                this.loc.y-=2
+            }
+        }
 
     }
 
     render() {
         if(!this.isFloor){
-            ctx.beginPath();
+            ctx.drawImage(this.wallImg,this.loc.x,this.loc.y+10,20,-this.width-10);
+            /*ctx.beginPath();
             ctx.moveTo(this.loc.x,this.loc.y+10);
             ctx.lineTo(this.loc.x+10,this.loc.y+10);
             ctx.lineTo(this.loc.x+10,this.loc.y-this.width);
             ctx.lineTo(this.loc.x,this.loc.y-this.width);
             ctx.closePath();
             ctx.fillStyle = "purple";
-            ctx.fill();
+            ctx.fill();*/
         } else {    
         ctx.drawImage(this.img,this.loc.x,this.loc.y,this.width,20);
         /*ctx.beginPath();
