@@ -63,6 +63,7 @@ class Hero {
       this.statusBlock.onPlatform = false;
     }
   }
+
   loadImages() {
     for (let i = 0; i < 16; i++) {
       //the 9 has to be hardcoded inn
@@ -111,8 +112,8 @@ class Hero {
   render() {
     if (showHitBox) { // renders the hitbox of the hero
       ctx.save()
-      ctx.translate(this.loc.x+10, this.loc.y + game.camLoc.y)
-      ctx.rect(0, 0, this.width-20, this.height)
+      ctx.translate(this.loc.x + 10, this.loc.y + game.camLoc.y)
+      ctx.rect(0, 0, this.width - 20, this.height)
       ctx.fill()
       ctx.restore()
     }
