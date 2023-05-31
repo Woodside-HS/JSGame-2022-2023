@@ -3,7 +3,7 @@ class Deer{
         this.eatingDistance = 500; //determines when the dear starts to eat
         this.platform = platforms[pIndex]; //uses index given to locate attaches platform
         //this.pIndex = pIndex; //initial index of platform //! Unnecessary?
-        this.pHealth = 10*this.platform.width; //sets plaform health
+        this.pHealth = 5*this.platform.width; //sets plaform health
         this.loc = this.platform.loc.copy(); //sets loc to platform loc //! May have to adjust y later to account for platform height
         this.loc.x += deltaX; //deltaX adjusts the loc of the enemy from the default position
         this.docile = false;
