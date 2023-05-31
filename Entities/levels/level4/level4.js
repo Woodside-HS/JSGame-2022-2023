@@ -6,14 +6,14 @@ class level4 extends Level{
         this.loadResources();
         this.loadDoors();
         this.loadEnemies();
-        this.count = 0; 
+         
     }
 
 
     loadPlatforms() {
         this.platforms[0] = new level4platform(150,670,100,true);
-        this.platforms[19] = new level4platform(250,670,100,true);
-        this.platforms[20] = new level4platform(350,670,100,true,true);
+        this.platforms[19] = new level4platform(250,670,100,true,true);
+        this.platforms[20] = new level4platform(350,670,100,true);
         this.platforms[1] = new level4platform(550,670,100,true);
         this.platforms[2] = new level4platform(750,620,100,true);
         this.platforms[3] = new level4platform(950,620,120,true);
@@ -38,7 +38,7 @@ class level4 extends Level{
         this.platforms[30] = new level4platform(2850,400,100,true);
         this.platforms[31] = new level4platform(2950,400,100,true);
         this.platforms[13] = new level4platform(1370,270,100,true);
-        this.platforms[14] = new level4platform(1150,220,110,true);
+        this.platforms[14] = new level4platform(1150,220,100,true);
         this.platforms[15] = new level4platform(3150,400,110,true);
         this.platforms[16] = new level4platform(3250,400,90,false);
         this.platforms[17] = new level4platform(3250,300,100,true);
@@ -68,6 +68,7 @@ class level4 extends Level{
         this.enemies[11] = new Ghost(2750,550,300,50,20)
         this.enemies[12] = new Ghost(2850,250,300,50,20)
         this.enemies[13] = new Ghost(2950,550,300,50,20)
+        this.enemies[14] = new Clown(1150,220,100,50,20)
 
     }
 

@@ -34,7 +34,7 @@ class GhostPowerUp {
         heroLoc.y + heroH > this.y &&
         heroLoc.y < this.y + this.size
       ) {
-        game.levels[3].resources.splice(0,1)
+        this .y = 1000;
         game.hero.inventory.ghostPowerUp = true;
       }
     }

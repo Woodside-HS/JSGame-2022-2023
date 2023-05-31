@@ -9,7 +9,7 @@ class Ghost{
     this.indc = 0;
     this.look = false;
     this.isdead = false;
-    this.speed = 1.5;
+    this.speed = 2.3;
     this.frames = [];
     this.groove = 0;//groove is the varible that counts down to switching games
     this.grooveId = 0;//grooveID is current frame that is being rendered
@@ -21,6 +21,7 @@ class Ghost{
     this.checkHero();
     this.checkAttack();
     this.checkLook();
+    this.checkAttack();
     this.checkCrucifix();
   }
   /*loadImages(){
@@ -141,9 +142,39 @@ class Ghost{
     }
   }
 
+  checkAttack() {
+    if (game.hero.statusBlock.isAttacking) {
+      //currently only works if enemy is on right side of hero
+      if (
+        this.loc.x > game.hero.loc.x &&
+        this.loc.x < game.hero.loc.x + 80 &&
+        game.hero.posNeg
+      ) {
+        //enemy is within attack bounds
+        if (
+          this.loc.y > game.hero.loc.y &&
+          this.loc.y < game.hero.loc.y + game.hero.height
+        ) {
+          this.loc.y = 1000;
+        }
+      } else if (
+        this.loc.x < game.hero.loc.x &&
+        this.loc.x > game.hero.loc.x - 40
+      ) {
+        //enemy is within attack bounds
+        if (
+          this.loc.y > game.hero.loc.y &&
+          this.loc.y < game.hero.loc.y + game.hero.height
+        ) {
+          this.loc.y = 1000;
+        }
+      }
+    }
+  }
+
   checkCrucifix(){
     let d = game.hero.loc.distance(this.loc);
-    if(game.hero.inventory.crucifix && d < 75)
-    game.levels[3].enemies.splice(0,1);
+    if(game.hero.inventory.crucifix && d < 100)
+    this.loc.y = 1000;
   }
 }

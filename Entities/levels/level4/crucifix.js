@@ -36,7 +36,7 @@ class Crucifix {
       ) {
         this.collected = true;
         game.hero.inventory.crucifix = true;
-        game.levels[3].resources.splice(0,1)
+        this.y = 1000;
       }
     }
   }

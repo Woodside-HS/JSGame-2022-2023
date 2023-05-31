@@ -11,6 +11,10 @@ class level4platform extends Platform {
         this.img = document.createElement("img");
         this.img.src  = "resources/Platform/platform.png";
         
+        this.img2 = document.createElement("img");
+        this.img2.src  = "resources/Platform/platform2.png";
+        
+        
         this.wallImg = document.createElement("img");
         this.wallImg.src = "resources/Platform/wall.png";
       }
@@ -26,11 +30,6 @@ class level4platform extends Platform {
     
     }
     update() {
-        if(this.isTrapFloor){
-            if(game.hero.statusBlock.onPlatform){
-                this.loc.y-=2
-            }
-        }
 
     }
 
@@ -47,6 +46,8 @@ class level4platform extends Platform {
             ctx.fill();*/
         } else {    
         ctx.drawImage(this.img,this.loc.x,this.loc.y,this.width,20);
+        if(this.isTrapFloor)
+        ctx.drawImage(this.img2,this.loc.x,this.loc.y,this.width,20);
         /*ctx.beginPath();
         ctx.moveTo(this.loc.x,this.loc.y);
         ctx.lineTo(this.loc.x+this.width,this.loc.y);
@@ -98,6 +99,8 @@ class level4platform extends Platform {
                 game.hero.statusBlock.jumpCount = 0;
                 game.hero.vel.y = 0;
                 game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
+                if(this.isTrapFloor)
+                this.loc.y-=100
             } else {
                 // makes it so you cant go through the bottom of the platform
                 game.hero.vel.y = 0;
