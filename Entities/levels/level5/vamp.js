@@ -100,7 +100,6 @@ class Vamp {
     }
 
     lookForHero() {
-        console.log(this.isLocked)
         let hero = game.hero;
         if (
             this.loc.x - this.veiwDist < hero.loc.x &&

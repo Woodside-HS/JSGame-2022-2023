@@ -51,6 +51,7 @@ class zombie {
         if (this.frameNum >= this.zombieImgs.length - 1) {
             this.frameNum = 1;
         }
+
         if (this.changeFrame >= 10) {
             this.changeFrame = 0;
             this.frameNum++
@@ -226,6 +227,12 @@ class zombie {
         if (this.gotHit && this.invincableTimer++ >= this.invincableLength) {
             this.gotHit = false;
             this.invincableTimer = 0;
+
+            if (this.checkHeroPos() === "right") {
+                this.movingR = true;
+            } else {
+                this.movingL = true
+            }
         }
     }
 
