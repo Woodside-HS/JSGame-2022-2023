@@ -7,6 +7,7 @@ class Bear{
            this.loc = platforms[pIndex].loc.copy();
            this.loc.x+=deltaX;
            this.loc.y-=15;
+           this.counter = 0;
 
     }
 
@@ -26,7 +27,10 @@ class Bear{
             this.health--;
         }
         else if(!game.hero.statusBlock.isAttacking && disCheck){
-            game.hero.statusBlock.hp--;
+            if(this.counter%5){
+                game.hero.statusBlock.hp--;
+            }
+            this.counter++;
         }
     } 
 
