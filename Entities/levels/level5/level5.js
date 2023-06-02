@@ -19,6 +19,7 @@ class level5 extends Level {
         this.platforms[6] = new level5platform(1100, 500, 300, false);
         this.platforms[7] = new level5platform(1300, 500, 400, false);
         this.platforms[7] = new level5platform(1500, 500, 400, false);
+        this.platforms[8] = new level5platform(1800, 500, 400, true);
 
         //need the specific platform class to get started on loading platforms
     }
