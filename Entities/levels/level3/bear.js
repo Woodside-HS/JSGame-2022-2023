@@ -10,7 +10,6 @@ class Bear{
            this.right = platforms[pIndex].loc.x + platforms[pIndex].width;
            this.loc.x+=deltaX;
            this.loc.y-=15;
-           console.log(this.loc);
            this.counter = 0;
 
     }
