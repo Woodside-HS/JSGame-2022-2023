@@ -19,8 +19,8 @@ class level5 extends Level {
         this.platforms[5] = new level5platform(900, 400, 200, false);
         this.platforms[6] = new level5platform(1100, 500, 300, false);
         this.platforms[7] = new level5platform(1300, 500, 400, false);
-        this.platforms[7] = new level5platform(1500, 500, 400, false);
-        this.platforms[8] = new level5platform(1800, 500, 400, true);
+        this.platforms[8] = new level5platform(1500, 500, 400, false);
+        this.platforms[9] = new level5platform(1600, 500, 400, true);
 
         //need the specific platform class to get started on loading platforms
     }
@@ -33,7 +33,9 @@ class level5 extends Level {
 
         this.resources[0] = new JumpBoost(370, 375, 10);
         this.resources[1] = new BatOrb(450, 125, 10)
-        this.resources[2] = new Spear(1350, 450, 10, 15);
+        // this.resources[2] = new Spear(1350, 450, 10, 15);
+        this.resources[2] = new Spear(100, 450, 10, 15);
+
     }
 
     loadEnemies(pArray1, pArray2) {
@@ -83,6 +85,10 @@ class level5 extends Level {
         // template function
         this.spliceResources();
         this.spliceEnemies()
+
+        if (game.hero.loc.x >= 1700) {
+            gameState++;
+        }
 
     }
 
