@@ -1,5 +1,5 @@
 class level2platform extends Platform {
-    constructor(x, y, w, enemy) {
+    constructor(x, y, w, enemy, resource) {
         super(x, y, w);
         this.hasEnemy = enemy;
         if (this.hasEnemy) {
@@ -14,6 +14,10 @@ class level2platform extends Platform {
         } else {
             this.enemy = null;
         }
+        this.hasResource = resource;
+        if (this.hasResource) {
+            this.resource = new DoubleJumpResource(x + w / 2, y - 50, 10);
+        }
 
     }
     loadImages() {
@@ -23,6 +27,9 @@ class level2platform extends Platform {
     run() {
         if (this.enemy) {
             this.enemy.run(game.hero.loc);
+        }
+        if (this.resource) {
+            this.resource.run(game.hero);
         }
         this.update();
         this.render();

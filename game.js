@@ -31,16 +31,16 @@ class Game {
 
   update = () => {
     this.moveCam();
-      if(gameState == 0){
-        this.menuScreen();
-      }
-      else if(gameState >= 1){ //gameState is equal to the level
-        this.playState(gameState);
-      }
-      else{
-        this.endState();
-      }
-      document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
+    if (gameState == 0) {
+      this.menuScreen();
+    }
+    else if (gameState >= 1) { //gameState is equal to the level
+      this.playState(gameState);
+    }
+    else {
+      this.endState();
+    }
+    document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
   };
 
   // Game state 0
@@ -79,13 +79,13 @@ class Game {
   moveCam = () => {
     // Susbtitude Event handlers
     if (this.clickingA && !hittingRight) {
-      this.hero.loc.x -= 2
+      this.hero.loc.x -= 5
     }
     else {
       null;
     }
     if (this.clickingD && !hittingLeft) {
-      this.hero.loc.x += 2
+      this.hero.loc.x += 5
     }
     else {
       null;
