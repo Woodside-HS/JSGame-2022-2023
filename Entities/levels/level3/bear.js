@@ -2,11 +2,15 @@ class Bear{
     constructor(pIndex, deltaX, platforms){
            this.docile = false; //only exists for deer as I would prefer to use speed to adjust anger
            this.speed = 2;
+           this.speedDirec = 1;
            this.health = 100;
            this.heroDis = 60;
            this.loc = platforms[pIndex].loc.copy();
+           this.left = platforms[pIndex].loc.x;
+           this.right = platforms[pIndex].loc.x + platforms[pIndex].width;
            this.loc.x+=deltaX;
            this.loc.y-=15;
+           console.log(this.loc);
            this.counter = 0;
 
     }
@@ -34,7 +38,11 @@ class Bear{
         }
     } 
 
-    attack(){ //go back and forth on platform
+    attack(){
+        this.loc.x+=0.5*this.speed*this.speedDirec;
+        if(this.loc.x<this.left || this.loc.x>this.right){
+            this.speedDirec*=-1;
+        }
 
     }
 
