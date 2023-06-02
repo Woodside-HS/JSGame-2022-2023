@@ -41,6 +41,4 @@ class level2 extends Level {
         this.platforms[33] = new level2platform(9700, 300, 200, false);
         this.platforms[34] = new level2platform(10000, 400, 200, true);
     }
-
-
 }
