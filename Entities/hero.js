@@ -10,6 +10,20 @@ class Hero {
     this.clr = "green";
     this.bullets = [];
     this.shootingDirection = false; //true = right, false = left
+
+    this.attackHitBoxL = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: 30,
+      h: this.height,
+    }
+    this.attackHitBoxR = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: 30,
+      h: this.height,
+    }
+
     this.inventory = {
       dbJump: false,
       dbCoin: false,
@@ -17,7 +31,9 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
-      invulnerability: false
+      invulnerability: false,
+      batMode: false,
+      hasSpear: false,
     };
     this.statusBlock = {
       hp: 100,
@@ -34,10 +50,13 @@ class Hero {
       coolDownTimer: 100, // the length of the attack cooldown
       attackTimer: 50, // the length/amount of time that the hero attacks for
       jumpBoostCounter: 0,
+      jumpBoostLength: 100,
+      batModeCounter: 0,
+      batModeLength: 300,
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
-      powerUpLength: 1000
+      powerUpLength: 1000,
     };
     this.indc = 0;
 
@@ -104,7 +123,6 @@ class Hero {
     if (this.vel.y > 0) {
       this.statusBlock.isFalling = true;
       this.statusBlock.isJumping = false;//cuts the jump anim early
-      //console.log("falling");
     } else {
       this.statusBlock.isFalling = false;
     }
@@ -112,20 +130,23 @@ class Hero {
   render() {
     if (showHitBox) { // renders the hitbox of the hero
       ctx.save()
-      ctx.translate(this.loc.x+10, this.loc.y + game.camLoc.y)
-      ctx.rect(0, 0, this.width-20, this.height)
+      ctx.translate(this.loc.x + 10, this.loc.y + game.camLoc.y)
+      ctx.rect(0, 0, this.width - 20, this.height)
       ctx.fill()
       ctx.restore()
     }
     switch (true) {
       //checks if any of the following values are true, if so runs them
-      case this.statusBlock.isAttacking:
+      case (this.statusBlock.isAttacking && !this.inventory.hasSpearman):
         console.log("renderding Attack");
+        break;
+      case (this.statusBlock.isAttacking && this.inventory.hasSpear):
+        console.log(`rendering attack with a spike`)
         break;
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
         this.changeFrame++;
-        console.log("throwing" + this.frameNum);
+        // console.log("throwing" + this.frameNum);
         if (this.changeFrame >= 2) {
           this.changeFrame = 0;
           this.frameNum++;
@@ -299,12 +320,59 @@ class Hero {
         this.clr = "green";
       }
     }
+
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& jumpBoost timer
+    if (
+      this.inventory.jumpBoost &&
+      this.statusBlock.jumpBoostCounter++ >= this.statusBlock.jumpBoostLength
+    ) {
+      console.log(`lost jumpBoost`)
+      this.statusBlock.jumpBoostCounter = 0;
+      this.inventory.jumpBoost = false;
+    }
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of jumpBoost timer
+
+
+
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& batMode 
+    if (this.inventory.batMode && this.statusBlock.isFalling) {
+      this.grav.y = 0.01
+    } else {
+      this.grav.y = 0.2
+    }
+
+
+    if (
+      this.inventory.batMode &&
+      this.statusBlock.batModeCounter++ >= this.statusBlock.batModeLength
+    ) {
+      this.statusBlock.batModeCounter = 0;
+      this.inventory.batMode = false;
+    }
+
+
+    //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& end of batMode
     for (let i = 0; i < this.bullets.length; i++) {
       this.bullets[i].run();
       if (this.bullets[i].isDead) {
         this.bullets.splice(i, 1);
       }
     }
+
+    // ########this is to refresh the location of the attack hitbox
+    this.attackHitBoxL = {
+      x: this.loc.x - 20,
+      y: this.loc.y,
+      w: 20 + this.width,
+      h: this.height,
+    }
+    this.attackHitBoxR = {
+      x: this.loc.x,
+      y: this.loc.y,
+      w: this.width + 20,
+      h: this.height,
+    }
+    // ########
   }
 
   jump() {
@@ -324,28 +392,31 @@ class Hero {
     //! change this later! I set it to a large number just for testing
     //we might not need a jumplimit but its good to have for now
     //jumplimit should be reset when you touch a platform, only alowed to jump as many times as your jumplimit
-    if (this.statusBlock.jumpCount < jumpLimit) {
+    if (this.statusBlock.jumpCount < jumpLimit && !this.inventory.jumpBoost) {
       // stops the velocity of the hero than subtracts 5 and incroments the jumpcount
       this.vel.y = 0; // stops the hero
       this.vel.y -= 8; // pushes the hero up
       this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
       this.statusBlock.jumpCount++;
+
+    }
+    if (this.statusBlock.jumpCount < jumpLimit && this.inventory.jumpBoost) {
+      this.vel.y = 0; // stops the hero
+      this.vel.y -= 10; // pushes the hero up
+      this.statusBlock.onPlatform = false; // just an etra test to make sure the hero is not on a platform
+      this.statusBlock.jumpCount++;
+
     }
   }
   attack() {
+
     if (this.statusBlock.isAttacking && !this.statusBlock.onCoolDown) {
       this.statusBlock.attackTimer--;
       ctx.beginPath();
       if (!this.posNeg) {
-        ctx.moveTo(this.loc.x + 50, this.loc.y + 0); //top left
-        ctx.lineTo(this.loc.x + 80, this.loc.y + 0); //top right
-        ctx.lineTo(this.loc.x + 80, this.loc.y + this.height); //bottom right
-        ctx.lineTo(this.loc.x + 50, this.loc.y + this.height); //bottom left
+        ctx.rect(this.attackHitBoxR.x, this.attackHitBoxR.y, this.attackHitBoxR.w, this.attackHitBoxR.h)
       } else {
-        ctx.moveTo(this.loc.x - 30, this.loc.y + 0); //top left
-        ctx.lineTo(this.loc.x + 0, this.loc.y + 0); //top right
-        ctx.lineTo(this.loc.x + 0, this.loc.y + this.height); //bottom right
-        ctx.lineTo(this.loc.x - 30, this.loc.y + this.height); //bottom left
+        ctx.rect(this.attackHitBoxL.x, this.attackHitBoxL.y, this.attackHitBoxL.w, this.attackHitBoxL.h)
       }
       ctx.closePath();
       ctx.fillStyle = "darkgreen";
