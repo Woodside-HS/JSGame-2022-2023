@@ -14,6 +14,7 @@ class Vamp {
         this.startLocX = x
         this.movementSize = 50
         this.veiwDist = 400; // the distance that the vamp can see
+        this.bulletDmg = 25; // the distance between
     }
     run() {
         this.render()

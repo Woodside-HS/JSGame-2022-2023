@@ -82,6 +82,7 @@ class level5 extends Level {
     update() {
         // template function
         this.spliceResources();
+        this.spliceEnemies()
 
     }
 
@@ -89,6 +90,14 @@ class level5 extends Level {
         for (let i = 0; i < this.resources.length; i++) {
             if (this.resources[i].collected) {
                 this.resources.splice(i, 1);
+            }
+        }
+    }
+
+    spliceEnemies() {
+        for (let i = 0; i < this.enemies.length; i++) {
+            if (this.enemies[i].isDead) {
+                this.enemies.splice(i, 1);
             }
         }
     }
