@@ -6,7 +6,8 @@ class level3 extends Level{
         this.loadCoins();
         this.loadResources([7],[5],[6]);
         this.loadEnemies([12], [4]);
-        this.end;
+        this.endX;
+        this.endY;
     }
 
     loadPlatforms() {
@@ -23,7 +24,8 @@ class level3 extends Level{
         this.platforms[10] = new Level3Platform(1430,380,20, false);
         this.platforms[11] = new Level3Platform(1520,390,20, false);
         this.platforms[12] = new Level3Platform(1610,350,100, false);
-        this.end = this.platforms[this.platforms.length-1].loc.x + this.platforms[this.platforms.length-1].width //- 50;
+        this.endX = this.platforms[this.platforms.length-1].loc.x + this.platforms[this.platforms.length-1].width; //- 50;
+        this.endY = this.platforms[this.platforms.length-1].loc.y + 20;
         // this.platforms[13] = new Level3Platform(150,400,100); //!continue
         // this.platforms[14] = new Level3Platform(150,400,100);
         // this.platforms[15] = new Level3Platform(150,400,100);
@@ -42,7 +44,7 @@ class level3 extends Level{
 
     run(){
         super.run();
-        if(game.hero.loc.x>this.end){
+        if(game.hero.loc.x>this.endX && game.hero.loc.y<this.endY){
             gameState = 4;
         }
     }
