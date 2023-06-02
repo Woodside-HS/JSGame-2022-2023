@@ -3,12 +3,18 @@ class level2platform extends Platform {
         super(x, y, w);
         this.hasEnemy = enemy;
         if (this.hasEnemy) {
-            const enemyHeight = 50;  // You should adjust this value
-            const enemyWidth = 50;  // You should adjust this value
-            this.enemy = new TrashEnemy(x, y, enemyHeight, enemyWidth, w);
+            const enemyHeight = 50;
+            const enemyWidth = 50;
+
+            if (Math.random() < 0.5) {
+                this.enemy = new TrashEnemy(x, y, enemyHeight, enemyWidth, w);
+            } else {
+                this.enemy = new FogMonster(x, y, enemyHeight, enemyWidth, w);
+            }
         } else {
             this.enemy = null;
         }
+
     }
     loadImages() {
         this.img = document.createElement("img");
@@ -26,13 +32,13 @@ class level2platform extends Platform {
     }
 
     render() {
+        ctx.fillStyle = "red";
         ctx.beginPath();
         ctx.moveTo(this.loc.x, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y);
         ctx.lineTo(this.loc.x + this.width, this.loc.y + 10);
         ctx.lineTo(this.loc.x, this.loc.y + 10);
         ctx.closePath();
-        ctx.fillStyle = "red";
         ctx.fill();
     }
 }
