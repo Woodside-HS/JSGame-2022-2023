@@ -5,6 +5,7 @@ class level5 extends Level {
         this.loadCoins();
         this.loadBackgrounds(3);
         this.loadResources()
+        this.loadEnemies();
     }
     loadPlatforms() {
         // console.log("lvl5 is here")
@@ -40,6 +41,7 @@ class level5 extends Level {
         //pArray2 is the array of platforms with enemy 2
         //hardcoding which type of enemies
         // this.enemies[0] = new zombies();
+        this.enemies[0] = new Vamp(1500, 400, 80, 20)
     }
 
     loadPlatformImages() {
