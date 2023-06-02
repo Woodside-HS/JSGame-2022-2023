@@ -6,7 +6,7 @@ class lvl1Projec {
         this.vel = direction.copy();
         this.vel.setMagnitude(0.5);
         this.dir = JSVector.subGetNew(this.loc,game.hero.loc);//gets the direction from the bark to the hero
-        this.vel.setDirection(this.dir.getDirection());
+        this.vel.setDirection(this.dir.getDirection()+(3*Math.PI/2));
     }
     run(){
         this.render();
@@ -21,6 +21,7 @@ class lvl1Projec {
             game.hero.vel.y = -5;
             game.hero.loc.y -=10;
         }
+        //add trackigng to bark
     }
     update(){
         this.rad+=.1

@@ -31,6 +31,8 @@ class lvl1BusStop{
             this.txt = "You have " + game.levels[0].tokens + "/" + this.desiredAmount  + " required bus tickets";
             ctx.fillText(this.txt, this.loc.x-20,this.loc.y);
             if(game.levels[0].tokens>=this.desiredAmount&& !this.confirmed){
+                game.clickingA = false;//makes sure the hero doesnt get stuck moving in a direction
+                game.clickingD = false;
                 this.confirmed = true;
                 this.endLvl();
                 window.confirm("next level");
@@ -42,7 +44,7 @@ class lvl1BusStop{
     }
     endLvl(){
         ctx.drawImage(this.bus,this.busLoc.x,this.busLoc.y,600,200);
-        console.log("runnign");
+        //console.log("runnign");
         if(this.busLoc.x>=game.hero.loc.x){
             this.busLoc.x-=10;
         } else if(this.busLoc.x<=game.hero.loc.x){

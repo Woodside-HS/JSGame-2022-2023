@@ -68,7 +68,7 @@ class lvl1Enemy2 {
         let hLoc = new JSVector(game.hero.loc.x + (game.hero.width / 2), game.hero.loc.y + (game.hero.height / 2));//gets the ceneter of the hero
         if (this.loc.distanceSquared(hLoc) < this.sightSq) {
             this.sees = true;
-        }
+        }//need to fix seeing I think
         if (this.sees) {
             this.move = 0;
             if (this.loc.x > this.pLoc.x && this.loc.x < this.pLoc.x + this.pWidth - 45) {
