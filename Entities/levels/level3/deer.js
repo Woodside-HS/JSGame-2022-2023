@@ -24,6 +24,9 @@ class Deer{
         if(game.hero.statusBlock.isAttacking && disCheck){
             this.health--;
         }
+        if(this.platform.isDead){
+            this.health = 0;
+        }
     }
     }
 
