@@ -9,6 +9,7 @@ class Deer{
         this.docile = false;
         this.health = 50;
         this.size = 20;
+        this.speed = 0; //! NOT FUNCTIONAL JUST FOR EASE IN GOING THROUGH AN ARRAY
     }
 
     run(){ 

@@ -1,6 +1,6 @@
 class Berries{
     constructor(x, y){
-        this.crazeFactor = 0.1; //Berries make bears go... crazy
+        this.crazeFactor = 1; //Berries make bears go... crazy
         this.loc = new JSVector(x, y);
         this.loc.y -= 24;
         this.collected = false;
@@ -28,15 +28,17 @@ class Berries{
           heroLoc.y + heroH > this.loc.y &&
           heroLoc.y < this.loc.y + this.size
         ) {
-            game.levels[2].craze += this.crazeFactor; //bears will check against craze factor
+            for(let i = 0; i<game.levels[2].enemies.length; i++){
+                game.levels[2].enemies[i].speed += this.crazeFactor;
+            }
             game.hero.statusBlock.coins++; //berries function as coins despite their negative side effect
             this.collected = true;
+
         }
     }
 
     render(){
         ctx.drawImage(this.img, this.loc.x, this.loc.y, 24,24);
-        
     }
 
 }

@@ -4,9 +4,8 @@ class level3 extends Level{
         this.loadPlatforms();
         this.loadBackgrounds(3);
         this.loadCoins();
-        this.craze = 0;
-        this.loadResources([4],[5],[6]);
-        this.loadEnemies([12]);
+        this.loadResources([7],[5],[6]);
+        this.loadEnemies([12], [4]);
     }
 
     loadPlatforms() {
@@ -64,6 +63,10 @@ class level3 extends Level{
     loadEnemies(pArray1, pArray2) { 
         for(let i = 0; i<pArray1.length; i++){
             this.enemies[i] = new Deer(pArray1[i], 30, this.platforms);
+        }
+        for(let j = 0; j<pArray2.length; j++){
+            let deltaX = Math.floor(Math.random()*this.platforms[pArray2[j]].length);
+            this.enemies[j] = new Bear(pArray2[j], deltaX, this.platforms);
         }
         //pArray2 is the array of platforms with enemy 2
         //hardcoding which type of enemies

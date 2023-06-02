@@ -59,6 +59,7 @@ class Befriend{
       ) {
         for(let i = 0; i< game.levels[2].enemies.length; i++){
             game.levels[2].enemies[i].docile = true;
+            game.levels[2].enemies[i].speed -=1;
            }
         this.collected = true;
         this.counter = 1000;
