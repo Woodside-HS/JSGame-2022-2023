@@ -9,6 +9,7 @@ var fps;
 window.onload = init; // After the window has been loaded, go to init
 
 var debugView = false;
+var showHitBox = false;
 
 function init() {
   canvas = document.createElement("canvas");
