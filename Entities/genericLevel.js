@@ -50,7 +50,7 @@ class Level {
         }
         // */
     }
-    loadBackgrounds(num){
+    loadBackgrounds(num){ 
         let backgrounds = [];
         for(let i = 0; i < num; i++){
             backgrounds[i] = document.createElement("img");
