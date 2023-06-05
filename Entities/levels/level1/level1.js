@@ -56,6 +56,7 @@ class level1 extends Level{
         //resources work not, just have to get them placed in
         this.resources[0] = new lvl1Resource1(400,400);
         this.resources[1] = new lvl1Resource2(600,400);
+        this.resources[2] = new lvl1Shop(4400,500,5);
     }
 
 
