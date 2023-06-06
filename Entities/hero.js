@@ -89,6 +89,7 @@ class Hero {
       this.statusBlock.onPlatform = false;
     }
   }
+
   loadImages() {
     for (let i = 0; i < 16; i++) {
       //the 9 has to be hardcoded inn
