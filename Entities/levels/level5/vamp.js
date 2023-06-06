@@ -24,6 +24,7 @@ class Vamp {
             this.checkHero()
         }
         this.lookForHero()
+        this.attackHero()
 
     }
 
@@ -74,6 +75,13 @@ class Vamp {
         }
     }
 
+    attackHero() {
+        if (this.isAttacking) {
+            game.hero.statusBlock.hp = 0
+        }
+
+    }
+
     checkHeroPos() { // return left if the hero is left of the enemy and right if rights
         if (game.hero.loc.x > this.loc.x) {
             return "right"
@@ -94,7 +102,8 @@ class Vamp {
         ) {
             // this.movingL = false;
             // this.movingR = false;
-            // this.isAttacking = true;
+            this.isAttacking = true;
+            console.log("ehrer")
             return true;
         }
         return false;
