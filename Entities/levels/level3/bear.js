@@ -9,10 +9,12 @@ class Bear{
            this.left = platforms[pIndex].loc.x;
            this.right = platforms[pIndex].loc.x + platforms[pIndex].width;
            this.loc.x+=deltaX;
-           this.loc.y-=15;
+           this.loc.y-=30;
            this.counter = 0;
            this.imgA = document.createElement("img");
-           this.imgA.src = "Images/Level3/bearAttack.png";
+           this.imgA.src = "Images/Level3/bearAttackR.png";
+           this.imgB = document.createElement("img");
+           this.imgB.src = "Images/Level3/bearAttackL.png";
            this.imgD = document.createElement("img");
            this.imgD.src = "Images/Level3/bearDocile.png";
 
@@ -50,11 +52,16 @@ class Bear{
     }
 
     render(n){
-        if(n == 0){ //!Not attacking
-            ctx.drawImage(this.imgD, this.loc.x, this.loc.y, 30, 30);
+        if(n == 0){ //!Attacking?
+            if(this.speedDirec <0){
+                ctx.drawImage(this.imgA, this.loc.x, this.loc.y, 30, 30);
+            }
+            else{
+                ctx.drawImage(this.imgB, this.loc.x, this.loc.y, 30, 30);
+            }
         }
-        else{ //!Attack Render
-            ctx.drawImage(this.imgA, this.loc.x, this.loc.y, 30, 30);
+        else{ //!Not Attacking?
+            ctx.drawImage(this.imgD, this.loc.x, this.loc.y, 30, 30);
         }
     }
 
