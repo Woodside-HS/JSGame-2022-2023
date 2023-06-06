@@ -58,7 +58,7 @@ function GameArea() {
       "click",
       function () {
         game.gamePaused = !game.gamePaused;
-        console.log("Mouse Clicked tile: " + i + " and should have run level: " + (i + 1));
+        //console.log("Mouse Clicked tile: " + i + " and should have run level: " + (i + 1));
       },
       false
     );
@@ -70,7 +70,7 @@ function GameArea() {
     "click",
     function () {
     gameState = 3; //! SWITCH FOR SB: FOR MY BRANCH SHOULD BE 3
-      console.log("gameState = 1!!!"); // gameState = 1 means the you are playing on level 1
+      //console.log("gameState = 1!!!"); // gameState = 1 means the you are playing on level 1
       game.hero.loc.x = 200;
       game.hero.loc.y = 200;
       game.hero.vel.setMagnitude(0);

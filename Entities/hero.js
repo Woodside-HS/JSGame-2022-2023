@@ -138,10 +138,10 @@ class Hero {
     switch (true) {
       //checks if any of the following values are true, if so runs them
       case (this.statusBlock.isAttacking && !this.inventory.hasSpearman):
-        console.log("renderding Attack");
+        //console.log("renderding Attack");
         break;
       case (this.statusBlock.isAttacking && this.inventory.hasSpear):
-        console.log(`rendering attack with a spike`)
+        //console.log(`rendering attack with a spike`)
         break;
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
