@@ -10,7 +10,14 @@ const keyDownActions = {
     game.mouseDown = true;
   },
   Space: () => {
-    if (!stopMovement) game.hero.jump();
+    if (!stopMovement) {
+      if (!game.flight) {
+        game.hero.jump();
+      }
+      else {
+        game.clickingSpace = true;
+      }
+    }
   },
   KeyP: () => {
     game.hero.shoot();
@@ -32,6 +39,11 @@ const keyUpActions = {
   KeyF: () => {
     game.mouseDown = false;
   },
+  Space: () => {
+    if (game.flight) {
+      game.clickingSpace = false;
+    }
+  }
 };
 
 window.addEventListener(
@@ -72,6 +84,14 @@ window.addEventListener(
   false
 );
 
+
+window.addEventListener("keydown", function (event) {
+  if (event.code === "KeyN") {
+    game.debugView = !game.debugView;
+  }
+});
+
+
 function debugViewCheckBoxClicked() {
   // Optimized debug view checkbox clicked using ternary functions
   const { checked } = document.getElementById("DebugViewCheckBox");
@@ -99,3 +119,4 @@ function createDebugDOM() {
     debugDiv.appendChild(element);
   });
 }
+

@@ -17,7 +17,7 @@ class TrashEnemy {
         this.chaseSpeed = 1.4; // speed when chasing
         this.chaseDistance = 150; // distance to start chasing
         this.canMoveFurther = true;
-        this.particleSystem = new ParticleSystem();
+        this.particleSystem = new ParticleSystem2();
     }
     run(heroLoc) {
         this.render();
@@ -90,7 +90,7 @@ class TrashEnemy {
 }
 
 
-class Particle {
+class Particle2 {
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -116,14 +116,14 @@ class Particle {
     }
 }
 
-class ParticleSystem {
+class ParticleSystem2 {
     constructor() {
         this.particles = [];
     }
 
     addParticles(x, y, count) {
         for (let i = 0; i < count; i++) {
-            this.particles.push(new Particle(x, y));
+            this.particles.push(new Particle2(x, y));
         }
     }
 

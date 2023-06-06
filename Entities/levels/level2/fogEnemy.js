@@ -11,7 +11,7 @@ class FogMonster {
         this.fadeTime = 4000;
         this.lastFadeTime = Date.now();
         this.damageOnContact = true;
-        this.particleSystem = new ParticleSystem();
+        this.particleSystem = new ParticleSystem2();
     }
 
     run(heroLoc) {
