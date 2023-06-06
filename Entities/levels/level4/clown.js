@@ -6,7 +6,7 @@ class Clown{
     this.h = h;
     this.w = w;
     this.heroCheck = false;
-    this.move = 3; // the speed of the enemy movement
+    this.move = Math.random()*10; // the speed of the enemy movement
     this.isdead = false;
     this.frames = [];
     this.groove = 0;//groove is the varible that counts down to switching games

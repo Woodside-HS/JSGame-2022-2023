@@ -5,7 +5,7 @@ class Hero {
     this.posNeg = true; //related to attacking
     this.height = 50;
     this.width = 50;
-    this.grav = new JSVector(0, 0.2); //gravity for when falling
+    this.grav = new JSVector(0, -.1); //gravity for when falling
     this.clr = "green";
     this.bullets = [];
     this.shootingDirection = false; //true = right, false = left

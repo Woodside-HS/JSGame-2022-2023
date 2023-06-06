@@ -44,7 +44,7 @@ class Ghost{
           this.loc.y > game.hero.loc.y &&
           this.loc.y < game.hero.loc.y + game.hero.height
         ) {
-          this.isdead = true;
+          this.loc.y = 1000;
         }
       } else if (
         this.loc.x < game.hero.loc.x &&
@@ -55,7 +55,7 @@ class Ghost{
           this.loc.y > game.hero.loc.y &&
           this.loc.y < game.hero.loc.y + game.hero.height
         ) {
-          this.isdead = true;
+          this.loc.y = 1000;
         }
       }
     }
