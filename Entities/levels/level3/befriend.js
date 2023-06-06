@@ -9,6 +9,8 @@ class Befriend{
       this.collected = false;
       this.coinClr = "brown";
       this.counter = 0;
+      this.img = document.createElement("img");
+      this.img.src = "Images/Level3/befriend.png";
     }
     run() {
       if(!this.collected){
@@ -37,13 +39,7 @@ class Befriend{
       }
     }
     render() {
-      ctx.save();
-      ctx.beginPath();
-      ctx.arc(this.loc.x, this.loc.y - this.bounce, this.size, 0, Math.PI * 2);
-      ctx.closePath(); //beginning and closing path just to be sure
-      ctx.fillStyle = this.coinClr;
-      ctx.fill();
-      ctx.restore();
+      ctx.drawImage(this.img, this.loc.x -30, this.loc.y - 20, 45, 45);
     }
 
     checkHero() {

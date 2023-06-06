@@ -9,15 +9,21 @@ class Bear{
            this.left = platforms[pIndex].loc.x;
            this.right = platforms[pIndex].loc.x + platforms[pIndex].width;
            this.loc.x+=deltaX;
-           this.loc.y-=15;
+           this.loc.y-=30;
            this.counter = 0;
+           this.imgA = document.createElement("img");
+           this.imgA.src = "Images/Level3/bearAttackR.png";
+           this.imgB = document.createElement("img");
+           this.imgB.src = "Images/Level3/bearAttackL.png";
+           this.imgD = document.createElement("img");
+           this.imgD.src = "Images/Level3/bearDocile.png";
 
     }
 
     run(){
         if(this.health>0){
             if(this.speed>=2){
-                this.attack();
+                this.move();
                 this.render(0);
             }
             else{
@@ -29,15 +35,15 @@ class Bear{
         if(game.hero.statusBlock.isAttacking && disCheck){
             this.health--;
         }
-        else if(!game.hero.statusBlock.isAttacking && disCheck){
-            if(this.counter%5){
+        else if(!game.hero.statusBlock.isAttacking && disCheck && this.speed>=2){
+            this.counter++;
+            if(this.counter%20 == 0){
                 game.hero.statusBlock.hp--;
             }
-            this.counter++;
         }
     } 
 
-    attack(){
+    move(){
         this.loc.x+=0.5*this.speed*this.speedDirec;
         if(this.loc.x<this.left || this.loc.x>this.right){
             this.speedDirec*=-1;
@@ -46,19 +52,16 @@ class Bear{
     }
 
     render(n){
-        if(n == 0){ //!Not attacking
-            ctx.beginPath();
-            ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
-            ctx.closePath();
-            ctx.fillStyle = "black";
-            ctx.fill();
+        if(n == 0){ //!Attacking?
+            if(this.speedDirec >0){
+                ctx.drawImage(this.imgA, this.loc.x, this.loc.y, 30, 30);
+            }
+            else{
+                ctx.drawImage(this.imgB, this.loc.x, this.loc.y, 30, 30);
+            }
         }
-        else{ //!Attack Render
-            ctx.beginPath();
-            ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
-            ctx.closePath();
-            ctx.fillStyle = "red";
-            ctx.fill();
+        else{ //!Not Attacking?
+            ctx.drawImage(this.imgD, this.loc.x, this.loc.y, 30, 30);
         }
     }
 
