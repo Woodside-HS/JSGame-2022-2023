@@ -50,6 +50,9 @@ class level1 extends Level{
     }
     loadFreeEnemies(){
         this.enemies[0] = new lvl1Enemy1(25,650,0,150,200);
+        this.enemies[1] = new lvl1Enemy1(550,550,400,400+450,200);
+        this.enemies[2] = new lvl1Enemy1(2200,550,2150,2150+150,200);
+        this.enemies[3] = new lvl1Enemy1(2750,600,2750,2750+300,200);
     }
 
     loadResources() {
@@ -70,16 +73,16 @@ class level1 extends Level{
         this.resources[12] = new lvl1Resource2(3800,550);
         this.resources[13] = new lvl1Resource2(4200,400);
         //coins below
-        this.resources[] = new lvl1Resource1(500,400);
-        this.resources[] = new lvl1Resource1(1100,500);
-        this.resources[] = new lvl1Resource1(1700,600);
-        this.resources[] = new lvl1Resource1(2100,700);
-        this.resources[] = new lvl1Resource1(2500,600);
-        this.resources[] = new lvl1Resource1(2900,500);
-        this.resources[] = new lvl1Resource1(3100,400);
-        this.resources[] = new lvl1Resource1(3500,500);
-        this.resources[] = new lvl1Resource1(3700,400);
-        this.resources[] = new lvl1Resource1(4100,500);
+        this.resources[14] = new lvl1Resource1(500,400);
+        this.resources[15] = new lvl1Resource1(1100,500);
+        this.resources[16] = new lvl1Resource1(1700,600);
+        this.resources[17] = new lvl1Resource1(2100,700);
+        this.resources[18] = new lvl1Resource1(2500,600);
+        this.resources[19] = new lvl1Resource1(2900,500);
+        this.resources[20] = new lvl1Resource1(3100,400);
+        this.resources[21] = new lvl1Resource1(3500,500);
+        this.resources[22] = new lvl1Resource1(3700,400);
+        this.resources[23] = new lvl1Resource1(4100,500);
     }
 
 

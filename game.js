@@ -51,8 +51,10 @@ class Game {
       this.endState();
     }
     document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
-    document.getElementById("resource-count").innerHTML = this.unique;//adds a counter for the unique resource of each level;
-
+    if(gameState ==1){
+      document.getElementById("resource-count").innerHTML = this.unique;//adds a counter for the unique resource of each level;
+      //for now only set up to run in my level
+    }
   };
 
   getNewLevelInstance(levelNum) {
