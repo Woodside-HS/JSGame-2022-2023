@@ -7,7 +7,7 @@ class Game {
     this.hero = new Hero(this.start.x, this.start.y);
     this.camLoc = new JSVector(0, 0);
     this.speed = 2;
-
+    this.unique = 0;
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
     );
@@ -50,9 +50,14 @@ class Game {
       this.endState();
     }
     document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
+    if (gameState == 1) {
+      document.getElementById("resource-count").innerHTML = this.unique;//adds a counter for the unique resource of each level;
+      //for now only set up to run in my level
+      //if statement doesnt work lmao
+    }
   };
 
-  getNewLevelInstance(levelNum) {
+  getNewLevelInstance(levelNum) { // resets teh level and the hero
     switch (levelNum) {
       case 1:
         this.levels[0] = new level1(1);

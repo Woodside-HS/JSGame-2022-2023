@@ -94,7 +94,7 @@ class Hero {
       this.heroThrow[i] = document.createElement("img");
       this.heroThrow[i].src = "Images/Hero/HeroThrow/hero" + (i + 1) + ".png";
     }
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 7; i++) {
       this.heroJump[i] = document.createElement("img");
       this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
     }
@@ -139,15 +139,15 @@ class Hero {
     switch (true) {
       //checks if any of the following values are true, if so runs them
       case (this.statusBlock.isAttacking && !this.inventory.hasSpearman):
-        console.log("renderding Attack");
+        //console.log("renderding Attack");
         break;
       case (this.statusBlock.isAttacking && this.inventory.hasSpear):
-        console.log(`rendering attack with a spike`)
+        //console.log(`rendering attack with a spike`)
         break;
       //! END OF ATTACKING
       case this.statusBlock.isShooting:
         this.changeFrame++;
-        // console.log("throwing" + this.frameNum);
+        //console.log("throwing" + this.frameNum);
         if (this.changeFrame >= 2) {
           this.changeFrame = 0;
           this.frameNum++;
@@ -175,19 +175,20 @@ class Hero {
           this.changeFrame = 0;
           this.frameNum++;
         }
-        if (this.frameNum >= 14) {
+        if (this.frameNum >= 7) {
           this.statusBlock.isJumping = false;
         }
-        if (game.clickingD || !this.posNeg) {
+        if ((game.clickingD || !this.posNeg) && this.frameNum < 6) {
+          //console.log(this.frameNum);
           ctx.drawImage(this.heroJump[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
-        } else if (game.clickingA || this.posNeg) {
+        } else if ((game.clickingA || this.posNeg) && this.frameNum < 6) {
           ctx.save();//this code flips the character if the character is facing right
           ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
           ctx.scale(-1, 1);
           ctx.drawImage(this.heroJump[this.frameNum], -this.width, 0, this.width, this.height);
           ctx.restore();
         } else {
-          ctx.drawImage(this.heroJump[this.frameNum], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+          ctx.drawImage(this.heroJump[6], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         }
         //console.log("jumping");
         break;
@@ -249,10 +250,10 @@ class Hero {
           ctx.save();//this code flips the character if the character is facing right
           ctx.translate(this.loc.x, this.loc.y + game.camLoc.y);
           ctx.scale(-1, 1);
-          ctx.drawImage(this.heroJump[0], -this.width, 0, this.width, this.height);
+          ctx.drawImage(this.heroMove[0], -this.width, 0, this.width, this.height);
           ctx.restore();
         } else if (!this.posNeg && this.timeSinceMoved >= 1) {
-          ctx.drawImage(this.heroJump[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
+          ctx.drawImage(this.heroMove[0], this.loc.x, this.loc.y + game.camLoc.y, this.width, this.height);
         }
 
     }
@@ -279,7 +280,6 @@ class Hero {
     // }
     //!%%%%%%%%%%%%%%
     if (game.mouseDown && !this.statusBlock.onCoolDown) {
-      // attacking if mouse is down and the heros not on cooldown
       this.statusBlock.isAttacking = true;
     } else if (this.statusBlock.onCoolDown) {
       // runs the cooldown timer
@@ -291,6 +291,8 @@ class Hero {
       this.statusBlock.coolDownTimer = 100;
     }
     this.attack();
+
+    //!%%%%%%%%%%%%%%%%%%% powerups below
     //double jump timer
     if (this.inventory.dbJump) {
       this.clr = "purple";
@@ -415,6 +417,7 @@ class Hero {
       this.statusBlock.attackTimer--;
       ctx.beginPath();
       if (!this.posNeg) {
+        //right of hero
         ctx.rect(this.attackHitBoxR.x, this.attackHitBoxR.y, this.attackHitBoxR.w, this.attackHitBoxR.h)
       } else {
         ctx.rect(this.attackHitBoxL.x, this.attackHitBoxL.y, this.attackHitBoxL.w, this.attackHitBoxL.h)
