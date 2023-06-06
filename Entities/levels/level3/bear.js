@@ -23,7 +23,7 @@ class Bear{
     run(){
         if(this.health>0){
             if(this.speed>=2){
-                this.attack();
+                this.move();
                 this.render(0);
             }
             else{
@@ -35,7 +35,7 @@ class Bear{
         if(game.hero.statusBlock.isAttacking && disCheck){
             this.health--;
         }
-        else if(!game.hero.statusBlock.isAttacking && disCheck){
+        else if(!game.hero.statusBlock.isAttacking && disCheck && this.speed>=2){
             if(this.counter%5){
                 game.hero.statusBlock.hp--;
             }
@@ -43,7 +43,7 @@ class Bear{
         }
     } 
 
-    attack(){
+    move(){
         this.loc.x+=0.5*this.speed*this.speedDirec;
         if(this.loc.x<this.left || this.loc.x>this.right){
             this.speedDirec*=-1;
