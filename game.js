@@ -104,7 +104,7 @@ class Game {
     this.levels[a - 1].background.run();//since there is only one background object, then only need to run this once
     //need to run background before everything else
     this.hero.run();
-    this.levels[1].run();
+    this.levels[a-1].run();
     ctx.restore();
   };
 
