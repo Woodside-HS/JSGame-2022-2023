@@ -116,7 +116,9 @@ class Game {
     if (a == 6) {
       this.flight = true;
       if (!this.inStore) {
+        ctx.translate(0, 0);
         this.levels[5].run();
+        ctx.restore();
       } else {
         this.store.run();
       }
@@ -136,7 +138,7 @@ class Game {
 
   endState = () => {
     ctx.save();
-    ctx.translate(-this.camLoc.x, -this.camLoc.y);
+    //ctx.translate(-this.camLoc.x, -this.camLoc.y);
     this.hero.loc.x = this.camLoc.x + 200;
     stopMovement = false;
     this.hero.run();

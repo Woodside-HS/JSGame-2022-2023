@@ -86,7 +86,7 @@ class level5 extends Level {
         this.spliceResources();
         this.spliceEnemies()
 
-        if (game.hero.loc.x >= 1700) {
+        if (game.hero.loc.x >= 300) {
             gameState++;
         }
     }
