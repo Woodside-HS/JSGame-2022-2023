@@ -6,7 +6,7 @@ class level4 extends Level{
         this.loadResources();
         this.loadDoors();
         this.loadEnemies();
-        this.loadBackgrounds(4);         
+        this.loadBackgrounds(3);         
     }
 
 
@@ -230,18 +230,18 @@ class level4 extends Level{
 
     }
 
-    loadBackgrounds(num){ 
-        /*let backgrounds = [];
-        for(let i = 0; i < num; i++){
-            backgrounds[i] = document.createElement("img");
-            let path = "Images/Level" + this.id +"/Lvl" + this.id + "Background/bg" + (i+1)+".png";
-            //the images need to be set in order from furthest back to furthest forward
-            console.log(path);
-            backgrounds[i].src = path;
-        }
-        this.background = new genericBackground(backgrounds);
-     */   
-    }
+    // loadBackgrounds(num){ 
+    //     /*let backgrounds = [];
+    //     for(let i = 0; i < num; i++){
+    //         backgrounds[i] = document.createElement("img");
+    //         let path = "Images/Level" + this.id +"/Lvl" + this.id + "Background/bg" + (i+1)+".png";
+    //         //the images need to be set in order from furthest back to furthest forward
+    //         console.log(path);
+    //         backgrounds[i].src = path;
+    //     }
+    //     this.background = new genericBackground(backgrounds);
+    //  */   
+    // }
 
     update() {
 
