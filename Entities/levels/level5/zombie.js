@@ -143,6 +143,7 @@ class zombie {
 
 
 
+
     checkHeroPos() { // return left if the hero is left of the enemy and right if rights
         if (game.hero.loc.x > this.loc.x) {
             return "right"
