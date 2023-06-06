@@ -3,7 +3,7 @@ class level2 extends Level {
         super(id);
         this.loadPlatforms();
         this.loadCoins();
-        this.loadBackgrounds(3);
+        this.loadBackgrounds(2);
     }
     loadPlatforms() {
         this.platforms[1] = new level2platform(100, 600, 200, false, true);
