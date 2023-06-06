@@ -23,9 +23,8 @@ class Game {
     };
 
     this.levels[0] = new level1(1);
-    // this.levels[1] = new level2(2)
-    this.levels[2] = new level3(3); //Spencer's Level
-    //this.levels[3] = new level4(4);
+    this.levels[1] = new level2(2);
+    this.levels[2] = new level3(3);
     this.levels[4] = new level5(5);
 
   }
@@ -51,7 +50,7 @@ class Game {
       this.endState();
     }
     document.getElementById("coin-count").innerHTML = this.hero.statusBlock.coins;
-    if(gameState ==1){
+    if (gameState == 1) {
       document.getElementById("resource-count").innerHTML = this.unique;//adds a counter for the unique resource of each level;
       //for now only set up to run in my level
       //if statement doesnt work lmao
@@ -105,7 +104,7 @@ class Game {
     this.levels[a - 1].background.run();//since there is only one background object, then only need to run this once
     //need to run background before everything else
     this.hero.run();
-    this.levels[a - 1].run();
+    this.levels[a-1].run();
     ctx.restore();
   };
 

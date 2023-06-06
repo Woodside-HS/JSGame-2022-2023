@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lab 117 Start Code</title>
-    <link rel="stylesheet" type="text/css" href="mystyles.css" />
-    <script src="main.js"></script>
-    <script src="gamearea.js"></script>
-    <script src="game.js"></script>
-    <script src="utility.js"></script>
-    <script src="Entities/genericLevel.js"></script>
-    <script src="Entities/genericPlatform.js"></script>
-    <script src="Entities/genericBackground.js"></script>
-    <!-- Level 1 Files-->
-    <script src="Entities/levels/level1/level1.js"></script>
-    <script src="Entities/levels/level1/level1platform.js "></script>
-    <script src="Entities/levels/level1/enemy1Grandma.js"></script>
-    <script src="Entities/levels/level1/enemy2Dog.js"></script>
-    <script src="Entities/levels/level1/enemy2Projectile.js"></script>
-    <script src="Entities/levels/level1/level1EndState.js"></script>
-    <script src="Entities/levels/level1/resource1Coin.js"></script>
-    <script src="Entities/levels/level1/resource2BusToken.js"></script>
-    <script src="Entities/levels/level1/level1Shop.js"></script>
 
-    <script src="Entities/levels/level2/level2.js"></script>
 
-    <!-- Level 3 Files-->
-    <script src="Entities/levels/level3/level3.js"></script>
-    <script src="Entities/levels/level3/level3platform.js"></script>
-    <script src="Entities/levels/level3/bear.js"></script>
-    <script src="Entities/levels/level3/befriend.js"></script>
-    <script src="Entities/levels/level3/berries.js"></script>
-    <script src="Entities/levels/level3/deer.js"></script>
-    <script src="Entities/levels/level3/increasedSpeed.js"></script>
 
-    <script src="Entities/levels/level4/level4.js"></script>
-    <script src="Entities/levels/level5/level5.js"></script>
-    <script src="Entities/levels/level5/level5Platform.js "></script>
-    <script src="Entities/levels/level5/jumpBoost.js"></script>
-    <script src="Entities/levels/level5/batOrb.js"></script>
-    <script src="Entities/levels/level5/spear.js"></script>
-    <script src="Entities/levels/level5/zombie.js"></script>
-    <script src="Entities/levels/level5/vamp.js"></script>
-    <script src="Entities/levels/level6/level6.js"></script>
-    <script src="Entities/hero.js"></script>
-    <script src="jsvector.js"></script>
-    <script src="Entities/coin.js"></script>
-    <script src="eventlisteners.js"></script>
-    <script src="Entities/bullet.js"></script>
-    <script src="Entities/Powerups/doublecoins.js"></script>
-    <script src="Entities/Powerups/doublejump.js"></script>
-    <script src="Entities/Traps/legTrap.js"></script>
-    <script src="Entities/Powerups/invulnerability.js"></script>
-  </head>
+<head>
+  <title>Lab 117 Start Code</title>
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
+  <script src="main.js"></script>
+  <script src="gamearea.js"></script>
+  <script src="game.js"></script>
+  <script src="utility.js"></script>
+  <script src="Entities/genericLevel.js"></script>
+  <script src="Entities/genericPlatform.js"></script>
+  <script src="Entities/genericBackground.js"></script>
+  <!-- Level 1 Files-->
+  <script src="Entities/levels/level1/level1.js"></script>
+  <script src="Entities/levels/level1/level1platform.js "></script>
+  <script src="Entities/levels/level1/enemy1Grandma.js"></script>
+  <script src="Entities/levels/level1/enemy2Dog.js"></script>
+  <script src="Entities/levels/level1/enemy2Projectile.js"></script>
+  <script src="Entities/levels/level1/level1EndState.js"></script>
+  <script src="Entities/levels/level1/resource1Coin.js"></script>
+  <script src="Entities/levels/level1/resource2BusToken.js"></script>
+  <script src="Entities/levels/level1/level1Shop.js"></script>
+
+  <script src="Entities/levels/level2/level2.js"></script>
+  <script src="Entities/levels/level2/trashEnemy.js "></script>
+  <script src="Entities/levels/level2/fogEnemy.js "></script>
+  <script src="Entities/levels/level2/level2Resource.js "></script>
+  <script src="Entities/levels/level2/level2platform.js "></script>
+  <script src="Entities/levels/level3/level3.js"></script>
+  <script src="Entities/levels/level3/level3.js"></script>
+  <script src="Entities/levels/level3/level3platform.js"></script>
+  <script src="Entities/levels/level3/bear.js"></script>
+  <script src="Entities/levels/level3/befriend.js"></script>
+  <script src="Entities/levels/level3/berries.js"></script>
+  <script src="Entities/levels/level3/deer.js"></script>
+  <script src="Entities/levels/level3/increasedSpeed.js"></script>
+  <script src="Entities/levels/level5/level5.js"></script>
+  <script src="Entities/levels/level5/level5Platform.js "></script>
+  <script src="Entities/levels/level5/jumpBoost.js"></script>
+  <script src="Entities/levels/level5/batOrb.js"></script>
+  <script src="Entities/levels/level5/spear.js"></script>
+  <script src="Entities/levels/level5/zombie.js"></script>
+  <script src="Entities/levels/level5/vamp.js"></script>
+  <script src="Entities/levels/level4/level4.js"></script>
+  <script src="Entities/levels/level6/level6.js"></script>
+  <script src="Entities/hero.js"></script>
+  <script src="jsvector.js"></script>
+  <script src="Entities/coin.js"></script>
+  <script src="eventlisteners.js"></script>
+  <script src="Entities/bullet.js"></script>
+  <script src="Entities/Powerups/doublecoins.js"></script>
+  <script src="Entities/Powerups/doublejump.js"></script>
+  <script src="Entities/Traps/legTrap.js"></script>
+  <script src="Entities/Powerups/invulnerability.js"></script>
+
+
+  <link rel="stylesheet" type="text/css" href="mystyles.css" />
+</head>
 
 <body>
   <div id="wrapperDiv"></div>
@@ -64,7 +72,7 @@
   } else {
     showHitBox = true
   }
-  "/>
+  " />
   <label for="ShowHitBoxCheckBoxCheckName">Show HitBox</label>
   <div id="coin-count">0</div>
   <div id="resource-count">0</div>
