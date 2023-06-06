@@ -2,7 +2,7 @@ class level3 extends Level{
     constructor(id, levels){
         super(id);   
         this.loadPlatforms();
-        this.end = Date.now() + 120000;
+        this.end = Date.now() + 60000;
         this.loadBackgrounds(3);
         this.loadCoins();
         this.loadResources([7],[5],[6]);
