@@ -3,7 +3,6 @@ class level4platform extends Platform {
         super(x,y,w);
         this.isFloor = isFloor
         this.isTrapFloor = isTrapFloor
-        this.platformFall = false;
         this.loadImages(); 
     }
 
@@ -21,9 +20,9 @@ class level4platform extends Platform {
 
     run(){
         this.update();
-        if(this.isFloor){
+        if(this.isFloor && !this.isTrapFloor){
             this.checkHeroFloor();
-        } else {
+        } else if(!this.isFloor && !this.isTrapFloor){
             this.checkHeroWall();
         }
         this.render();
@@ -98,9 +97,7 @@ class level4platform extends Platform {
                 // checks if the hero is falling
                 game.hero.statusBlock.jumpCount = 0;
                 game.hero.vel.y = 0;
-                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform
-                if(this.isTrapFloor)
-                this.loc.y-=100
+                game.hero.loc.y = this.loc.y - game.hero.height; // places the hero on the top of the platform   
             } else {
                 // makes it so you cant go through the bottom of the platform
                 game.hero.vel.y = 0;

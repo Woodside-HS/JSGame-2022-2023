@@ -39,6 +39,8 @@ class Hero {
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
+      crucifixCounter: 0,
+      ghostPowerUpCounter: 0,
       powerUpLength: 1000
     };
     this.indc = 0;
@@ -304,6 +306,24 @@ class Hero {
       if (this.statusBlock.invulnerabilityCounter > this.statusBlock.powerUpLength) {
         this.inventory.invulnerability = false;
         this.statusBlock.invulnerability = 0;
+        this.clr = "green";
+      }
+    }
+    //crucifix timer
+    if (this.inventory.crucifix) {
+      this.statusBlock.crucifixCounter++;
+      this.clr = "#DDDDDD";
+      if (this.statusBlock.crucifixCounter > this.statusBlock.powerUpLength) {
+        this.inventory.crucifix = false;
+        this.clr = "green";
+      }
+    }
+    //ghostPowerUp timer
+    if (this.inventory.ghostPowerUp) {
+      this.statusBlock.ghostPowerUpCounter++;
+      this.clr = "#DDDDDD";
+      if (this.statusBlock.ghostPowerUpCounter > this.statusBlock.powerUpLength) {
+        this.inventory.ghostPowerUp = false;
         this.clr = "green";
       }
     }

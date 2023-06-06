@@ -9,7 +9,7 @@ class Ghost{
     this.indc = 0;
     this.look = false;
     this.isdead = false;
-    this.speed = 2.3;
+    this.speed = 1.5;
     this.frames = [];
     this.groove = 0;//groove is the varible that counts down to switching games
     this.grooveId = 0;//grooveID is current frame that is being rendered
