@@ -51,13 +51,13 @@ class Level {
         }
         // */
     }
-    loadBackgrounds(num){
+    loadBackgrounds(num){ 
         let backgrounds = [];
         for(let i = 0; i < num; i++){
             backgrounds[i] = document.createElement("img");
             let path = "Images/Level" + this.id +"/Lvl" + this.id + "Background/bg" + (i+1)+".png";
             //the images need to be set in order from furthest back to furthest forward
-            console.log(path);
+            //console.log(path);
             backgrounds[i].src = path;
         }
         this.background = new genericBackground(backgrounds);
@@ -84,7 +84,7 @@ class Level {
             let halfNhalf = Math.random() * 100;
             if (halfNhalf < 50) {
                 platform.coin = new Coin(platform.x, platform.y, 20, 20);
-                console.log('platform.coin: ', platform.coin);
+                //console.log('platform.coin: ', platform.coin);
             }
         });
     }

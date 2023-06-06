@@ -58,7 +58,7 @@ function GameArea() {
       "click",
       function () {
         game.gamePaused = !game.gamePaused;
-        console.log("Mouse Clicked");
+        //console.log("Mouse Clicked tile: " + i + " and should have run level: " + (i + 1));
       },
       false
     );
@@ -69,8 +69,8 @@ function GameArea() {
   this.tiles[0].addEventListener(
     "click",
     function () {
-      gameState = 1;
-      console.log("gameState = 1!!!"); // gameState = 1 means the you are playing on level 1
+    gameState = 1; //! SWITCH FOR SB: FOR MY BRANCH SHOULD BE 3
+      //console.log("gameState = 1!!!"); // gameState = 1 means the you are playing on level 1
       game.hero.loc.x = 200;
       game.hero.loc.y = 200;
       game.hero.vel.setMagnitude(0);
@@ -81,7 +81,18 @@ function GameArea() {
   this.tiles[1].addEventListener(
     "click",
     function () {
-      gameState++;
+      gameState = 2;
+      game.hero.loc.x = 200;
+      game.hero.loc.y = 200;
+      game.hero.vel.setMagnitude(0);
+    },
+    false
+  );
+
+  this.tiles[4].addEventListener(
+    "click",
+    function () {
+      gameState = 5;
       game.hero.loc.x = 200;
       game.hero.loc.y = 200;
       game.hero.vel.setMagnitude(0);
