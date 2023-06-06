@@ -22,7 +22,7 @@ class level1 extends Level{
         this.platforms[9] = new level1platform(1075,700,150,false);
         this.platforms[10] = new level1platform(1400,600,150,false);
 
-        this.platforms[11] = new level1platform(1500,650,150, false);//! big ground platform
+        this.platforms[11] = new level1platform(1500,650,150, false);
         this.platforms[12] = new level1platform(1750,550,150, true);
         this.platforms[13] = new level1platform(1900,675,150, false);
         this.platforms[14] = new level1platform(2150,550,150,false);
@@ -33,7 +33,7 @@ class level1 extends Level{
         this.platforms[19] = new level1platform(2275,700,150,false);
         this.platforms[20] = new level1platform(2900,600,150,false);
 
-        this.platforms[21] = new level1platform(3000,650,150, false);//! big ground platform
+        this.platforms[21] = new level1platform(3000,650,150, false);
         this.platforms[22] = new level1platform(3250,550,150, true);
         this.platforms[23] = new level1platform(3400,675,150, false);
         this.platforms[24] = new level1platform(3550,650,150,false);
