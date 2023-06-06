@@ -22,9 +22,11 @@ class Game {
       height: 600,
     };
 
+    
     this.levels[0] = new level1(1);
-    this.levels[1] = new level2(2);
-    this.levels[2] = new level3(3);
+    this.levels[1] = new level2(2)
+    this.levels[2] = new level3(3); //Spencer's Level
+    this.levels[3] = new level4(4);//Michael's Level
     this.levels[4] = new level5(5);
 
   }

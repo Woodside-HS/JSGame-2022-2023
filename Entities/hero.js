@@ -6,7 +6,7 @@ class Hero {
     this.posNeg = true; //related to attacking
     this.height = 50;
     this.width = 50;
-    this.grav = new JSVector(0, 0.2); //gravity for when falling
+    this.grav = new JSVector(0,.2); //gravity for when falling
     this.clr = "green";
     this.bullets = [];
     this.shootingDirection = false; //true = right, false = left
@@ -31,6 +31,9 @@ class Hero {
       loveRay: false,
       block: false,
       jumpBoost: false,
+      keyCount: 0,
+      crucifix: false,
+      ghostPowerUp: false,
       invulnerability: false,
       batMode: false,
       hasSpike: false,
@@ -56,7 +59,9 @@ class Hero {
       dbCoinCounter: 0,
       dbJumpCounter: 0,
       invulnerabilityCounter: 0,
-      powerUpLength: 1000,
+      crucifixCounter: 0,
+      ghostPowerUpCounter: 0,
+      powerUpLength: 1000
     };
     this.indc = 0;
 
@@ -73,6 +78,7 @@ class Hero {
   }
 
   run() {
+    
     this.checkFace();
     this.render();
     this.update();
@@ -98,6 +104,11 @@ class Hero {
       this.heroJump[i] = document.createElement("img");
       this.heroJump[i].src = "Images/Hero/HeroJump/hero" + (i + 1) + ".png";
     }
+    for (let i = 0; i < 6; i++) {
+      this.heroFall[i] = document.createElement("img");
+      this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";
+    }
+
     for (let i = 0; i < 6; i++) {
       this.heroFall[i] = document.createElement("img");
       this.heroFall[i].src = "Images/Hero/HeroFall/hero" + (i + 1) + ".png";
@@ -171,7 +182,7 @@ class Hero {
       case this.statusBlock.isJumping:
         this.changeFrame++;
         //console.log("jumping"+ this.frameNum);
-        if (this.changeFrame >= 4) {
+        if (this.changeFrame >= 6) {
           this.changeFrame = 0;
           this.frameNum++;
         }
@@ -320,6 +331,24 @@ class Hero {
       if (this.statusBlock.invulnerabilityCounter > this.statusBlock.powerUpLength) {
         this.inventory.invulnerability = false;
         this.statusBlock.invulnerability = 0;
+        this.clr = "green";
+      }
+    }
+    //crucifix timer
+    if (this.inventory.crucifix) {
+      this.statusBlock.crucifixCounter++;
+      this.clr = "#DDDDDD";
+      if (this.statusBlock.crucifixCounter > this.statusBlock.powerUpLength) {
+        this.inventory.crucifix = false;
+        this.clr = "green";
+      }
+    }
+    //ghostPowerUp timer
+    if (this.inventory.ghostPowerUp) {
+      this.statusBlock.ghostPowerUpCounter++;
+      this.clr = "#DDDDDD";
+      if (this.statusBlock.ghostPowerUpCounter > this.statusBlock.powerUpLength) {
+        this.inventory.ghostPowerUp = false;
         this.clr = "green";
       }
     }
