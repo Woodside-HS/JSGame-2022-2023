@@ -2,6 +2,7 @@ class level3 extends Level{
     constructor(id, levels){
         super(id);   
         this.loadPlatforms();
+        this.end = Date.now() + 120000;
         this.loadBackgrounds(3);
         this.loadCoins();
         this.loadResources([7],[5],[6]);
@@ -46,6 +47,9 @@ class level3 extends Level{
         super.run();
         if(game.hero.loc.x>this.endX && game.hero.loc.y<this.endY){
             gameState = 4;
+        }
+        if(Date.now()>this.end){
+            this.hero.statusBlock.isDead = true;
         }
     }
 
