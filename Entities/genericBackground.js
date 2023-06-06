@@ -32,6 +32,7 @@ class genericBackground {
     }
     render(id){
         let perc = this.calcPerc(id);
+        
         //id is which image is being rendered 
         ctx.save();
         ctx.translate(game.camLoc.x*(1-perc), 0);
