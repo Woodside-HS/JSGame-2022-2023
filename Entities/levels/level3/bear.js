@@ -11,6 +11,10 @@ class Bear{
            this.loc.x+=deltaX;
            this.loc.y-=15;
            this.counter = 0;
+           this.imgA = document.createElement("img");
+           this.imgA.src = "Images/Level3/bearAttack.png";
+           this.imgD = document.createElement("img");
+           this.imgD.src = "Images/Level3/bearDocile.png";
 
     }
 
@@ -47,18 +51,10 @@ class Bear{
 
     render(n){
         if(n == 0){ //!Not attacking
-            ctx.beginPath();
-            ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
-            ctx.closePath();
-            ctx.fillStyle = "black";
-            ctx.fill();
+            ctx.drawImage(this.imgD, this.loc.x, this.loc.y, 30, 30);
         }
         else{ //!Attack Render
-            ctx.beginPath();
-            ctx.arc(this.loc.x, this.loc.y, 10, 0, Math.PI*2);
-            ctx.closePath();
-            ctx.fillStyle = "red";
-            ctx.fill();
+            ctx.drawImage(this.imgA, this.loc.x, this.loc.y, 30, 30);
         }
     }
 
