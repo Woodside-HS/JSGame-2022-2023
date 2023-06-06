@@ -22,6 +22,7 @@ class level2 extends Level {
 
     update() {
         if (game.hero.loc.x > 3100) {
+            game.hero.loc = new JSVector(200, 200)
             gameState++;
         }
     }
