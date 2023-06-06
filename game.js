@@ -11,7 +11,7 @@ class Game {
     this.speed = 2;
 
 
-    this.flight = true;
+    this.flight = false;
     this.unique = 0;
     [this.gamePaused, this.clickingA, this.clickingD, this.mouseDown].fill(
       false
@@ -114,6 +114,7 @@ class Game {
     ctx.save();
 
     if (a == 6) {
+      this.flight = true;
       if (!this.inStore) {
         this.levels[5].run();
       } else {
