@@ -245,9 +245,11 @@ class level4 extends Level {
 
     update() {
 
-        /*if (game.hero.loc.x >= 8350) {
+        if (game.hero.loc.x >= 8350) {
+            game.hero.loc.x = 200
+            game.hero.loc.y = 200
             gameState++;
-        }*/
+        }
     }
 
 
