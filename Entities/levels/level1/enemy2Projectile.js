@@ -21,7 +21,7 @@ class lvl1Projec {
             game.hero.vel.y = -5;
             game.hero.loc.y -=10;
         }
-        //add trackigng to bark
+        //add trackigng to bark no
     }
     update(){
         this.rad+=.1

@@ -24,14 +24,7 @@ class lvl1Resource2{
     }
     render(){
         //will be a token that kinda floats
+        //no
         ctx.drawImage(this.img,this.loc.x-10,this.loc.y-10,20,20);
-        // ctx.beginPath();
-        // ctx.moveTo(this.loc.x+5,this.loc.y+5);
-        // ctx.lineTo(this.loc.x-5,this.loc.y+5);
-        // ctx.lineTo(this.loc.x-5,this.loc.y-5);
-        // ctx.lineTo(this.loc.x+5,this.loc.y-5);
-        // ctx.closePath();
-        // ctx.fillStyle = "pink";
-        // ctx.fill();
     }
 }

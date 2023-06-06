@@ -50,7 +50,7 @@ class level1 extends Level{
     }
     loadFreeEnemies(){
         this.enemies[0] = new lvl1Enemy1(25,650,0,150,200);
-        this.enemies[1] = new lvl1Enemy1(550,550,400,400+450,200);
+        this.enemies[1] = new lvl1Enemy1(550,550,400,400+400,200);
         this.enemies[2] = new lvl1Enemy1(2200,550,2150,2150+150,200);
         this.enemies[3] = new lvl1Enemy1(2750,600,2750,2750+300,200);
     }

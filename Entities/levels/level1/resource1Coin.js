@@ -25,10 +25,7 @@ class lvl1Resource1{
         }
     }
     render(){
-        //"spin" the coin around
+        //"spin" the coin around no time
         ctx.drawImage(this.img,this.loc.x-10,this.loc.y-10,20,20);
-        //ctx.arc(this.loc.x,this.loc.y,5,0,Math.PI*2);
-        //ctx.fillStyle = "red";
-        //ctx.fill();
     }
 }

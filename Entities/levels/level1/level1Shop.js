@@ -13,14 +13,6 @@ class lvl1Shop {
         this.render();
     }
     render(){
-        // ctx.beginPath();
-        // ctx.moveTo(this.loc.x,this.loc.y);
-        // ctx.lineTo(this.loc.x,this.loc.y+25);
-        // ctx.lineTo(this.loc.x+25,this.loc.y+25);
-        // ctx.lineTo(this.loc.x+25,this.loc.y);
-        // ctx.closePath();
-        // ctx.fillStyle = "red";
-        // ctx.fill();
         ctx.drawImage(this.img, this.loc.x,this.loc.y, 100,100);
     }
     checkHero(){

@@ -54,6 +54,7 @@ class Game {
     if(gameState ==1){
       document.getElementById("resource-count").innerHTML = this.unique;//adds a counter for the unique resource of each level;
       //for now only set up to run in my level
+      //if statement doesnt work lmao
     }
   };
 

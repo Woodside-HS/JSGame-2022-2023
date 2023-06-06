@@ -19,6 +19,7 @@ class lvl1Enemy1 {
     }
     loadImages() {
         //TODO should load images, dont have images yet, will use placeholders as boxes
+        //done
         for (let i = 1; i < 7; i++) {
             this.moveImgs[i - 1] = document.createElement("img");
             this.moveImgs[i - 1].src = "Images/Level1/Lvl1Enemies/Lvl1Enemy1/oldman" + i + ".png"
@@ -26,7 +27,6 @@ class lvl1Enemy1 {
         //console.log(this.moveImgs);
     }
     run() {
-        //dont want to overwrite the superclass run function
         this.checkHurt();
         if (this.hp > 0) {
             this.update();
