@@ -36,7 +36,7 @@ class Hero {
       ghostPowerUp: false,
       invulnerability: false,
       batMode: false,
-      hasSpear: false,
+      hasSpike: false,
     };
     this.statusBlock = {
       hp: 100,
@@ -148,10 +148,10 @@ class Hero {
     }
     switch (true) {
       //checks if any of the following values are true, if so runs them
-      case (this.statusBlock.isAttacking && !this.inventory.hasSpearman):
+      case (this.statusBlock.isAttacking && !this.inventory.hasSpike):
         //console.log("renderding Attack");
         break;
-      case (this.statusBlock.isAttacking && this.inventory.hasSpear):
+      case (this.statusBlock.isAttacking && this.inventory.hasSpike):
         //console.log(`rendering attack with a spike`)
         break;
       //! END OF ATTACKING
