@@ -31,7 +31,7 @@ class Game {
   }
 
   update = () => {
-    if(this.speed > 6){
+    if (this.speed > 6) {
       this.speed = 6;
     }
     this.moveCam();
@@ -58,7 +58,7 @@ class Game {
     }
   };
 
-  getNewLevelInstance(levelNum) {
+  getNewLevelInstance(levelNum) { // resets teh level and the hero
     switch (levelNum) {
       case 1:
         this.levels[0] = new level1(1);
@@ -102,7 +102,7 @@ class Game {
     // Camera follow player
     this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
     ctx.translate(-this.camLoc.x, -this.camLoc.y);
-    this.levels[a-1].background.run();//since there is only one background object, then only need to run this once
+    this.levels[a - 1].background.run();//since there is only one background object, then only need to run this once
     //need to run background before everything else
     this.hero.run();
     this.levels[a - 1].run();
@@ -121,13 +121,13 @@ class Game {
 
   moveCam = () => {
     // Susbtitude Event handlers
-    if(this.clickingA && !hittingRight){
+    if (this.clickingA && !hittingRight) {
       this.hero.loc.x -= this.speed;
-     }
-     else{
+    }
+    else {
       null;
-     }
-    if(this.clickingD && !hittingLeft){
+    }
+    if (this.clickingD && !hittingLeft) {
       this.hero.loc.x += this.speed;
     }
     else {
