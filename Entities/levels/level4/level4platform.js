@@ -4,8 +4,11 @@ class level4platform extends Platform {
         this.isFloor = isFloor
         this.isTrapFloor = isTrapFloor
         this.loadImages(); 
+ 
+
     }
 
+    
     loadImages(){
         this.img = document.createElement("img");
         this.img.src  = "resources/Platform/platform.png";
@@ -29,7 +32,7 @@ class level4platform extends Platform {
     
     }
     update() {
-
+        
     }
 
     render() {

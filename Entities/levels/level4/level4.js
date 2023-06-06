@@ -6,8 +6,7 @@ class level4 extends Level{
         this.loadResources();
         this.loadDoors();
         this.loadEnemies();
-        this.loadBackgrounds(4);
-         
+        this.loadBackgrounds(4);         
     }
 
 
@@ -243,4 +242,13 @@ class level4 extends Level{
         this.background = new genericBackground(backgrounds);
      */   
     }
+
+    update() {
+
+        if (game.hero.loc.x >= 8350) {
+            gameState++;
+        }
+    }
+
+   
 }
