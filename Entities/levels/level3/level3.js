@@ -25,9 +25,7 @@ class level3 extends Level{
         this.platforms[10] = new Level3Platform(1430,380,20, false);
         this.platforms[11] = new Level3Platform(1520,390,20, false);
         this.platforms[12] = new Level3Platform(1610,350,100, false);
-        this.endX = this.platforms[this.platforms.length-1].loc.x + this.platforms[this.platforms.length-1].width; //- 50;
-        this.endY = this.platforms[this.platforms.length-1].loc.y + 20;
-        // this.platforms[13] = new Level3Platform(150,400,100); //!continue
+        // this.platforms[13] = new Level3Platform(150,400,100);
         // this.platforms[14] = new Level3Platform(150,400,100);
         // this.platforms[15] = new Level3Platform(150,400,100);
         // this.platforms[16] = new Level3Platform(150,400,100);
@@ -40,7 +38,33 @@ class level3 extends Level{
         // this.platforms[23] = new Level3Platform(150,400,100);
         // this.platforms[24] = new Level3Platform(150,400,100);
         // this.platforms[25] = new Level3Platform(150,400,100);
-        // this.platforms[26] = new Level3Platform(150,400,100);      
+        // this.platforms[26] = new Level3Platform(150,400,100);
+         // this.platforms[27] = new Level3Platform(150,400,100);
+        // this.platforms[28] = new Level3Platform(150,400,100);
+        // this.platforms[29] = new Level3Platform(150,400,100);
+        // this.platforms[30] = new Level3Platform(150,400,100);
+        // this.platforms[31] = new Level3Platform(150,400,100);
+        // this.platforms[32] = new Level3Platform(150,400,100);
+        // this.platforms[33] = new Level3Platform(150,400,100);
+        // this.platforms[34] = new Level3Platform(150,400,100);
+        // this.platforms[35] = new Level3Platform(150,400,100);
+        // this.platforms[36] = new Level3Platform(150,400,100);
+        // this.platforms[37] = new Level3Platform(150,400,100);
+        // this.platforms[38] = new Level3Platform(150,400,100);
+        // this.platforms[39] = new Level3Platform(150,400,100);
+        // this.platforms[40] = new Level3Platform(150,400,100);    
+        // this.platforms[41] = new Level3Platform(150,400,100);
+        // this.platforms[42] = new Level3Platform(150,400,100);
+        // this.platforms[43] = new Level3Platform(150,400,100);
+        // this.platforms[44] = new Level3Platform(150,400,100);
+        // this.platforms[45] = new Level3Platform(150,400,100);
+        // this.platforms[46] = new Level3Platform(150,400,100);
+        // this.platforms[47] = new Level3Platform(150,400,100);
+        // this.platforms[48] = new Level3Platform(150,400,100);
+        // this.platforms[49] = new Level3Platform(150,400,100);
+        // this.platforms[50] = new Level3Platform(150,400,100);  
+        this.endX = this.platforms[this.platforms.length-1].loc.x + this.platforms[this.platforms.length-1].width; //- 50;
+        this.endY = this.platforms[this.platforms.length-1].loc.y + 20;    
     }
 
     run(){
@@ -49,7 +73,7 @@ class level3 extends Level{
             gameState = 4;
         }
         if(Date.now()>this.end){
-            this.hero.statusBlock.isDead = true;
+            game.hero.statusBlock.isDead = true;
         }
     }
 
