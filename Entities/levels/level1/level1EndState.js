@@ -48,7 +48,7 @@ class lvl1BusStop{
         if(this.busLoc.x>=game.hero.loc.x){
             this.busLoc.x-=10;
         } else if(this.busLoc.x<=game.hero.loc.x){
-            gameState++;
+            gameState=2;
 
         } 
     }
