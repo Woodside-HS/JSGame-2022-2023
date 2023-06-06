@@ -60,7 +60,7 @@ class level3 extends Level{
             let sec = Math.ceil((this.end - Date.now())/(1000));
             let clr;
             if(sec>15){
-                clr = "black";
+                clr = "white";
             }
             else{
                 clr = "red";

@@ -53,7 +53,7 @@ class Bear{
 
     render(n){
         if(n == 0){ //!Attacking?
-            if(this.speedDirec <0){
+            if(this.speedDirec >0){
                 ctx.drawImage(this.imgA, this.loc.x, this.loc.y, 30, 30);
             }
             else{
