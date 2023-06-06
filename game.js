@@ -77,13 +77,13 @@ class Game {
   moveCam = () => {
     // Susbtitude Event handlers
     if(this.clickingA && !hittingRight){
-      this.hero.loc.x -= 12
+      this.hero.loc.x -= 2
      }
      else{
       null;
      }
     if(this.clickingD && !hittingLeft){
-      this.hero.loc.x += 12
+      this.hero.loc.x += 2
     }
     else{
       null;
