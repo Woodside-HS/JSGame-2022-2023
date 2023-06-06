@@ -5,7 +5,7 @@ class level3 extends Level{
         this.end = Date.now() + 60000;
         this.loadBackgrounds(3);
         this.loadCoins();
-        this.loadResources([2, 6, 8, 10, 11, 11, 13, 15, 20, 22, 23, 25, 27, 30, 32],[34],[5]);
+        this.loadResources([2, 6, 8, 10, 11, 11, 13, 15, 20, 22, 23, 25, 27, 30, 32],[34],[5, 7, 9, 12, 18, 26]);
         this.loadEnemies([11, 19, 25], [3, 3, 19, 19, 19, 30, 33, 24]);
         this.endX;
         this.endY;
