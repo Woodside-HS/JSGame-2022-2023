@@ -5,7 +5,7 @@ class lvl1BusStop{
         this.img = document.createElement("img");
         this.img.src = "Images/Level1/Lvl1End/lvl1BusStop.png"
         this.txt;
-        this.desiredAmount = 20;
+        this.desiredAmount = 10;
         this.bus = document.createElement("img");
         this.bus.src = "Images/Level1/Lvl1End/lvl1Bus.png";
         this.busLoc = new JSVector(this.loc.x+800,this.loc.y);

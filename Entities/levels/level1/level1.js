@@ -54,9 +54,32 @@ class level1 extends Level{
 
     loadResources() {
         //resources work not, just have to get them placed in
-        this.resources[0] = new lvl1Resource1(400,400);
-        this.resources[1] = new lvl1Resource2(600,400);
-        this.resources[2] = new lvl1Shop(4400,500,5);
+        this.resources[0] = new lvl1Resource1(400,400);//coin
+        this.resources[1] = new lvl1Resource2(600,400);//bus token
+        this.resources[2] = new lvl1Shop(4400,500,5);//this is the shop
+        //Bus Tokens Below
+        this.resources[3] = new lvl1Resource2(1000,600);
+        this.resources[4] = new lvl1Resource2(1200,400);
+        this.resources[5] = new lvl1Resource2(1400,650);
+        this.resources[6] = new lvl1Resource2(1600,500);
+        this.resources[7] = new lvl1Resource2(2000,400);
+        this.resources[8] = new lvl1Resource2(2400,600);
+        this.resources[9] = new lvl1Resource2(2800,550);
+        this.resources[10] = new lvl1Resource2(3000,600);
+        this.resources[11] = new lvl1Resource2(3400,400);
+        this.resources[12] = new lvl1Resource2(3800,550);
+        this.resources[13] = new lvl1Resource2(4200,400);
+        //coins below
+        this.resources[] = new lvl1Resource1(500,400);
+        this.resources[] = new lvl1Resource1(1100,500);
+        this.resources[] = new lvl1Resource1(1700,600);
+        this.resources[] = new lvl1Resource1(2100,700);
+        this.resources[] = new lvl1Resource1(2500,600);
+        this.resources[] = new lvl1Resource1(2900,500);
+        this.resources[] = new lvl1Resource1(3100,400);
+        this.resources[] = new lvl1Resource1(3500,500);
+        this.resources[] = new lvl1Resource1(3700,400);
+        this.resources[] = new lvl1Resource1(4100,500);
     }
 
 

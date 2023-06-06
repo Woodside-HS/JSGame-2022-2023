@@ -2,7 +2,8 @@ class lvl1Shop {
     constructor(x,y, cost){
         this.loc = new JSVector(x,y);
         this.cost = cost;
-        this.img;//img tbd
+        this.img = document.createElement("img");
+        this.img.src = "Images/Level1/Lvl1End/Lvl1Shop.png"
     }
     run(){
         if(game.hero.loc.x > 4000){
@@ -12,14 +13,15 @@ class lvl1Shop {
         this.render();
     }
     render(){
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x,this.loc.y);
-        ctx.lineTo(this.loc.x,this.loc.y+25);
-        ctx.lineTo(this.loc.x+25,this.loc.y+25);
-        ctx.lineTo(this.loc.x+25,this.loc.y);
-        ctx.closePath();
-        ctx.fillStyle = "red";
-        ctx.fill();
+        // ctx.beginPath();
+        // ctx.moveTo(this.loc.x,this.loc.y);
+        // ctx.lineTo(this.loc.x,this.loc.y+25);
+        // ctx.lineTo(this.loc.x+25,this.loc.y+25);
+        // ctx.lineTo(this.loc.x+25,this.loc.y);
+        // ctx.closePath();
+        // ctx.fillStyle = "red";
+        // ctx.fill();
+        ctx.drawImage(this.img, this.loc.x,this.loc.y, 100,100);
     }
     checkHero(){
         let sightSq = 100*100;
@@ -27,7 +29,12 @@ class lvl1Shop {
         if(dist<sightSq){
             this.txt1 = "Buy a bus token for " + this.cost + " coins";
             ctx.fillText(this.txt1, this.loc.x-20,this.loc.y);
-            this.txt2 = "Press B to buy"
+            if(game.hero.statusBlock.coins >= 5){
+                this.txt2 = "Press B to buy"
+            } else {
+                this.txt2 = "";
+            }
+            
             ctx.fillText(this.txt2, this.loc.x-20,this.loc.y-40);
         }
     }

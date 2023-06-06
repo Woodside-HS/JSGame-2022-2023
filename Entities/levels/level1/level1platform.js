@@ -6,12 +6,15 @@ class level1platform extends Platform {
             this.enemy = new lvl1Enemy2(this.loc.x,this.loc.y,this.width,25,25);
         }
         let rand = Math.random();
+        this.img = document.createElement("img");
         if(rand >=.5){
-            this.img = document.createElement("img");
             this.img.src = "Images/Level1/Lvl1Platform/plat1.png"
         } else {
-            this.img = document.createElement("img");
             this.img.src = "Images/Level1/Lvl1Platform/plat2.png"
+        }
+        if(this.loc.x == 4400){
+            this.img.src = "Images/Level1/Lvl1End/lvl1StopFloor.png"
+            //the lazy way of specifiying the image
         }
     }
     run(){
@@ -29,6 +32,12 @@ class level1platform extends Platform {
     }
 
     render() {
-        ctx.drawImage(this.img, this.loc.x,this.loc.y-25,this.width,50);
+        if(this.loc.x == 4400){
+            //the lzy way part 2
+            ctx.drawImage(this.img, this.loc.x,this.loc.y,this.width,50);
+        } else {
+            ctx.drawImage(this.img, this.loc.x,this.loc.y-25,this.width,50);
+        }
+        
     }
 }
