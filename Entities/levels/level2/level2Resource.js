@@ -34,7 +34,7 @@ class DoubleJumpResource {
 
             if (distance < this.radius + hero.width / 2) {
                 console.log('collected');
-                hero.inventory.dbJump = true;
+                game.hero.inventory.dbJump = true;
                 this.collected = true;
                 return true;
             }

@@ -1,6 +1,8 @@
 class level2platform extends Platform {
     constructor(x, y, w, enemy, resource) {
         super(x, y, w);
+        this.x = x;
+        this.y = y;
         this.hasEnemy = enemy;
         if (this.hasEnemy) {
             const enemyHeight = 50;
@@ -18,11 +20,12 @@ class level2platform extends Platform {
         if (this.hasResource) {
             this.resource = new DoubleJumpResource(x + w / 2, y - 50, 10);
         }
+        this.loadImages();
 
     }
     loadImages() {
         this.img = document.createElement("img");
-        this.img.src = "resources/Platform/platform.png";
+        this.img.src = "Images/Level2/WoodPlatform.png";
     }
     run() {
         if (this.enemy) {
@@ -39,13 +42,6 @@ class level2platform extends Platform {
     }
 
     render() {
-        ctx.fillStyle = "red";
-        ctx.beginPath();
-        ctx.moveTo(this.loc.x, this.loc.y);
-        ctx.lineTo(this.loc.x + this.width, this.loc.y);
-        ctx.lineTo(this.loc.x + this.width, this.loc.y + 10);
-        ctx.lineTo(this.loc.x, this.loc.y + 10);
-        ctx.closePath();
-        ctx.fill();
+        ctx.drawImage(this.img, this.x, this.y);
     }
 }

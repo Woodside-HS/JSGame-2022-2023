@@ -27,11 +27,12 @@ class TrashEnemy {
         this.particleSystem.draw();
     }
     render() {
-        ctx.fillStyle = "blue";
         ctx.save();
+        ctx.fillStyle = "blue";
         ctx.translate(this.loc.x, this.loc.y);
         ctx.rect(0, 0, this.h, this.w)
         ctx.fill();
+        ctx.fillStyle = "grey";
         ctx.restore();
     }
     checkHero(heroLoc, heroH, heroW) {
