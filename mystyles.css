@@ -40,7 +40,19 @@ body {
   font-size: 20px;
 }
 
-@font-face {
-  font-family: "CompassPro";
-  src: url("Fonts/CompassPro.ttf");
+#resource-count {
+  position: absolute;
+  float: left;
+  top: 50px;
+  right: 10px;
+  background-color: lightblue;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
 }

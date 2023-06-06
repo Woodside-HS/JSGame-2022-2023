@@ -89,7 +89,6 @@ class level5 extends Level {
         if (game.hero.loc.x >= 1700) {
             gameState++;
         }
-
     }
 
     spliceResources() {

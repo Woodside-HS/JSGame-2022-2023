@@ -63,7 +63,7 @@ function GameArea() {
   this.tiles[0].addEventListener(
     "click",
     function () {
-    gameState = 1; //! SWITCH FOR SB: FOR MY BRANCH SHOULD BE 3
+      gameState = 1; //! SWITCH FOR SB: FOR MY BRANCH SHOULD BE 3
       //console.log("gameState = 1!!!"); // gameState = 1 means the you are playing on level 1
       game.hero.loc.x = 200;
       game.hero.loc.y = 200;
@@ -76,6 +76,26 @@ function GameArea() {
     "click",
     function () {
       gameState = 2;
+      game.hero.loc.x = 200;
+      game.hero.loc.y = 200;
+      game.hero.vel.setMagnitude(0);
+    },
+    false
+  );
+  this.tiles[2].addEventListener(
+    "click",
+    function () {
+      gameState = 3;
+      game.hero.loc.x = 200;
+      game.hero.loc.y = 200;
+      game.hero.vel.setMagnitude(0);
+    },
+    false
+  );
+  this.tiles[3].addEventListener(
+    "click",
+    function () {
+      gameState = 4;
       game.hero.loc.x = 200;
       game.hero.loc.y = 200;
       game.hero.vel.setMagnitude(0);

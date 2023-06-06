@@ -22,6 +22,10 @@ const keyDownActions = {
   KeyP: () => {
     game.hero.shoot();
   },
+  KeyB: () => {
+    console.log("Bed");
+    game.levels[0].resources[2].purchase();
+  },
 };
 
 const keyUpActions = {
