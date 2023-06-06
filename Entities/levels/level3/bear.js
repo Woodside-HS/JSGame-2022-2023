@@ -36,10 +36,10 @@ class Bear{
             this.health--;
         }
         else if(!game.hero.statusBlock.isAttacking && disCheck && this.speed>=2){
-            if(this.counter%5){
+            this.counter++;
+            if(this.counter%20 == 0){
                 game.hero.statusBlock.hp--;
             }
-            this.counter++;
         }
     } 
 
