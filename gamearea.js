@@ -1,25 +1,16 @@
 function GameArea() {
   //  Wrapper Div
   this.wrapperDiv = document.getElementById("wrapperDiv");
-  this.wrapperDiv.setAttribute(
-    "style",
-    " background-color:yellow; border: 5px solid black; width:1100px; height:800px;"
-  );
+  this.wrapperDiv.setAttribute("style", " background-color:yellow; border: 5px solid black; width:1100px; height:800px;");
   // create tileMenuDiv
   this.tileMenuDiv = document.createElement("div");
   this.wrapperDiv.appendChild(this.tileMenuDiv);
-  this.tileMenuDiv.setAttribute(
-    "style",
-    " background-color:#FFFFFF; width:1100px; height:100px;float:left;"
-  );
+  this.tileMenuDiv.setAttribute("style", " background-color:#FFFFFF; width:1100px; height:100px;float:left;");
 
   // create canvasDiv
   this.canvasDiv = document.createElement("div");
   this.wrapperDiv.appendChild(this.canvasDiv);
-  this.canvasDiv.setAttribute(
-    "style",
-    " background-color:pink; width:1100px; height:700px;float:left;"
-  );
+  this.canvasDiv.setAttribute("style", " background-color:pink; width:1100px; height:700px;float:left;");
 
   // place canvas in div and style
   this.canvasDiv.appendChild(canvas);
@@ -31,6 +22,9 @@ function GameArea() {
     this.tileMenuDiv.appendChild(this.tiles[i]);
     this.tiles[i].setAttribute("class", "tile");
     this.tileText[i] = document.createTextNode("Tile " + (i + 1) + "");
+    if (i == 2) {
+      this.tileText[i] = document.createTextNode("Store");
+    }
     //this.t1Text.style.padding = "10px";
     this.tiles[i].appendChild(this.tileText[i]);
   }
@@ -130,4 +124,7 @@ function GameArea() {
     },
     false
   );
+  this.tiles[2].addEventListener("click", function () {
+    game.inStore = !game.inStore;
+  });
 }

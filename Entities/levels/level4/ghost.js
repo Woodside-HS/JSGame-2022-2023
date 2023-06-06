@@ -1,8 +1,8 @@
-class Ghost{
+class Ghost2 {
   constructor(x, y, platformWidth, h, w) {
     this.loc = new JSVector(x, y - h); //enemies location, does change
-    this.vel = new JSVector(0,0);
-    this.acc = new JSVector(0,0);
+    this.vel = new JSVector(0, 0);
+    this.acc = new JSVector(0, 0);
     this.hide = false;
     this.h = h;
     this.w = w;
@@ -61,29 +61,29 @@ class Ghost{
     }
   }
   move() {
-  
-    this.loc.add(this.vel);  
+
+    this.loc.add(this.vel);
     let d = game.hero.loc.distance(this.loc)
 
-      if(d < 200){
-      this.acc = JSVector.subGetNew(game.hero.loc, this.loc)  
-      }
-      this.acc.normalize();
-      if(d < 200)
+    if (d < 200) {
+      this.acc = JSVector.subGetNew(game.hero.loc, this.loc)
+    }
+    this.acc.normalize();
+    if (d < 200)
       this.acc.multiply(.5);
-      if(d>=200)
+    if (d >= 200)
       this.acc.multiply(0);
-      this.vel.limit(this.speed);
-      this.vel.add(this.acc);
-  } 
+    this.vel.limit(this.speed);
+    this.vel.add(this.acc);
+  }
 
   checkLook() {
-    if(game.clickingD)
-    this.indc = 20;
-    if(game.clickingA)
-    this.indc = -20;
-  
-    if((this.indc > 0 && this.loc.x>game.hero.loc.x) || (this.indc < 0 && this.loc.x<game.hero.loc.x)){
+    if (game.clickingD)
+      this.indc = 20;
+    if (game.clickingA)
+      this.indc = -20;
+
+    if ((this.indc > 0 && this.loc.x > game.hero.loc.x) || (this.indc < 0 && this.loc.x < game.hero.loc.x)) {
       this.vel.limit(0)
       this.hide = true;
     } else {
@@ -109,7 +109,7 @@ class Ghost{
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.restore();
     }*/
-    
+
     ctx.save(); //renders as simple box for now
     ctx.beginPath();
     ctx.moveTo(this.loc.x, this.loc.y);
@@ -117,10 +117,10 @@ class Ghost{
     ctx.lineTo(this.loc.x + this.w, this.loc.y + this.h);
     ctx.lineTo(this.loc.x, this.loc.y + this.h);
     ctx.closePath();
-    if(!this.hide)
-    ctx.fillStyle = "white";
-    if(this.hide)
-    ctx.fillStyle = "rgb(255,255,255,.1)"
+    if (!this.hide)
+      ctx.fillStyle = "white";
+    if (this.hide)
+      ctx.fillStyle = "rgb(255,255,255,.1)"
     ctx.fill();
     ctx.restore();
   }
@@ -136,8 +136,8 @@ class Ghost{
       heroLoc.y + heroH > this.loc.y &&
       heroLoc.y < this.loc.y + this.h
     ) {
-      if(!game.hero.inventory.invulnerability){
-      game.hero.statusBlock.hp--;
+      if (!game.hero.inventory.invulnerability) {
+        game.hero.statusBlock.hp--;
       }
     }
   }
@@ -172,9 +172,9 @@ class Ghost{
     }
   }
 
-  checkCrucifix(){
+  checkCrucifix() {
     let d = game.hero.loc.distance(this.loc);
-    if(game.hero.inventory.crucifix && d < 100)
-    this.loc.y = 1000;
+    if (game.hero.inventory.crucifix && d < 100)
+      this.loc.y = 1000;
   }
 }
