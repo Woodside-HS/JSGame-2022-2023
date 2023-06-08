@@ -42,8 +42,6 @@ function animate(currentTime) {
   //   displayFPS(fps);
   // }
 
-
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   debugUpdate();
   game.update();

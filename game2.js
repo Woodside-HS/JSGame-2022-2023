@@ -101,24 +101,22 @@ class Game {
     this.hero.statusBlock.isDead = false;
     this.hero.loc = this.start;
     this.camLoc.Zero();
-    drawText(ctx, "click 'tile 1' to play ", "50px serif", 200, 200, "green", "red");
+    drawText(ctx, "ARE YOU READY FOR THE FINAL LEVEL?", "50px serif", 1050, 200, "green", "red");
+    drawText(ctx, "PRESS TILE 1 TO GO!", "50px serif", 800, 400, "green", "red");
   };
 
   playState = (a) => {
     ctx.save();
 
-    if (a == 6) {
-      window.location.href = "index2.html";
-    } else {
-      // Camera follow player
-      this.camLoc.x = lerp(this.camLoc.x, this.hero.loc.x - 200, 0.05);
-      ctx.translate(-this.camLoc.x, -this.camLoc.y);
-      this.levels[a - 1].background.run(); //since there is only one background object, then only need to run this once
-      //need to run background before everything else
-      this.hero.run();
-      this.levels[a - 1].run();
+    this.flight = true;
+    if (!this.inStore) {
+      ctx.translate(0, 0);
+      this.levels[5].run();
       ctx.restore();
+    } else {
+      this.store.run();
     }
+    ctx.restore();
   };
 
   endState = () => {
